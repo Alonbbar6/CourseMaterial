@@ -1,0 +1,1142 @@
+﻿MODULE 3: COMPLETE VISUAL & DIAGRAM SPECIFICATIONS
+Introduction to Neural Networks and Deep Learning
+10 Visuals | 36 minutes total | 30% of Module Content
+________________
+
+
+VISUAL STUDY TIME ALLOCATION
+Total Visual Time: 36 minutes
+Average per visual: 3.6 minutes
+Breakdown: 2 min viewing + 1.6 min reflection/interaction
+
+
+Visual #
+	Title
+	Study Time
+	Format
+	Complexity
+	1
+	Biological Neuron Diagram
+	4 min
+	Labeled anatomy
+	Medium
+	2
+	Artificial Neuron (Perceptron)
+	4 min
+	Technical diagram
+	Medium
+	3
+	Activation Functions
+	3 min
+	Comparison chart
+	Low-Medium
+	4
+	Multi-Layer Network Architecture
+	4 min
+	System diagram
+	High
+	5
+	Backpropagation Flow
+	4 min
+	Process diagram
+	High
+	6
+	MNIST Digit Recognition
+	3 min
+	Example showcase
+	Low
+	7
+	Logic Gate Visualization
+	3 min
+	Interactive prep
+	Medium
+	8
+	Loss Function Graph
+	3 min
+	Chart visualization
+	Medium
+	9
+	Gradient Descent Intuition
+	4 min
+	Conceptual diagram
+	Medium-High
+	10
+	Summary Concept Map
+	4 min
+	Integration map
+	High
+	________________
+
+
+VISUAL 1: BIOLOGICAL NEURON DIAGRAM (4 minutes)
+Learning Objective: Understand biological neuron structure as inspiration for artificial neurons
+Visual Description
+┌─────────────────────────────────────────────────────────────┐
+│        THE BIOLOGICAL NEURON (Neurona Biológica)            │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│   INPUT                  PROCESSING              OUTPUT      │
+│                                                               │
+│  ┌──────┐              ┌──────────┐          ┌──────────┐   │
+│  │Dendri│─────────────→│   SOMA   │─────────→│  AXON    │   │
+│  │tes   │              │(Cell Body)│          │          │   │
+│  │ 树突  │              │  细胞体   │          │  轴突    │   │
+│  └──────┘              └──────────┘          └──────────┘   │
+│    ↑                        ↑                      ↓         │
+│    │                    ┌───┴───┐              ┌───┴────┐   │
+│ Receives             Contains:              Transmits     │
+│ signals            - Nucleus (DNA)          signals to    │
+│ from other        - Mitochondria (energy)   next neuron   │
+│ neurons           - Protein synthesis                      │
+│                                                               │
+│                                                               │
+│  SYNAPSE DETAIL (La Sinapsis):                              │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                       │   │
+│  │  Presynaptic Terminal  Synaptic    Postsynaptic     │   │
+│  │   (Sending Neuron)      Cleft      (Receiving)      │   │
+│  │          │               │              │            │   │
+│  │          │    ◉◉◉◉◉     │              │            │   │
+│  │          ╰─→Neurotrans─→│──→Receptors  │            │   │
+│  │              mitters     │    (Dendrite)│            │   │
+│  │          (Chemical       │              │            │   │
+│  │           messengers)    │              │            │   │
+│  │                          │              │            │   │
+│  │         ~20 nanometers gap              │            │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                               │
+│  KEY FACTS:                                                  │
+│  • Human brain: ~86 billion neurons                         │
+│  • Each neuron connects to ~1,000-10,000 others            │
+│  • Signal speed: up to 120 meters/second                    │
+│  • Synaptic gap: incredibly tiny (~5-20 nanometers)        │
+│  • Communication: electrical within neuron, chemical        │
+│    between neurons                                           │
+└─────────────────────────────────────────────────────────────┘
+
+
+Bilingual Labels
+English
+	Spanish
+	Function
+	Dendrites
+	Dendritas
+	Receive signals (input)
+	Soma (Cell Body)
+	Soma (Cuerpo Celular)
+	Processes signals
+	Axon
+	Axón
+	Transmits signals (output)
+	Synapse
+	Sinapsis
+	Connection point between neurons
+	Neurotransmitter
+	Neurotransmisor
+	Chemical messenger
+	Study Questions (Embedded with Visual)
+1. What are the three main parts of a biological neuron?
+   * Answer: Dendrites (input), Soma (processing), Axon (output)
+2. How do neurons communicate with each other?
+   * Answer: Electrical signals within neuron; chemical signals (neurotransmitters) across synapses
+3. Why is the synapse important?
+   * Answer: It's the connection point where information transfers from one neuron to another
+________________
+
+
+VISUAL 2: ARTIFICIAL NEURON (PERCEPTRON) STRUCTURE (4 minutes)
+Learning Objective: Map biological neuron to artificial neuron (perceptron)
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│     THE PERCEPTRON (Perceptrón): Artificial Neuron           │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│   INPUTS         WEIGHTS        SUMMATION    ACTIVATION       │
+│   (like dendrites)             (like soma)   (output)         │
+│                                                                │
+│                                                                │
+│   x₁ = 0.5 ──┐                                                │
+│              │w₁=0.8                                          │
+│   x₂ = 0.3 ──┼──┐                ┌─────┐      ┌─────┐        │
+│              │  │                │  Σ  │─────→│  f  │─→ y    │
+│   x₃ = 0.9 ──┼──┼──┐  Weighted  │ Sum │      │ (x) │  Output│
+│              │w₂│w₃│    Sum      └─────┘      └─────┘        │
+│              │=0.6│=0.2                                       │
+│              │  │  │                                           │
+│              ↓  ↓  ↓                                           │
+│        (0.5×0.8) + (0.3×0.6) + (0.9×0.2) = 0.76              │
+│                                                                │
+│   bias = -0.5 ─────────┘  (threshold adjustment)             │
+│                                                                │
+│   Total = 0.76 - 0.5 = 0.26 → Activation function            │
+│                                                                │
+│   If f(0.26) using sigmoid → Output ≈ 0.56                   │
+│                                                                │
+│  BIOLOGICAL vs. ARTIFICIAL MAPPING:                          │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │                                                          │ │
+│  │  Biological Neuron       Artificial Neuron (Perceptron)│ │
+│  │  ─────────────────       ─────────────────────────────│ │
+│  │  Dendrites      →        Input values (x₁, x₂, x₃...)  │ │
+│  │  Synapses       →        Weights (w₁, w₂, w₃...)       │ │
+│  │  Soma (cell body) →      Weighted sum (Σ)              │ │
+│  │  Axon threshold   →      Activation function (f)       │ │
+│  │  Signal output    →      Output value (y)              │ │
+│  │                                                          │ │
+│  └────────────────────────────────────────────────────────┘ │
+│                                                                │
+│  KEY CONCEPTS:                                                │
+│  • Weights (pesos): How important each input is              │
+│  • Bias (sesgo): Shifts activation threshold                 │
+│  • Weighted sum: Multiply each input by its weight, add all │
+│  • Activation function: Decides if neuron "fires"            │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+Calculation Example
+Step-by-Step Walkthrough:
+Given inputs: x₁=0.5, x₂=0.3, x₃=0.9
+Given weights: w₁=0.8, w₂=0.6, w₃=0.2
+Given bias: b=-0.5
+
+
+Step 1: Weighted sum
+z = (x₁ × w₁) + (x₂ × w₂) + (x₃ × w₃) + bias
+z = (0.5 × 0.8) + (0.3 × 0.6) + (0.9 × 0.2) + (-0.5)
+z = 0.4 + 0.18 + 0.18 - 0.5
+z = 0.26
+
+
+Step 2: Apply activation function (sigmoid)
+y = 1 / (1 + e^(-z))
+y = 1 / (1 + e^(-0.26))
+y ≈ 0.56
+
+
+Output: 0.56 (closer to 1 = "fire", closer to 0 = "don't fire")
+
+
+Study Questions
+1. What do the weights represent in an artificial neuron?
+   * Answer: The strength/importance of each input connection
+2. Why do we need an activation function?
+   * Answer: To decide whether the neuron should "fire" (activate) based on weighted inputs
+3. How does a perceptron mimic a biological neuron?
+   * Answer: Inputs=dendrites, weights=synapse strength, weighted sum=soma processing, activation=axon firing
+________________
+
+
+VISUAL 3: ACTIVATION FUNCTIONS COMPARISON (3 minutes)
+Learning Objective: Understand different activation functions and their behaviors
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│        ACTIVATION FUNCTIONS (Funciones de Activación)         │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│  1. SIGMOID (Sigmoide)                                        │
+│     Formula: f(x) = 1 / (1 + e^(-x))                         │
+│     Output range: (0, 1)                                      │
+│                                                                │
+│        1 │         ╭────────                                  │
+│          │       ╭─                                           │
+│      0.5 │     ╭─                                             │
+│          │   ╭─                                               │
+│        0 │──────────                                          │
+│          └────────────→ x                                     │
+│         -5   0    5                                           │
+│                                                                │
+│     Use: Binary classification (yes/no decisions)            │
+│     Pro: Smooth, differentiable, bounded                      │
+│     Con: Vanishing gradient problem (saturates at extremes)  │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│  2. ReLU (Rectified Linear Unit)                             │
+│     Formula: f(x) = max(0, x)                                │
+│     Output range: [0, ∞)                                      │
+│                                                                │
+│          │           ╱                                        │
+│          │         ╱                                          │
+│          │       ╱                                            │
+│          │     ╱                                              │
+│          │───────────→ x                                      │
+│          └────────────                                        │
+│                0                                               │
+│                                                                │
+│     Use: Deep neural networks (most popular)                 │
+│     Pro: Fast, avoids vanishing gradient, sparse activation  │
+│     Con: "Dead ReLU" problem (neurons can stop learning)     │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│  3. TANH (Hyperbolic Tangent)                                │
+│     Formula: f(x) = (e^x - e^(-x)) / (e^x + e^(-x))        │
+│     Output range: (-1, 1)                                     │
+│                                                                │
+│        1 │         ╭────────                                  │
+│          │       ╭─                                           │
+│        0 │     ╱                                              │
+│          │  ─╯                                                │
+│       -1 │────────────                                        │
+│          └────────────→ x                                     │
+│         -5   0    5                                           │
+│                                                                │
+│     Use: Hidden layers in networks                           │
+│     Pro: Zero-centered, stronger gradients than sigmoid      │
+│     Con: Also suffers vanishing gradient                      │
+│                                                                │
+│  COMPARISON TABLE:                                            │
+│  ┌───────────┬──────────┬──────────┬─────────────┐          │
+│  │ Function  │ Range    │ Speed    │ Best For    │          │
+│  ├───────────┼──────────┼──────────┼─────────────┤          │
+│  │ Sigmoid   │ (0,1)    │ Slow     │ Output layer│          │
+│  │ ReLU      │ [0,∞)    │ Fast     │ Hidden layer│          │
+│  │ Tanh      │ (-1,1)   │ Medium   │ Hidden layer│          │
+│  └───────────┴──────────┴──────────┴─────────────┘          │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+Study Questions
+1. Why can't we use a simple linear function as activation?
+   * Answer: Without non-linearity, neural networks can't learn complex patterns (multiple layers would collapse to single layer)
+2. When would you use Sigmoid vs. ReLU?
+   * Answer: Sigmoid for output layer (probabilities 0-1); ReLU for hidden layers (faster, avoids vanishing gradient)
+3. What is the "vanishing gradient" problem?
+   * Answer: When gradients become extremely small during backpropagation, neurons stop learning effectively
+________________
+
+
+VISUAL 4: MULTI-LAYER NETWORK ARCHITECTURE (4 minutes)
+Learning Objective: Understand how neurons organize into layers to process information
+Visual Description
+┌────────────────────────────────────────────────────────────────┐
+│    MULTI-LAYER NEURAL NETWORK (Red Neuronal Multi-Capa)        │
+├────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   INPUT          HIDDEN LAYERS           OUTPUT                 │
+│   LAYER          (Capas Ocultas)         LAYER                  │
+│                                                                  │
+│                 Layer 1    Layer 2                              │
+│                                                                  │
+│     ●               ●         ●                                  │
+│     │              ╱│╲       ╱│╲                                 │
+│     │             ╱ │ ╲     ╱ │ ╲                                │
+│     ●            ●  │  ●   ●  │  ●          ●                   │
+│     │           ╱ ╲ │ ╱ ╲ ╱ ╲ │ ╱ ╲        ╱│╲                  │
+│     │          ╱   ╲│╱   ╳   ╲│╱   ╲      ╱ │ ╲                 │
+│     ●         ●     ╳   ●     ╳     ●    ●  │  ●                │
+│     │          ╲   ╱│╲   ╲   ╱│╲   ╱      ╲ │ ╱                 │
+│     │           ╲ ╱ │ ╲ ╱ ╲ ╱ │ ╲ ╱        ╲│╱                  │
+│     ●            ●  │  ●   ●  │  ●          ●                   │
+│                   ╲ │ ╱     ╲ │ ╱                                │
+│                    ╲│╱       ╲│╱                                 │
+│                     ●         ●                                  │
+│                                                                  │
+│   (4 inputs)     (3 neurons) (3 neurons)   (3 outputs)         │
+│                                                                  │
+│   Example: Image Recognition                                    │
+│   ────────────────────────────                                  │
+│   Input Layer:    Raw pixel values (784 for 28×28 image)       │
+│   Hidden Layer 1: Detects edges, corners (simple features)     │
+│   Hidden Layer 2: Combines features (shapes, textures)         │
+│   Output Layer:   Classification (digit 0-9)                   │
+│                                                                  │
+│   INFORMATION FLOW:                                             │
+│   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐  │
+│   │          │   │          │   │          │   │          │  │
+│   │  Input   │──→│ Hidden 1 │──→│ Hidden 2 │──→│  Output  │  │
+│   │  Layer   │   │  Layer   │   │  Layer   │   │  Layer   │  │
+│   │          │   │          │   │          │   │          │  │
+│   └──────────┘   └──────────┘   └──────────┘   └──────────┘  │
+│        ↓              ↓              ↓              ↓          │
+│   Raw data      Simple         Complex       Final            │
+│                 features       patterns      decision          │
+│                                                                  │
+│   DEEP LEARNING = Many Hidden Layers                           │
+│   ────────────────────────────────────                          │
+│   • "Shallow" network: 1-2 hidden layers                       │
+│   • "Deep" network: 3+ hidden layers (hence "Deep Learning")   │
+│   • Modern networks: 50-200+ layers (ResNet, GPT, etc.)       │
+│                                                                  │
+│   KEY INSIGHT:                                                  │
+│   Each layer learns increasingly abstract representations:     │
+│   Layer 1: Edges, colors                                       │
+│   Layer 2: Textures, simple shapes                            │
+│   Layer 3: Object parts (eyes, wheels)                        │
+│   Layer 4: Complete objects (faces, cars)                     │
+│                                                                  │
+└────────────────────────────────────────────────────────────────┘
+
+
+Layer-by-Layer Example: Recognizing a Cat
+Input: 224×224 pixel image (RGB)
+
+
+Layer 1 (Early Hidden):
+  Neuron 1: Detects vertical edges
+  Neuron 2: Detects horizontal edges
+  Neuron 3: Detects diagonal edges
+  Output: Edge map of image
+
+
+Layer 2 (Mid Hidden):
+  Neuron 1: Combines edges into textures (fur patterns)
+  Neuron 2: Detects curved shapes (ear outlines)
+  Neuron 3: Identifies color regions
+  Output: Texture and shape features
+
+
+Layer 3 (Late Hidden):
+  Neuron 1: Recognizes eyes
+  Neuron 2: Recognizes ears
+  Neuron 3: Recognizes whiskers
+  Output: Object parts
+
+
+Output Layer:
+  Neuron 1 ("Cat"): 0.92 (92% confident it's a cat)
+  Neuron 2 ("Dog"): 0.05
+  Neuron 3 ("Bird"): 0.03
+  Result: Classified as "Cat"
+
+
+Study Questions
+1. Why do we need multiple layers?
+   * Answer: Each layer learns increasingly complex features; single layer can't learn complex patterns
+2. What makes a network "deep"?
+   * Answer: Having many hidden layers (3+), allowing hierarchical feature learning
+3. How does information flow through the network?
+   * Answer: Forward: input → hidden layers → output; each layer transforms data to more abstract representation
+________________
+
+
+VISUAL 5: BACKPROPAGATION FLOW DIAGRAM (4 minutes)
+Learning Objective: Understand conceptually how neural networks learn from mistakes
+Visual Description
+┌───────────────────────────────────────────────────────────────┐
+│      BACKPROPAGATION (Retropropagación): How Networks Learn   │
+├───────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   STEP 1: FORWARD PASS (Making a Prediction)                  │
+│   ────────────────────────────────────────                     │
+│                                                                 │
+│      Input     Hidden      Output      Actual                 │
+│       ●          ●           ●          Label                  │
+│       │         ╱│╲         ╱│╲                                 │
+│       │        ╱ │ ╲       ╱ │ ╲                                │
+│       ●───────●  │  ●─────●  │  ●  ──→  Predicted: 0.7        │
+│       │        ╲ │ ╱       ╲ │ ╱         Actual: 1.0          │
+│       │         ╲│╱         ╲│╱                                 │
+│       ●          ●           ●          Error = 0.3!           │
+│                                                                 │
+│       ──→ Flow direction: Left to right                        │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────    │
+│                                                                 │
+│   STEP 2: CALCULATE ERROR (How Wrong Are We?)                 │
+│   ─────────────────────────────────────────────                │
+│                                                                 │
+│      Loss Function (Función de Pérdida):                       │
+│      Error = (Predicted - Actual)²                             │
+│      Error = (0.7 - 1.0)²                                      │
+│      Error = 0.09                                              │
+│                                                                 │
+│      Goal: Minimize this error                                 │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────    │
+│                                                                 │
+│   STEP 3: BACKWARD PASS (Learning from Mistakes)              │
+│   ──────────────────────────────────────────────               │
+│                                                                 │
+│      Input     Hidden      Output                              │
+│       ●          ●           ●                                  │
+│       │         ╱│╲         ╱│╲                                 │
+│       │    ┌───╱ │ ╲───┐  ╱ │ ╲                                │
+│       ● ◁──●  │  ● ◁───●  │  ●  ◁── Error signal (0.09)       │
+│       │    └───╲ │ ╱───┘  ╲ │ ╱                                │
+│       │         ╲│╱         ╲│╱                                 │
+│       ●          ●           ●                                  │
+│                                                                 │
+│       ◁── Flow direction: Right to left                        │
+│       Update weights at each connection to reduce error        │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────    │
+│                                                                 │
+│   STEP 4: UPDATE WEIGHTS (Gradient Descent)                   │
+│   ─────────────────────────────────────────────                │
+│                                                                 │
+│      For each weight w:                                         │
+│      w_new = w_old - (learning_rate × gradient)                │
+│                                                                 │
+│      Example:                                                   │
+│      If gradient = 0.5 (error says "increase this weight")    │
+│      learning_rate = 0.1                                       │
+│      w_new = 0.8 - (0.1 × 0.5) = 0.75                         │
+│                                                                 │
+│      The weight is adjusted slightly in direction that         │
+│      reduces error                                              │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────    │
+│                                                                 │
+│   THE CYCLE REPEATS:                                           │
+│                                                                 │
+│       ┌──────────────────────────────────────┐                │
+│       │                                        │                │
+│       ↓                                        │                │
+│   Forward Pass  →  Calculate Error  →  Backward Pass          │
+│   (Prediction)     (How wrong?)      (Update weights)          │
+│       │                                        ↑                │
+│       └────────────────────────────────────────┘                │
+│                                                                 │
+│   Repeat thousands of times until error is minimized          │
+│                                                                 │
+│   KEY ANALOGY:                                                 │
+│   ───────────                                                   │
+│   Imagine learning to shoot basketballs:                       │
+│   1. Take a shot (Forward Pass)                                │
+│   2. Miss the basket by 2 feet (Calculate Error)              │
+│   3. Your brain adjusts aim (Backward Pass)                    │
+│   4. Try again with adjustment (Update Weights)                │
+│   5. Repeat until you consistently make baskets                │
+│                                                                 │
+│   Backpropagation = Network learning from its mistakes         │
+│                                                                 │
+└───────────────────────────────────────────────────────────────┘
+
+
+Mathematical Intuition (Simplified)
+Chain Rule of Calculus:
+"How much does changing weight W affect final error?"
+
+
+Error depends on Output
+Output depends on Hidden Layer
+Hidden Layer depends on Weight W
+
+
+Therefore: Change in Error = (change due to Output) ×
+                             (change due to Hidden) ×
+                             (change due to Weight)
+
+
+Backpropagation efficiently calculates these "chains" of
+dependencies, telling us exactly how to adjust each weight.
+
+
+Study Questions
+1. What is the purpose of the forward pass?
+   * Answer: To make a prediction based on current weights
+2. What is the purpose of the backward pass?
+   * Answer: To calculate how much each weight contributed to error and adjust weights accordingly
+3. Why is it called "backpropagation"?
+   * Answer: Error propagates backward from output to input, updating weights along the way
+________________
+
+
+VISUAL 6: MNIST DIGIT RECOGNITION EXAMPLE (3 minutes)
+Learning Objective: See a real-world application of neural networks
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│     MNIST HANDWRITTEN DIGIT RECOGNITION                       │
+│     (Reconocimiento de Dígitos Escritos a Mano)              │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│   THE CLASSIC "HELLO WORLD" OF DEEP LEARNING                 │
+│                                                                │
+│   INPUT: 28×28 pixel grayscale image (784 pixels total)      │
+│                                                                │
+│      ┌───────────────────┐                                    │
+│      │ ████████          │                                    │
+│      │     ████          │                                    │
+│      │      ███          │                                    │
+│      │     ████          │                                    │
+│      │    ████           │                                    │
+│      │    ███            │                                    │
+│      │   ████            │         What digit is this?       │
+│      │  ████             │                                    │
+│      │  ███              │         Answer: 7                  │
+│      │  ███              │                                    │
+│      │                   │                                    │
+│      └───────────────────┘                                    │
+│           28×28 pixels                                         │
+│                                                                │
+│   NETWORK ARCHITECTURE:                                       │
+│   ───────────────────────                                     │
+│                                                                │
+│   Input: 784 neurons (one per pixel)                         │
+│     ↓                                                          │
+│   Hidden Layer 1: 128 neurons                                │
+│     ↓                                                          │
+│   Hidden Layer 2: 64 neurons                                 │
+│     ↓                                                          │
+│   Output: 10 neurons (one per digit 0-9)                     │
+│                                                                │
+│                                                                │
+│   OUTPUT LAYER PROBABILITIES:                                 │
+│   ┌──────────────────────────────────────────┐               │
+│   │ Digit  │ Probability │ Confidence Bar    │               │
+│   ├────────┼─────────────┼───────────────────┤               │
+│   │   0    │    0.01     │ ▌                 │               │
+│   │   1    │    0.02     │ █                 │               │
+│   │   2    │    0.03     │ █▌                │               │
+│   │   3    │    0.01     │ ▌                 │               │
+│   │   4    │    0.02     │ █                 │               │
+│   │   5    │    0.01     │ ▌                 │               │
+│   │   6    │    0.01     │ ▌                 │               │
+│   │   7    │    0.88     │ ████████████████  │  ← WINNER!   │
+│   │   8    │    0.01     │ ▌                 │               │
+│   │   9    │    0.00     │                   │               │
+│   └────────┴─────────────┴───────────────────┘               │
+│                                                                │
+│   Prediction: Digit 7 (88% confidence)                        │
+│                                                                │
+│   TRAINING PROCESS:                                           │
+│   ─────────────────                                            │
+│   1. Show network 60,000 labeled training images              │
+│   2. Network makes predictions                                │
+│   3. Calculate error (how wrong?)                             │
+│   4. Backpropagation adjusts weights                          │
+│   5. Repeat until accuracy > 98%                              │
+│                                                                │
+│   PERFORMANCE:                                                │
+│   • Human accuracy: ~98%                                      │
+│   • Simple neural network: ~97%                               │
+│   • Deep convolutional network: ~99.7%                        │
+│                                                                │
+│   WHY MNIST MATTERS:                                          │
+│   • Benchmark dataset since 1998                              │
+│   • Simple enough for learning                                │
+│   • Complex enough to be interesting                          │
+│   • Foundation for more advanced computer vision              │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+MNIST Dataset Details
+Dataset Statistics:
+- 70,000 total images
+- 60,000 training images
+- 10,000 test images
+- 28×28 pixels (grayscale)
+- 10 classes (digits 0-9)
+- Balanced classes (~6,000 images per digit)
+
+
+Study Questions
+1. Why does the network have 784 input neurons?
+   * Answer: 28×28 pixels = 784 pixels; one input per pixel value
+2. Why 10 output neurons?
+   * Answer: One for each possible digit (0-9); highest probability wins
+3. How does the network "see" a digit?
+   * Answer: Doesn't "see" like humans; processes pixel patterns through layers to recognize digit shapes
+________________
+
+
+VISUAL 7: LOGIC GATE VISUALIZATION (3 minutes)
+Learning Objective: Prepare for interactive perceptron lab; understand simple pattern learning
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│         PERCEPTRON LEARNING LOGIC GATES                       │
+│         (Perceptrón Aprendiendo Puertas Lógicas)             │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│   LOGIC GATE: AND                                             │
+│   ─────────────────                                            │
+│                                                                │
+│   Truth Table:                                                │
+│   ┌────┬────┬────────┐                                        │
+│   │ x₁ │ x₂ │ Output │                                        │
+│   ├────┼────┼────────┤                                        │
+│   │ 0  │ 0  │   0    │  Only TRUE when BOTH inputs are 1     │
+│   │ 0  │ 1  │   0    │                                        │
+│   │ 1  │ 0  │   0    │                                        │
+│   │ 1  │ 1  │   1    │  ← Only this case outputs 1           │
+│   └────┴────┴────────┘                                        │
+│                                                                │
+│   Visual Representation:                                      │
+│                                                                │
+│       x₂                                                       │
+│        │                                                       │
+│      1 │    ○ (0,1)        ● (1,1)                           │
+│        │                    ↑                                 │
+│        │                 Output = 1                           │
+│        │                                                       │
+│      0 │    ○ (0,0)        ○ (1,0)                           │
+│        │                                                       │
+│        └────────────────────→ x₁                              │
+│        0                   1                                  │
+│                                                                │
+│   ○ = Output 0 (False)                                        │
+│   ● = Output 1 (True)                                         │
+│                                                                │
+│   Decision Boundary (what perceptron learns):                 │
+│   A line separating ● from ○                                  │
+│                                                                │
+│       x₂                                                       │
+│        │                                                       │
+│      1 │    ○          ╱  ● ← Positive class                 │
+│        │             ╱                                         │
+│        │           ╱  ← Decision boundary                     │
+│        │         ╱                                             │
+│      0 │    ○  ╱       ○ ← Negative class                    │
+│        │                                                       │
+│        └────────────────────→ x₁                              │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│   LOGIC GATE: OR                                              │
+│   ────────────────                                             │
+│                                                                │
+│   Truth Table:                                                │
+│   ┌────┬────┬────────┐                                        │
+│   │ x₁ │ x₂ │ Output │                                        │
+│   ├────┼────┼────────┤                                        │
+│   │ 0  │ 0  │   0    │  ← Only this outputs 0               │
+│   │ 0  │ 1  │   1    │  TRUE when EITHER input is 1          │
+│   │ 1  │ 0  │   1    │                                        │
+│   │ 1  │ 1  │   1    │                                        │
+│   └────┴────┴────────┘                                        │
+│                                                                │
+│   Visual Representation:                                      │
+│                                                                │
+│       x₂                                                       │
+│        │                                                       │
+│      1 │    ● (0,1)        ● (1,1)                           │
+│        │     ↑              ↑                                 │
+│        │  Output = 1     Output = 1                          │
+│        │                                                       │
+│      0 │    ○ (0,0)        ● (1,0)                           │
+│        │                    ↑                                 │
+│        └──────────────── Output = 1                           │
+│        0                   1   → x₁                           │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│   WHAT THE PERCEPTRON LEARNS:                                 │
+│                                                                │
+│   Starting with random weights:                               │
+│   w₁ = 0.3, w₂ = 0.5, bias = -0.4                           │
+│                                                                │
+│   Training cycle:                                             │
+│   1. Test on (0,0): Predicts 0.40 → Should be 0 → ERROR!    │
+│   2. Adjust weights to reduce error                          │
+│   3. Test on (0,1): Predicts 0.62 → Should be 1 → CLOSE!    │
+│   4. Continue adjusting...                                    │
+│   5. After 50 iterations: Perfect predictions!               │
+│                                                                │
+│   Final learned weights (example):                            │
+│   w₁ = 0.8, w₂ = 0.8, bias = -0.9                           │
+│                                                                │
+│   Now perceptron correctly implements AND logic!              │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+Study Questions
+1. Why is the AND gate "learnable" by a single perceptron?
+   * Answer: The pattern is linearly separable (can be separated by a straight line)
+2. What would happen if you tried to teach a perceptron XOR (exclusive OR)?
+   * Answer: Single perceptron would fail; XOR is not linearly separable (needs 2+ layers)
+3. How does the perceptron know it's made a mistake?
+   * Answer: Compares its prediction to the known correct answer; calculates error
+________________
+
+
+VISUAL 8: LOSS FUNCTION GRAPH (3 minutes)
+Learning Objective: Understand how training progress is measured
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│         LOSS FUNCTION OVER TRAINING                           │
+│         (Función de Pérdida Durante Entrenamiento)           │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│   WHAT IS LOSS? (¿Qué es la pérdida?)                        │
+│   Loss = How wrong the network's predictions are              │
+│   Goal: Minimize loss (make predictions more accurate)        │
+│                                                                │
+│   Loss                                                         │
+│    │                                                           │
+│ 10 │  ●                                                        │
+│    │   ╲                                                       │
+│  9 │    ●                                                      │
+│    │     ╲                                                     │
+│  8 │      ●                                                    │
+│    │       ╲          HIGH LOSS                               │
+│  7 │        ●         (Bad predictions)                        │
+│    │         ╲                                                 │
+│  6 │          ●                                                │
+│    │           ╲                                               │
+│  5 │            ●╲                                             │
+│    │              ╲                                            │
+│  4 │               ●╲    Network is learning!                 │
+│    │                 ╲                                         │
+│  3 │                  ●╲                                       │
+│    │                    ╲                                      │
+│  2 │                     ●╲                                    │
+│    │                       ╲╲                                  │
+│  1 │                         ●●─●─●─●─●                       │
+│    │                    LOW LOSS (Good predictions)           │
+│  0 │─────────────────────────────────────────→ Training Epoch │
+│    0   10   20   30   40   50   60   70   80                 │
+│                                                                │
+│   TRAINING vs. VALIDATION LOSS:                               │
+│   ─────────────────────────────                                │
+│                                                                │
+│   Loss                                                         │
+│    │                                                           │
+│  5 │  ●                                                        │
+│    │   ╲●                                                      │
+│  4 │     ╲●             ─── Training Loss                     │
+│    │       ╲●           ─ ─ Validation Loss                   │
+│  3 │         ╲●                                                │
+│    │           ╲● ●                                            │
+│  2 │             ●─●─●─●─●                                    │
+│    │              ╲                                            │
+│  1 │               ●─ ─ ─●─ ─ ─●                              │
+│    │                    ╱  ← GAP WIDENING                     │
+│  0 │───────────────●───●───────●→ Epoch                       │
+│                        ↑                                       │
+│                  OVERFITTING STARTS                            │
+│                  (Validation loss increases while              │
+│                   training loss decreases)                     │
+│                                                                │
+│   TYPES OF LOSS FUNCTIONS:                                    │
+│   ─────────────────────────                                    │
+│                                                                │
+│   1. Mean Squared Error (MSE) - For regression               │
+│      Loss = (1/n) Σ(predicted - actual)²                     │
+│                                                                │
+│   2. Cross-Entropy Loss - For classification                  │
+│      Loss = -Σ actual × log(predicted)                        │
+│      Penalizes confident wrong predictions heavily            │
+│                                                                │
+│   3. Binary Cross-Entropy - For binary classification         │
+│      Loss = -(y×log(p) + (1-y)×log(1-p))                     │
+│      Used when output is yes/no, 0/1                          │
+│                                                                │
+│   EARLY STOPPING:                                             │
+│   ────────────────                                             │
+│   Stop training when validation loss stops decreasing         │
+│   Prevents overfitting by not training "too long"            │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+Study Questions
+1. What does it mean when loss decreases during training?
+   * Answer: Network predictions are becoming more accurate; weights are being adjusted correctly
+2. Why do we track both training loss and validation loss?
+   * Answer: Training loss shows learning progress; validation loss detects overfitting
+3. What should you do if validation loss starts increasing while training loss decreases?
+   * Answer: Stop training (early stopping); the model is starting to overfit
+________________
+
+
+VISUAL 9: GRADIENT DESCENT INTUITION (4 minutes)
+Learning Objective: Understand how weights are updated to minimize loss
+Visual Description
+┌──────────────────────────────────────────────────────────────┐
+│         GRADIENT DESCENT (Descenso de Gradiente)              │
+│         "Walking Down a Hill to Find the Bottom"              │
+├──────────────────────────────────────────────────────────────┤
+│                                                                │
+│   THE OPTIMIZATION PROBLEM:                                   │
+│   Find weight values that minimize loss function              │
+│                                                                │
+│   Loss Function Surface (2 weights shown):                    │
+│                                                                │
+│         Loss                                                   │
+│          ↑                                                     │
+│          │        ╱╲                                          │
+│          │       ╱  ╲                                         │
+│          │      ╱    ╲      You are here ●                   │
+│          │     ╱      ╲         │                            │
+│          │    ╱        ╲        ↓                            │
+│          │   ╱     ╲    ╲      Step 1: Go downhill          │
+│          │  ╱       ╲    ╲        │                          │
+│          │ ╱         ╲____╲       ↓                          │
+│          │╱               ╲      ●                            │
+│          │                 ╲     ↓                            │
+│          │                  ╲   Step 2: Keep going           │
+│          │                   ╲  ↓                             │
+│          │                    ●─────→ ●  ← Global minimum    │
+│          │                         (Best weights)             │
+│          └─────────────────────────────────→ Weight Values   │
+│                                                                │
+│   GRADIENT = Slope of the hill                                │
+│   • Positive gradient → Go left (decrease weight)            │
+│   • Negative gradient → Go right (increase weight)           │
+│   • Zero gradient → You're at the bottom!                    │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│   THE ALGORITHM:                                              │
+│                                                                │
+│   Starting position: Random weights                           │
+│   ┌──────────────────────────────────────┐                   │
+│   │ 1. Calculate gradient (slope)        │                   │
+│   │    "Which direction is downhill?"    │                   │
+│   │                                       │                   │
+│   │ 2. Take a step in that direction     │                   │
+│   │    new_weight = old_weight -         │                   │
+│   │                 (learning_rate ×     │                   │
+│   │                  gradient)            │                   │
+│   │                                       │                   │
+│   │ 3. Repeat until gradient ≈ 0         │                   │
+│   └──────────────────────────────────────┘                   │
+│                                                                │
+│   LEARNING RATE (Tasa de Aprendizaje):                       │
+│   ──────────────────────────────────────                      │
+│                                                                │
+│   Too Large:               Just Right:         Too Small:     │
+│   Loss                     Loss                Loss           │
+│    │  ●                     │  ●                │  ●          │
+│    │   ╲●                   │   ╲               │   ╲         │
+│    │     ●●                 │    ●              │    ●        │
+│    │   ●   ●                │     ●             │     ●       │
+│    │  ●     ●               │      ●            │      ●      │
+│    │ ●       ●              │       ●           │       ●     │
+│    │●         ●             │        ●          │        ●    │
+│    └───→ Epoch              └───→ Epoch         └───→ Epoch  │
+│                                                                │
+│   Overshoots!              Converges smoothly   Too slow!     │
+│   Never converges          (Ideal)              Takes forever │
+│                                                                │
+│  ─────────────────────────────────────────────────────────   │
+│                                                                │
+│   STOCHASTIC vs. BATCH GRADIENT DESCENT:                      │
+│                                                                │
+│   Batch GD: Use ALL training data to calculate gradient       │
+│   • Pro: Accurate gradient                                    │
+│   • Con: Slow (must process all data before updating)        │
+│                                                                │
+│   Stochastic GD: Use ONE training example at a time           │
+│   • Pro: Fast updates                                         │
+│   • Con: Noisy gradient (jumps around)                        │
+│                                                                │
+│   Mini-Batch GD: Use small batches (e.g., 32 examples)       │
+│   • Pro: Balance speed and stability                          │
+│   • Con: Hyperparameter to tune (batch size)                 │
+│   • Most common in practice                                   │
+│                                                                │
+│   ANALOGY:                                                    │
+│   Imagine you're blindfolded in a hilly park.                 │
+│   Goal: Find the lowest point.                                │
+│                                                                │
+│   Strategy:                                                   │
+│   1. Feel the slope under your feet (gradient)               │
+│   2. Take a step downhill                                     │
+│   3. Repeat until ground is flat (minimum reached)           │
+│                                                                │
+│   Learning rate = How big each step is                        │
+│   Gradient = Which direction to step                          │
+│                                                                │
+└──────────────────────────────────────────────────────────────┘
+
+
+Study Questions
+1. What does the gradient tell us?
+   * Answer: The direction and magnitude of the steepest ascent; we go opposite direction (descent)
+2. Why do we need a learning rate?
+   * Answer: Controls step size; too large overshoots minimum; too small trains slowly
+3. What happens when gradient = 0?
+   * Answer: We've reached a minimum (local or global); no more updates needed
+________________
+
+
+VISUAL 10: SUMMARY CONCEPT MAP (4 minutes)
+Learning Objective: Integrate all Module 3 concepts into unified understanding
+Visual Description
+┌────────────────────────────────────────────────────────────────┐
+│    MODULE 3: NEURAL NETWORKS & DEEP LEARNING - CONCEPT MAP     │
+├────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│                   NEURAL NETWORKS                               │
+│                        │                                         │
+│           ┌────────────┴────────────┐                          │
+│           ↓                         ↓                          │
+│     BIOLOGICAL              ARTIFICIAL                          │
+│     INSPIRATION             IMPLEMENTATION                      │
+│           │                         │                           │
+│    ┌──────┴──────┐          ┌──────┴──────┐                   │
+│    │             │          │              │                   │
+│  Neuron       Synapse    Perceptron    Multi-Layer             │
+│    │             │          │           Network                 │
+│    │             │          │              │                    │
+│ • Dendrites  • Weight   • Inputs      • Input Layer            │
+│ • Soma       • Strength • Weights     • Hidden Layers          │
+│ • Axon                  • Activation  • Output Layer           │
+│                         • Output                                │
+│                                                                  │
+│  ─────────────────────────────────────────────────────────     │
+│                                                                  │
+│              KEY COMPONENTS & HOW THEY CONNECT                  │
+│                                                                  │
+│                    FORWARD PROPAGATION                          │
+│                            │                                     │
+│              ┌─────────────┴─────────────┐                     │
+│              ↓                           ↓                     │
+│         ACTIVATION                   WEIGHTED SUM               │
+│         FUNCTIONS                         │                     │
+│              │                            │                     │
+│     ┌────────┼────────┐        y = Σ(wᵢ × xᵢ) + bias          │
+│     │        │        │                   │                     │
+│  Sigmoid   ReLU    Tanh          ┌────────┴────────┐          │
+│     │        │        │           ↓                 ↓          │
+│  (0 to 1) (0 to ∞)(-1 to 1)  LAYERS           CONNECTIONS      │
+│                                   │                 │           │
+│                         • Input (raw data)    • Weights         │
+│                         • Hidden (features)   • Bias            │
+│                         • Output (prediction) • Full/Partial    │
+│                                                                  │
+│  ─────────────────────────────────────────────────────────     │
+│                                                                  │
+│                      LEARNING PROCESS                           │
+│                            │                                     │
+│              ┌─────────────┴─────────────┐                     │
+│              ↓                           ↓                     │
+│     BACKPROPAGATION              GRADIENT DESCENT               │
+│              │                           │                     │
+│    • Calculate error        • Update weights to minimize        │
+│    • Propagate backward       loss function                     │
+│    • Find gradient          • Learning rate controls step       │
+│    • Update each weight     • Iterate until convergence         │
+│                                                                  │
+│              ↓                           ↓                     │
+│         LOSS FUNCTION              OPTIMIZATION                 │
+│              │                           │                     │
+│    • MSE (regression)         • Batch GD                        │
+│    • Cross-Entropy           • Stochastic GD                   │
+│      (classification)         • Mini-Batch GD (most common)     │
+│    • Measures error          • Adam, RMSprop (advanced)        │
+│                                                                  │
+│  ─────────────────────────────────────────────────────────     │
+│                                                                  │
+│                     DEEP LEARNING                               │
+│                            │                                     │
+│                   "Deep" = Many Layers                          │
+│                            │                                     │
+│              ┌─────────────┴─────────────┐                     │
+│              ↓                           ↓                     │
+│     HIERARCHICAL LEARNING         APPLICATIONS                  │
+│              │                           │                     │
+│    Layer 1: Simple features  • Image Recognition (MNIST)       │
+│    Layer 2: Combinations     • Natural Language Processing     │
+│    Layer 3: Complex patterns • Speech Recognition              │
+│    Layer N: High-level       • Game Playing (AlphaGo)         │
+│             concepts          • Autonomous Driving             │
+│                                                                  │
+│  ─────────────────────────────────────────────────────────     │
+│                                                                  │
+│                  KEY CHALLENGES & SOLUTIONS                     │
+│                                                                  │
+│   PROBLEM                        SOLUTION                       │
+│   ────────                       ────────                       │
+│   Vanishing Gradient    →    ReLU activation, Skip connections │
+│   Overfitting           →    Regularization, Dropout, Early    │
+│                               stopping                          │
+│   Slow Training         →    Mini-batch GD, GPU acceleration,  │
+│                               Better optimizers (Adam)          │
+│   Choosing Architecture →    Start simple, experiment, Use     │
+│                               proven architectures              │
+│                                                                  │
+│  ─────────────────────────────────────────────────────────     │
+│                                                                  │
+│              THE COMPLETE NEURAL NETWORK CYCLE                  │
+│                                                                  │
+│   ┌─────────────────────────────────────────────────────┐     │
+│   │                                                       │     │
+│   │  1. INITIALIZE                                       │     │
+│   │     Random weights & biases                          │     │
+│   │                                                       │     │
+│   │  2. FORWARD PASS                                     │     │
+│   │     Input → Layers → Activation → Output             │     │
+│   │                                                       │     │
+│   │  3. CALCULATE LOSS                                   │     │
+│   │     Compare prediction to actual label               │     │
+│   │                                                       │     │
+│   │  4. BACKWARD PASS (Backpropagation)                  │     │
+│   │     Calculate gradients layer by layer               │     │
+│   │                                                       │     │
+│   │  5. UPDATE WEIGHTS (Gradient Descent)                │     │
+│   │     w_new = w_old - (learning_rate × gradient)       │     │
+│   │                                                       │     │
+│   │  6. REPEAT                                           │     │
+│   │     Until loss is minimized or max epochs reached    │     │
+│   │                                                       │     │
+│   └───────────────────────────────────────────────────────┘     │
+│                           ↓                                     │
+│                    TRAINED MODEL                                │
+│                 (Ready for predictions)                         │
+│                                                                  │
+│  BILINGUAL KEY TERMS:                                          │
+│  • Neuron (Neurona) | Perceptron (Perceptrón)                 │
+│  • Activation Function (Función de Activación)                 │
+│  • Hidden Layer (Capa Oculta)                                  │
+│  • Backpropagation (Retropropagación)                          │
+│  • Gradient Descent (Descenso de Gradiente)                    │
+│  • Loss Function (Función de Pérdida)                          │
+│  • Deep Learning (Aprendizaje Profundo)                        │
+│                                                                  │
+└────────────────────────────────────────────────────────────────┘
+
+
+Study Questions (Comprehensive Review)
+1. Trace the path from biological neuron to deep learning:
+   * Answer: Biological neuron → Perceptron (artificial neuron) → Layer of perceptrons → Multi-layer network → Deep network (many layers)
+2. Explain the complete learning cycle in your own words:
+   * Answer: (1) Start with random weights, (2) Make predictions (forward), (3) Calculate how wrong (loss), (4) Find how to improve (backprop), (5) Adjust weights (gradient descent), (6) Repeat
+3. Why is deep learning "deep"?
+   * Answer: Multiple hidden layers allow hierarchical learning of increasingly abstract features
+________________
+
+
+IMPLEMENTATION GUIDE FOR PLATFORM
+Format Recommendations
+Visual 1-2: Side-by-side comparison layout Visual 3: Horizontal comparison chart with hover details Visual 4:Interactive expand/collapse layers Visual 5: Animated flow diagram (can be static with arrows) Visual 6: Grid layout with example images Visual 7: Interactive 2D plot (clickable points) Visual 8: Line graph with toggle for train/val lossVisual 9: 3D surface visualization (can be 2D cross-section) Visual 10: Zoomable concept map with clickable nodes
+Technical Implementation
+Option 1: Static Images (Easiest)
+- Create in Figma/Canva/Draw.io
+- Export as SVG (scalable) or high-res PNG
+- Embed directly in reading material
+
+
+Option 2: Interactive SVG (Medium)
+- Create SVG with clickable elements
+- Add JavaScript for hover/click interactions
+- Good for Visual 7 (logic gates) and Visual 10 (concept map)
+
+
+Option 3: JavaScript Visualization (Advanced)
+- Use D3.js or Chart.js for Visual 8 (loss graph)
+- TensorFlow.js Playground style for Visual 7
+- Animated transitions for Visual 5 (backpropagation)
+
+
+Accessibility Requirements
+* Alt text for every visual
+* High contrast colors (WCAG 2.1 AA compliant)
+* Text descriptions alongside visuals
+* Bilingual labels integrated into graphics
+* Screen reader friendly (describe visual flow verbally)
+________________
+
+
+STUDY TIME ALLOCATION VALIDATION
+Visual 1: Biological Neuron        4 min  ✓
+Visual 2: Artificial Neuron         4 min  ✓
+Visual 3: Activation Functions      3 min  ✓
+Visual 4: Multi-Layer Network       4 min  ✓
+Visual 5: Backpropagation          4 min  ✓
+Visual 6: MNIST Example            3 min  ✓
+Visual 7: Logic Gates              3 min  ✓
+Visual 8: Loss Function            3 min  ✓
+Visual 9: Gradient Descent         4 min  ✓
+Visual 10: Concept Map             4 min  ✓
+──────────────────────────────────────────
+TOTAL:                            36 min  ✓
+
+
+Status: All 10 visuals designed and specified Ready for: Graphic design and platform implementation Next Steps:Create visual assets; integrate with Module 3 reading material

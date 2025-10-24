@@ -1,0 +1,608 @@
+﻿Module 2 Quiz: Machine Learning Fundamentals
+Fundamentos del Aprendizaje Automático: El Motor Central
+________________
+
+
+Quiz Overview
+Course: MTW AI Platform - Artificial Intelligence Fundamentals and Practical Applications
+Module: Module 2 - Machine Learning Fundamentals: The Core Engine
+Estimated Time: 12 minutes
+Total Questions: 10 (7 Multiple Choice + 3 Matching)
+Format: Bilingual (English / Español)
+Passing Score: 70% (7/10 correct)
+________________
+
+
+Instructions / Instrucciones
+Answer all questions to the best of your ability. Each question is worth equal points.
+Responda todas las preguntas lo mejor que pueda. Cada pregunta vale los mismos puntos.
+________________
+
+
+SECTION A: MULTIPLE CHOICE QUESTIONS
+Preguntas de Opción Múltiple
+________________
+
+
+Question 1
+Which type of machine learning uses labeled data with known input-output pairs?
+¿Qué tipo de aprendizaje automático utiliza datos etiquetados con pares conocidos de entrada-salida?
+A) Unsupervised Learning / Aprendizaje No Supervisado
+B) Supervised Learning / Aprendizaje Supervisado
+C) Reinforcement Learning / Aprendizaje por Refuerzo
+D) Deep Learning / Aprendizaje Profundo
+Correct Answer: B
+Explanation: Supervised learning is the ML approach that uses labeled training data with known input-output pairs. The model learns to map inputs to their corresponding outputs. Unsupervised learning works with unlabeled data (C), reinforcement learning learns through rewards/penalties (D), and deep learning is a technique within ML using neural networks (D is a subset of supervised/unsupervised).
+Learning Objective: Understand the fundamental distinction between supervised and unsupervised learning approaches.
+________________
+
+
+Question 2
+What is the primary purpose of dividing data into training, validation, and test sets?
+¿Cuál es el propósito principal de dividir los datos en conjuntos de entrenamiento, validación y prueba?
+A) To make the model train faster
+B) To evaluate model performance and prevent overfitting
+C) To increase the amount of available data
+D) To reduce computational costs
+Correct Answer: B
+Explanation: Splitting data into three sets serves a critical purpose:
+* Training Set: Used to train the model
+* Validation Set: Used to tune hyperparameters and prevent overfitting during development
+* Test Set: Used for final unbiased evaluation on completely unseen data
+This prevents overfitting (where a model memorizes training data but doesn't generalize) and provides honest assessment of model performance. Options A (doesn't directly speed up training), C (doesn't create new data), and D (doesn't reduce costs) are incorrect.
+Learning Objective: Understand the importance of proper data separation for unbiased model evaluation.
+________________
+
+
+Question 3
+Overfitting occurs when:
+El sobreajuste ocurre cuando:
+A) The model performs well on training data but poorly on new data
+B) The model performs poorly on both training and test data
+C) The model is too simple to capture patterns
+D) The training process takes too long
+Correct Answer: A
+Explanation: Overfitting is when a model learns the training data too well, including noise and irrelevant patterns, causing it to perform poorly on new, unseen data. This happens when:
+* Model is too complex
+* Training data is limited
+* Model is trained too long
+The model "memorizes" rather than "learns."
+Option B describes underfitting (model too simple). Option C also describes underfitting. Option D (training time) is unrelated to overfitting.
+Learning Objective: Recognize overfitting as a key challenge in machine learning and understand its characteristics.
+________________
+
+
+Question 4
+Which of the following is an example of a classification task?
+¿Cuál de los siguientes es un ejemplo de una tarea de clasificación?
+A) Predicting house prices / Predecir precios de casas
+B) Detecting spam emails / Detectar correos spam
+C) Forecasting temperature / Pronosticar temperatura
+D) Estimating sales revenue / Estimar ingresos por ventas
+Correct Answer: B
+Explanation: Classification is predicting a discrete category or class. "Detecting spam emails" is a binary classification task (spam or not spam).
+Other options are regression tasks (predicting continuous values):
+* A) House prices are continuous numbers (regression)
+* C) Temperature is a continuous value (regression)
+* D) Sales revenue is a continuous value (regression)
+Classification examples: email spam detection, image recognition (cat vs. dog), sentiment analysis (positive/negative/neutral).
+Learning Objective: Distinguish between classification and regression tasks.
+________________
+
+
+Question 5
+What is the primary goal of unsupervised learning?
+¿Cuál es el objetivo principal del aprendizaje no supervisado?
+A) To predict specific output values
+B) To find hidden patterns and structure in unlabeled data
+C) To learn from rewards and penalties
+D) To classify data into predefined categories
+Correct Answer: B
+Explanation: Unsupervised learning works without labeled data and aims to discover patterns, structure, or relationships in data. Common unsupervised learning tasks include:
+* Clustering: Grouping similar data points
+* Dimensionality reduction: Reducing data complexity
+* Anomaly detection: Finding unusual patterns
+Option A (predicting specific values) is supervised learning. Option C (rewards/penalties) is reinforcement learning. Option D (predefined categories) is supervised classification.
+Learning Objective: Understand the purpose and characteristics of unsupervised learning.
+________________
+
+
+Question 6
+Which of the following is an unsupervised learning task?
+¿Cuál de los siguientes es una tarea de aprendizaje no supervisado?
+A) Predicting customer lifetime value
+B) Identifying disease from medical images
+C) Clustering customers by purchasing behavior
+D) Classifying plants by species
+Correct Answer: C
+Explanation: Clustering is an unsupervised learning task that groups similar items together without predefined labels. "Clustering customers by purchasing behavior" discovers natural groups in the data.
+Other options are supervised learning tasks:
+* A) Regression task (predicting numerical value)
+* B) Classification task (identifying class from labeled examples)
+* D) Classification task (predefined plant species classes)
+Learning Objective: Recognize unsupervised learning tasks like clustering and anomaly detection.
+________________
+
+
+Question 7
+Which evaluation metric measures the proportion of correct predictions made by a model?
+¿Qué métrica de evaluación mide la proporción de predicciones correctas realizadas por un modelo?
+A) Error Rate / Tasa de Error
+B) Accuracy / Precisión
+C) Loss Function / Función de Pérdida
+D) Gradient / Gradiente
+Correct Answer: B
+Explanation: Accuracy measures the proportion of correct predictions out of total predictions:
+Accuracy = (True Positives + True Negatives) / Total Predictions
+* Error Rate (option A) is the complement: 1 - Accuracy (proportion of incorrect predictions)
+* Loss Function (option C) measures model performance during training but is not an evaluation metric
+* Gradient (option D) is used in optimization algorithms, not evaluation
+While accuracy is intuitive, it can be misleading with imbalanced datasets. Other metrics (precision, recall, F1-score) are often more appropriate.
+Learning Objective: Understand common model evaluation metrics and their meanings.
+________________
+
+
+SECTION B: MATCHING QUESTIONS
+Preguntas de Emparejamiento
+Match each ML concept with its correct description.
+Empareje cada concepto de ML con su descripción correcta.
+________________
+
+
+Question 8: Match the Learning Types
+Match the Learning Types with Their Descriptions:
+Learning Types
+	Descriptions
+	1. Supervised Learning
+	A. Learning through rewards and penalties
+	2. Unsupervised Learning
+	B. Finding patterns in unlabeled data
+	3. Reinforcement Learning
+	C. Learning from labeled input-output pairs
+	Your Answers:
+1. ____    2. ____    3. ____
+
+
+Correct Answers: 1-C, 2-B, 3-A
+Explanation:
+1. Supervised Learning (C) - Learning from labeled input-output pairs
+* Uses labeled training data
+* Goal: Learn mapping from inputs to outputs
+* Examples: Classification, regression
+* Approach: Model learns from examples with correct answers
+2. Unsupervised Learning (B) - Finding patterns in unlabeled data
+* No labeled data provided
+* Goal: Discover hidden structure or patterns
+* Examples: Clustering, dimensionality reduction
+* Approach: Model finds natural groupings or relationships
+3. Reinforcement Learning (A) - Learning through rewards and penalties
+* Agent learns by interacting with environment
+* Goal: Maximize cumulative reward
+* Examples: Game playing, robotics, autonomous driving
+* Approach: Trial and error with feedback signals
+Learning Objective: Understand the fundamental distinction between three main ML approaches.
+________________
+
+
+Question 9: Match the Task Types with Examples
+Match the Task Types with Their Examples:
+Task Types
+	Examples
+	1. Classification
+	A. Predicting house prices
+	2. Regression
+	B. Grouping customers by behavior
+	3. Clustering
+	C. Identifying spam vs. non-spam emails
+	Your Answers:
+1. ____    2. ____    3. ____
+
+
+Correct Answers: 1-C, 2-A, 3-B
+Explanation:
+1. Classification (C) - Identifying spam vs. non-spam emails
+* Predicting discrete categories or classes
+* Output: Category label (e.g., spam/not spam, cat/dog, positive/negative)
+* Binary classification: 2 classes
+* Multi-class classification: 3+ classes
+* Examples: Email spam detection, disease diagnosis, sentiment analysis
+2. Regression (A) - Predicting house prices
+* Predicting continuous numerical values
+* Output: Numerical value (e.g., price $500,000, temperature 72°F)
+* Goal: Minimize difference between predicted and actual value
+* Examples: Stock price prediction, weather forecasting, sales forecasting
+3. Clustering (B) - Grouping customers by behavior
+* Unsupervised task: No predefined labels
+* Goal: Find natural groupings in data
+* Output: Group/cluster assignments
+* Examples: Customer segmentation, image compression, document organization
+* Algorithms: K-means, hierarchical clustering, DBSCAN
+Learning Objective: Recognize different ML task types and their characteristics.
+________________
+
+
+Question 10: Match the Data Split with Its Purpose
+Match the Data Split with Its Purpose:
+Data Split
+	Purpose
+	1. Training Data
+	A. Final performance evaluation on unseen data
+	2. Validation Data
+	B. Teaching the model to learn patterns
+	3. Test Data
+	C. Tuning model parameters and preventing overfitting
+	Your Answers:
+1. ____    2. ____    3. ____
+
+
+Correct Answers: 1-B, 2-C, 3-A
+Explanation:
+1. Training Data (B) - Teaching the model to learn patterns
+* Percentage: Typically 60-70% of total data
+* Purpose: Model learns by minimizing loss on this data
+* Used in: Gradient descent and optimization
+* Importance: Provides examples for learning
+* Note: Good models train quickly but may overfit
+2. Validation Data (C) - Tuning model parameters and preventing overfitting
+* Percentage: Typically 10-20% of total data
+* Purpose: Monitor performance during training
+* Used for: Hyperparameter tuning, early stopping, model selection
+* Importance: Detects overfitting (divergence from training performance)
+* Strategy: Stop training if validation performance stops improving
+3. Test Data (A) - Final performance evaluation on unseen data
+* Percentage: Typically 10-30% of total data
+* Purpose: Unbiased estimate of production performance
+* Used for: Final model evaluation and reporting
+* Importance: Never use for training or hyperparameter tuning
+* Strategy: Hold completely separate until final evaluation
+Common Data Split Ratios:
+* Standard: 70% training, 15% validation, 15% test
+* Large datasets: 60% training, 20% validation, 20% test
+* Small datasets: 80% training, 10% validation, 10% test
+Learning Objective: Understand the critical purpose of each data split in building reliable ML models.
+________________
+
+
+ANSWER KEY & SCORING GUIDE
+Quick Reference
+Multiple Choice Answers
+Question
+	Answer
+	Topic
+	1
+	B
+	Supervised Learning
+	2
+	B
+	Data Splitting
+	3
+	A
+	Overfitting
+	4
+	B
+	Classification vs. Regression
+	5
+	B
+	Unsupervised Learning
+	6
+	C
+	Unsupervised Tasks
+	7
+	B
+	Model Evaluation Metrics
+	Matching Answers
+Question
+	Answer
+	8
+	1-C, 2-B, 3-A
+	9
+	1-C, 2-A, 3-B
+	10
+	1-B, 2-C, 3-A
+	________________
+
+
+Scoring Rubric
+Multiple Choice (Questions 1-7): 1 point each = 7 points
+Matching (Questions 8-10): 1 point per correct match = 9 points
+Total Points: 16 points
+Scoring Conversion:
+Score Points → Grade Equivalent
+16/16 = 100%
+15/16 = 94%
+14/16 = 88%
+13/16 = 81%
+12/16 = 75%
+11/16 = 69% (Below passing)
+
+
+Passing Score: 70% (approximately 11-12 correct)
+________________
+
+
+Performance Analysis
+Perfect Score (15-16/16)
+Achievement: Excellent understanding of Machine Learning fundamentals
+Competencies Demonstrated:
+* ✓ Clearly distinguishes between supervised, unsupervised, and reinforcement learning
+* ✓ Understands data split purposes and overfitting
+* ✓ Recognizes classification vs. regression tasks
+* ✓ Knows model evaluation metrics
+Next Steps:
+* Proceed confidently to Module 3
+* Ready for advanced ML concepts
+* Can tackle real-world ML projects
+________________
+
+
+Good Score (13-14/16)
+Achievement: Strong understanding with minor gaps
+Likely Weak Areas (based on missed questions):
+* If missed Q1/Q5: Review learning paradigm differences
+* If missed Q2: Review data splitting importance
+* If missed Q3: Review overfitting concept
+* If missed Q4/Q6: Review task type classification
+Recommendations:
+* Review 1-2 weak concept areas
+* Move forward to Module 3
+* Revisit concepts if needed
+________________
+
+
+Passing Score (11-12/16)
+Achievement: Meets minimum requirements
+Challenges:
+* Some confusion between learning types
+* Incomplete understanding of data splits
+* Task classification needs reinforcement
+Recommendations:
+* Review "Why Data Splitting Matters" section
+* Study learning paradigm differences
+* Practice identifying task types
+* Consider additional practice problems
+* Retake quiz after review (optional)
+________________
+
+
+Below Passing (Below 11/16)
+Achievement: Needs additional review
+Action Required:
+1. Review Module 2 content thoroughly
+2. Focus on:
+   * Supervised vs. Unsupervised Learning
+   * Classification vs. Regression
+   * Overfitting concept
+   * Data splitting importance
+3. Retake quiz after study
+4. Seek instructor clarification if needed
+________________
+
+
+Concept Summary & Review
+Key Concepts Covered
+1. Learning Paradigms
+* Supervised: Learn from labeled data
+* Unsupervised: Find patterns in unlabeled data
+* Reinforcement: Learn through rewards/penalties
+2. Task Types
+* Classification: Predict categories
+* Regression: Predict continuous values
+* Clustering: Group similar items
+3. Critical Concepts
+* Overfitting: Model memorizes training data, doesn't generalize
+* Data Splitting: Train/validate/test for unbiased evaluation
+* Evaluation Metrics: Accuracy, precision, recall, F1-score
+4. Model Development Workflow
+1. Split data (train/validation/test)
+2. Train model on training data
+3. Monitor performance on validation data
+4. Final evaluation on test data
+________________
+
+
+Study Tips for Future Quizzes
+Before Taking the Quiz:
+1. Review module reading material
+2. Complete hands-on activities
+3. Study all examples provided
+4. Review key terms in English and Spanish
+5. Time yourself to practice
+While Taking the Quiz:
+1. Read each question carefully
+2. Eliminate obviously wrong answers first
+3. For matching questions, process elimination helps
+4. Answer all questions (no penalty for guessing)
+5. Review your answers if time permits
+After Quiz:
+1. Review all incorrect answers
+2. Understand why correct answer is right
+3. Note concepts to review before next module
+4. Ask instructor about unclear concepts
+________________
+
+
+Common Misconceptions
+Misconception 1: More data = better model
+Reality: More data helps only if it's quality data. Overfitting can occur with large datasets using overly complex models.
+Misconception 2: High training accuracy = good model
+Reality: High training accuracy but low validation/test accuracy indicates overfitting. Need good generalization.
+Misconception 3: All tasks are classification
+Reality: Regression (predicting continuous values) is equally important and distinct from classification.
+Misconception 4: Unsupervised learning is easier than supervised
+Reality: Unsupervised learning is often harder—no labels to guide learning. Requires careful validation.
+Misconception 5: One data split is sufficient
+Reality: Separate train/validation/test prevents overfitting and gives honest performance estimate.
+________________
+
+
+Vocabulary Reference
+English - Spanish Key Terms
+English
+	Español
+	Definition
+	Supervised Learning
+	Aprendizaje Supervisado
+	Learning from labeled data
+	Unsupervised Learning
+	Aprendizaje No Supervisado
+	Learning from unlabeled data
+	Reinforcement Learning
+	Aprendizaje por Refuerzo
+	Learning through rewards/penalties
+	Classification
+	Clasificación
+	Predicting discrete categories
+	Regression
+	Regresión
+	Predicting continuous values
+	Clustering
+	Agrupamiento
+	Grouping similar items
+	Overfitting
+	Sobreajuste
+	Model memorizes training data
+	Underfitting
+	Infraajuste
+	Model too simple to learn patterns
+	Training Data
+	Datos de Entrenamiento
+	Data used for learning
+	Validation Data
+	Datos de Validación
+	Data for tuning hyperparameters
+	Test Data
+	Datos de Prueba
+	Data for final evaluation
+	Accuracy
+	Precisión/Exactitud
+	Proportion of correct predictions
+	Hyperparameter
+	Hiperparámetro
+	Model parameter set before training
+	________________
+
+
+Resources for Further Learning
+Recommended Review Areas
+1. Supervised Learning: Decision trees, linear regression, logistic regression
+2. Unsupervised Learning: K-means clustering, hierarchical clustering
+3. Evaluation Metrics: Beyond accuracy—precision, recall, F1-score, confusion matrix
+4. Data Preprocessing: Handling missing data, feature scaling, normalization
+Additional Practice
+* Take the optional "Extended Practice Quiz" (20 questions)
+* Complete hands-on project: Build a classification model
+* Review Module 2 examples and case studies
+* Participate in peer learning groups
+Video Recommendations
+* Supervised vs. Unsupervised Learning Explained
+* Understanding Overfitting
+* Classification vs. Regression
+* Train/Validation/Test Split Importance
+________________
+
+
+APPENDIX: EXTENDED EXPLANATIONS
+Why Data Splitting Matters: A Real Example
+Scenario: Building a model to predict house prices
+Wrong Approach (Training & Testing on same data):
+Use all 1000 house records for:
+- Training: Learn patterns
+- Testing: Evaluate (using same 1000 records)
+
+
+Result: 95% accuracy on test set
+Reality: Model memorized all houses, won't predict new houses well
+
+
+Correct Approach (Proper train/validation/test split):
+Split 1000 records:
+- Training (700): Learn patterns
+- Validation (150): Tune hyperparameters, monitor for overfitting
+- Test (150): Final honest evaluation on completely new data
+
+
+Result: 
+- Training: 95% accuracy
+- Validation: 87% accuracy (declining—indicates overfitting)
+- Test: 86% accuracy (honest estimate of production performance)
+
+
+Key Insight: Test set performance (86%) is what matters in production, not training performance (95%).
+________________
+
+
+Overfitting vs. Underfitting
+Overfitting
+* What: Model learns training data too well, including noise
+* Symptom: High training accuracy, low test accuracy
+* Cause: Model too complex, too much training
+* Solution: Simpler model, more training data, regularization, early stopping
+Underfitting
+* What: Model too simple to capture data patterns
+* Symptom: Low training AND low test accuracy
+* Cause: Model too simple, not enough training
+* Solution: More complex model, more features, train longer
+Goldilocks Zone
+* Goal: Model complex enough to learn patterns but simple enough to generalize
+* Indicator: Training accuracy ≈ Test accuracy (both reasonably high)
+________________
+
+
+Classification vs. Regression Quick Reference
+Aspect
+	Classification
+	Regression
+	Output
+	Category/Class
+	Continuous number
+	Examples
+	Spam/Not spam, Cat/Dog
+	House price, Temperature
+	Typical Metrics
+	Accuracy, Precision, Recall
+	RMSE, MAE, R²
+	Algorithms
+	Logistic regression, Decision trees, SVM
+	Linear regression, Decision trees, Neural networks
+	Use Cases
+	Medical diagnosis, Image classification
+	Stock prediction, Weather forecasting
+	________________
+
+
+The Three Learning Paradigms Comparison
+Feature
+	Supervised
+	Unsupervised
+	Reinforcement
+	Data Need
+	Labeled data required
+	Unlabeled data
+	Environment interaction
+	Goal
+	Predict output from input
+	Find patterns/structure
+	Maximize cumulative reward
+	Training
+	Learn from examples
+	Discover clusters/patterns
+	Trial and error with feedback
+	Examples
+	Classification, regression
+	Clustering, anomaly detection
+	Game playing, robotics
+	Challenge
+	Getting quality labels
+	Validating results
+	Defining reward signals
+	Time
+	Depends on data size
+	Usually faster
+	Can be very slow
+	________________
+
+
+Module 2 Quiz: Machine Learning Fundamentals
+Last Updated: 2024
+ Course: MTW AI Platform - Artificial Intelligence Fundamentals and Practical Applications
+ Language: English / Español (Bilingual)

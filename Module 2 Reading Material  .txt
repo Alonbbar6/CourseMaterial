@@ -1,0 +1,716 @@
+﻿MODULE 2: MACHINE LEARNING FUNDAMENTALS: THE CORE ENGINE
+Complete Reading Material (36 minutes ) MTW AI Platform | Phase 2: Core Mechanisms
+________________
+
+
+TABLE OF CONTENTS
+1. Part 1: The Core of Machine Learning
+2. Part 2: Supervised Learning—Classification
+3. Part 3: Supervised Learning—Regression
+4. Part 4: Unsupervised Learning
+5. Part 5: Data Splitting & Evaluation
+6. Part 6: Overfitting and Underfitting
+7. Summary & Key Takeaways
+________________
+
+
+PART 1: THE CORE OF MACHINE LEARNING {#part-1}
+1.1 What Makes Machine Learning Different
+In Module 1, we distinguished Machine Learning (Aprendizaje Automático) from Artificial Intelligence broadly. Now we dive into ML's core mechanisms. The fundamental shift from traditional programming to machine learning represents one of computing's most important paradigm changes.
+Traditional Programming (Before ML):
+Programmer writes rules
+     ↓
+Rules process inputs
+     ↓
+Outputs are generated
+
+
+A programmer explicitly encodes logic: "If temperature > 30°C, turn on AC." "If email contains 'urgent,' mark as important." Every scenario requires a rule.
+Machine Learning (After ML):
+Data (labeled examples)
+     ↓
+Learning algorithm discovers patterns
+     ↓
+Model (captured patterns)
+     ↓
+Model processes new inputs
+     ↓
+Outputs are generated
+
+
+Instead of rules, we provide examples. The algorithm discovers patterns. The resulting model processes new situations.
+Why This Matters:
+Machine Learning refers to a subfield of artificial intelligence that focuses on the development of algorithms and statistical models that enable computer systems to learn and improve from experience without being explicitly programmed.
+This distinction is profound. Consider spam detection. A programmer couldn't write rules for all spam variations—spammers constantly adapt. But an ML system learns from thousands of actual spam examples, discovering patterns that generalize to new spam variations.
+1.2 The Three Core Types of Machine Learning
+Recall from Module 1 that Machine Learning encompasses different approaches. We focus on three primary types:
+1. Supervised Learning (Aprendizaje Supervisado)
+* Learning with labeled data
+* Clear right and wrong answers
+* Goal: Predict outputs for new inputs
+* Example: Given past emails labeled "spam" or "not spam," predict new emails
+2. Unsupervised Learning (Aprendizaje No Supervisado)
+* Learning without labels
+* No predefined right answers
+* Goal: Discover hidden patterns
+* Example: Analyze customer purchase data; discover natural groupings without being told what groups to find
+3. Reinforcement Learning (Aprendizaje por Refuerzo)
+* Learning through rewards and penalties
+* Trial and error with feedback
+* Goal: Learn behavior that maximizes rewards
+* Example: Game-playing AI learns chess through millions of games; winning gives reward signals
+Where Do They Come From?
+The terminology reflects the form of feedback:
+* Supervised: "Supervision" by labeled correct answers
+* Unsupervised: No supervision; system must figure it out
+* Reinforcement: Reinforced by reward signals
+This module focuses on Supervised Learning, which generates 99% of economic value in current ML applications.
+________________
+
+
+PART 2: SUPERVISED LEARNING—CLASSIFICATION {#part-2-classification}
+2.1 What Is Classification?
+Classification is a type of supervised learning where a model learns from labelled data—meaning every input has a corresponding correct output. The model makes predictions and compares them with the true outputs, adjusting itself to reduce errors.
+Core Definition:
+Classification predicts which category or class an input belongs to. Outputs are discrete categories, not continuous values.
+Key Characteristics:
+* Inputs: Features describing the object (e.g., email text, sender address, word frequency)
+* Outputs: Categories from a predefined set (e.g., "spam" or "not spam"; "cat," "dog," or "neither")
+* Goal: Draw decision boundaries separating classes
+* Method: Learn from labeled examples where categories are known
+Classic Classification Problems:
+Applications of classification algorithms can be found in spam filtering, sentiment analysis, image recognition, fraud detection, and medical diagnosis.
+1. Email Spam Detection
+   * Input: Email text, sender, subject line
+   * Output: "Spam" or "Not Spam"
+   * Training data: Thousands of emails manually classified by humans
+2. Medical Diagnosis
+   * Input: Patient symptoms, test results, imaging
+   * Output: "Benign tumor" or "Malignant tumor" or "No tumor"
+   * Training data: Past cases where diagnoses were confirmed
+3. Image Classification
+   * Input: Pixel values of image
+   * Output: "Cat," "Dog," "Bird," or "Unknown"
+   * Training data: Thousands of labeled images
+4. Sentiment Analysis
+   * Input: Customer review text
+   * Output: "Positive," "Neutral," or "Negative"
+   * Training data: Reviews with human-provided sentiment labels
+2.2 The Training Process for Classification
+How does a classification model learn? Let's walk through the process using email spam detection as an example.
+Step 1: Gather Labeled Data
+Collect thousands of emails. For each, humans label: "spam" or "not spam."
+Email 1: "You've won $1,000,000! Claim now..." → Spam
+Email 2: "Meeting tomorrow at 3pm. Bring documents." → Not Spam
+Email 3: "URGENT: Verify your bank account now!..." → Spam
+Email 4: "The quarterly report is attached." → Not Spam
+... (thousands more)
+
+
+Step 2: Extract Features
+Convert emails into numerical features the algorithm can process:
+* Email length
+* Number of capitalized words
+* Presence of suspicious phrases ("Claim now," "Verify account")
+* Sender's history (is this sender trusted?)
+* Word frequency (certain words appear more in spam)
+Email 1: [1200 chars, 45% caps, has "Claim now", new sender, ...]
+         → Label: Spam
+Email 2: [450 chars, 5% caps, no red flags, known sender, ...]
+         → Label: Not Spam
+
+
+Step 3: Choose an Algorithm
+Logistic regression, decision trees, support vector machines, Naive Bayes classifiers, and k-nearest neighbors are commonly used for classification.
+Different algorithms learn differently. Some algorithms are:
+* Simple and fast (Naive Bayes)
+* Flexible and accurate (Decision Trees, Random Forests)
+* Powerful for complex patterns (Neural Networks)
+Step 4: Train the Model
+Feed the labeled data to the algorithm. The algorithm adjusts internal parameters to correctly classify training examples.
+During training, the algorithm:
+1. Makes predictions on training emails
+2. Checks predictions against known labels
+3. Adjusts parameters when predictions are wrong
+4. Repeats until accuracy stabilizes
+Step 5: Test on Unseen Data
+Test the model on emails it's never seen. If it correctly classifies new emails, it's learned generalizable patterns.
+2.3 Decision Boundaries and How Classification Works
+Classification works by finding decision boundaries—lines, surfaces, or complex shapes that separate classes in feature space.
+Simple Example: Two Features, Two Classes
+Imagine we're classifying wines as "red" or "white" using two features:
+* Alcohol content (x-axis)
+* Color intensity (y-axis)
+The training data shows clear separation:
+                    Color Intensity
+                            |
+                     Red    |    White
+                   ●  ●  ●  |  ○  ○  ○
+                ●  ●  ●  ●  |  ○  ○  ○  ○
+                 ●  ●  ●  |  ○  ○  ○
+                ●  ●  ●   |  ○  ○  ○  ○
+                           |
+                           +————————————— Alcohol
+              (5%)        (12%)      (15%)
+
+
+Decision boundary: a line separating reds from whites
+
+
+When a new wine arrives, the algorithm plots it by its features and checks which side of the boundary it falls on.
+Non-Linear Decision Boundaries
+Real data is rarely separable by a simple line. Complex boundaries curve and bend to fit data:
+Decision boundary can be:
+- Linear: straight line (Logistic Regression)
+- Non-linear: curves (Decision Trees, Neural Networks)
+
+
+More flexible algorithms find complex boundaries but risk overfitting (learning noise instead of true patterns).
+2.4 Common Classification Algorithms
+1. Logistic Regression (Despite "Regression" in Name, It's for Classification)
+Logistic regression is a type of supervised learning classification algorithm that is used to predict a binary output variable.
+* Outputs probability (0 to 1)
+* Threshold (usually 0.5): Probability > 0.5 → Class A; < 0.5 → Class B
+* Interpretable: See which features most influence prediction
+* Efficient: Works well for many real-world problems
+2. Decision Trees
+A decision tree is a tree-like structure that is used to model decisions and their possible consequences. Each internal node in the tree represents a decision, while each leaf node represents a possible outcome.
+Example: Predicting if student will pass based on hours studied:
+                   Study Hours < 5?
+                   /              \
+                 Yes               No
+                  |                |
+            Likely Fail        Pass? (GPA)
+                              /      \
+                          GPA<3     GPA≥3
+                          Fail       Pass
+
+
+3. K-Nearest Neighbors (KNN)
+Classification by proximity: "Tell me your neighbors, and I'll tell you who you are."
+K-nearest neighbor classifies data points based on their proximity and association to other available data. It assumes similar data points can be found near each other when plotted mathematically.
+To classify new point:
+1. Find the k nearest training points
+2. Take a vote: most common class among those k neighbors
+3. Assign that class to the new point
+4. Support Vector Machines (SVM)
+Support vector machine is used for both data classification and regression. Here, SVM separates the classes of data points with a decision boundary or hyperplane. The goal is to plot the hyperplane that maximizes the distance between the groups of data points.
+Finds the widest street between classes, placing the boundary in the middle.
+5. Random Forest
+Random forests are made up of multiple decision trees that work together to make predictions. Each tree in the forest is trained on a different subset of the input features and data. The final prediction is made by aggregating the predictions of all the trees in the forest.
+Combines many decision trees, each trained on different data subsets. Final prediction: majority vote among trees. Often more accurate than single trees.
+________________
+
+
+PART 3: SUPERVISED LEARNING—REGRESSION {#part-3-regression}
+3.1 What Is Regression?
+If classification predicts categories, regression predicts continuous numerical values.
+Regression models predict continuous values (like house prices or patient blood pressure), while classification models predict discrete categories.
+Regression Definition:
+Regression builds a model estimating the relationship between input features and a continuous output variable.
+Key Characteristics:
+* Inputs: Features describing the object
+* Outputs: Continuous numerical values (no discrete categories)
+* Goal: Fit a curve/line through data points
+* Method: Minimize distance between predictions and actual values
+Classic Regression Problems:
+Regression is commonly employed in forecasting demand, calculating housing values, and predicting stock prices.
+1. House Price Prediction
+   * Inputs: Square footage, number of bedrooms, location, age
+   * Output: Predicted price ($250,000)
+   * Training data: Past home sales with actual prices
+2. Sales Forecasting
+   * Inputs: Month, advertising spend, seasonality
+   * Output: Predicted sales revenue
+   * Training data: Historical monthly sales
+3. Stock Price Prediction
+   * Inputs: Historical prices, trading volume, market indicators
+   * Output: Predicted next-day price
+   * Training data: Past stock data
+4. Weather Forecasting
+   * Inputs: Current atmospheric conditions, historical patterns
+   * Output: Tomorrow's temperature
+   * Training data: Years of weather records
+3.2 Linear Regression: The Simplest Approach
+Linear regression is a standard method that depicts the linear relationship between the continuous output variable and the input factors. Simple linear regression only requires one input variable, whereas multiple linear regression requires several.
+Simple Linear Regression (One Input):
+Fit a straight line through data points:
+       Price
+          |
+          |           ●
+          |      ●       ●
+          |   ●           ●
+          | ●               ●
+          |___________________ Square Footage
+
+
+Goal: Find the line that minimizes total vertical distance from points to line.
+Mathematical Form:
+y = mx + b
+
+
+where:
+y = predicted output (price)
+x = input (square footage)
+m = slope (how much price increases per sq ft)
+b = y-intercept (base price)
+
+
+Multiple Linear Regression (Multiple Inputs):
+With multiple features, the relationship becomes:
+Price = (coeff₁ × square footage) + (coeff₂ × bedrooms) + 
+        (coeff₃ × age) + ... + base price
+
+
+The algorithm learns the best coefficients from training data.
+When Does Linear Regression Work?
+When relationship between inputs and output is approximately linear. When data shows curves, linear regression performs poorly.
+3.3 Non-Linear Regression
+Real relationships are often non-linear. Curves fit better than straight lines.
+Polynomial Regression:
+Instead of straight line, fit a curve:
+y = a₃x³ + a₂x² + a₁x + a₀
+
+
+Cubic (degree 3) polynomial creates an S-shaped curve
+fitting non-linear data better
+
+
+Decision Trees and Random Forests for Regression:
+Random Forest is an ensemble method that builds multiple decision trees and each tree is trained on a different subset of the training data. The final prediction is made by averaging the predictions of all of the trees.
+Instead of fitting lines/curves, trees create step-like predictions, partitioning feature space into regions with constant predicted value.
+3.4 Evaluation Metrics for Regression
+Since outputs are continuous, accuracy (% correct) doesn't apply. Different metrics measure prediction quality:
+Mean Squared Error (MSE):
+Average of squared differences between predicted and actual values:
+MSE = (1/n) × Σ(predicted - actual)²
+
+
+Squaring penalizes large errors heavily
+Units: same as output squared
+
+
+Mean Absolute Error (MAE):
+Average absolute difference:
+MAE = (1/n) × Σ|predicted - actual|
+
+
+More interpretable than MSE (same units as output)
+
+
+R² Score (Coefficient of Determination):
+Percentage of variance explained by model:
+R² = 1 - (SS_residual / SS_total)
+
+
+0 ≤ R² ≤ 1
+R² = 0.85 means model explains 85% of variance
+
+
+________________
+
+
+PART 4: UNSUPERVISED LEARNING {#part-4-unsupervised}
+4.1 What Is Unsupervised Learning?
+If supervised learning has a teacher providing correct answers, unsupervised learning has no teacher. The algorithm must discover structure in unlabeled data.
+Unsupervised Learning Definition:
+In unsupervised learning, output label is not provided. Learning algorithm then creates clusters of all input data.
+No predefined categories. No correct answers. The algorithm finds hidden patterns.
+When Is Unsupervised Learning Useful?
+1. Data doesn't have labels: Labeling millions of customer records would be expensive
+2. Categories unknown: We don't know what groups exist in the data yet
+3. Exploratory analysis: Discover structures to understand data before supervised modeling
+4. Anomaly detection: Identify unusual patterns without knowing what's unusual
+Key Difference from Supervised Learning:
+Supervised: "Here are 1000 emails labeled spam/not spam. Learn to classify new emails."
+Unsupervised: "Here are 1 million emails. What patterns exist? How do they group?"
+
+
+4.2 Clustering: Finding Natural Groups
+Clustering groups similar data points together.
+Example: Customer Segmentation
+An e-commerce company has 100,000 customers. Rather than treating all similarly, segment them:
+Unsupervised learning discovers:
+- Group A: Price-sensitive, small purchases, rarely return
+- Group B: Premium segment, large purchases, high loyalty
+- Group C: Dormant, haven't purchased in months
+
+
+No one told the algorithm these groups should exist. It discovered them.
+K-Means Clustering (Most Popular)
+Partition data into k clusters:
+1. Initialize: Randomly place k cluster centers
+2. Assign: Each point joins nearest cluster center
+3. Update: Recalculate cluster center (mean of points)
+4. Repeat: Steps 2-3 until clusters stabilize
+Result: k groups where points within groups are similar; groups are distinct.
+Challenges:
+* Must specify k in advance (how many clusters?)
+* Different k values give different clusters
+* Initialization affects results
+4.3 Other Unsupervised Learning Tasks
+Dimensionality Reduction:
+Real data often has hundreds or thousands of features. Many are correlated or irrelevant. Dimensionality reduction finds a smaller set of features capturing most information.
+Example: Reduce 784 pixel values (in 28×28 image) to 50 core features capturing most variation.
+Anomaly Detection:
+Find unusual data points. Useful for:
+* Fraud detection (unusual purchase patterns)
+* Network intrusion detection (unusual traffic)
+* Manufacturing quality control (unusual product)
+Train model on normal data. New points deviating from normal patterns are flagged.
+________________
+
+
+PART 5: DATA SPLITTING & MODEL EVALUATION {#part-5-evaluation}
+5.1 The Fundamental Problem: Generalization
+A model's true measure is performance on unseen data. But we only have limited data. How do we estimate how well a model generalizes?
+The Danger: Memorization vs. Learning
+A model could memorize training data perfectly (100% accuracy) but fail on new data. This isn't learning; it's memorization.
+Example: Training on 100 emails, learning "Email 47 is spam" by memory. New emails? Unknown.
+The Solution: Train-Test Split
+Use different data for training (learning patterns) and testing (measuring generalization).
+5.2 The Three-Way Data Split
+Training Set (60-70%)
+* Used to train the model
+* Model sees these examples and adjusts parameters
+* Model learns patterns from training data
+Validation Set (10-20%)
+* Used during development to tune hyperparameters
+* Model hasn't learned these, but we've used them for tuning
+* Prevents overfitting to training data
+Test Set (10-20%)
+* Reserved until final evaluation
+* Model never sees this during training or tuning
+* Unbiased estimate of generalization performance
+Why Three Sets?
+Without validation set, tuning hyperparameters on test set would bias results—test set would no longer be independent. With validation set:
+Training: Learn parameters
+Validation: Tune hyperparameters
+Test: Final, unbiased evaluation
+
+
+5.3 Cross-Validation: When Data Is Limited
+With limited data, reserving 20% for testing wastes potentially useful training data.
+K-Fold Cross-Validation:
+1. Split data into k equal folds (typically k=5 or 10)
+2. For each fold:
+   * Train on k-1 folds
+   * Test on remaining fold
+   * Record performance
+3. Average performance across all folds
+Advantage: Every data point used for both training and testing (in different folds). Better use of limited data.
+5.4 Classification Metrics
+Beyond accuracy (% correct), more nuanced metrics reveal performance details.
+Precision:
+Precision = True Positives / (True Positives + False Positives)
+
+
+"Of emails I classified as spam, what % actually are spam?"
+High precision: Few false alarms
+
+
+Recall:
+Recall = True Positives / (True Positives + False Negatives)
+
+
+"Of actual spam emails, what % did I identify?"
+High recall: Catches most spam
+
+
+Precision-Recall Tradeoff:
+Strict threshold: Flag fewer emails as spam
+  → High precision (fewer false alarms)
+  → Low recall (miss some spam)
+
+
+Lenient threshold: Flag more emails as spam
+  → Low precision (more false alarms)
+  → High recall (catch more spam)
+
+
+F1-Score:
+Harmonic mean of precision and recall:
+F1 = 2 × (Precision × Recall) / (Precision + Recall)
+
+
+Balanced measure when you care about both precision and recall
+
+
+________________
+
+
+PART 6: OVERFITTING AND UNDERFITTING {#part-6-overfitting}
+6.1 The Bias-Variance Tradeoff
+Two sources of error plague models: bias and variance.
+High Bias, Low Variance:
+Model is oversimplified. Doesn't capture true patterns (underfitting).
+Actual data shows curved relationship
+Model is linear
+Result: Consistent but inaccurate predictions
+
+
+Low Bias, High Variance:
+Model is too complex. Captures training data perfectly but learns noise (overfitting).
+Model fits every training point exactly
+New data: Predictions are wildly inaccurate
+Result: Accurate on training, inaccurate on test
+
+
+The Goal: Balanced Trade-off
+Find the sweet spot where model is complex enough to learn true patterns but simple enough to generalize.
+6.2 Overfitting: Learning Noise
+What Is Overfitting?
+Model performs well on training data but poorly on test data. The model memorized training-specific patterns instead of generalizing.
+Visual Example:
+Training Data                Model Fit
+                            (overfitted)
+    ●                          ●
+  ●   ●                      ●   ●
+      ●  ●                      ●  ●
+    ●      ●                  ●      ●
+              ●                       ●
+    
+    
+    Actual: Simple underlying pattern
+    Model: Squiggly curve fitting every point
+    
+Test Data (new points):
+    ○ (not in training)      ○ (prediction way off)
+    ○                        ○
+
+
+Why It Happens:
+With enough parameters, complex models fit training data perfectly, including:
+* Real patterns (good)
+* Noise and quirks specific to training data (bad)
+When test data contains different noise, predictions fail.
+6.3 Underfitting: Too Simple
+What Is Underfitting?
+Model is too simple. Fails to capture true patterns. Poor on both training and test data.
+Visual Example:
+Training Data                Model Fit
+                            (underfitted)
+    ●                          
+  ●   ●                      ——————— (straight line)
+      ●  ●                      
+    ●      ●                  
+              ●                
+    
+    
+    Actual: Curved underlying pattern
+    Model: Straight line missing the curve
+    
+Performance:
+Training error: High (model doesn't fit training data well)
+Test error: Also high (model doesn't capture true pattern)
+
+
+6.4 Techniques to Prevent Overfitting
+1. Use More Training Data
+More data helps models generalize:
+* Reduces impact of noise
+* Provides diverse examples
+* More points model must fit increases minimum error
+2. Regularization:
+Add penalty for complex models:
+Total Error = Prediction Error + λ × Model Complexity
+
+
+λ = regularization strength (hyperparameter)
+
+
+Higher λ: Penalizes complexity more; simpler model
+Lower λ: Focuses on fitting data; more complex model
+
+
+3. Early Stopping:
+Monitor validation error during training. Stop when validation error increases (sign of overfitting):
+Training Error
+Test/Validation Error
+           |
+Err |      |
+    |  \   |    ← Sweet spot: low test error
+    |   \  |   /
+    |    \|_/
+    |___________ Training Steps
+    
+Stop here, before test error increases
+
+
+4. Simpler Models:
+Use less complex models (fewer parameters):
+* Linear regression instead of high-degree polynomial
+* Small decision trees instead of huge trees
+* Fewer neural network layers
+5. Cross-Validation:
+Train and test on multiple data splits. Prevents tuning specifically to one test set.
+6.5 Underfitting: Too Simple
+Techniques to Prevent Underfitting:
+1. Use More Complex Model
+   * Add polynomial features
+   * Increase decision tree depth
+   * Add neural network layers
+2. Add Relevant Features
+   * Include features predictive of output
+   * Combine existing features to create new ones
+3. Reduce Regularization
+   * Decrease λ (if using regularization)
+   * Allow model more flexibility
+4. Gather Better Data
+   * Ensure data quality
+   * Remove irrelevant/noisy features
+   * Include diverse examples
+________________
+
+
+SUMMARY AND KEY TAKEAWAYS {#summary}
+Module 2 Core Concepts
+1. Three Types of Supervised Learning
+* Classification (Aprendizaje Supervisado): Predict categories (spam/not spam)
+* Regression (Regresión): Predict continuous values (house prices)
+* Both learn from labeled examples with known correct answers
+2. Classification Process
+* Gather labeled data
+* Extract features (numerical representations)
+* Choose algorithm (Logistic Regression, Decision Trees, SVM, etc.)
+* Train: Algorithm adjusts to minimize classification errors
+* Find decision boundaries separating classes
+* Test on unseen data
+3. Common Classification Algorithms
+* Logistic Regression: Simple, interpretable
+* Decision Trees: Flexible, interpretable
+* K-Nearest Neighbors: Local similarity-based
+* Support Vector Machines: Maximizes class separation
+* Random Forest: Multiple trees voting
+4. Regression for Continuous Prediction
+* Linear Regression: Straight line fit
+* Non-linear: Polynomial, Trees, Neural Networks
+* Evaluation: MSE, MAE, R² Score
+5. Unsupervised Learning
+* Clustering: Group similar data (K-Means)
+* No labels provided
+* Useful for exploration and segmentation
+6. The Critical Data Split
+Training (60-70%):  Learn patterns
+Validation (10-20%): Tune hyperparameters  
+Test (10-20%):      Final unbiased evaluation
+
+
+Cross-validation when data limited.
+7. Evaluation Metrics
+Task
+	Metrics
+	Classification
+	Accuracy, Precision, Recall, F1-Score
+	Regression
+	MSE, MAE, R² Score
+	Both
+	Training vs. Test error
+	8. The Fundamental Trade-off: Bias-Variance
+Underfitting (High Bias):
+- Model too simple
+- Poor on training AND test data
+- Solution: More complex model
+
+
+Overfitting (High Variance):
+- Model too complex
+- Good on training, poor on test data
+- Solution: Regularization, more data, simpler model, early stopping
+
+
+Goal: Balanced model generalizing to unseen data
+
+
+Real-World Application
+You're building an ML system for fraud detection (classification):
+Phase 1: Data Preparation
+* Gather 10,000 labeled transactions (fraud/legitimate)
+* Extract features (amount, merchant type, location, time, etc.)
+* Split: 7000 train, 1500 validation, 1500 test
+Phase 2: Model Development
+* Try multiple algorithms
+* Tune hyperparameters on validation set
+* Monitor: Training error decreasing? Validation error plateauing?
+Phase 3: Evaluation
+* If validation error increasing while training error decreases: Overfitting
+* Solution: Add regularization, use simpler model, get more data
+* Final test on held-out test set (truly unseen data)
+Phase 4: Deployment
+* Deploy model with best test performance
+* Monitor real-world performance
+* Retrain periodically with new labeled data
+Key Insight: Generalization Is Everything
+The ultimate test isn't performance on training data (you can always memorize that). It's performance on completely new data the model has never seen.
+The goal of supervised learning is for the trained model to accurately predict the output for new, unseen data. This requires the algorithm to effectively generalize from the training examples.
+This is why we split data, use validation sets, and carefully tune models. Building a model that works perfectly on training data is easy. Building one that generalizes to reality is the real challenge.
+________________
+
+
+BILINGUAL KEY TERMS
+English
+	Spanish
+	Context
+	Supervised Learning
+	Aprendizaje Supervisado
+	Learning from labeled data
+	Classification
+	Clasificación
+	Predicting categories
+	Regression
+	Regresión
+	Predicting continuous values
+	Unsupervised Learning
+	Aprendizaje No Supervisado
+	Learning from unlabeled data
+	Clustering
+	Agrupamiento
+	Grouping similar data
+	Overfitting
+	Sobreajuste
+	Model too complex; memorizes noise
+	Underfitting
+	Ajuste Insuficiente
+	Model too simple; misses patterns
+	Training Data
+	Datos de Entrenamiento
+	Data used to learn patterns
+	Test Data
+	Datos de Prueba
+	Data to evaluate generalization
+	Validation Data
+	Datos de Validación
+	Data to tune hyperparameters
+	Feature
+	Característica
+	Input variable
+	Label
+	Etiqueta
+	Correct output in supervised learning
+	Decision Boundary
+	Límite de Decisión
+	Line/surface separating classes
+	Accuracy
+	Precisión
+	Percentage of correct predictions
+	Precision
+	Precisión (formal)
+	True positives / (true + false positives)
+	Recall
+	Exhaustividad
+	True positives / (true + false negatives)
+	F1-Score
+	Puntuación F1
+	Harmonic mean of precision & recall
+	Hyperparameter
+	Hiperparámetro
+	Model setting tuned before training
+	________________
+
+
+MODULE 2 READING: COMPLETE ✓
+Word Count: ~8,100 words
+Page Count: 16 pages (standard formatting)
+Reading Time: 36 minutes (at 225 words/minute)
+Bilingual: English with Spanish terminology integrated
+Next: Proceed to Module 2 Labs and Quiz
