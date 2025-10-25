@@ -1,0 +1,167 @@
+﻿SECTION A: MULTIPLE CHOICE QUESTIONS
+Preguntas de Opción Múltiple
+Question 1
+What is tokenization in NLP?
+¿Qué es la tokenización en PLN?
+A) The process of encrypting text for security purposes
+B) The process of breaking text into smaller units such as words or subwords
+C) The process of translating text from one language to another
+D) The process of removing punctuation from text
+________________
+
+
+Question 2
+What are stop words?
+¿Qué son las palabras vacías (stop words)?
+A) Words that terminate a sentence
+B) Common words like "the," "is," "and" that are often removed in NLP processing
+C) Keywords that identify the main topic of a text
+D) Words that contain errors or typos
+________________
+
+
+Question 3
+What is the primary purpose of sentiment analysis?
+¿Cuál es el propósito principal del análisis de sentimiento?
+A) To count the number of words in a document
+B) To determine the emotional tone or attitude expressed in text (positive, negative, neutral)
+C) To translate text between languages
+D) To identify grammatical errors in writing
+________________
+
+
+Question 4
+What does Named Entity Recognition (NER) do?
+¿Qué hace el Reconocimiento de Entidades Nombradas (NER)?
+A) Identifies and classifies named entities like people, organizations, locations, and dates in text
+B) Recognizes the author of a text document
+C) Detects spelling errors in proper nouns
+D) Translates names from one language to another
+________________
+
+
+Question 5
+How do word embeddings (like Word2Vec) represent language?
+¿Cómo representan el lenguaje las incrustaciones de palabras (como Word2Vec)?
+A) As alphabetically ordered lists
+B) As numerical vectors in a multi-dimensional space where similar words are closer together
+C) As images that computers can process
+D) As audio signals that can be analyzed
+________________
+
+
+Question 6
+Which of the following is a real-world application of NLP?
+¿Cuál de las siguientes es una aplicación del mundo real de PLN?
+A) Facial recognition systems
+B) Customer service chatbots that understand and respond to text queries
+C) Self-driving car navigation
+D) Weather prediction models
+________________
+
+
+Question 7
+What advantage do word embeddings provide over simple word counting?
+¿Qué ventaja proporcionan las incrustaciones de palabras sobre el simple conteo de palabras?
+A) They are faster to compute
+B) They capture semantic relationships and meaning between words
+C) They require less storage space
+D) They work only with English text
+________________
+
+
+SECTION B: DEFINITION MATCHING
+Emparejamiento de Definiciones
+Instructions: Match each NLP term with its correct definition.
+Instrucciones: Empareje cada término de PLN con su definición correcta.
+________________
+
+
+Question 8
+Match the NLP Tasks with Their Descriptions
+NLP Tasks:
+1. Sentiment Analysis (Análisis de Sentimiento)
+2. Named Entity Recognition (NER)
+3. Machine Translation (Traducción Automática)
+Descriptions: A. Automatically converting text from one language to another
+B. Identifying and classifying key information elements like names, places, and organizations
+C. Determining whether text expresses positive, negative, or neutral emotions
+Your Answers:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+
+Question 9
+Match the NLP Concepts with Their Examples
+Concepts:
+1. Tokenization (Tokenización)
+2. Stop Words (Palabras Vacías)
+3. Word Embedding (Incrustación de Palabras)
+Examples: A. Converting "king" to a vector like [0.25, 0.67, -0.12, 0.89...]
+B. Breaking "Hello world!" into ["Hello", "world", "!"]
+C. Removing words like "the," "a," "is," "are" from analysis
+Your Answers:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+
+Question 10
+Match the NLP Applications with Their Business Use Cases
+Applications:
+1. Chatbots / Virtual Assistants
+2. Social Media Monitoring
+3. Automatic Summarization
+Use Cases: A. Analyzing customer tweets to determine brand sentiment and reputation
+B. Providing 24/7 customer support by understanding and responding to user queries
+C. Creating short summaries of long reports or news articles
+Your Answers:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+
+ANSWER KEY / CLAVE DE RESPUESTAS
+Multiple Choice:
+1. B - The process of breaking text into smaller units such as words or subwords
+2. B - Common words like "the," "is," "and" that are often removed in NLP processing
+3. B - To determine the emotional tone or attitude expressed in text
+4. A - Identifies and classifies named entities like people, organizations, locations, and dates
+5. B - As numerical vectors in a multi-dimensional space where similar words are closer together
+6. B - Customer service chatbots that understand and respond to text queries
+7. B - They capture semantic relationships and meaning between words
+Definition Matching:
+Question 8:
+1. C (Sentiment Analysis → Determining emotions in text)
+2. B (NER → Identifying names, places, organizations)
+3. A (Machine Translation → Converting between languages)
+Question 9:
+1. B (Tokenization → Breaking text into tokens)
+2. C (Stop Words → Removing common words)
+3. A (Word Embedding → Converting words to vectors)
+Question 10:
+1. B (Chatbots → 24/7 customer support)
+2. A (Social Media Monitoring → Analyzing brand sentiment)
+3. C (Automatic Summarization → Creating short summaries)
+________________
+
+
+EXPLANATION NOTES
+Question 5 - Word Embeddings:
+Word embeddings revolutionized NLP by representing words as dense numerical vectors. In this representation, words with similar meanings are positioned closer together in vector space. For example, "king" and "queen" would be near each other, and the famous relationship "king - man + woman ≈ queen" demonstrates how these embeddings capture semantic relationships mathematically.
+Question 7 - Advantage of Word Embeddings:
+Traditional word counting (bag-of-words) treats each word independently and cannot capture that "car" and "automobile" mean similar things. Word embeddings solve this by learning semantic relationships from large text datasets, allowing NLP models to understand that similar words should be treated similarly.
+Real-World Context:
+The practical examples in this quiz reflect the three key applications mentioned in the module:
+* Customer Service Chatbots: Understanding and responding to user queries automatically
+* Automatic Translation: Breaking down language barriers in global communication
+* Social Media Monitoring: Tracking brand sentiment across platforms like Twitter, Facebook, and Instagram
+________________
+
+
+Module 5: Natural Language Processing (NLP) Applications
+Duration: 120 minutes | Quiz Time: 12 minutes
