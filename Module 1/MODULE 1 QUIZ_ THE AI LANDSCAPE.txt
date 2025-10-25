@@ -1,0 +1,399 @@
+﻿MODULE 1 QUIZ: THE AI LANDSCAPE
+15-Question Assessment
+Artificial Intelligence Fundamentals and Practical Applications
+________________
+
+
+INSTRUCTIONS
+Time Limit: 30 minutes
+Format: Multiple choice, true/false, and short answer
+Passing Score: 70% (10.5 out of 15 points)
+Question Types:
+* Multiple Choice: Select best answer
+* True/False: Evaluate statement accuracy
+* Application: Apply concepts to scenarios
+Important: This quiz assesses your understanding of Module 1 concepts. Review the reading content and case studies before attempting.
+________________
+
+
+SECTION A: DEFINITIONS & CONCEPTS (Questions 1-5)
+Question 1: Core Definition
+Which of the following best defines Machine Learning (Aprendizaje Automático)?
+A) Any computer system that performs tasks typically requiring human intelligence
+B) Computer systems that improve performance through experience and data, without being explicitly programmed for every scenario
+C) Neural networks with multiple layers that learn hierarchical patterns
+D) A system that memorizes all training data and repeats it perfectly
+Correct Answer: B
+Explanation: Machine Learning specifically involves learning from data without explicit programming. Option A describes AI broadly (too broad). Option C describes Deep Learning specifically (too narrow). Option D describes memorization, not learning.
+Bilingual Note: Aprendizaje Automático = "automatic learning"
+________________
+
+
+Question 2: Relationship Between AI, ML, and DL
+Which statement accurately describes the relationship between Artificial Intelligence (IA), Machine Learning (Aprendizaje Automático), and Deep Learning (Aprendizaje Profundo)?
+A) They are three completely different fields with no connection
+B) AI is a subset of ML, which is a subset of DL
+C) AI is the broadest category; ML is a subset of AI; DL is a subset of ML
+D) ML is the broadest; AI and DL are both subsets of ML
+Correct Answer: C
+Explanation: Hierarchical relationship: AI (parent) > ML (child of AI) > DL (child of ML). This is the standard conceptual model in the field.
+Visual Aid:
+AI (broadest)
+  └── ML (subset of AI)
+       └── DL (subset of ML)
+
+
+________________
+
+
+Question 3: Deep Learning vs. Machine Learning
+True or False: All Machine Learning systems are Deep Learning systems.
+Correct Answer: False
+Explanation: Deep Learning is a subset of ML that uses neural networks. Other ML approaches include decision trees, random forests, support vector machines, and collaborative filtering (Netflix uses this). You can have ML without deep learning.
+Example: Netflix's recommendation engine is primarily ML but not necessarily Deep Learning (uses collaborative filtering instead).
+________________
+
+
+Question 4: The Turing Test (Prueba de Turing)
+What was Alan Turing's primary goal in proposing the Turing Test?
+A) To prove that machines can never think like humans
+B) To create a practical measure of machine intelligence that sidesteps philosophical debates about what "thinking" means
+C) To demonstrate that machines are superior to humans
+D) To establish ethical guidelines for AI development
+Correct Answer: B
+Explanation: Turing aimed to shift focus from philosophical debate ("What is thinking?") to a practical test ("Can a machine fool an observer?"). This pragmatic approach became foundational to AI research.
+________________
+
+
+Question 5: Limited Memory AI
+A medical diagnostic system reviews a patient's current X-ray image and their last three scan results to recommend diagnosis. What type of AI system is this?
+A) Reactive AI (IA Reactiva)
+B) Limited Memory AI (IA de Memoria Limitada)
+C) General AI (IA General)
+D) Symbolic AI (IA Simbólica)
+Correct Answer: B
+Explanation: Limited Memory AI uses recent data/context (current image + prior scans) to inform current decisions. Reactive AI would use only current input. General AI doesn't exist yet. Symbolic AI uses rule-based reasoning, not image data.
+________________
+
+
+SECTION B: HISTORY & CONTEXT (Questions 6-9)
+Question 6: Historical Milestones
+Which of the following was NOT a major milestone in AI history?
+A) 1950: Alan Turing proposes the Turing Test
+B) 1956: Dartmouth Summer Research Project officially launches AI as a field
+C) 1974-1980: First AI Winter due to unmet expectations and computational limitations
+D) 2000: Computers achieve human-level intelligence and pass the Turing Test
+Correct Answer: D
+Explanation: Computers did NOT achieve human-level intelligence by 2000. This was Turing's prediction, but it proved overly optimistic. Options A, B, and C are actual historical milestones.
+________________
+
+
+Question 7: AI Winters
+What caused the "First AI Winter" (1974-1980)?
+A) The field of AI was unfunded and lost support
+B) AI systems failed to achieve promised capabilities; combinatorial explosion made problems unsolvable
+C) Researchers discovered AI was theoretically impossible
+D) A and B are both correct
+Correct Answer: D
+Explanation: The winter resulted from both reduced funding AND the recognition that early AI approaches (symbolic reasoning, exhaustive search) hit fundamental limitations. Overpromising led to underperformance, causing withdrawal of support.
+Key Limitation Identified: The "common sense problem"—systems could do formal logic but couldn't understand real-world reasoning humans take for granted.
+________________
+
+
+Question 8: Expert Systems Era
+Expert Systems in the 1980s represented a second wave of optimism. Why did they eventually decline?
+A) They worked perfectly but were too expensive
+B) They were too rigid; required constant expert updates; couldn't learn from new data
+C) They were replaced by better symbolic AI systems
+D) Computers became too fast and made them obsolete
+Correct Answer: B
+Explanation: Expert systems required manual knowledge updates. They couldn't learn from experience, only follow pre-programmed rules. This brittleness and maintenance burden led to the "Second AI Winter" (1987-1997).
+________________
+
+
+Question 9: Deep Learning Revolution
+What event in 2012 marked the beginning of the Deep Learning Revolution?
+A) IBM's Watson won Jeopardy
+B) AlexNet won the ImageNet competition with dramatically better accuracy than traditional methods
+C) Google developed Google Brain
+D) The first smartphone with AI was released
+Correct Answer: B
+Explanation: AlexNet's 2012 ImageNet victory convinced skeptics that deep neural networks, given sufficient data and GPU computing power, could solve real-world problems. This triggered massive investment and research in deep learning.
+Context: This wasn't the first neural network success, but the combination of deep networks + big data + GPU computing + sound algorithms created the modern AI era.
+________________
+
+
+SECTION C: TYPES OF AI (Questions 10-12)
+Question 10: Narrow vs. General AI
+Netflix's recommendation system, facial recognition for security, and medical diagnostic systems are all examples of what type of AI?
+A) General AI (IA General) - they work across multiple domains
+B) Narrow AI (IA Estrecha) - each is specialized for specific tasks
+C) Super AI (IA Super) - they exceed human capabilities in all domains
+D) Symbolic AI - they use rule-based reasoning
+Correct Answer: B
+Explanation: All three are examples of Narrow AI. Each excels at one specific task but cannot be applied to different domains without retraining. None of them qualify as General AI (which doesn't exist yet).
+________________
+
+
+Question 11: Defining Super AI
+Which statement about Super AI (IA Super) is most accurate?
+A) Super AI already exists and is controlling major companies
+B) Super AI is theoretical and speculative; it might exceed human intelligence across virtually all domains but may never exist
+C) Super AI is impossible because machines can never think
+D) Super AI is what OpenAI's ChatGPT represents
+Correct Answer: B
+Explanation: Super AI remains entirely speculative. It's not yet developed, hasn't been proven possible, and its timeline and feasibility are debated. Current AI systems like ChatGPT are still Narrow AI (specialized for language tasks).
+________________
+
+
+Question 12: Types of AI by Architecture
+A chess-playing AI reviews the current board position and recommends the best move. It doesn't remember previous games or learn from past mistakes. What type of AI system is this?
+A) Limited Memory AI - uses recent history
+B) Reactive AI - responds to current input only, no memory
+C) Symbolic AI - uses explicit rules
+D) General AI - applies broad reasoning
+Correct Answer: B
+Explanation: Reactive AI has no memory; it only processes current input. Limited Memory AI would use past game history to improve recommendations. Symbolic AI would use explicit rules, which this system doesn't necessarily do.
+Note: This describes early chess AI like Deep Blue. Modern systems use some learning, making them Limited Memory.
+________________
+
+
+SECTION D: CASE STUDY APPLICATION (Questions 13-15)
+Question 13: Netflix Case Study - Learning Type
+Netflix's recommendation system learns from millions of user ratings and viewing habits. What type of Machine Learning does this represent?
+A) Unsupervised Learning (Aprendizaje No Supervisado) - finding patterns without labels
+B) Supervised Learning (Aprendizaje Supervisado) - learning from labeled examples
+C) Reinforcement Learning (Aprendizaje por Refuerzo) - learning through trial and reward
+D) Symbolic Learning - learning explicit rules
+Correct Answer: B
+Explanation: Netflix provides labeled data: users rate movies (the label). The system learns to predict ratings based on user features. This is supervised learning. (Netflix also incorporates reinforcement learning—testing recommendations and learning which keep users engaged—but the primary approach is supervised via ratings.)
+________________
+
+
+Question 14: Facial Recognition Case Study - Limitations
+The case study showed that facial recognition achieved 94% accuracy but still produced false arrests. Which of the following explains why high accuracy alone isn't sufficient for law enforcement use?
+A) Accuracy percentage doesn't account for false positive rates when applied to millions of suspects
+B) The system performs differently across demographic groups
+C) The system cannot reason about context or probability
+D) All of the above
+Correct Answer: D
+Explanation:
+* A: Base rate problem—94% accurate × 6 million suspects = 360,000 false matches
+* B: Demonstrated racial bias in case study
+* C: Limited context understanding (can't verify alibi)
+* D: All three factors contribute to why high accuracy doesn't equal safe deployment
+________________
+
+
+Question 15: Medical Diagnosis Case Study - Human-AI Collaboration
+The case study showed that when a hospital implemented AI diagnostic assistance, diagnostic errors actually increased (from 0.8% to 1.2%) despite AI being 89% accurate. What was likely the main reason?
+A) The AI system was poorly designed
+B) Radiologists rubber-stamped AI recommendations without careful review, losing their expertise and critical judgment
+C) Radiologists completely ignored AI recommendations
+D) The hospital eliminated experienced radiologists and replaced them entirely with AI
+Correct Answer: B
+Explanation: The case study explicitly describes radiologists "rubber-stamping" AI recommendations without careful review. This represents both over-trust in technology and alert fatigue (too many flags to review carefully). The ideal human-AI collaboration requires radiologists to maintain critical judgment while using AI as a tool to augment their capabilities.
+Key Learning: Better performance requires proper human-AI collaboration, not just having the technology.
+________________
+
+
+ANSWER KEY SUMMARY
+Question
+	Answer
+	Difficulty
+	Learning Objective
+	1
+	B
+	Easy
+	Define ML
+	2
+	C
+	Medium
+	Explain AI/ML/DL relationships
+	3
+	False
+	Medium
+	Distinguish DL from ML
+	4
+	B
+	Medium
+	Understand Turing Test significance
+	5
+	B
+	Medium
+	Identify Limited Memory AI
+	6
+	D
+	Easy
+	Know historical milestones
+	7
+	D
+	Hard
+	Understand AI Winters causes
+	8
+	B
+	Hard
+	Explain Expert Systems decline
+	9
+	B
+	Medium
+	Identify Deep Learning breakthrough
+	10
+	B
+	Easy
+	Distinguish Narrow vs. General AI
+	11
+	B
+	Easy
+	Understand Super AI status
+	12
+	B
+	Medium
+	Identify Reactive vs. Limited Memory
+	13
+	B
+	Medium
+	Identify Learning types in cases
+	14
+	D
+	Hard
+	Apply statistical reasoning to AI
+	15
+	B
+	Hard
+	Understand human-AI collaboration
+	________________
+
+
+SCORING GUIDE
+Total Points Possible: 15
+Point Distribution:
+* Questions 1-12: 1 point each (12 points)
+* Questions 13-15: 1 point each (3 points)
+* Total: 15 points
+Passing Score: 70% = 10.5 points minimum (typically round to 11/15)
+Performance Interpretation:
+Score Range
+	Performance Level
+	Mastery
+	14-15
+	Excellent
+	Mastered all concepts
+	12-13
+	Good
+	Strong understanding; minor gaps
+	11-12
+	Satisfactory
+	Meets minimum; some confusion
+	10-11
+	Borderline
+	Barely passing; review recommended
+	Below 10
+	Insufficient
+	Needs additional study before Module 2
+	________________
+
+
+REMEDIATION GUIDE
+If learner struggles with specific question types, recommend:
+Questions 1-5 (Definitions):
+* Review: Module 1 Reading Part 1 (Definitions section)
+* Activity: Create comparison table of AI, ML, DL
+Questions 6-9 (History):
+* Review: Module 1 Reading Part 2 (Historical Journey)
+* Activity: Create timeline of AI milestones and winters
+Questions 10-12 (Types of AI):
+* Review: Module 1 Reading Part 3 (Types and Categories)
+* Activity: Classify current AI systems (Siri, Tesla, Netflix, etc.)
+Questions 13-15 (Case Studies):
+* Review: Module 1 Case Studies and discussion questions
+* Activity: Rewrite case study explanations in own words
+________________
+
+
+QUIZ DEPLOYMENT OPTIONS
+Option 1: Self-Paced Online Quiz
+* Learners complete at their own pace
+* Immediate feedback on each question
+* Option to review and retake
+* Recommended: Allow 2 attempts; take higher score
+Option 2: Timed Assessment
+* Set 30-minute timer
+* All questions on one page
+* No backtracking
+* Graded upon submission
+Option 3: Interactive Learning
+* Present questions one at a time
+* Provide explanation after each answer
+* Allow pause/reflection between questions
+* Longer but more educational
+________________
+
+
+QUESTION DIFFICULTY DISTRIBUTION
+Easy (30%): Questions 1, 6, 10, 11 - Foundation concepts Medium (50%): Questions 2, 3, 4, 5, 9, 12, 13 - Application and relationships Hard (20%): Questions 7, 8, 14, 15 - Critical thinking and analysis
+This distribution ensures:
+* Confidence-building with foundational questions
+* Application of knowledge in middle section
+* Deep thinking required for final questions
+________________
+
+
+BILINGUAL TERMINOLOGY IN QUIZ
+Throughout the quiz, bilingual terms appear with Spanish translations in parentheses:
+* Artificial Intelligence (IA)
+* Machine Learning (Aprendizaje Automático)
+* Deep Learning (Aprendizaje Profundo)
+* Turing Test (Prueba de Turing)
+* Limited Memory AI (IA de Memoria Limitada)
+* Reactive AI (IA Reactiva)
+* Symbolic AI (IA Simbólica)
+* Narrow AI (IA Estrecha)
+* General AI (IA General)
+* Super AI (IA Super)
+* Supervised Learning (Aprendizaje Supervisado)
+* Unsupervised Learning (Aprendizaje No Supervisado)
+* Reinforcement Learning (Aprendizaje por Refuerzo)
+________________
+
+
+QUIZ ALIGNMENT TO LEARNING OBJECTIVES
+Learning Objective 1: "Define AI, ML, and DL and explain their relationships"
+* Assessed by: Questions 1, 2, 3
+* Passing criteria: Answer 2 of 3 correctly
+Learning Objective 2: "Identify major historical milestones and key figures in AI development"
+* Assessed by: Questions 6, 7, 8, 9
+* Passing criteria: Answer 3 of 4 correctly
+Learning Objective 3: "Differentiate between narrow, general, and super AI"
+* Assessed by: Questions 10, 11, 12
+* Passing criteria: Answer 2 of 3 correctly
+Applied Learning: "Apply concepts to real-world AI systems"
+* Assessed by: Questions 4, 5, 13, 14, 15
+* Passing criteria: Answer 3 of 5 correctly
+________________
+
+
+GENERATING CERTIFICATES
+Upon passing (70% or higher):
+* Learner receives notification: "Congratulations! You've completed Module 1"
+* Digital badge displayed: "AI Foundations Mastered"
+* Progress updated: "1 of 10 modules complete"
+* Encouragement: "Ready for Module 2: Machine Learning Fundamentals"
+Upon not passing:
+* Feedback provided: "Review these topics before retrying"
+* Recommendation: "Complete the associated reading/activities again"
+* Retake option: "You may retake this quiz after review"
+* Support: "Use FAQ chatbot or contact support for help"
+________________
+
+
+END OF QUIZ
+Total Questions: 15
+Estimated Time: 20-30 minutes
+Format: Suitable for online platform deployment
+Ready for: Implementation on Vercel/Supabase platform
+Next Steps:
+1. Import quiz into platform CMS
+2. Configure auto-grading and feedback
+3. Test in staging environment
+4. Enable for learners accessing Module 1
