@@ -1,0 +1,676 @@
+﻿MODULE 4: HANDS-ON PROMPTING LAB
+Interactive Prompt Engineering Practice (48 minutes)
+MTW AI Platform | 40% of Module Content
+________________
+
+
+LAB OVERVIEW
+Total Time: 48 minutes
+Format: Guided exercises using public LLM interfaces
+Tools Required:
+* Web browser
+* Access to ChatGPT (free tier) OR Claude.ai OR Google Gemini
+* No coding required for main exercises
+* Optional: Google Colab for API integration exercise
+Learning Outcomes:
+1. Practice effective prompt engineering techniques
+2. Compare zero-shot vs. few-shot prompting
+3. Apply iterative refinement to improve outputs
+4. Understand prompt patterns for different tasks
+5. Experience real LLM capabilities and limitations
+________________
+
+
+LAB STRUCTURE
+Exercise 1: Basic Prompting (8 min)
+Exercise 2: Role Assignment & Context (8 min)
+Exercise 3: Few-Shot Learning (8 min)
+Exercise 4: Chain of Thought Reasoning (8 min)
+Exercise 5: Iterative Refinement (8 min)
+Exercise 6: Text-to-Image Prompting (8 min)
+──────────────────────────────────────
+TOTAL: 48 minutes
+
+
+________________
+
+
+SETUP INSTRUCTIONS (2 minutes)
+Choose Your LLM Platform
+Option 1: ChatGPT (Recommended)
+1. Go to https://chat.openai.com
+2. Sign up for free account (if needed)
+3. Click "New Chat" to begin
+Option 2: Claude.ai
+1. Go to https://claude.ai
+2. Sign up for free account
+3. Start new conversation
+Option 3: Google Gemini
+1. Go to https://gemini.google.com
+2. Sign in with Google account
+3. Begin conversation
+Note: All exercises work with any of these platforms. Examples show ChatGPT, but adapt to your chosen tool.
+________________
+
+
+EXERCISE 1: BASIC PROMPTING - GOOD VS. BAD PROMPTS
+Time: 8 minutes | Focus: Specificity and Clarity
+Part A: Experience Poor Prompting (3 minutes)
+Task 1.1: Copy this POOR prompt into your chosen LLM:
+Write about AI
+
+
+Observe the output:
+* Is it what you wanted?
+* What's missing?
+* How specific or useful is it?
+Expected Issue: Generic, vague response (could be history, definition, applications, ethics—who knows?)
+________________
+
+
+Task 1.2: Now try this GOOD prompt:
+Write a 200-word explanation of how Artificial Intelligence is transforming 
+healthcare, focusing on three specific applications: medical imaging analysis, 
+drug discovery, and personalized treatment plans. Write for a general audience 
+with no medical background. Include one concrete example for each application.
+
+
+Observe the output:
+* Much more focused?
+* Specific examples included?
+* Appropriate length and detail?
+Part B: Identify the Differences (2 minutes)
+What made the second prompt better?
+✓ Specificity: Exact topic (AI in healthcare, not just "AI")
+✓ Scope: Three specific applications named
+✓ Audience: General audience (no medical jargon)
+✓ Format: 200 words, concrete examples
+✓ Structure: One example per application
+Part C: Your Turn - Improve a Bad Prompt (3 minutes)
+Given this poor prompt:
+Tell me about climate change
+
+
+Your task: Rewrite it using the principles you learned.
+Consider:
+* What specific aspect? (causes, effects, solutions, science?)
+* Who's the audience? (child, policymaker, scientist?)
+* What format? (essay, bullet points, Q&A?)
+* What length?
+* What tone? (urgent, educational, balanced?)
+Example improved prompt:
+Explain three main causes of climate change in simple terms suitable for 
+high school students. For each cause, provide: (1) a clear explanation, 
+(2) one specific example, and (3) one action individuals can take to help. 
+Use an educational but optimistic tone. Format as three short paragraphs, 
+approximately 150 words total.
+
+
+Try your improved prompt in the LLM and compare results!
+________________
+
+
+EXERCISE 2: ROLE ASSIGNMENT & CONTEXT
+Time: 8 minutes | Focus: Setting Roles and Providing Context
+Part A: No Role vs. Role Assignment (4 minutes)
+Task 2.1: Prompt WITHOUT role:
+Explain photosynthesis
+
+
+Observe: Likely gets technical, assumes some prior knowledge
+________________
+
+
+Task 2.2: Same topic WITH role assignment:
+You are a kindergarten teacher known for making complex topics fun and simple. 
+Explain photosynthesis to 5-year-olds using a simple story or analogy. 
+Avoid scientific terms. Make it memorable and engaging.
+
+
+Compare outputs: Notice how role dramatically changes tone, vocabulary, and approach?
+________________
+
+
+Task 2.3: Try different roles for the SAME task:
+ROLE 1: "You are a university biology professor lecturing graduate students..."
+
+
+ROLE 2: "You are Carl Sagan, the famous scientist who explained complex ideas 
+poetically..."
+
+
+ROLE 3: "You are a patient tutor helping someone who failed biology twice..."
+
+
+Question: How does each role change the explanation style?
+Part B: Context Makes All the Difference (4 minutes)
+Task 2.4: Prompt WITHOUT context:
+Should I invest in stocks?
+
+
+Observe: Generic, can't give useful personalized advice
+________________
+
+
+Task 2.5: Same question WITH context:
+I'm a 25-year-old software engineer in Miami earning $80,000/year. I have 
+$10,000 in savings, no debt, and already contribute to my 401(k). I have 
+no investment experience. I'm considering investing $5,000 in stocks but 
+I'm risk-averse and planning to buy a house in 5 years. Should I invest 
+in stocks, and if so, what approach would be appropriate for my situation?
+
+
+Compare: Much more specific, actionable advice?
+Key Lesson: Context = Better Relevance
+________________
+
+
+EXERCISE 3: FEW-SHOT LEARNING
+Time: 8 minutes | Focus: Learning from Examples
+Part A: Zero-Shot (No Examples) (2 minutes)
+Task 3.1: Try this classification task with NO examples:
+Classify the sentiment of this product review as Positive, Neutral, or Negative:
+
+
+"The battery life is okay, but the screen is amazing."
+
+
+Observe: LLM might classify it differently than you'd expect (Positive? Neutral? Mixed?)
+Part B: Few-Shot (With Examples) (3 minutes)
+Task 3.2: Now provide examples BEFORE your actual task:
+Classify product review sentiment as Positive, Neutral, or Negative.
+
+
+Example 1:
+Review: "This product exceeded all my expectations! Absolutely love it."
+Sentiment: Positive
+
+
+Example 2:
+Review: "Terrible quality. Broke after one use. Total waste of money."
+Sentiment: Negative
+
+
+Example 3:
+Review: "It works. Nothing special, but it does what it's supposed to."
+Sentiment: Neutral
+
+
+Example 4:
+Review: "Great features, but overpriced for what you get."
+Sentiment: Neutral
+
+
+Now classify this review:
+Review: "The battery life is okay, but the screen is amazing."
+Sentiment:
+
+
+Compare results: More consistent classification matching your examples?
+Part C: Your Turn - Design Few-Shot Prompts (3 minutes)
+Task 3.3: Create a few-shot prompt for this task:
+Goal: Convert casual text to professional business language
+Your structure:
+1. State the task clearly
+2. Provide 2-3 examples showing casual → professional transformation
+3. Give your actual text to convert
+Example format:
+Convert casual language to professional business language.
+
+
+Example 1:
+Casual: "Hey, can you send me that report ASAP?"
+Professional: "Could you please send me the report at your earliest convenience?"
+
+
+Example 2:
+Casual: "The meeting was super boring and way too long."
+Professional: "The meeting duration exceeded the scheduled time and could have been more concise."
+
+
+Now convert:
+Casual: "My bad, I totally forgot about the deadline."
+Professional: [LLM completes]
+
+
+Try your prompt and evaluate the output!
+________________
+
+
+EXERCISE 4: CHAIN OF THOUGHT REASONING
+Time: 8 minutes | Focus: Step-by-Step Problem Solving
+Part A: Direct Question (2 minutes)
+Task 4.1: Ask directly without structure:
+A store has a 20% off sale. An item originally costs $80. If there's an 
+additional 10% discount at checkout, what's the final price?
+
+
+Observe: LLM gives answer, but does it show reasoning? Is it correct?
+Part B: Chain of Thought (3 minutes)
+Task 4.2: Request step-by-step reasoning:
+A store has a 20% off sale. An item originally costs $80. If there's an 
+additional 10% discount at checkout, what's the final price?
+
+
+Solve this step-by-step:
+1. First, calculate the price after the 20% discount
+2. Then, calculate the additional 10% discount on the new price
+3. Finally, state the final price
+
+
+Show all calculations clearly.
+
+
+Compare: More transparent reasoning? Can you verify each step?
+Part C: Complex Reasoning Task (3 minutes)
+Task 4.3: Try this logic puzzle with chain of thought:
+Three people (Alice, Bob, Carol) are in a room. Alice says "I don't know 
+if anyone else is wearing a hat." Bob says "I don't know either." Carol 
+says "I know whether I'm wearing a hat." Everyone can see everyone else's 
+hat but not their own. Alice and Bob are both wearing hats. Is Carol 
+wearing a hat?
+
+
+Reason through this step-by-step:
+1. What can Alice see?
+2. What does Alice's statement tell us?
+3. What can Bob see?
+4. What does Bob's statement tell us?
+5. What can Carol deduce from their statements?
+6. Final answer with reasoning
+
+
+Key Lesson: Complex reasoning improves when you request explicit step-by-step thinking.
+________________
+
+
+EXERCISE 5: ITERATIVE REFINEMENT
+Time: 8 minutes | Focus: Improving Outputs Through Iteration
+The Iterative Process (8 minutes)
+Iteration 1: Start Simple
+Write a product description for noise-canceling headphones.
+
+
+Evaluate Output 1:
+* Is it compelling?
+* Does it address your target audience?
+* Does it mention key features you care about?
+* Is the tone right?
+________________
+
+
+Iteration 2: Add Specificity
+Write a 100-word product description for premium noise-canceling headphones 
+targeting remote workers. Emphasize how they solve the problem of noisy 
+home environments and improve focus during video calls. Professional tone.
+
+
+Evaluate Output 2:
+* Better audience targeting?
+* Problem-solution framing?
+* Appropriate length?
+________________
+
+
+Iteration 3: Refine Further
+Write a 100-word product description for premium noise-canceling headphones 
+targeting remote workers. Include:
+- Opening hook about common pain point (noisy home office)
+- 2-3 key features (noise cancellation, comfort, battery life)
+- Specific benefit for video calls (crystal-clear microphone)
+- Call-to-action
+Tone: Professional but warm, like a helpful colleague recommending a solution.
+
+
+Evaluate Output 3:
+* Follows structure?
+* Includes all specified elements?
+* Achieves desired tone?
+________________
+
+
+Iteration 4: Polish (Optional)
+Based on Output 3, make final tweaks:
+[Previous prompt] + 
+
+
+Additional requirement: Start with a question that resonates with remote 
+workers: "Tired of barking dogs and loud neighbors interrupting your focus?"
+
+
+Key Lesson: First drafts are rarely perfect. Iterate based on what's missing or needs adjustment.
+________________
+
+
+EXERCISE 6: TEXT-TO-IMAGE PROMPTING
+Time: 8 minutes | Focus: Crafting Image Generation Prompts
+Note: If you have access to DALL-E (ChatGPT Plus), Midjourney, or another text-to-image tool, try these. Otherwise, just practice writing the prompts.
+Part A: Poor vs. Good Image Prompts (4 minutes)
+Task 6.1: Poor image prompt:
+A cat
+
+
+What's missing?
+* Style? (Photo, painting, cartoon?)
+* Setting? (Indoor, outdoor, where?)
+* Lighting?
+* Mood/emotion?
+* Details?
+________________
+
+
+Task 6.2: Improved image prompt:
+A fluffy orange tabby cat sitting on a sun-drenched windowsill, surrounded 
+by potted plants, photorealistic style, soft afternoon sunlight streaming 
+through sheer curtains, warm and peaceful atmosphere, high detail, 
+professional photography
+
+
+What improved? ✓ Subject details (fluffy, orange tabby)
+✓ Setting (windowsill, plants, curtains)
+✓ Style (photorealistic, professional photography)
+✓ Lighting (afternoon sunlight, soft)
+✓ Mood (warm, peaceful)
+✓ Quality (high detail)
+Part B: Prompt Formula for Images (4 minutes)
+Standard Structure:
+[Subject] + [Action/Pose] + [Setting/Background] + [Style] + 
+[Lighting] + [Mood] + [Quality descriptors]
+
+
+Task 6.3: Write prompts for these scenarios:
+Scenario 1: Professional headshot for LinkedIn
+Your prompt:
+[Professional woman in business attire, confident smile, neutral gray 
+background, corporate headshot photography style, soft diffused lighting, 
+professional and approachable mood, high resolution, sharp focus]
+
+
+________________
+
+
+Scenario 2: Fantasy book cover illustration
+Your prompt:
+[Dragon perched on mountain peak, wings spread majestically, overlooking 
+medieval castle in valley below, fantasy art style like Magic the Gathering, 
+dramatic sunset lighting, epic and awe-inspiring mood, highly detailed, 
+trending on ArtStation, 4K quality]
+
+
+________________
+
+
+Scenario 3: Modern minimalist logo
+Your prompt:
+[Simple geometric logo for tech startup, incorporating abstract circuit 
+pattern, minimalist design, navy blue and silver color scheme, clean lines, 
+modern and professional, vector art style, white background]
+
+
+Practice: Write prompts for:
+1. A cozy coffee shop interior
+2. A futuristic city skyline
+3. An infographic about recycling
+________________
+
+
+BONUS EXERCISE: GOOGLE COLAB API INTEGRATION (OPTIONAL)
+Time: 15 minutes | For learners wanting to use OpenAI API programmatically
+Note: This requires an OpenAI API key (paid). Skip if you don't have access.
+Google Colab Setup
+Step 1: Open Google Colab
+* Go to https://colab.research.google.com
+* Click "New Notebook"
+Step 2: Install OpenAI library
+# Cell 1: Install OpenAI
+!pip install openai
+
+
+Step 3: Import and configure
+# Cell 2: Import and set API key
+import openai
+import os
+
+
+# IMPORTANT: Never hardcode API keys! Use Colab secrets or environment variables
+# For this tutorial, you'll paste your key when prompted
+api_key = input("Enter your OpenAI API key: ")
+openai.api_key = api_key
+
+
+print("✓ OpenAI configured")
+
+
+Step 4: Basic chat completion
+# Cell 3: Simple prompt function
+def chat_gpt(prompt, model="gpt-3.5-turbo"):
+    """Send a prompt to ChatGPT and get response"""
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response['choices'][0]['message']['content']
+
+
+# Test it
+prompt = "Explain artificial intelligence in one sentence."
+result = chat_gpt(prompt)
+print(result)
+
+
+Step 5: Exercise - Sentiment Analysis
+# Cell 4: Sentiment analysis with few-shot prompting
+def analyze_sentiment(review):
+    """Classify review sentiment using few-shot prompting"""
+    
+    prompt = f"""Classify product review sentiment as Positive, Neutral, or Negative.
+
+
+Example 1:
+Review: "This product exceeded all my expectations!"
+Sentiment: Positive
+
+
+Example 2:
+Review: "Terrible quality. Broke after one use."
+Sentiment: Negative
+
+
+Example 3:
+Review: "It works. Nothing special."
+Sentiment: Neutral
+
+
+Now classify:
+Review: "{review}"
+Sentiment:"""
+
+
+    response = chat_gpt(prompt)
+    return response.strip()
+
+
+# Test with multiple reviews
+reviews = [
+    "Amazing product! Best purchase ever!",
+    "It's okay, does what it says",
+    "Complete waste of money. Disappointed.",
+    "Great features but a bit overpriced"
+]
+
+
+for review in reviews:
+    sentiment = analyze_sentiment(review)
+    print(f"Review: {review}")
+    print(f"Sentiment: {sentiment}\n")
+
+
+Step 6: Exercise - Code Generation
+# Cell 5: Generate code from natural language
+def generate_code(description, language="python"):
+    """Generate code from natural language description"""
+    
+    prompt = f"""You are an expert {language} programmer. Generate clean, 
+well-commented code for the following task:
+
+
+{description}
+
+
+Provide only the code with brief comments."""
+
+
+    code = chat_gpt(prompt)
+    return code
+
+
+# Test it
+task = "Create a function that calculates the factorial of a number recursively"
+code = generate_code(task)
+print(code)
+
+
+Step 7: Exercise - Iterative Refinement
+# Cell 6: Demonstrate iterative refinement programmatically
+def refine_content(original_content, refinement_instruction):
+    """Iteratively refine content based on feedback"""
+    
+    prompt = f"""Original content:
+{original_content}
+
+
+Refinement needed:
+{refinement_instruction}
+
+
+Provide the improved version:"""
+
+
+    return chat_gpt(prompt)
+
+
+# Example: Refine a product description
+original = "These headphones have good sound quality."
+
+
+iteration_1 = refine_content(
+    original,
+    "Make it more compelling and specific. Mention noise cancellation."
+)
+print("Iteration 1:")
+print(iteration_1)
+print("\n" + "="*50 + "\n")
+
+
+iteration_2 = refine_content(
+    iteration_1,
+    "Add a call-to-action and target remote workers specifically."
+)
+print("Iteration 2:")
+print(iteration_2)
+
+
+________________
+
+
+LAB COMPLETION CHECKLIST
+Mark exercises completed:
+* [ ] Exercise 1: Basic Prompting (good vs. bad prompts)
+* [ ] Exercise 2: Role Assignment & Context
+* [ ] Exercise 3: Few-Shot Learning
+* [ ] Exercise 4: Chain of Thought Reasoning
+* [ ] Exercise 5: Iterative Refinement
+* [ ] Exercise 6: Text-to-Image Prompting
+* [ ] Bonus: Google Colab API (optional)
+________________
+
+
+KEY TAKEAWAYS FROM LAB
+What You Learned
+1. Specificity Matters
+* Vague prompts → vague outputs
+* Detailed prompts → targeted, useful outputs
+2. Structure Improves Results
+* Role assignment changes tone and approach
+* Context personalizes responses
+* Format specification controls output structure
+3. Examples Guide Behavior (Few-Shot)
+* 2-3 examples dramatically improve consistency
+* Examples show desired format, style, detail level
+* Particularly powerful for classification and transformation tasks
+4. Request Reasoning for Complex Tasks
+* Chain of thought improves accuracy
+* Makes LLM "show its work"
+* Allows you to verify logic
+5. Iteration is Normal
+* First attempts rarely perfect
+* Refine based on what's missing
+* Each iteration incorporates learning
+6. Image Prompts Need Detail
+* Subject, style, lighting, mood, quality all matter
+* More descriptive = better results
+* Reference artistic styles for consistency
+Prompt Engineering Skills Developed
+✓ Writing clear, specific instructions
+✓ Providing helpful context
+✓ Designing few-shot examples
+✓ Structuring complex requests
+✓ Iterative refinement based on outputs
+✓ Understanding LLM capabilities and limitations
+________________
+
+
+REFLECTION QUESTIONS
+Answer these to consolidate learning:
+1. Which exercise was most eye-opening? Why?
+2. Compare your first prompt in Exercise 1 to your last prompt in Exercise 5. How did your approach evolve?
+3. When might few-shot prompting be essential vs. optional?
+4. What's one real-world task you could use these techniques for?
+5. What surprised you most about how LLMs respond to different prompts?
+________________
+
+
+CONNECTING LAB TO CASE STUDIES
+Jasper AI:
+* Used templates (Exercise 2: structured prompts)
+* Iterative refinement (Exercise 5)
+* Marketing-specific context (Exercise 2)
+GitHub Copilot:
+* Comments as prompts (Exercise 1: specificity)
+* Few-shot from your code (Exercise 3)
+* Code generation (Bonus: Colab)
+Lensa AI:
+* Image prompt engineering (Exercise 6)
+* Detailed descriptions = better outputs
+* Style specification matters
+________________
+
+
+NEXT STEPS: APPLYING SKILLS
+Practice Opportunities:
+1. Content Creation
+   * Blog posts, social media, emails
+   * Use role assignment + context + format
+2. Problem Solving
+   * Complex questions requiring reasoning
+   * Use chain of thought
+3. Data Processing
+   * Classification, transformation, summarization
+   * Use few-shot prompting
+4. Creative Projects
+   * Stories, poems, image generation
+   * Use iterative refinement
+5. Code Assistance
+   * Function generation, debugging, explanation
+   * Use specific descriptions + examples
+________________
+
+
+LAB COMPLETE ✓
+Time Spent: 48 minutes
+Exercises Completed: 6 (+ 1 bonus)
+Skills Practiced: Specificity, context, few-shot, chain of thought, iteration, image prompting
+Ready for: Module 4 Quiz
+Pro Tip: Bookmark your favorite prompts! Build a personal "prompt library" of templates that work well for your common tasks.

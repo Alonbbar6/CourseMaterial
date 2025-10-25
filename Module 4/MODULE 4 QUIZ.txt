@@ -1,0 +1,425 @@
+﻿MODULE 4 QUIZ: GENERATIVE AI & LARGE LANGUAGE MODELS
+10-Question Assessment
+Time Limit: 12 minutes | Passing Score: 70% (7/10 correct)
+________________
+
+
+INSTRUCTIONS
+Question Types:
+* Multiple Choice (select best answer)
+* Scenario-Based (apply concepts to real situations)
+* True/False with explanation
+Important Notes:
+* Read all options before selecting
+* Some questions test Module 4 case study understanding
+* Apply concepts from reading and hands-on lab
+________________
+
+
+SECTION A: CORE CONCEPTS (Questions 1-4)
+Question 1: Generative vs. Discriminative AI
+Which of the following best describes the fundamental difference between Generative AI and Discriminative AI?
+A) Generative AI is faster; Discriminative AI is more accurate
+B) Generative AI creates new content; Discriminative AI classifies or predicts from existing data
+C) Generative AI requires more training data; Discriminative AI works with less data
+D) Generative AI only works with text; Discriminative AI only works with images
+Correct Answer: B
+Explanation: The core distinction is purpose and output:
+* Generative AI (IA Generativa): Creates entirely new content (text, images, code, music). Learns P(X) or P(X,Y)—the data distribution itself.
+* Discriminative AI (IA Discriminativa): Classifies, labels, or predicts from existing inputs. Learns P(Y|X)—decision boundaries between classes.
+Examples:
+* Generative: ChatGPT writing an essay, DALL-E creating an image
+* Discriminative: Spam filter classifying emails, medical AI diagnosing from X-rays
+Why other options are wrong:
+* A: Speed and accuracy depend on implementation, not type
+* C: Both can require large datasets; depends on specific task
+* D: Both work across multiple data types (text, images, audio)
+________________
+
+
+Question 2: Transformer Architecture
+What is the key innovation of the Transformer architecture (Arquitectura Transformador) that enabled modern Large Language Models?
+A) It processes words sequentially, one at a time, ensuring perfect grammar
+B) It uses the attention mechanism to process all words simultaneously and understand relationships between them
+C) It eliminates the need for training data by generating text randomly
+D) It requires less computational power than previous architectures
+Correct Answer: B
+Explanation: The attention mechanism (mecanismo de atención) is the breakthrough innovation from the 2017 paper "Attention Is All You Need."
+How it works:
+Old approach (RNNs): "The" → "cat" → "sat" → ... (sequential)
+Problem: Forgets early context
+
+
+Transformer approach: Analyzes ALL words simultaneously
+"it" can directly attend to "cat" even if they're far apart
+
+
+Self-attention allows each word to consider relationships with every other word at once, enabling:
+* Parallel processing (faster training)
+* Long-range dependencies (understanding entire documents)
+* Scalability (stack more layers = better performance)
+Why other options are wrong:
+* A: Transformers process simultaneously, not sequentially (that was RNN limitation)
+* C: Still requires massive training data (billions of tokens)
+* D: Actually requires MORE compute (GPUs/TPUs) but trains faster due to parallelization
+________________
+
+
+Question 3: Large Language Models (LLMs)
+Which statement accurately describes how Large Language Models (Modelos de Lenguaje Grande - LLMs) like GPT-4 are trained?
+A) They are programmed with explicit rules for grammar and facts
+B) They undergo pre-training on massive text data predicting next words, then fine-tuning with human feedback
+C) They memorize entire internet databases to retrieve exact answers
+D) They are trained only on curated, fact-checked content to avoid errors
+Correct Answer: B
+Explanation: LLM training has two phases:
+Phase 1: Pre-Training (Self-Supervised Learning)
+* Feed model trillions of words from internet (books, websites, code)
+* Training objective: Predict next word
+* Example: "The capital of France is ___" → model learns "Paris" is most likely
+* No human labeling needed (self-supervised)
+* Results in general language understanding
+Phase 2: Fine-Tuning (RLHF - Reinforcement Learning from Human Feedback)
+* Humans provide examples of good/bad responses
+* Model generates multiple responses, humans rank them
+* Model learns to prefer high-quality, helpful responses
+* Transforms "next word predictor" into "helpful assistant"
+Why other options are wrong:
+* A: Not rule-based; learns patterns from data
+* C: Doesn't memorize; learns statistical patterns (can't retrieve exact internet text)
+* D: Trained on raw internet (including errors, biases); not curated for facts
+________________
+
+
+Question 4: Hallucinations
+In the context of LLMs, what is a "hallucination" (alucinación)?
+A) When the model generates creative, fictional stories as requested
+B) When the model generates false information presented confidently as fact
+C) When the model refuses to answer a question due to safety concerns
+D) When the model produces grammatically incorrect sentences
+Correct Answer: B
+Explanation: Hallucination (Alucinación): LLM generates plausible-sounding but factually incorrect information, stated with confidence as if true.
+Example:
+User: "Who won the 2025 Nobel Prize in Chemistry?"
+LLM: "Dr. Sarah Chen from Stanford won for her work on sustainable polymers."
+Reality: This is fabricated—model invented a plausible answer.
+
+
+Why this happens:
+* LLMs predict statistically likely text, not truth
+* When uncertain, they generate plausible completions
+* No inherent fact-checking mechanism
+* Pattern matching doesn't equal knowledge
+How to mitigate:
+* Verify important facts externally
+* Ask for sources (though LLMs may invent those too)
+* Use models fine-tuned for factuality
+* Apply critical thinking to all outputs
+Why other options are wrong:
+* A: Creative fiction is intentional and requested (not hallucination)
+* C: Refusal is safety feature, not hallucination
+* D: Grammar errors are different issue (though rare in modern LLMs)
+________________
+
+
+SECTION B: PROMPT ENGINEERING (Questions 5-7)
+Question 5: Effective Prompting
+Which prompt will likely produce the BEST output from an LLM for creating marketing content?
+A) "Write about coffee"
+B) "Write a social media post"
+C) "You are a professional social media marketer. Write a 150-character Instagram caption for artisanal cold brew coffee targeting health-conscious millennials. Use an enthusiastic but authentic tone and include a call-to-action."
+D) "Coffee is good. Write something."
+Correct Answer: C
+Explanation: Effective prompts include:
+✓ Role assignment: "You are a professional social media marketer" ✓ Specificity: "Instagram caption" (not generic "post") ✓ Constraints: "150 characters" (clear length requirement) ✓ Context: "Artisanal cold brew coffee" ✓ Audience: "Health-conscious millennials" ✓ Tone: "Enthusiastic but authentic" ✓ Format: "Include call-to-action"
+Comparison:
+* A: Too vague (what about coffee? Essay? Recipe? Poem?)
+* B: Slightly better but still unclear (platform? length? purpose?)
+* C: Comprehensive, clear, actionable ✓
+* D: No useful information; will produce generic output
+Key principle from Module 4: Specificity + Context + Format = Better outputs
+________________
+
+
+Question 6: Few-Shot Prompting
+What is "few-shot prompting" (aprendizaje con pocos ejemplos)?
+A) Asking the LLM very short questions
+B) Providing 1-3 examples of desired input-output pairs before your actual request
+C) Using an LLM with fewer parameters
+D) Limiting the LLM to generate short responses
+Correct Answer: B
+Explanation: Few-Shot Prompting: Including examples in your prompt to show the LLM the pattern you want.
+Example:
+Classify sentiment as Positive, Neutral, or Negative.
+
+
+Example 1:
+Text: "I love this product!"
+Sentiment: Positive
+
+
+Example 2:
+Text: "It broke after one day."
+Sentiment: Negative
+
+
+Example 3:
+Text: "It's okay, I guess."
+Sentiment: Neutral
+
+
+Now classify:
+Text: "Best purchase I've ever made!"
+Sentiment: [LLM responds: Positive]
+
+
+Types:
+* Zero-shot: No examples (just ask directly)
+* One-shot: One example
+* Few-shot: 2-5 examples
+* Many-shot: 10+ examples
+Benefits:
+* LLM learns format, style, level of detail
+* Improves accuracy for specific tasks
+* Reduces ambiguity
+Why other options are wrong:
+* A: "Few-shot" refers to examples, not question length
+* C: Refers to training data, not model size
+* D: About examples provided, not response length
+________________
+
+
+Question 7: Scenario - Prompt Refinement
+You prompt an LLM: "Explain quantum computing" and receive a highly technical response with complex equations. You want a simpler explanation. What's the BEST way to refine your prompt?
+A) "Explain quantum computing" (repeat exact same prompt)
+B) "Make it simpler"
+C) "You are a patient teacher explaining to a 10-year-old. Explain quantum computing using everyday analogies and no technical jargon."
+D) "Just give me the basics"
+Correct Answer: C
+Explanation: Effective refinement includes:
+✓ Role assignment: "Patient teacher explaining to 10-year-old" ✓ Clear constraints: "No technical jargon" ✓ Method specification: "Using everyday analogies" ✓ Audience level: "10-year-old" (defines complexity)
+Why this works:
+* Sets clear expectations for complexity level
+* Provides context (teaching child vs. peer discussion)
+* Specifies approach (analogies, not equations)
+* Likely produces accessible explanation
+Why other options fail:
+* A: Same prompt = same output (LLM has no memory to know you're dissatisfied)
+* B: Vague; "simpler" is subjective without context
+* D: Still unclear how basic; could still be too technical
+Lesson from Copilot case study: Better prompts (comments) = better outputs. Specificity matters.
+________________
+
+
+SECTION C: CASE STUDY APPLICATION (Questions 8-10)
+Question 8: Jasper AI Case Study
+Based on the Jasper AI case study, what is the PRIMARY reason Jasper provides value beyond just giving users access to GPT-4?
+A) Jasper has a better base model than GPT-4
+B) Jasper adds templates, brand voice customization, and marketing-specific workflows on top of GPT-4
+C) Jasper is cheaper than using GPT-4 directly
+D) Jasper doesn't use GPT-4 at all
+Correct Answer: B
+Explanation: Jasper's value proposition:
+Not just API access—it's the layer on top:
+1. Templates: Pre-built prompts encoding marketing expertise
+   * "Blog Post Template" → sophisticated system prompt
+   * "Product Description Template" → optimized structure
+2. Brand Voice: Analyzes your existing content, learns style, maintains consistency
+3. Workflows: Multi-step processes (outline → draft → polish)
+4. Marketing Optimization: SEO keywords, call-to-action placement, tone control
+Key insight: Anyone can access GPT-4 via OpenAI. Jasper's competitive advantage is prompt engineering infrastructure that non-experts can use effectively.
+Why other options are wrong:
+* A: Uses same GPT-4 API (doesn't have better model)
+* C: Actually more expensive (subscription fee + GPT-4 API costs)
+* D: Explicitly uses GPT-4 (stated in case study)
+Lesson: Business value comes from application, not just model access.
+________________
+
+
+Question 9: GitHub Copilot Case Study
+The case study showed developers complete tasks 55% faster with Copilot. However, what critical limitation requires human developers to remain essential?
+A) Copilot can only write Python code, not other languages
+B) Copilot generates plausible but potentially incorrect or insecure code requiring human review and testing
+C) Copilot requires internet connection to function
+D) Copilot can only write 10 lines of code at a time
+Correct Answer: B
+Explanation: The hallucination problem in code:
+Copilot can suggest:
+* Functionally incorrect code (logic errors)
+* Security vulnerabilities (SQL injection, XSS attacks)
+* Inefficient algorithms (works but performs poorly)
+* Outdated patterns (better modern alternatives exist)
+Example from case study:
+# Copilot might suggest:
+query = f"SELECT * FROM users WHERE username='{username}'"
+# SQL injection vulnerability!
+
+
+Human developers must:
+* Understand what code does
+* Test for correctness
+* Review for security issues
+* Verify performance
+* Ensure maintainability
+Key quote from case study: "Developers who learn with Copilot might not understand the code they're accepting."
+Why other options are wrong:
+* A: Supports 12+ languages (Python, JavaScript, Java, C++, etc.)
+* C: Works offline with local model (though may have limited capability)
+* D: Can generate entire functions (50+ lines)
+Lesson: AI augments but doesn't replace human judgment and expertise.
+________________
+
+
+Question 10: Lensa AI Case Study
+The Lensa AI case study highlighted ethical concerns from artists. Which statement BEST represents the artists' primary concern?
+A) AI will make art completely obsolete
+B) Stable Diffusion was trained on their copyrighted artwork without permission or compensation, and now generates art "in their style" that competes economically
+C) Lensa avatars are always better quality than human-created art
+D) AI-generated images violate all international copyright laws
+Correct Answer: B
+Explanation: The core ethical issue:
+What happened:
+1. Stable Diffusion trained on billions of internet images
+2. Included copyrighted artwork (scraped without asking permission)
+3. Model learned artists' styles, techniques, signatures
+4. Can now generate "art in [artist's] style" on demand
+5. Undercuts artists economically ($4 AI avatar vs. $50-500 commission)
+Artists' perspective: "I spent years developing my style. AI trained on my work without consent. Now anyone can generate art that looks like mine for $4. How is this fair?"
+Legal ambiguity:
+* Is training on public images "fair use"? (Courts haven't decided)
+* Does AI "copy" or "learn patterns"? (Debated)
+* Should artists be compensated? (No consensus)
+Why other options are wrong:
+* A: Artists don't claim art is obsolete; concerned about specific economic harm
+* C: Quality varies; not always better (often has errors)
+* D: Legal status unclear; not universally illegal (ongoing litigation)
+Key lesson: Generative AI raises unresolved ethical questions about training data, consent, and compensation.
+________________
+
+
+ANSWER KEY & SCORING GUIDE
+Question
+	Answer
+	Topic
+	Difficulty
+	1
+	B
+	Generative vs. Discriminative
+	Easy
+	2
+	B
+	Transformer Architecture
+	Medium
+	3
+	B
+	LLM Training
+	Medium
+	4
+	B
+	Hallucinations
+	Easy
+	5
+	C
+	Effective Prompting
+	Easy
+	6
+	B
+	Few-Shot Prompting
+	Medium
+	7
+	C
+	Prompt Refinement
+	Hard
+	8
+	B
+	Case Study - Jasper
+	Medium
+	9
+	B
+	Case Study - Copilot
+	Hard
+	10
+	B
+	Case Study - Lensa Ethics
+	Medium
+	________________
+
+
+SCORING INTERPRETATION
+Total Points: 10 (1 point per question)
+Grade Ranges:
+* 9-10 (90-100%): Excellent - Mastered Module 4 concepts
+* 8 (80%): Good - Strong understanding with minor gaps
+* 7 (70%): Passing - Meets minimum competency
+* 5-6 (50-60%): Below passing - Review reading and case studies
+* 0-4 (0-40%): Insufficient - Revisit all module materials
+________________
+
+
+REMEDIATION GUIDE
+If you scored below 70%, review these sections:
+Questions 1-4 (Core Concepts):
+* Re-read Module 4 Part 1 (Generative vs. Discriminative)
+* Re-read Part 2 (Transformer Architecture)
+* Re-read Part 3 (LLMs and Training)
+* Re-read Part 6 (Limitations - Hallucinations)
+Questions 5-7 (Prompt Engineering):
+* Re-read Module 4 Part 4 (Prompt Engineering Fundamentals)
+* Review the 6 core techniques
+* Practice writing prompts in hands-on lab
+Questions 8-10 (Case Studies):
+* Re-read all three case studies carefully
+* Focus on "Key Concepts" sections
+* Review discussion questions and answers
+________________
+
+
+LEARNING OBJECTIVES ASSESSMENT
+Learning Objective 1: Define Generative AI and differentiate from Discriminative AI
+* Assessed by: Questions 1, 8
+* Mastery indicator: Both correct
+Learning Objective 2: Explain Transformer architecture role in LLMs
+* Assessed by: Questions 2, 3
+* Mastery indicator: Both correct
+Learning Objective 3: Master prompt engineering fundamentals
+* Assessed by: Questions 5, 6, 7
+* Mastery indicator: 2+ correct
+Applied Understanding: Real-world application
+* Assessed by: Questions 4, 8, 9, 10
+* Mastery indicator: 3+ correct
+________________
+
+
+QUIZ COMPLETION ACTIONS
+Upon Passing (≥70%):
+* Certificate component unlocked: "Generative AI Fundamentals"
+* Progress updated: Module 4 complete
+* Module 5 (NLP Applications) unlocked
+* Badge earned: "Prompt Engineer"
+Upon Not Passing (<70%):
+* Feedback: "Review these specific topics: [list]"
+* Recommendation: "Revisit reading materials and case studies"
+* Retry option: "You may retake this quiz after review"
+* Support link: "Need help? Use FAQ chatbot"
+________________
+
+
+BILINGUAL KEY TERMS TESTED
+* Generative AI (IA Generativa)
+* Discriminative AI (IA Discriminativa)
+* Transformer (Transformador)
+* Attention Mechanism (Mecanismo de Atención)
+* Large Language Model (Modelo de Lenguaje Grande - LLM)
+* Hallucination (Alucinación)
+* Prompt Engineering (Ingeniería de Prompts)
+* Few-Shot Learning (Aprendizaje con Pocos Ejemplos)
+________________
+
+
+QUIZ COMPLETE ✓
+Total Questions: 10
+Estimated Time: 10-12 minutes
+Format: Multiple choice, scenario-based
+Passing Score: 70% (7/10)
+Ready for: Platform deployment (Vercel/Supabase)
+Module 4 Status: Reading ✓ | Case Studies ✓ | Quiz ✓ | Lab (Pending)
