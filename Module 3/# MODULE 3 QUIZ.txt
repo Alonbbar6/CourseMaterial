@@ -1,0 +1,227 @@
+﻿# MODULE 3 QUIZ: INTRODUCTION TO NEURAL NETWORKS AND DEEP LEARNING
+## Introducción a Redes Neuronales y Aprendizaje Profundo
+
+
+**Estimated Time:** 12 minutes  
+**Total Questions:** 10 (6 Multiple Choice + 2 Fill-in-the-Blank + 2 True/False)  
+**Course:** MTW AI Platform - Artificial Intelligence Fundamentals and Practical Applications
+
+
+---
+
+
+## INSTRUCTIONS / INSTRUCCIONES
+
+
+Answer all questions based on your understanding of neural networks and deep learning concepts.
+
+
+*Responda todas las preguntas según su comprensión de los conceptos de redes neuronales y aprendizaje profundo.*
+
+
+---
+
+
+## SECTION A: MULTIPLE CHOICE QUESTIONS
+## Preguntas de Opción Múltiple
+
+
+### Question 1
+**What is a perceptron?**  
+*¿Qué es un perceptrón?*
+
+
+A) A biological neuron found in the human brain  
+B) The simplest type of artificial neural network with a single neuron  
+C) A layer in a deep neural network  
+D) A type of activation function
+
+
+---
+
+
+### Question 2
+**Which activation function is most commonly used in modern deep learning for hidden layers?**  
+*¿Qué función de activación se usa más comúnmente en el aprendizaje profundo moderno para capas ocultas?*
+
+
+A) Sigmoid / Sigmoide  
+B) ReLU (Rectified Linear Unit)  
+C) Linear / Lineal  
+D) Step function / Función escalón
+
+
+---
+
+
+### Question 3
+**In a neural network, what is the purpose of the hidden layer?**  
+*En una red neuronal, ¿cuál es el propósito de la capa oculta?*
+
+
+A) To receive the initial input data  
+B) To process and transform data between input and output layers  
+C) To produce the final output predictions  
+D) To store training data
+
+
+---
+
+
+### Question 4
+**What is backpropagation?**  
+*¿Qué es la retropropagación?*
+
+
+A) The forward pass of data through a network  
+B) The algorithm used to calculate gradients and update weights by propagating errors backward  
+C) A method to add more layers to a neural network  
+D) A technique to reduce overfitting
+
+
+---
+
+
+### Question 5
+**The MNIST dataset is commonly used for:**  
+*El conjunto de datos MNIST se usa comúnmente para:*
+
+
+A) Natural language processing tasks  
+B) Recognizing handwritten digits (0-9)  
+C) Speech recognition  
+D) Time series prediction
+
+
+---
+
+
+### Question 6
+**What distinguishes Deep Learning from traditional neural networks?**  
+*¿Qué distingue al Aprendizaje Profundo de las redes neuronales tradicionales?*
+
+
+A) Deep Learning uses only one hidden layer  
+B) Deep Learning networks have multiple hidden layers (deep architectures)  
+C) Deep Learning doesn't require training data  
+D) Deep Learning is only used for image processing
+
+
+---
+
+
+## SECTION B: FILL-IN-THE-BLANK
+## Complete los Espacios en Blanco
+
+
+### Question 7
+**Complete the sentence:**
+
+
+An artificial neuron receives multiple inputs, multiplies each by a **________________**, sums them together, and then applies an **________________** function to produce an output.
+
+
+*Una neurona artificial recibe múltiples entradas, multiplica cada una por un peso, las suma y luego aplica una función de activación para producir una salida.*
+
+
+**Word bank / Banco de palabras:** weight (peso), activation (activación), bias, threshold (umbral)
+
+
+---
+
+
+### Question 8
+**Complete the sentence:**
+
+
+The three main types of layers in a neural network are the **________________** layer, the **________________** layer(s), and the **________________** layer.
+
+
+*Los tres tipos principales de capas en una red neuronal son la capa de entrada, la(s) capa(s) oculta(s) y la capa de salida.*
+
+
+**Word bank / Banco de palabras:** input (entrada), hidden (oculta), output (salida), processing
+
+
+---
+
+
+## SECTION C: TRUE OR FALSE
+## Verdadero o Falso
+
+
+### Question 9
+**True or False?**
+
+
+A perceptron can learn to solve complex non-linear problems like the XOR logic gate without additional hidden layers.
+
+
+*Un perceptrón puede aprender a resolver problemas no lineales complejos como la puerta lógica XOR sin capas ocultas adicionales.*
+
+
+**True / Verdadero    ☐**  
+**False / Falso       ☐**
+
+
+---
+
+
+### Question 10
+**True or False?**
+
+
+Activation functions introduce non-linearity into neural networks, allowing them to learn complex patterns beyond simple linear relationships.
+
+
+*Las funciones de activación introducen no linealidad en las redes neuronales, permitiéndoles aprender patrones complejos más allá de relaciones lineales simples.*
+
+
+**True / Verdadero    ☐**  
+**False / Falso       ☐**
+
+
+---
+
+
+## ANSWER KEY / CLAVE DE RESPUESTAS
+
+
+### Multiple Choice:
+1. **B** - The simplest type of artificial neural network with a single neuron
+2. **B** - ReLU (Rectified Linear Unit)
+3. **B** - To process and transform data between input and output layers
+4. **B** - The algorithm used to calculate gradients and update weights by propagating errors backward
+5. **B** - Recognizing handwritten digits (0-9)
+6. **B** - Deep Learning networks have multiple hidden layers (deep architectures)
+
+
+### Fill-in-the-Blank:
+7. **weight / peso**, **activation / activación**
+8. **input / entrada**, **hidden / oculta**, **output / salida**
+
+
+### True or False:
+9. **False / Falso** - A single perceptron cannot solve XOR; it needs hidden layers for non-linear problems
+10. **True / Verdadero** - Activation functions introduce essential non-linearity
+
+
+---
+
+
+## EXPLANATION NOTES
+
+
+**Question 9 Explanation:**  
+This is a famous limitation discovered in the 1960s by Marvin Minsky and Seymour Papert. A single-layer perceptron can only solve linearly separable problems (like AND, OR gates). The XOR problem requires at least one hidden layer because it is not linearly separable. This limitation led to the "AI Winter" until multi-layer networks and backpropagation were developed.
+
+
+**Question 10 Explanation:**  
+Without activation functions, a neural network would only perform linear transformations, no matter how many layers it has. This would make it mathematically equivalent to a single-layer network and no more powerful than linear regression. Activation functions like ReLU, sigmoid, and tanh introduce the non-linearity needed to model complex, real-world patterns.
+
+
+---
+
+
+**Module 3: Introduction to Neural Networks and Deep Learning**  
+**Duration:** 120 minutes | **Quiz Time:** 12 minutes
