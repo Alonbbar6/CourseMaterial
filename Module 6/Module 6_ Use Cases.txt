@@ -1,0 +1,654 @@
+﻿Module 6: Computer Vision Fundamentals and Use Cases
+Visualizations/Demos (30% of 120 minutes = 36 minutes)
+Based on the course structure, here are comprehensive visualizations and demonstrations for Module 6.
+________________
+
+
+VISUALIZATION 1: How Computers "See" Images (8 minutes)
+Demo 1.1: From Photo to Pixels
+Title (English): Understanding Digital Images: Pixels and Color Channels
+Title (Spanish): Entendiendo Imágenes Digitales: Píxeles y Canales de Color
+Interactive Visualization Description:
+Create a three-panel interactive display showing:
+Panel 1: The Original Image
+* Display a simple, colorful image (e.g., a red apple on a blue background)
+* Dimensions: 100x100 pixels
+* Include a zoom slider
+Panel 2: Pixelated View
+* As users zoom in, reveal the individual pixel squares
+* Show how the image is composed of tiny colored squares
+* Display pixel coordinates (x, y) on hover
+Panel 3: Numerical Representation
+* Show the RGB values for a selected pixel
+* Example: Red apple pixel = (255, 0, 0)
+* Blue background pixel = (0, 0, 255)
+Visual Components:
+┌─────────────────────────────────────────────────────┐
+│  ORIGINAL IMAGE    │   PIXELATED VIEW   │  RGB VALUES│
+│                    │                    │            │
+│   [Apple Photo]    │   [Grid of        │  Selected: │
+│                    │    colored         │  X: 45     │
+│   100x100 pixels   │    squares]        │  Y: 67     │
+│                    │                    │            │
+│   [Zoom Slider]    │   Zoom Level: 8x   │  R: 255    │
+│   ├────────────┤   │                    │  G: 20     │
+│   1x        16x    │   Click a pixel!   │  B: 15     │
+│                    │                    │            │
+└─────────────────────────────────────────────────────┘
+```
+
+
+**Narration Script:**
+
+
+**English:**
+"A digital image is simply a grid of tiny colored squares called pixels (píxeles). Each pixel has a specific location (x, y coordinates) and a color defined by three numbers: Red, Green, and Blue values (RGB). These numbers range from 0 to 255. For example, pure red is (255, 0, 0), while pure blue is (0, 0, 255). A computer doesn't 'see' the apple - it processes millions of these numbers!"
+
+
+**Spanish:**
+"Una imagen digital es simplemente una cuadrícula de pequeños cuadrados de colores llamados píxeles. Cada píxel tiene una ubicación específica (coordenadas x, y) y un color definido por tres números: valores Rojo, Verde y Azul (RGB). Estos números van de 0 a 255. Por ejemplo, el rojo puro es (255, 0, 0), mientras que el azul puro es (0, 0, 255). ¡Una computadora no 've' la manzana - procesa millones de estos números!"
+
+
+---
+
+
+### **Demo 1.2: Color Channels Separation**
+
+
+**Interactive Visualization:**
+
+
+Show a single color photograph separated into its three color channels:
+```
+┌──────────────────────────────────────────────────────────┐
+│              ORIGINAL COLOR IMAGE                        │
+│         [Color photo of a sunset scene]                  │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+                        ↓  DECOMPOSE
+┌─────────────┬──────────────┬──────────────┬─────────────┐
+│   RED       │    GREEN     │     BLUE     │  COMBINED   │
+│  CHANNEL    │   CHANNEL    │   CHANNEL    │             │
+│             │              │              │             │
+│ [Grayscale  │ [Grayscale   │ [Grayscale   │ [Original   │
+│  showing    │  showing     │  showing     │  color      │
+│  red        │  green       │  blue        │  image]     │
+│  intensity] │  intensity]  │  intensity]  │             │
+│             │              │              │             │
+│ Toggle: ☑   │ Toggle: ☑    │ Toggle: ☑    │             │
+└─────────────┴──────────────┴──────────────┴─────────────┘
+```
+
+
+**Interactive Feature:** Users can toggle each channel on/off to see how they combine to create the full color image.
+
+
+**Key Learning Points:**
+- Computers process images as three separate layers (channels)
+- Each channel is just a grid of numbers (0-255)
+- CNN processes each channel to understand the image
+
+
+---
+
+
+## **VISUALIZATION 2: Introduction to Convolutional Filters (10 minutes)**
+
+
+### **Demo 2.1: Interactive Filter Application**
+
+
+**Title (English):** See Filters in Action: Edge Detection and Feature Extraction  
+**Title (Spanish):** Ve los Filtros en Acción: Detección de Bordes y Extracción de Características
+
+
+**Interactive Demo Interface:**
+```
+┌────────────────────────────────────────────────────────────┐
+│                    FILTER EXPLORER                         │
+│                                                            │
+│  SELECT A FILTER:                                          │
+│  ○ Original Image    ○ Edge Detection (Vertical)          │
+│  ○ Edge Detection    ○ Edge Detection (Horizontal)        │
+│  ○ Blur             ○ Sharpen                            │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  BEFORE                        AFTER                       │
+│  ┌──────────────┐             ┌──────────────┐           │
+│  │              │             │              │           │
+│  │  [Original   │    ──→      │  [Filtered   │           │
+│  │   Image]     │             │   Image]     │           │
+│  │              │             │              │           │
+│  └──────────────┘             └──────────────┘           │
+│                                                            │
+│  FILTER MATRIX (3x3 Kernel):                              │
+│  ┌─────────────────┐                                      │
+│  │  -1  │  -1  │  -1 │                                    │
+│  │───────┼──────┼─────│                                    │
+│  │  -1  │   8  │  -1 │  ← This detects edges!            │
+│  │───────┼──────┼─────│                                    │
+│  │  -1  │  -1  │  -1 │                                    │
+│  └─────────────────┘                                      │
+│                                                            │
+│  [APPLY FILTER BUTTON]                                    │
+└────────────────────────────────────────────────────────────┘
+```
+
+
+**Available Filters with Visual Examples:**
+
+
+**1. Edge Detection Filter (Sobel)**
+- **Matrix:** 
+```
+  -1  -1  -1
+  -1   8  -1
+  -1  -1  -1
+```
+- **Effect:** Highlights boundaries and edges in the image
+- **Use Case:** "This is how self-driving cars detect road lanes!"
+
+
+**2. Blur Filter (Averaging)**
+- **Matrix:**
+```
+  1/9  1/9  1/9
+  1/9  1/9  1/9
+  1/9  1/9  1/9
+```
+- **Effect:** Smooths the image by averaging neighboring pixels
+- **Use Case:** "Used for noise reduction in medical imaging"
+
+
+**3. Sharpen Filter**
+- **Matrix:**
+```
+   0  -1   0
+  -1   5  -1
+   0  -1   0
+```
+- **Effect:** Enhances details and makes edges more pronounced
+- **Use Case:** "Improves clarity in surveillance footage"
+
+
+**4. Vertical Edge Detection**
+- **Matrix:**
+```
+  -1   0   1
+  -1   0   1
+  -1   0   1
+```
+- **Effect:** Detects vertical lines and boundaries
+
+
+**5. Horizontal Edge Detection**
+- **Matrix:**
+```
+  -1  -1  -1
+   0   0   0
+   1   1   1
+```
+- **Effect:** Detects horizontal lines and boundaries
+
+
+---
+
+
+### **Demo 2.2: How Convolution Works (Step-by-Step Animation)**
+
+
+**Animated Visualization:**
+
+
+Show a 3x3 filter sliding across a 5x5 pixel image:
+```
+STEP 1: Position filter at top-left
+┌─────────────────────────────┐
+│  INPUT IMAGE (5x5 pixels)   │
+│                             │
+│  ┌───┬───┬───┬───┬───┐     │
+│  │ 1 │ 2 │ 3 │ 4 │ 5 │     │
+│  ├───┼───┼───┼───┼───┤     │
+│  │ 6 │ 7 │ 8 │ 9 │10 │     │
+│  ├───┼───┼───┼───┼───┤     │
+│  │11 │12 │13 │14 │15 │     │
+│  ├───┼───┼───┼───┼───┤     │
+│  │16 │17 │18 │19 │20 │     │
+│  ├───┼───┼───┼───┼───┤     │
+│  │21 │22 │23 │24 │25 │     │
+│  └───┴───┴───┴───┴───┘     │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│  3x3 FILTER (Kernel)        │
+│  ┌───┬───┬───┐              │
+│  │ 1 │ 0 │-1 │              │
+│  ├───┼───┼───┤              │
+│  │ 1 │ 0 │-1 │              │
+│  ├───┼───┼───┤              │
+│  │ 1 │ 0 │-1 │              │
+│  └───┴───┴───┘              │
+└─────────────────────────────┘
+
+
+STEP 2: Multiply and sum
+┌─────────────────────────────┐
+│  ╔═══╦═══╦═══╗───┬───┐     │
+│  ║ 1 ║ 2 ║ 3 ║ 4 │ 5 │     │
+│  ╠═══╬═══╬═══╣───┼───┤     │
+│  ║ 6 ║ 7 ║ 8 ║ 9 │10 │     │
+│  ╠═══╬═══╬═══╣───┼───┤     │
+│  ║11 ║12 ║13 ║14 │15 │     │
+│  ╚═══╩═══╩═══╝───┼───┤     │
+│  │16 │17 │18 │19 │20 │     │
+│  ├───┼───┼───┼───┼───┤     │
+│  │21 │22 │23 │24 │25 │     │
+│  └───┴───┴───┴───┴───┘     │
+│                             │
+│  Calculation:               │
+│  (1×1)+(2×0)+(3×-1)+       │
+│  (6×1)+(7×0)+(8×-1)+       │
+│  (11×1)+(12×0)+(13×-1)     │
+│  = 1+0-3+6+0-8+11+0-13     │
+│  = -6                       │
+└─────────────────────────────┘
+
+
+STEP 3: Slide filter to the right (Stride = 1)
+[Animation continues showing filter sliding across entire image]
+
+
+OUTPUT: Feature Map (3x3)
+┌───────────────┐
+│  -6 │ -8 │-10│
+│─────┼────┼───│
+│  -2 │ -4 │ -6│
+│─────┼────┼───│
+│   2 │  0 │ -2│
+└───────────────┘
+```
+
+
+**Narration:**
+
+
+**English:**
+"This is convolution! The filter (or kernel) slides across the image, multiplying its values with the pixels beneath it, then summing the results. Each calculation produces one number in the output (feature map). Different filters detect different features: edges, textures, patterns. A CNN uses dozens of these filters in multiple layers!"
+
+
+**Spanish:**
+"¡Esto es la convolución! El filtro (o kernel) se desliza por la imagen, multiplicando sus valores con los píxeles debajo de él, luego sumando los resultados. Cada cálculo produce un número en la salida (mapa de características). Diferentes filtros detectan diferentes características: bordes, texturas, patrones. ¡Una CNN usa docenas de estos filtros en múltiples capas!"
+
+
+---
+
+
+## **VISUALIZATION 3: CNN Architecture Walkthrough (8 minutes)**
+
+
+### **Demo 3.1: CNN Layer-by-Layer Visualization**
+
+
+**Interactive Architecture Diagram:**
+```
+┌────────────────────────────────────────────────────────────────┐
+│              CONVOLUTIONAL NEURAL NETWORK (CNN)                │
+│              RED NEURONAL CONVOLUCIONAL                        │
+└────────────────────────────────────────────────────────────────┘
+
+
+INPUT IMAGE                  CONVOLUTIONAL      POOLING         
+(Imagen de Entrada)          LAYER 1            LAYER 1         
+                             (Capa Conv 1)      (Capa Pool 1)   
+┌──────────┐                ┌──────────┐       ┌─────────┐     
+│          │                │▓▓▓▓▓▓▓▓▓▓│       │▓▓▓▓▓    │     
+│   CAT    │    Filter 1 →  │▓▓▓▓▓▓▓▓▓▓│  →    │▓▓▓▓▓    │     
+│  PHOTO   │    32 filters  │▓▓▓▓▓▓▓▓▓▓│       │▓▓▓▓▓    │     
+│          │    (3x3)       │▓▓▓▓▓▓▓▓▓▓│       │▓▓▓▓▓    │     
+│ 224x224  │                └──────────┘       └─────────┘     
+│   RGB    │                Feature Maps       Max Pooling     
+└──────────┘                (Mapas de          (2x2)           
+                            Características)   Reduces size    
+                            32 maps            by 50%          
+                            224x224 each                       
+
+
+     ↓                           ↓                   ↓
+
+
+CONVOLUTIONAL              POOLING             FLATTEN         
+LAYER 2                    LAYER 2             (Aplanar)       
+┌──────────┐              ┌─────────┐          ┌────────┐     
+│▓▓▓▓▓▓    │              │▓▓       │          │▓▓▓▓▓▓▓▓│     
+│▓▓▓▓▓▓    │  →           │▓▓       │    →     │▓▓▓▓▓▓▓▓│     
+│▓▓▓▓▓▓    │              │▓▓       │          │▓▓▓▓▓▓▓▓│     
+└──────────┘              └─────────┘          │▓▓▓▓▓▓▓▓│     
+64 filters                Max Pooling          │▓▓▓▓▓▓▓▓│     
+(3x3)                     (2x2)                └────────┘     
+Detects more                                   Convert to      
+complex patterns                               1D vector       
+
+
+     ↓                           ↓                   ↓
+
+
+FULLY CONNECTED            OUTPUT LAYER             PREDICTION
+LAYER                      (Capa de Salida)         (Predicción)
+(Capa Totalmente          
+Conectada)                 
+┌────────┐                ┌──────────┐             ┌─────────┐
+│ ●──●─● │                │   CAT    │ 0.95 ✓     │         │
+│ ●──●─● │    →           │   DOG    │ 0.03       │  🐱 CAT │
+│ ●──●─● │                │   BIRD   │ 0.02       │         │
+│ ●──●─● │                └──────────┘             └─────────┘
+└────────┘                Probabilities            Final      
+Neural network            (Probabilidades)         Answer     
+combines features         for each class                      
+```
+
+
+**Interactive Features:**
+- Click on each layer to see detailed explanation
+- Hover over feature maps to see what patterns they detect
+- Adjust number of filters to see impact on accuracy
+
+
+---
+
+
+### **Demo 3.2: What Each Layer "Sees"**
+
+
+**Progressive Feature Visualization:**
+```
+┌────────────────────────────────────────────────────────────────┐
+│           WHAT DOES EACH LAYER DETECT?                         │
+│           ¿QUÉ DETECTA CADA CAPA?                              │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  LAYER 1 (Early Layers - Capas Tempranas)                     │
+│  Simple features: Edges, colors, simple textures              │
+│  Características simples: Bordes, colores, texturas simples   │
+│                                                                │
+│  [Image showing: Vertical lines] [Horizontal lines]           │
+│  [Diagonal edges] [Color blobs]                               │
+│                                                                │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  LAYER 2-3 (Middle Layers - Capas Medias)                     │
+│  Textures and patterns: Fur, wheels, eyes, ears               │
+│  Texturas y patrones: Pelaje, ruedas, ojos, orejas           │
+│                                                                │
+│  [Image showing: Cat ear shape] [Eye patterns]                │
+│  [Wheel circular pattern] [Fur texture]                       │
+│                                                                │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  LAYER 4-5 (Deep Layers - Capas Profundas)                    │
+│  Complex objects and parts: Entire face, car body, bird wing  │
+│  Objetos complejos: Cara completa, carrocería, ala de ave    │
+│                                                                │
+│  [Image showing: Complete cat face] [Full car shape]          │
+│  [Bird silhouette] [Human face]                               │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+```
+
+
+**Key Message:**
+"Each layer builds on the previous one! Early layers see simple patterns, but deep layers combine these to recognize complex objects like cats, cars, or human faces."
+
+
+---
+
+
+## **VISUALIZATION 4: Image Classification vs Object Detection vs Segmentation (6 minutes)**
+
+
+### **Demo 4.1: Three Computer Vision Tasks Compared**
+
+
+**Side-by-Side Visual Comparison:**
+```
+┌───────────────────────────────────────────────────────────────────┐
+│         COMPUTER VISION TASKS COMPARISON                          │
+│         COMPARACIÓN DE TAREAS DE VISIÓN POR COMPUTADORA          │
+└───────────────────────────────────────────────────────────────────┘
+
+
+Original Image: Street scene with a car, person, and dog
+Imagen Original: Escena callejera con un auto, persona y perro
+
+
+┌─────────────────┬──────────────────┬─────────────────────────┐
+│  1. IMAGE       │  2. OBJECT       │  3. IMAGE               │
+│  CLASSIFICATION │  DETECTION       │  SEGMENTATION           │
+│                 │                  │                         │
+│  Clasificación  │  Detección de    │  Segmentación de        │
+│  de Imágenes    │  Objetos         │  Imágenes               │
+├─────────────────┼──────────────────┼─────────────────────────┤
+│                 │                  │                         │
+│  [Street Scene] │  [Street Scene   │  [Street Scene with     │
+│                 │   with bounding  │   colored regions]      │
+│                 │   boxes]         │                         │
+│                 │                  │                         │
+│                 │  ┌────────┐      │   Car: Blue area        │
+│                 │  │  CAR   │      │   Person: Red area      │
+│                 │  └────────┘      │   Dog: Green area       │
+│                 │     ┌────┐       │   Road: Gray area       │
+│                 │     │PERSON      │   Sky: Light blue       │
+│                 │     └────┘       │                         │
+│                 │  ┌───┐           │                         │
+│                 │  │DOG│           │                         │
+│                 │  └───┘           │                         │
+│                 │                  │                         │
+├─────────────────┼──────────────────┼─────────────────────────┤
+│                 │                  │                         │
+│ OUTPUT:         │ OUTPUT:          │ OUTPUT:                 │
+│ "Street Scene"  │ • Car (x,y,w,h)  │ Pixel-level mask        │
+│                 │   Conf: 98%      │ Every pixel labeled     │
+│ ONE label for   │ • Person (x,y,w,h│ Cada píxel etiquetado   │
+│ entire image    │   Conf: 95%      │                         │
+│                 │ • Dog (x,y,w,h)  │                         │
+│ UNA etiqueta    │   Conf: 87%      │                         │
+│ para toda la    │                  │                         │
+│ imagen          │ MULTIPLE objects │                         │
+│                 │ with locations   │                         │
+│                 │                  │                         │
+│                 │ MÚLTIPLES objetos│                         │
+│                 │ con ubicaciones  │                         │
+│                 │                  │                         │
+├─────────────────┼──────────────────┼─────────────────────────┤
+│                 │                  │                         │
+│ USE CASES:      │ USE CASES:       │ USE CASES:              │
+│                 │                  │                         │
+│ • Photo         │ • Self-driving   │ • Medical imaging       │
+│   organization  │   cars           │   (tumor detection)     │
+│ • Content       │ • Surveillance   │ • Satellite imagery     │
+│   moderation    │ • Retail (people │ • Video editing         │
+│ • Medical       │   counting)      │ • Augmented reality     │
+│   diagnosis     │ • Quality control│                         │
+│   screening     │   (defect detect)│                         │
+│                 │                  │                         │
+│ FASTER ⚡       │ MODERATE ⚡⚡    │ SLOWER ⚡⚡⚡           │
+│ SIMPLER ◐       │ MODERATE ◐◐     │ MOST COMPLEX ◐◐◐       │
+│                 │                  │                         │
+└─────────────────┴──────────────────┴─────────────────────────┘
+```
+
+
+**Interactive Demo:**
+- Upload any image and see all three tasks performed
+- Toggle between views to understand differences
+- See confidence scores and processing time for each
+
+
+---
+
+
+## **VISUALIZATION 5: Pooling Layer Demonstration (4 minutes)**
+
+
+### **Demo 5.1: Max Pooling Animation**
+
+
+**Interactive Pooling Visualizer:**
+```
+┌────────────────────────────────────────────────────────────┐
+│              MAX POOLING LAYER DEMO                        │
+│              DEMOSTRACIÓN DE CAPA DE MAX POOLING           │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  BEFORE POOLING                     AFTER POOLING          │
+│  (ANTES)                            (DESPUÉS)              │
+│                                                            │
+│  Feature Map (4x4)                  Pooled Map (2x2)      │
+│                                                            │
+│  ┌────┬────┬────┬────┐             ┌────┬────┐           │
+│  │  1 │  3 │  2 │  8 │             │  9 │ 11 │           │
+│  ├────┼────┼────┼────┤             ├────┼────┤           │
+│  │  9 │  2 │  4 │ 11 │             │ 18 │ 21 │           │
+│  ├────┼────┼────┼────┤             └────┴────┘           │
+│  │  5 │ 18 │  7 │  3 │                                    │
+│  ├────┼────┼────┼────┤             2x2 Pooling window     │
+│  │  4 │  6 │ 21 │  1 │             Ventana 2x2            │
+│  └────┴────┴────┴────┘                                    │
+│                                                            │
+│  HOW IT WORKS:                                             │
+│  ┌─────────────┐                                          │
+│  │ Take 2x2    │   ┌────┬────┐                           │
+│  │ window:     │   │  1 │  3 │  → Max = 9                │
+│  │             │   ├────┼────┤                           │
+│  │ Slide and   │   │  9 │  2 │                           │
+│  │ extract max │   └────┴────┘                           │
+│  └─────────────┘                                          │
+│                                                            │
+│  BENEFITS / BENEFICIOS:                                    │
+│  ✓ Reduces size by 75% (4x4 → 2x2)                       │
+│    Reduce el tamaño en 75%                                │
+│  ✓ Keeps most important features                          │
+│    Mantiene las características más importantes           │
+│  ✓ Makes detection translation-invariant                  │
+│    Hace la detección invariante a la traslación          │
+│  ✓ Reduces computation cost                               │
+│    Reduce el costo computacional                          │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+
+---
+
+
+## **VISUALIZATION 6: Real-World Applications Showcase (Video Montage - 6 minutes)**
+
+
+### **Demo 6.1: Computer Vision in Action**
+
+
+**Video Compilation with Annotations:**
+
+
+Create a 6-minute video montage showing real computer vision systems with overlay explanations:
+
+
+**Segment 1: Facial Recognition (90 seconds)**
+- Airport security checkpoint
+- Phone unlock with Face ID
+- Photo tagging on social media
+- Overlay: "CNN detects 68 facial landmarks"
+
+
+**Segment 2: Autonomous Vehicles (90 seconds)**
+- Self-driving car identifying:
+  - Pedestrians (bounding boxes)
+  - Traffic lights (classification)
+  - Lane markings (segmentation)
+  - Other vehicles (object detection)
+- Overlay: "Processing 30 frames per second in real-time"
+
+
+**Segment 3: Medical Imaging (90 seconds)**
+- X-ray analysis
+- MRI scan segmentation
+- Skin cancer detection
+- Overlay: "CNN achieves 95% accuracy matching expert radiologists"
+
+
+**Segment 4: Manufacturing Quality Control (90 seconds)**
+- Assembly line inspection
+- Defect detection on products
+- Counting and sorting items
+- Overlay: "Inspects 1000 items per minute - 24/7"
+
+
+**Segment 5: Augmented Reality (90 seconds)**
+- Snapchat filters
+- IKEA furniture placement app
+- Virtual try-on for clothes/makeup
+- Overlay: "Real-time segmentation and tracking"
+
+
+**On-Screen Text Summary:**
+```
+┌────────────────────────────────────────┐
+│  COMPUTER VISION APPLICATIONS          │
+│  APLICACIONES DE VISIÓN POR COMPUTADORA│
+├────────────────────────────────────────┤
+│  • Security & Authentication           │
+│    Seguridad y Autenticación          │
+│  • Autonomous Vehicles                 │
+│    Vehículos Autónomos                │
+│  • Healthcare & Diagnostics            │
+│    Salud y Diagnósticos               │
+│  • Manufacturing & Quality Control     │
+│    Manufactura y Control de Calidad   │
+│  • Entertainment & AR/VR               │
+│    Entretenimiento y RA/RV            │
+└────────────────────────────────────────┘
+________________
+
+
+IMPLEMENTATION NOTES FOR LMS
+Technical Requirements:
+1. Interactive Demos: Build using HTML5 Canvas or JavaScript libraries (p5.js, TensorFlow.js)
+2. Image Upload: Allow students to upload their own photos for filter demonstrations
+3. Responsive Design: Ensure all visualizations work on mobile and desktop
+4. Accessibility: Provide alt-text for all visuals and audio descriptions for videos
+Suggested Tools:
+* Visualization Creation: D3.js, Plotly, Canvas API
+* Image Processing Demos: TensorFlow.js, ml5.js (for browser-based CNN demos)
+* Video Hosting: YouTube (unlisted) or Vimeo
+* Interactive Elements: H5P (for LMS integration)
+Timing Breakdown:
+Visualization
+	Time (minutes)
+	Type
+	1. Pixels & RGB
+	8
+	Interactive
+	2. Convolutional Filters
+	10
+	Interactive
+	3. CNN Architecture
+	8
+	Interactive Diagram
+	4. Classification vs Detection
+	6
+	Comparison Tool
+	5. Pooling Demo
+	4
+	Animation
+	6. Real-World Applications
+	6
+	Video Montage
+	TOTAL
+	42 minutes
+	Mixed Media
+	Note: 42 minutes allows for 6 extra minutes beyond the 36-minute target (30% of 120 min) to account for student interaction time and pauses.
+________________
+
+
+This comprehensive visualization package provides students with multiple learning modalities (visual, interactive, video) to understand complex computer vision concepts in an engaging, bilingual format.

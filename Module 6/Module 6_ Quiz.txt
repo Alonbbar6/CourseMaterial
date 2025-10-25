@@ -1,0 +1,521 @@
+﻿Module 6: Computer Vision Fundamentals and Use Cases - Quiz
+Estimated Time: 12 minutes (10% of 120 min)
+Total Questions: 10 (7 Multiple Choice + 3 Diagram Labeling)
+Passing Score: 70%
+________________
+
+
+Instructions / Instrucciones
+Read each question carefully and select the best answer. For diagram labeling questions, identify the correct components shown in the visual.
+Lea cada pregunta cuidadosamente y seleccione la mejor respuesta. Para las preguntas de etiquetado de diagramas, identifique los componentes correctos mostrados en la imagen.
+________________
+
+
+SECTION A: Multiple Choice Questions (7 questions)
+Question 1 (1.5 minutes)
+English:
+How does a computer "see" a digital image?
+Spanish:
+¿Cómo "ve" una computadora una imagen digital?
+Options:
+A) As a grid of pixels, where each pixel has RGB color values (numbers from 0-255)
+Como una cuadrícula de píxeles, donde cada píxel tiene valores de color RGB (números de 0-255)
+B) As a continuous analog signal that needs to be interpreted
+Como una señal analógica continua que necesita ser interpretada
+C) By recognizing shapes and objects the same way humans do
+Reconociendo formas y objetos de la misma manera que los humanos
+D) As text descriptions of what appears in the image
+Como descripciones de texto de lo que aparece en la imagen
+Correct Answer: A
+Explanation:
+Computers process images as numerical matrices. Each pixel is represented by three numbers (Red, Green, Blue values ranging from 0-255). A computer doesn't "understand" what's in the image—it processes millions of numbers through mathematical operations. This is why we need CNNs to extract meaningful patterns from these numbers.
+Explicación:
+Las computadoras procesan imágenes como matrices numéricas. Cada píxel está representado por tres números (valores Rojo, Verde, Azul que van de 0-255). Una computadora no "entiende" qué hay en la imagen—procesa millones de números a través de operaciones matemáticas. Por esto necesitamos CNNs para extraer patrones significativos de estos números.
+________________
+
+
+Question 2 (1.5 minutes)
+English:
+What is the primary function of a convolutional filter (kernel) in a CNN?
+Spanish:
+¿Cuál es la función principal de un filtro convolucional (kernel) en una CNN?
+Options:
+A) To compress the image file size for storage
+Para comprimir el tamaño del archivo de imagen para almacenamiento
+B) To detect specific features like edges, textures, or patterns by sliding across the image
+Para detectar características específicas como bordes, texturas o patrones deslizándose por la imagen
+C) To convert color images into black and white
+Para convertir imágenes a color en blanco y negro
+D) To increase the resolution and quality of the image
+Para aumentar la resolución y calidad de la imagen
+Correct Answer: B
+Explanation:
+A convolutional filter (or kernel) is a small matrix (typically 3x3 or 5x5) that slides across an image, performing element-wise multiplication and summation. Different filters detect different features: some detect vertical edges, others detect horizontal edges, textures, or more complex patterns. This is the fundamental operation that allows CNNs to "see" features in images.
+Explicación:
+Un filtro convolucional (o kernel) es una matriz pequeña (típicamente 3x3 o 5x5) que se desliza por una imagen, realizando multiplicación elemento por elemento y suma. Diferentes filtros detectan diferentes características: algunos detectan bordes verticales, otros detectan bordes horizontales, texturas o patrones más complejos. Esta es la operación fundamental que permite a las CNNs "ver" características en imágenes.
+________________
+
+
+Question 3 (1.5 minutes)
+English:
+In a Convolutional Neural Network (CNN), what do the early layers typically detect compared to the deeper layers?
+Spanish:
+En una Red Neuronal Convolucional (CNN), ¿qué detectan típicamente las capas tempranas comparadas con las capas más profundas?
+Options:
+A) Early layers detect complex objects (like faces), while deeper layers detect simple edges
+Las capas tempranas detectan objetos complejos (como caras), mientras que las capas más profundas detectan bordes simples
+B) Early layers detect simple features (edges, colors), while deeper layers detect complex patterns and objects
+Las capas tempranas detectan características simples (bordes, colores), mientras que las capas más profundas detectan patrones complejos y objetos
+C) Both early and deep layers detect the same types of features
+Tanto las capas tempranas como las profundas detectan los mismos tipos de características
+D) Early layers detect text, while deeper layers detect images
+Las capas tempranas detectan texto, mientras que las capas más profundas detectan imágenes
+Correct Answer: B
+Explanation:
+CNNs follow a hierarchical feature learning approach. Early convolutional layers detect low-level features like edges, corners, and color blobs. As you go deeper into the network, subsequent layers combine these simple features to recognize more complex patterns like textures, then parts (like eyes or wheels), and finally complete objects (like faces or cars). This hierarchical learning mirrors how the human visual cortex processes information.
+Explicación:
+Las CNNs siguen un enfoque de aprendizaje de características jerárquico. Las primeras capas convolucionales detectan características de bajo nivel como bordes, esquinas y manchas de color. A medida que avanzas más profundo en la red, las capas subsiguientes combinan estas características simples para reconocer patrones más complejos como texturas, luego partes (como ojos o ruedas), y finalmente objetos completos (como caras o autos). Este aprendizaje jerárquico refleja cómo la corteza visual humana procesa información.
+________________
+
+
+Question 4 (1.5 minutes)
+English:
+What is the main purpose of a pooling layer (like Max Pooling) in a CNN?
+Spanish:
+¿Cuál es el propósito principal de una capa de pooling (como Max Pooling) en una CNN?
+Options:
+A) To increase the size of feature maps for better detail
+Para aumentar el tamaño de los mapas de características para mayor detalle
+B) To reduce the spatial dimensions of feature maps while retaining important information
+Para reducir las dimensiones espaciales de los mapas de características mientras se retiene información importante
+C) To add more color channels to the image
+Para agregar más canales de color a la imagen
+D) To convert the image into text descriptions
+Para convertir la imagen en descripciones de texto
+Correct Answer: B
+Explanation:
+Pooling layers (especially Max Pooling) downsample feature maps by taking the maximum value (or average) within a sliding window. This serves multiple purposes: (1) reduces the spatial dimensions, making computation faster, (2) reduces the number of parameters, preventing overfitting, (3) provides translation invariance (the network can recognize a cat whether it's on the left or right side of the image), and (4) retains the most prominent features while discarding less important information.
+Explicación:
+Las capas de pooling (especialmente Max Pooling) reducen el muestreo de mapas de características tomando el valor máximo (o promedio) dentro de una ventana deslizante. Esto sirve múltiples propósitos: (1) reduce las dimensiones espaciales, haciendo el cómputo más rápido, (2) reduce el número de parámetros, previniendo el sobreajuste, (3) proporciona invarianza de traslación (la red puede reconocer un gato ya sea que esté en el lado izquierdo o derecho de la imagen), y (4) retiene las características más prominentes mientras descarta información menos importante.
+________________
+
+
+Question 5 (1.5 minutes)
+English:
+You're building a photo organization app that needs to automatically categorize images into albums (e.g., "Beach," "Mountains," "City," "Food"). Which Computer Vision task is most appropriate?
+Spanish:
+Estás construyendo una aplicación de organización de fotos que necesita categorizar automáticamente imágenes en álbumes (ej., "Playa," "Montañas," "Ciudad," "Comida"). ¿Qué tarea de Visión por Computadora es más apropiada?
+Options:
+A) Object Detection (Detección de Objetos)
+B) Image Segmentation (Segmentación de Imágenes)
+C) Image Classification (Clasificación de Imágenes)
+D) Facial Recognition (Reconocimiento Facial)
+Correct Answer: C
+Explanation:
+Image Classification is the task of assigning a single label to an entire image. Since you need to categorize each photo into one album category, this is a straightforward classification problem. The CNN would analyze the entire image and output a single prediction: "This is a beach photo" or "This is a mountain photo." Object Detection would be overkill (and slower) since you don't need to locate specific objects, just categorize the overall scene.
+Explicación:
+La Clasificación de Imágenes es la tarea de asignar una sola etiqueta a una imagen completa. Como necesitas categorizar cada foto en una categoría de álbum, este es un problema de clasificación directo. La CNN analizaría la imagen completa y daría una sola predicción: "Esta es una foto de playa" o "Esta es una foto de montaña." La Detección de Objetos sería excesiva (y más lenta) ya que no necesitas localizar objetos específicos, solo categorizar la escena general.
+________________
+
+
+Question 6 (1.5 minutes)
+English:
+What is the key difference between Image Classification and Object Detection?
+Spanish:
+¿Cuál es la diferencia clave entre Clasificación de Imágenes y Detección de Objetos?
+Options:
+A) Image Classification identifies what's in an image (one label), while Object Detection locates and identifies multiple objects with bounding boxes
+La Clasificación de Imágenes identifica qué hay en una imagen (una etiqueta), mientras que la Detección de Objetos localiza e identifica múltiples objetos con cajas delimitadoras
+B) Image Classification works only with black and white images, while Object Detection works with color images
+La Clasificación de Imágenes funciona solo con imágenes en blanco y negro, mientras que la Detección de Objetos funciona con imágenes a color
+C) They are the same task with different names
+Son la misma tarea con diferentes nombres
+D) Image Classification is faster but less accurate than Object Detection
+La Clasificación de Imágenes es más rápida pero menos precisa que la Detección de Objetos
+Correct Answer: A
+Explanation:
+Image Classification answers "What is this?" by assigning one primary label to the entire image (e.g., "This is a dog photo"). Object Detection answers "What and where?" by identifying multiple objects in the image and drawing bounding boxes around each with coordinates and labels (e.g., "Dog at position (120, 50, 200, 180), Person at (300, 100, 150, 250)"). Object Detection is more complex and computationally expensive because it must locate objects, not just identify them.
+Explicación:
+La Clasificación de Imágenes responde "¿Qué es esto?" asignando una etiqueta principal a toda la imagen (ej., "Esta es una foto de perro"). La Detección de Objetos responde "¿Qué y dónde?" identificando múltiples objetos en la imagen y dibujando cajas delimitadoras alrededor de cada uno con coordenadas y etiquetas (ej., "Perro en posición (120, 50, 200, 180), Persona en (300, 100, 150, 250)"). La Detección de Objetos es más compleja y computacionalmente costosa porque debe localizar objetos, no solo identificarlos.
+________________
+
+
+Question 7 (1.5 minutes)
+English:
+A medical imaging system needs to identify the exact boundaries of a tumor in an MRI scan, marking every pixel that belongs to the tumor. Which Computer Vision task is required?
+Spanish:
+Un sistema de imágenes médicas necesita identificar los límites exactos de un tumor en un escaneo de resonancia magnética, marcando cada píxel que pertenece al tumor. ¿Qué tarea de Visión por Computadora se requiere?
+Options:
+A) Image Classification (Clasificación de Imágenes)
+B) Object Detection (Detección de Objetos)
+C) Image Segmentation (Segmentación de Imágenes)
+D) Facial Recognition (Reconocimiento Facial)
+Correct Answer: C
+Explanation:
+Image Segmentation is the most precise Computer Vision task that labels every single pixel in an image. It creates a "mask" where different regions are colored differently based on what they represent. In medical imaging, this allows doctors to see exactly which pixels are tumor tissue versus healthy tissue. Classification would only tell you "tumor present" (yes/no), and Object Detection would draw a box around the tumor, but only Segmentation provides pixel-perfect boundaries—critical for surgical planning and treatment.
+Explicación:
+La Segmentación de Imágenes es la tarea de Visión por Computadora más precisa que etiqueta cada píxel individual en una imagen. Crea una "máscara" donde diferentes regiones están coloreadas de manera diferente según lo que representan. En imágenes médicas, esto permite a los doctores ver exactamente qué píxeles son tejido tumoral versus tejido sano. La clasificación solo diría "tumor presente" (sí/no), y la Detección de Objetos dibujaría una caja alrededor del tumor, pero solo la Segmentación proporciona límites perfectos a nivel de píxel—crítico para planificación quirúrgica y tratamiento.
+________________
+
+
+SECTION B: Diagram Labeling Questions (3 questions)
+Question 8 (1.5 minutes)
+English:
+Study the CNN architecture diagram below and identify the correct labels for each component.
+Spanish:
+Estudia el diagrama de arquitectura de CNN a continuación e identifica las etiquetas correctas para cada componente.
+Diagram:
+       [A]              [B]           [C]          [D]           [E]
+    ┌─────────┐      ┌────────┐    ┌──────┐    ┌────────┐    ┌────────┐
+    │         │      │▓▓▓▓▓▓▓▓│    │▓▓▓▓  │    │ ●──●─● │    │ CAT    │
+    │  Image  │  →   │▓▓▓▓▓▓▓▓│ → │▓▓▓▓  │ → │ ●──●─● │ → │ DOG    │
+    │  Input  │      │▓▓▓▓▓▓▓▓│    │▓▓▓▓  │    │ ●──●─● │    │ BIRD   │
+    │224x224  │      │Multiple│    │Smaller    │Neural  │    │        │
+    │   RGB   │      │Filters │    │Size   │    │Network │    │Scores  │
+    └─────────┘      └────────┘    └──────┘    └────────┘    └────────┘
+```
+
+
+**Question:** Match each letter (A-E) with the correct component name:
+
+
+**Components to match:**
+1. Input Layer (Capa de Entrada)
+2. Convolutional Layer (Capa Convolucional)
+3. Pooling Layer (Capa de Pooling)
+4. Fully Connected Layer (Capa Totalmente Conectada)
+5. Output Layer (Capa de Salida)
+
+
+**Correct Matching:**
+
+
+A → 1 (Input Layer / Capa de Entrada)  
+B → 2 (Convolutional Layer / Capa Convolucional)  
+C → 3 (Pooling Layer / Capa de Pooling)  
+D → 4 (Fully Connected Layer / Capa Totalmente Conectada)  
+E → 5 (Output Layer / Capa de Salida)
+
+
+**Explanation:**  
+This is the standard CNN architecture flow:
+- **A (Input):** The original image as a pixel matrix
+- **B (Convolutional):** Applies multiple filters to detect features; produces feature maps
+- **C (Pooling):** Reduces spatial dimensions while keeping important features
+- **D (Fully Connected):** Traditional neural network that combines all features for decision-making
+- **E (Output):** Final predictions with probability scores for each class
+
+
+**Explicación:**  
+Este es el flujo estándar de arquitectura CNN:
+- **A (Entrada):** La imagen original como una matriz de píxeles
+- **B (Convolucional):** Aplica múltiples filtros para detectar características; produce mapas de características
+- **C (Pooling):** Reduce dimensiones espaciales mientras mantiene características importantes
+- **D (Totalmente Conectada):** Red neuronal tradicional que combina todas las características para tomar decisiones
+- **E (Salida):** Predicciones finales con puntajes de probabilidad para cada clase
+
+
+---
+
+
+### **Question 9** (1.5 minutes)
+
+
+**English:**  
+Look at the RGB color channel diagram below. Identify which channel (Red, Green, or Blue) each grayscale image represents.
+
+
+**Spanish:**  
+Observa el diagrama de canales de color RGB a continuación. Identifica qué canal (Rojo, Verde o Azul) representa cada imagen en escala de grises.
+
+
+**Diagram:**
+```
+ORIGINAL COLOR IMAGE: Photo of red apple on green grass under blue sky
+IMAGEN ORIGINAL A COLOR: Foto de manzana roja sobre pasto verde bajo cielo azul
+
+
+Channel A          Channel B          Channel C
+[Grayscale:       [Grayscale:        [Grayscale:
+ Apple is          Apple is dark      Apple is dark
+ bright white,     gray, grass        gray, grass
+ grass is dark,    is bright,         is dark,
+ sky is dark]      sky is dark]       sky is bright]
+```
+
+
+**Question:** Match each channel (A, B, C) with the correct color channel:
+
+
+**Options:**
+- Red Channel (Canal Rojo)
+- Green Channel (Canal Verde)  
+- Blue Channel (Canal Azul)
+
+
+**Correct Matching:**
+
+
+Channel A → Red Channel (Canal Rojo)  
+Channel B → Green Channel (Canal Verde)  
+Channel C → Blue Channel (Canal Azul)
+
+
+**Explanation:**  
+In RGB channel separation:
+- **Red Channel** shows high intensity (bright/white) for red objects (apple) and low intensity (dark) for non-red objects
+- **Green Channel** shows high intensity for green objects (grass) and low intensity for non-green objects
+- **Blue Channel** shows high intensity for blue objects (sky) and low intensity for non-blue objects
+
+
+Each channel is essentially a grayscale image showing the intensity of that specific color throughout the image. CNNs process all three channels simultaneously to understand the full color information.
+
+
+**Explicación:**  
+En la separación de canales RGB:
+- **Canal Rojo** muestra alta intensidad (brillante/blanco) para objetos rojos (manzana) y baja intensidad (oscuro) para objetos no rojos
+- **Canal Verde** muestra alta intensidad para objetos verdes (pasto) y baja intensidad para objetos no verdes
+- **Canal Azul** muestra alta intensidad para objetos azules (cielo) y baja intensidad para objetos no azules
+
+
+Cada canal es esencialmente una imagen en escala de grises que muestra la intensidad de ese color específico en toda la imagen. Las CNNs procesan los tres canales simultáneamente para entender la información de color completa.
+
+
+---
+
+
+### **Question 10** (1.5 minutes)
+
+
+**English:**  
+Examine the three Computer Vision outputs below and label each with the correct task name.
+
+
+**Spanish:**  
+Examina las tres salidas de Visión por Computadora a continuación y etiqueta cada una con el nombre de tarea correcto.
+
+
+**Diagram:**
+```
+        OUTPUT A                OUTPUT B                OUTPUT C
+
+
+    ┌──────────────┐        ┌──────────────┐        ┌──────────────┐
+    │              │        │  ┌────────┐  │        │  ████████    │
+    │   Street     │        │  │  CAR   │  │        │  ████████    │
+    │   Scene      │        │  └────────┘  │        │  ░░░░░░░░    │
+    │              │        │     ┌────┐   │        │  ▒▒▒▒▒▒▒▒    │
+    │              │        │     │DOG │   │        │  ▓▓▓▓▓▓▓▓    │
+    │              │        │     └────┘   │        │              │
+    │              │        │  ┌────────┐  │        │ Legend:      │
+    │              │        │  │ PERSON │  │        │ █ = Car      │
+    └──────────────┘        │  └────────┘  │        │ ░ = Road     │
+                            └──────────────┘        │ ▒ = Person   │
+    Label: "Street"         Labels + Boxes          │ ▓ = Sky      │
+    Confidence: 94%         with coordinates        └──────────────┘
+                                                     Every pixel
+                                                     labeled
+Question: Match each output (A, B, C) with the correct Computer Vision task:
+Tasks:
+1. Image Classification (Clasificación de Imágenes)
+2. Object Detection (Detección de Objetos)
+3. Image Segmentation (Segmentación de Imágenes)
+Correct Matching:
+Output A → 1 (Image Classification / Clasificación de Imágenes)
+Output B → 2 (Object Detection / Detección de Objetos)
+Output C → 3 (Image Segmentation / Segmentación de Imágenes)
+Explanation:
+Output A - Image Classification:
+* Single label for entire image
+* Answers "What is this image?"
+* Fastest and simplest approach
+* Use case: Photo organization, content moderation
+Output B - Object Detection:
+* Multiple objects with bounding boxes
+* Answers "What and where?"
+* Provides object locations (x, y, width, height)
+* Use case: Self-driving cars, surveillance, retail analytics
+Output C - Image Segmentation:
+* Pixel-level classification
+* Answers "What is each pixel?"
+* Most detailed and computationally expensive
+* Use case: Medical imaging, video editing, autonomous navigation
+Explicación:
+Salida A - Clasificación de Imágenes:
+* Una sola etiqueta para toda la imagen
+* Responde "¿Qué es esta imagen?"
+* Enfoque más rápido y simple
+* Caso de uso: Organización de fotos, moderación de contenido
+Salida B - Detección de Objetos:
+* Múltiples objetos con cajas delimitadoras
+* Responde "¿Qué y dónde?"
+* Proporciona ubicaciones de objetos (x, y, ancho, alto)
+* Caso de uso: Autos autónomos, vigilancia, análisis de retail
+Salida C - Segmentación de Imágenes:
+* Clasificación a nivel de píxel
+* Responde "¿Qué es cada píxel?"
+* Más detallado y computacionalmente costoso
+* Caso de uso: Imágenes médicas, edición de video, navegación autónoma
+________________
+
+
+Quiz Answer Key / Clave de Respuestas
+Question
+	Correct Answer
+	Question Type
+	1
+	A
+	Multiple Choice
+	2
+	B
+	Multiple Choice
+	3
+	B
+	Multiple Choice
+	4
+	B
+	Multiple Choice
+	5
+	C
+	Multiple Choice
+	6
+	A
+	Multiple Choice
+	7
+	C
+	Multiple Choice
+	8
+	A→1, B→2, C→3, D→4, E→5
+	Diagram Labeling
+	9
+	A→Red, B→Green, C→Blue
+	Diagram Labeling
+	10
+	A→1, B→2, C→3
+	Diagram Labeling
+	________________
+
+
+Scoring Rubric / Rúbrica de Calificación
+* Multiple Choice Questions (1-7): 1 point each = 7 points total
+* Diagram Labeling Questions (8-10): 1 point each = 3 points total
+* Total Points: 10 points
+* Passing Score: 7/10 (70%)
+Partial Credit for Diagram Labeling:
+* Question 8: 0.2 points per correct match (5 matches total)
+* Question 9: 0.33 points per correct match (3 matches total)
+* Question 10: 0.33 points per correct match (3 matches total)
+________________
+
+
+Post-Quiz Feedback / Retroalimentación Post-Cuestionario
+If Score ≥ 70% / Si Puntuación ≥ 70%:
+English:
+🎉 Excellent work! You have a solid understanding of Computer Vision fundamentals. You can now:
+* Explain how computers process images (pixels, RGB channels)
+* Understand CNN architecture and how different layers work
+* Differentiate between Classification, Detection, and Segmentation
+* Identify real-world applications of Computer Vision
+Next Step: Proceed to Module 7: AI in Industry: Case Studies and Emerging Trends
+Spanish:
+🎉 ¡Excelente trabajo! Tienes una comprensión sólida de los fundamentos de Visión por Computadora. Ahora puedes:
+* Explicar cómo las computadoras procesan imágenes (píxeles, canales RGB)
+* Entender la arquitectura CNN y cómo funcionan diferentes capas
+* Diferenciar entre Clasificación, Detección y Segmentación
+* Identificar aplicaciones del mundo real de Visión por Computadora
+Siguiente Paso: Continúa al Módulo 7: La IA en la Industria: Casos de Estudio y Tendencias Emergentes
+________________
+
+
+If Score < 70% / Si Puntuación < 70%:
+English:
+📚 Keep Learning! Computer Vision is complex but incredibly powerful. Consider reviewing these key concepts:
+Areas to Review Based on Incorrect Answers:
+If you missed Questions 1, 9: Review how images are represented digitally
+* Revisit: Pixels, RGB color channels, numerical representation
+* Resource: Module 6 Visualization 1
+If you missed Questions 2, 3: Review convolutional filters and hierarchical learning
+* Revisit: How filters detect features, what each layer learns
+* Resource: Module 6 Visualization 2, Interactive Filter Demo
+If you missed Questions 4, 8: Review CNN architecture components
+* Revisit: Purpose of pooling, fully connected layers
+* Resource: Module 6 Visualization 3
+If you missed Questions 5, 6, 7, 10: Review the three main Computer Vision tasks
+* Revisit: Classification vs. Detection vs. Segmentation
+* Resource: Module 6 Visualization 4
+Spanish:
+📚 ¡Sigue Aprendiendo! La Visión por Computadora es compleja pero increíblemente poderosa. Considera revisar estos conceptos clave:
+Áreas para Revisar Según Respuestas Incorrectas:
+Si fallaste Preguntas 1, 9: Revisa cómo se representan las imágenes digitalmente
+* Revisa: Píxeles, canales de color RGB, representación numérica
+* Recurso: Módulo 6 Visualización 1
+Si fallaste Preguntas 2, 3: Revisa filtros convolucionales y aprendizaje jerárquico
+* Revisa: Cómo los filtros detectan características, qué aprende cada capa
+* Recurso: Módulo 6 Visualización 2, Demo Interactivo de Filtros
+Si fallaste Preguntas 4, 8: Revisa componentes de arquitectura CNN
+* Revisa: Propósito del pooling, capas totalmente conectadas
+* Recurso: Módulo 6 Visualización 3
+Si fallaste Preguntas 5, 6, 7, 10: Revisa las tres tareas principales de Visión por Computadora
+* Revisa: Clasificación vs. Detección vs. Segmentación
+* Recurso: Módulo 6 Visualización 4
+________________
+
+
+Recommended Resources / Recursos Recomendados
+For All Students:
+1. Stanford CS231n: Convolutional Neural Networks for Visual Recognition
+   * Free course materials and lecture videos
+   * http://cs231n.stanford.edu/
+2. 3Blue1Brown: But what is a convolution?
+   * Excellent visual explanation of convolutions
+   * YouTube video (highly recommended)
+3. TensorFlow CNN Tutorial
+   * Hands-on coding practice
+   * https://www.tensorflow.org/tutorials/images/cnn
+4. ImageNet Challenge
+   * Learn about the competition that revolutionized Computer Vision
+   * Research the winning architectures: AlexNet, VGG, ResNet
+Interactive Practice:
+* Google's Teachable Machine: Train your own image classifier
+* https://teachablemachine.withgoogle.com/
+________________
+
+
+Common Misconceptions Addressed / Conceptos Erróneos Comunes Abordados
+Misconception 1:
+❌ "CNNs understand images the way humans do"
+✅ Reality: CNNs process numerical patterns. They don't "understand" concepts; they learn statistical correlations between pixel patterns and labels.
+Misconception 2:
+❌ "More layers always mean better performance"
+✅ Reality: Deeper networks can learn more complex patterns, but they also risk overfitting and are harder to train. Architecture design requires balance.
+Misconception 3:
+❌ "Object Detection is just Classification done multiple times"
+✅ Reality: Object Detection requires specialized architectures (like YOLO, R-CNN) that simultaneously predict class labels AND bounding box coordinates—a fundamentally different task.
+Misconception 4:
+❌ "Pooling layers lose important information"
+✅ Reality: Pooling provides translation invariance and reduces overfitting. While some spatial detail is lost, the most important features (highest activations) are preserved.
+________________
+
+
+Bonus Challenge Question (Optional)
+For students who want extra practice:
+Challenge Question:
+A self-driving car needs to process video at 30 frames per second. Each frame requires identifying pedestrians, cars, traffic lights, and road lanes. The system must be fast enough for real-time decisions.
+Which combination of Computer Vision tasks would you use, and why?
+Think about:
+* Which task for identifying traffic light color?
+* Which task for locating pedestrians and cars?
+* Which task for understanding drivable road area?
+* How would you optimize for speed while maintaining safety?
+Suggested Answer:
+* Classification for traffic light color (red/yellow/green) - fastest
+* Object Detection for pedestrians and vehicles - need location + identity
+* Segmentation for road/lane detection - need precise boundaries
+* Optimization: Use lightweight models (MobileNet), specialized hardware (GPUs/TPUs), and temporal coherence (track objects across frames rather than re-detecting)
+________________
+
+
+End of Module 6 Quiz
+Time to Complete: Approximately 12-15 minutes
+Estimated Difficulty: Intermediate
+Skills Assessed: Understanding of Computer Vision fundamentals, CNN architecture, and practical applications
