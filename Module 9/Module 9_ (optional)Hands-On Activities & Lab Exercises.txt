@@ -1,0 +1,1005 @@
+﻿Module 9: Building with AI APIs and Tools
+Hands-On Activities & Lab Exercises (50% - ~60 minutes)
+________________
+
+
+Overview
+This section contains four progressive hands-on activities that guide learners through making their first API calls, processing JSON responses, and building practical AI solutions. Activities progress from guided setup to independent implementation.
+Total Time: 60 minutes
+* Activity 1: 15 minutes
+* Activity 2: 15 minutes
+* Activity 3: 15 minutes
+* Activity 4: 15 minutes
+________________
+
+
+Prerequisites
+Before starting these activities, ensure you have:
+* A text editor or IDE (VS Code, PyCharm, or any editor)
+* Python 3.7+ installed on your computer, or access to a web-based environment (Google Colab)
+* A valid email address (for free API tier sign-ups)
+* ~30 MB free disk space for library installations
+Quick Setup Check
+python --version  # Should show Python 3.7 or higher
+pip --version     # Should show pip is installed
+
+
+________________
+
+
+ACTIVITY 1: Getting Your First API Key & Making a Sentiment Analysis Call
+Duration: 15 minutes
+Learning Objectives
+By the end of this activity, you will:
+* Create an account with a cloud AI service
+* Obtain and securely store an API key
+* Make your first API call to a sentiment analysis service
+* Understand JSON response structure
+Part 1A: Sign Up for Google Cloud and Enable Natural Language API (5 minutes)
+Step 1: Visit Google Cloud Console
+* Go to https://console.cloud.google.com/
+* Click "Sign in with Google" or create a new Google account
+* Accept terms and create a free Google Cloud project
+Step 2: Create a New Project
+* Click the project dropdown at the top
+* Select "NEW PROJECT"
+* Name it: "AI_API_Learning"
+* Click "CREATE"
+* Wait for the project to initialize (~1 minute)
+Step 3: Enable Natural Language API
+* In the search bar, type "Natural Language API"
+* Click on the Natural Language API result
+* Click the "ENABLE" button
+* Wait for the API to enable
+Step 4: Create Service Account Credentials
+* On the left sidebar, click "Credentials"
+* Click "+ CREATE CREDENTIALS"
+* Select "Service Account"
+* Name: "api-learner"
+* Click "CREATE AND CONTINUE"
+* Skip optional steps and click "DONE"
+Step 5: Generate API Key
+* Click on the service account you just created
+* Go to "KEYS" tab
+* Click "ADD KEY" → "Create new key"
+* Select "JSON"
+* Click "CREATE"
+* A JSON file will download automatically (save it safely!)
+Checkpoint: You should now have a JSON file with your credentials. Keep this file secure!
+________________
+
+
+Part 1B: Set Up Your Python Environment (5 minutes)
+Step 1: Open your terminal/command prompt and install the Google Cloud library
+pip install google-cloud-language
+
+
+Wait for installation to complete (~1-2 minutes).
+Step 2: Create a project folder
+mkdir AI_API_Project
+cd AI_API_Project
+
+
+Step 3: Set up your credentials
+On Mac/Linux:
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/downloaded/credentials.json"
+
+
+On Windows (PowerShell):
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\your\credentials.json"
+
+
+Replace the path with the actual location of your JSON credentials file.
+Checkpoint: Your environment is ready when you can run pip list and see google-cloud-language in the output.
+________________
+
+
+Part 1C: Make Your First API Call (5 minutes)
+Step 1: Create a file called sentiment_analysis.py
+Step 2: Copy and paste this code:
+# Import the Natural Language library
+from google.cloud import language_v1
+
+
+# Initialize the client
+client = language_v1.LanguageServiceClient()
+
+
+# Define the text you want to analyze
+text = "I absolutely love this product! It's amazing and exceeded my expectations."
+
+
+# Create a document object
+document = language_v1.Document(
+    content=text,
+    type_=language_v1.Document.Type.PLAIN_TEXT
+)
+
+
+# Call the API to analyze sentiment
+response = client.analyze_sentiment(request={'document': document})
+
+
+# Extract sentiment scores
+sentiment = response.document_sentiment
+
+
+print("=" * 60)
+print("SENTIMENT ANALYSIS RESULTS")
+print("=" * 60)
+print(f"Text analyzed: '{text}'")
+print(f"\nSentiment Score: {sentiment.score:.2f}")
+print(f"Magnitude: {sentiment.magnitude:.2f}")
+print("\nInterpretation:")
+if sentiment.score > 0.25:
+    print("✓ POSITIVE sentiment detected")
+elif sentiment.score < -0.25:
+    print("✗ NEGATIVE sentiment detected")
+else:
+    print("~ NEUTRAL sentiment detected")
+print("=" * 60)
+
+
+# Display sentence-level analysis
+print("\nSentence-Level Analysis:")
+for sentence in response.sentences:
+    print(f"  - '{sentence.text.content}'")
+    print(f"    Sentiment: {sentence.sentiment.score:.2f}")
+
+
+Step 3: Run your code
+python sentiment_analysis.py
+
+
+Expected Output:
+============================================================
+SENTIMENT ANALYSIS RESULTS
+============================================================
+Text analyzed: 'I absolutely love this product! It's amazing and exceeded my expectations.'
+
+
+Sentiment Score: 0.90
+Magnitude: 1.40
+
+
+Interpretation:
+✓ POSITIVE sentiment detected
+============================================================
+
+
+Sentence-Level Analysis:
+  - 'I absolutely love this product!'
+    Sentiment: 0.90
+  - 'It's amazing and exceeded my expectations.'
+    Sentiment: 0.90
+
+
+Understanding the JSON Response
+The API returns a structured response with:
+{
+  "document_sentiment": {
+    "score": 0.90,
+    "magnitude": 1.40
+  },
+  "sentences": [
+    {
+      "text": "I absolutely love this product!",
+      "sentiment": {"score": 0.90}
+    }
+  ]
+}
+
+
+Key terms:
+* Score: Ranges from -1.0 (most negative) to 1.0 (most positive)
+* Magnitude: Strength of emotion (0.0 to +∞)
+✓ Activity 1 Checkpoint
+* [ ] Successfully signed up for Google Cloud
+* [ ] Enabled Natural Language API
+* [ ] Downloaded credentials JSON file
+* [ ] Installed google-cloud-language
+* [ ] Ran sentiment analysis code successfully
+* [ ] Understood JSON response structure
+________________
+
+
+ACTIVITY 2: Experimenting with Different Texts & Analyzing Responses
+Duration: 15 minutes
+Learning Objectives
+By the end of this activity, you will:
+* Make multiple API calls with different inputs
+* Understand how sentiment varies across different text types
+* Handle and parse JSON responses programmatically
+* Identify edge cases and limitations
+Part 2A: Create an Interactive Sentiment Analyzer (10 minutes)
+Step 1: Create a new file called interactive_sentiment.py
+Step 2: Copy and paste this code:
+from google.cloud import language_v1
+
+
+def analyze_text_sentiment(text):
+    """
+    Analyzes sentiment of given text using Google Cloud Natural Language API
+    Returns a dictionary with results
+    """
+    client = language_v1.LanguageServiceClient()
+    
+    document = language_v1.Document(
+        content=text,
+        type_=language_v1.Document.Type.PLAIN_TEXT
+    )
+    
+    response = client.analyze_sentiment(request={'document': document})
+    
+    return {
+        'text': text,
+        'sentiment_score': response.document_sentiment.score,
+        'magnitude': response.document_sentiment.magnitude,
+        'sentences': [
+            {
+                'text': sent.text.content,
+                'score': sent.sentiment.score
+            }
+            for sent in response.sentences
+        ]
+    }
+
+
+def classify_sentiment(score):
+    """Converts numerical score to human-readable sentiment"""
+    if score >= 0.25:
+        return "POSITIVE 😊"
+    elif score <= -0.25:
+        return "NEGATIVE 😞"
+    else:
+        return "NEUTRAL 😐"
+
+
+# Test Dataset: Different types of text
+test_texts = [
+    "This product is terrible and broke after one day.",
+    "The service was okay, nothing special.",
+    "I'm so happy! This exceeded all my expectations!",
+    "The customer support was unhelpful.",
+    "Best purchase I've ever made! Highly recommended!",
+    "It works as described. No complaints.",
+]
+
+
+print("\n" + "=" * 80)
+print("SENTIMENT ANALYSIS BATCH PROCESSING")
+print("=" * 80)
+
+
+# Store results for comparison
+results = []
+
+
+for i, text in enumerate(test_texts, 1):
+    print(f"\n[Test {i}/{len(test_texts)}]")
+    print(f"Analyzing: '{text}'")
+    
+    # Make API call
+    result = analyze_text_sentiment(text)
+    results.append(result)
+    
+    # Display results
+    sentiment_label = classify_sentiment(result['sentiment_score'])
+    print(f"Sentiment: {sentiment_label}")
+    print(f"Score: {result['sentiment_score']:.3f} | Magnitude: {result['magnitude']:.2f}")
+
+
+# Compare results
+print("\n" + "=" * 80)
+print("SUMMARY COMPARISON")
+print("=" * 80)
+
+
+sorted_results = sorted(results, key=lambda x: x['sentiment_score'], reverse=True)
+
+
+print("\nRanked by Sentiment Score (Most Positive to Most Negative):")
+for i, result in enumerate(sorted_results, 1):
+    print(f"{i}. Score {result['sentiment_score']:.3f} → {result['text'][:50]}...")
+
+
+print("\nScore Distribution:")
+positive_count = sum(1 for r in results if r['sentiment_score'] > 0.25)
+negative_count = sum(1 for r in results if r['sentiment_score'] < -0.25)
+neutral_count = len(results) - positive_count - negative_count
+
+
+print(f"  Positive: {positive_count}")
+print(f"  Neutral: {neutral_count}")
+print(f"  Negative: {negative_count}")
+
+
+Step 3: Run the code
+python interactive_sentiment.py
+
+
+Expected Output:
+================================================================================
+SENTIMENT ANALYSIS BATCH PROCESSING
+================================================================================
+
+
+[Test 1/6]
+Analyzing: 'This product is terrible and broke after one day.'
+Sentiment: NEGATIVE 😞
+Score: -0.800 | Magnitude: 0.80
+
+
+[Test 2/6]
+Analyzing: 'The service was okay, nothing special.'
+Sentiment: NEUTRAL 😐
+Score: 0.100 | Magnitude: 0.10
+
+
+...
+
+
+================================================================================
+SUMMARY COMPARISON
+================================================================================
+
+
+Ranked by Sentiment Score (Most Positive to Most Negative):
+1. Score 0.900 → Best purchase I've ever made! Highly recommended!
+2. Score 0.700 → I'm so happy! This exceeded all my expectations!
+...
+
+
+________________
+
+
+Part 2B: Analyze the Results & Document Findings (5 minutes)
+Task 1: Create a file called analysis_notes.txt and answer these questions:
+1. Which text received the highest sentiment score?
+
+2. Which text received the lowest sentiment score?
+
+3. Did any text surprise you with its sentiment classification?
+
+4. How does sentence length affect sentiment analysis? Compare the magnitude scores of short vs. long texts.
+
+5. What patterns do you notice? (e.g., certain words, punctuation, intensifiers like "very" or "absolutely")
+
+Example Response:
+1. Highest: "Best purchase I've ever made! Highly recommended!" (0.900)
+
+
+2. Lowest: "This product is terrible and broke after one day." (-0.800)
+
+
+3. Surprising: "The service was okay, nothing special." scored as neutral (0.1)
+   Expected: I thought this would be more negative
+
+
+4. Patterns: Longer texts tend to have higher magnitude scores. 
+   The presence of exclamation marks increases positive scores.
+
+
+5. Intensifiers like "absolutely", "so happy", "best" push scores higher
+
+
+✓ Activity 2 Checkpoint
+   * [ ] Created and ran interactive_sentiment.py
+   * [ ] Successfully processed multiple texts
+   * [ ] Compared sentiment scores across different inputs
+   * [ ] Documented findings in analysis_notes.txt
+   * [ ] Identified patterns in sentiment analysis
+________________
+
+
+ACTIVITY 3: Building a Text-to-Speech API Integration
+Duration: 15 minutes
+Learning Objectives
+By the end of this activity, you will:
+   * Integrate a different AI API (Text-to-Speech)
+   * Understand API parameter configuration
+   * Process and save API outputs (audio files)
+   * Work with multiple APIs in the same project
+Part 3A: Set Up Text-to-Speech Environment (3 minutes)
+Step 1: Install the Text-to-Speech library
+pip install google-cloud-texttospeech
+
+
+Step 2: Create a file called text_to_speech.py
+________________
+
+
+Part 3B: Create Your First Text-to-Speech Call (7 minutes)
+Step 1: Copy and paste this code into text_to_speech.py:
+from google.cloud import texttospeech
+import os
+
+
+def generate_speech(text, output_filename="output.mp3"):
+    """
+    Converts text to speech using Google Cloud Text-to-Speech API
+    Saves audio to an MP3 file
+    """
+    
+    # Initialize the Text-to-Speech client
+    client = texttospeech.TextToSpeechClient()
+    
+    # Set the text input
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+    
+    # Configure voice parameters
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-US",           # English (US)
+        name="en-US-Neural2-C",          # Female neural voice
+        ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+    )
+    
+    # Configure audio output
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        speaking_rate=1.0,               # Normal speed (0.25-4.0)
+        pitch=0.0                        # Normal pitch (-20.0 to 20.0)
+    )
+    
+    # Make API request
+    print(f"Generating speech for: '{text[:60]}...'")
+    response = client.synthesize_speech(
+        input=synthesis_input,
+        voice=voice,
+        audio_config=audio_config
+    )
+    
+    # Save audio content to file
+    with open(output_filename, "wb") as out:
+        out.write(response.audio_content)
+    
+    file_size = os.path.getsize(output_filename)
+    print(f"✓ Audio file saved: {output_filename} ({file_size:,} bytes)")
+    
+    return output_filename
+
+
+# Example texts to convert
+texts_to_convert = [
+    "Hello! Welcome to the AI API learning course.",
+    "Artificial intelligence is transforming how we work.",
+    "I absolutely love learning about APIs!",
+]
+
+
+print("=" * 70)
+print("TEXT-TO-SPEECH CONVERSION DEMO")
+print("=" * 70)
+
+
+# Convert multiple texts
+for i, text in enumerate(texts_to_convert, 1):
+    output_file = f"speech_{i}.mp3"
+    generate_speech(text, output_file)
+    print()
+
+
+print("=" * 70)
+print("All audio files have been generated!")
+print("=" * 70)
+
+
+Step 2: Run the code
+python text_to_speech.py
+
+
+Expected Output:
+======================================================================
+TEXT-TO-SPEECH CONVERSION DEMO
+======================================================================
+Generating speech for: 'Hello! Welcome to the AI API learning course.'
+✓ Audio file saved: speech_1.mp3 (12,345 bytes)
+
+
+Generating speech for: 'Artificial intelligence is transforming how we work.'
+✓ Audio file saved: speech_2.mp3 (15,678 bytes)
+
+
+Generating speech for: 'I absolutely love learning about APIs!'
+✓ Audio file saved: speech_3.mp3 (11,234 bytes)
+
+
+======================================================================
+All audio files have been generated!
+======================================================================
+
+
+What Just Happened:
+   1. You sent text to Google's Text-to-Speech API
+   2. The API generated natural-sounding speech
+   3. The speech was encoded as MP3 audio
+   4. You saved the audio files to disk
+________________
+
+
+Part 3C: Experiment with Voice Parameters (5 minutes)
+Task: Create a file called voices_comparison.py and test different voices/parameters:
+from google.cloud import texttospeech
+
+
+def create_speech_variant(text, language, voice_name, speaking_rate, filename):
+    """Creates speech with custom parameters"""
+    client = texttospeech.TextToSpeechClient()
+    
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+    
+    voice = texttospeech.VoiceSelectionParams(
+        language_code=language,
+        name=voice_name
+    )
+    
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        speaking_rate=speaking_rate,
+        pitch=0.0
+    )
+    
+    response = client.synthesize_speech(
+        input=synthesis_input,
+        voice=voice,
+        audio_config=audio_config
+    )
+    
+    with open(filename, "wb") as out:
+        out.write(response.audio_content)
+    
+    return filename
+
+
+# Same text, different voices
+text = "Artificial Intelligence APIs make development easier and faster."
+
+
+print("Creating voice variations...\n")
+
+
+# Slow, female voice
+create_speech_variant(
+    text=text,
+    language="en-US",
+    voice_name="en-US-Neural2-C",
+    speaking_rate=0.7,
+    filename="voice_slow_female.mp3"
+)
+print("✓ Created: Slow female voice (0.7 speed)")
+
+
+# Fast, male voice
+create_speech_variant(
+    text=text,
+    language="en-US",
+    voice_name="en-US-Neural2-A",
+    speaking_rate=1.3,
+    filename="voice_fast_male.mp3"
+)
+print("✓ Created: Fast male voice (1.3 speed)")
+
+
+# Spanish accent
+create_speech_variant(
+    text="Las API de inteligencia artificial facilitan el desarrollo.",
+    language="es-ES",
+    voice_name="es-ES-Neural2-A",
+    speaking_rate=1.0,
+    filename="voice_spanish.mp3"
+)
+print("✓ Created: Spanish voice")
+
+
+print("\nVoice comparison files created!")
+print("Note: You can open these MP3 files to hear the differences.")
+
+
+Run this experiment:
+python voices_comparison.py
+
+
+Understand API Parameters
+The API accepts various parameters to customize output:
+Parameter
+	Range
+	Effect
+	speaking_rate
+	0.25 - 4.0
+	Controls speed (0.5 = half speed, 2.0 = double speed)
+	pitch
+	-20.0 - 20.0
+	Controls pitch (negative = lower, positive = higher)
+	language_code
+	Various
+	Language selection (en-US, es-ES, fr-FR, etc.)
+	audio_encoding
+	MP3, OGG, etc.
+	Audio format for output
+	✓ Activity 3 Checkpoint
+   * [ ] Successfully installed Text-to-Speech library
+   * [ ] Generated speech from text
+   * [ ] Saved audio files to disk
+   * [ ] Experimented with different voice parameters
+   * [ ] Understood API parameter effects
+________________
+
+
+ACTIVITY 4: Building an Image Captioning Pipeline
+Duration: 15 minutes
+Learning Objectives
+By the end of this activity, you will:
+   * Work with image files as API inputs
+   * Integrate Vision API for image analysis
+   * Build a complete pipeline (image → API → caption)
+   * Combine multiple APIs in one project
+Part 4A: Set Up Vision API (3 minutes)
+Step 1: Install required libraries
+pip install google-cloud-vision pillow
+
+
+The pillow library helps us work with image files.
+Step 2: Create a file called image_captioning.py
+________________
+
+
+Part 4B: Download Sample Images (3 minutes)
+Step 1: Create an images folder in your project
+mkdir images
+cd images
+
+
+Step 2: Download 3 sample images:
+Option A: Use these public URLs (save images locally):
+   * https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+   * https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1280px-GoldenGateBridge-001.jpg
+   * https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-NCI_Visuals_Online.jpg/1200px-Good_Food_Display-_NCI_Visuals_Online.jpg
+Option B: Use your own images (any JPG or PNG files)
+Save them as:
+   * images/image1.jpg
+   * images/image2.jpg
+   * images/image3.jpg
+________________
+
+
+Part 4C: Build Image Captioning System (9 minutes)
+Step 1: Copy and paste this code into image_captioning.py:
+from google.cloud import vision
+import os
+from pathlib import Path
+
+
+def analyze_image(image_path):
+    """
+    Analyzes an image using Google Cloud Vision API
+    Returns detected objects, labels, and text
+    """
+    
+    client = vision.ImageAnnotatorClient()
+    
+    # Read image file
+    with open(image_path, "rb") as image_file:
+        content = image_file.read()
+    
+    image = vision.Image(content=content)
+    
+    # Perform label detection (identify objects/concepts)
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+    
+    # Perform text detection (read text in images)
+    text_response = client.text_detection(image=image)
+    text_annotations = text_response.text_annotations
+    
+    # Build result object
+    result = {
+        'filename': os.path.basename(image_path),
+        'labels': [
+            {
+                'description': label.description,
+                'confidence': label.score
+            }
+            for label in labels[:5]  # Top 5 labels
+        ],
+        'detected_text': text_annotations[0].description if text_annotations else "No text detected",
+        'objects': []
+    }
+    
+    # Perform object detection
+    object_response = client.object_localization(image=image)
+    objects = object_response.localized_object_annotations
+    
+    result['objects'] = [
+        {
+            'name': obj.name,
+            'confidence': obj.score
+        }
+        for obj in objects[:3]  # Top 3 objects
+    ]
+    
+    return result
+
+
+def generate_caption(analysis_result):
+    """
+    Creates a human-readable caption from analysis results
+    """
+    labels = analysis_result['labels']
+    objects = analysis_result['objects']
+    
+    if not labels:
+        return "Unable to analyze image"
+    
+    # Build caption from top labels
+    top_label = labels[0]['description']
+    confidence = int(labels[0]['confidence'] * 100)
+    
+    caption = f"This image shows {top_label} (confidence: {confidence}%)"
+    
+    if len(labels) > 1:
+        other_labels = ", ".join([l['description'] for l in labels[1:3]])
+        caption += f". Also contains: {other_labels}"
+    
+    return caption
+
+
+def process_images_in_directory(directory_path):
+    """
+    Processes all images in a directory and generates captions
+    """
+    
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
+    image_files = [
+        f for f in os.listdir(directory_path)
+        if os.path.splitext(f)[1].lower() in image_extensions
+    ]
+    
+    if not image_files:
+        print(f"No images found in {directory_path}")
+        return []
+    
+    print("=" * 80)
+    print("IMAGE CAPTIONING ANALYSIS")
+    print("=" * 80)
+    print(f"Found {len(image_files)} image(s) to analyze\n")
+    
+    results = []
+    
+    for i, filename in enumerate(image_files, 1):
+        image_path = os.path.join(directory_path, filename)
+        
+        print(f"[{i}/{len(image_files)}] Analyzing: {filename}")
+        print("-" * 80)
+        
+        # Analyze the image
+        analysis = analyze_image(image_path)
+        results.append(analysis)
+        
+        # Generate and display caption
+        caption = generate_caption(analysis)
+        print(f"Caption: {caption}\n")
+        
+        # Display detected objects
+        if analysis['objects']:
+            print("Detected Objects:")
+            for obj in analysis['objects']:
+                confidence = int(obj['confidence'] * 100)
+                print(f"  • {obj['name']} ({confidence}% confidence)")
+        
+        # Display extracted text
+        if analysis['detected_text'] != "No text detected":
+            print(f"\nExtracted Text: {analysis['detected_text'][:100]}...")
+        
+        print()
+    
+    return results
+
+
+# Main execution
+if __name__ == "__main__":
+    
+    # Directory containing images
+    images_directory = "./images"
+    
+    # Check if directory exists
+    if not os.path.exists(images_directory):
+        print(f"Error: Directory '{images_directory}' not found")
+        print("Please create an 'images' folder and add some image files")
+    else:
+        # Process all images
+        results = process_images_in_directory(images_directory)
+        
+        # Save results to a summary file
+        if results:
+            with open("captioning_results.txt", "w") as f:
+                f.write("IMAGE CAPTIONING RESULTS SUMMARY\n")
+                f.write("=" * 80 + "\n\n")
+                
+                for result in results:
+                    f.write(f"File: {result['filename']}\n")
+                    f.write(f"Labels: {', '.join([l['description'] for l in result['labels']])}\n")
+                    f.write(f"Detected Text: {result['detected_text']}\n")
+                    f.write("-" * 80 + "\n\n")
+            
+            print("=" * 80)
+            print("✓ Results saved to: captioning_results.txt")
+            print("=" * 80)
+
+
+Step 2: Prepare your images and run the code
+python image_captioning.py
+
+
+Expected Output:
+================================================================================
+IMAGE CAPTIONING ANALYSIS
+================================================================================
+Found 3 image(s) to analyze
+
+
+[1/3] Analyzing: image1.jpg
+--------------------------------------------------------------------------------
+Caption: This image shows Ant (confidence: 92%). Also contains: Insect, Macro photography
+
+
+Detected Objects:
+  • Ant (87% confidence)
+  • Leg (72% confidence)
+  • Antenna (68% confidence)
+
+
+[2/3] Analyzing: image2.jpg
+...
+
+
+________________
+
+
+Part 4D: Challenge Task - Build a Multi-API Pipeline (5 minutes)
+Bonus Challenge: Combine all three APIs (Sentiment + Speech + Vision) into one script:
+from google.cloud import vision, texttospeech, language_v1
+import os
+
+
+def complete_pipeline(image_path):
+    """
+    Complete pipeline:
+    1. Analyze image
+    2. Generate caption
+    3. Convert caption to speech
+    """
+    
+    # STEP 1: Analyze image
+    print("Step 1: Analyzing image...")
+    client = vision.ImageAnnotatorClient()
+    
+    with open(image_path, "rb") as f:
+        content = f.read()
+    
+    image = vision.Image(content=content)
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+    
+    # STEP 2: Generate caption
+    caption = f"This image contains {labels[0].description}"
+    print(f"Step 2: Generated caption - {caption}")
+    
+    # STEP 3: Analyze sentiment of caption
+    print("Step 3: Analyzing sentiment of caption...")
+    lang_client = language_v1.LanguageServiceClient()
+    document = language_v1.Document(
+        content=caption,
+        type_=language_v1.Document.Type.PLAIN_TEXT
+    )
+    sentiment_response = lang_client.analyze_sentiment(
+        request={'document': document}
+    )
+    print(f"Sentiment score: {sentiment_response.document_sentiment.score}")
+    
+    # STEP 4: Convert caption to speech
+    print("Step 4: Converting caption to speech...")
+    tts_client = texttospeech.TextToSpeechClient()
+    synthesis_input = texttospeech.SynthesisInput(text=caption)
+    
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-US",
+        name="en-US-Neural2-C"
+    )
+    
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3
+    )
+    
+    audio_response = tts_client.synthesize_speech(
+        input=synthesis_input,
+        voice=voice,
+        audio_config=audio_config
+    )
+    
+    # Save audio
+    output_file = "caption_audio.mp3"
+    with open(output_file, "wb") as out:
+        out.write(audio_response.audio_content)
+    
+    print(f"✓ Audio saved to: {output_file}")
+    
+    return {
+        'caption': caption,
+        'sentiment': sentiment_response.document_sentiment.score,
+        'audio_file': output_file
+    }
+
+
+# Run the pipeline on your first image
+if __name__ == "__main__":
+    image_path = "./images/image1.jpg"
+    result = complete_pipeline(image_path)
+
+
+✓ Activity 4 Checkpoint
+   * [ ] Installed Vision API library
+   * [ ] Downloaded or added sample images
+   * [ ] Successfully analyzed images using Vision API
+   * [ ] Generated captions from image analysis
+   * [ ] Extracted detected objects and text
+   * [ ] (Bonus) Built multi-API pipeline combining Vision, Language, and Speech APIs
+________________
+
+
+Summary: What You've Accomplished
+By completing these four activities, you have:
+✓ Activity 1: Made your first API call to Google Cloud Natural Language API for sentiment analysis
+✓ Activity 2: Processed multiple texts, compared results, and identified patterns in AI API responses
+✓ Activity 3: Integrated a different API (Text-to-Speech) and learned how to customize API parameters
+✓ Activity 4: Built an image analysis pipeline using Vision API and combined multiple APIs
+________________
+
+
+Key Concepts Reinforced
+API Authentication: Using credentials files and environment variables to securely access APIs
+JSON Responses: Parsing and extracting information from structured API responses
+API Parameters: Understanding how configuration options affect API output
+Error Handling: Checking for successful responses and handling edge cases
+Integration: Combining multiple APIs into complete workflows
+File I/O: Reading inputs (images, text) and saving outputs (audio, analysis results)
+________________
+
+
+Troubleshooting Common Issues
+Issue 1: "ModuleNotFoundError: No module named 'google.cloud'"
+Solution: Install the library with pip install google-cloud-language
+Issue 2: "GOOGLE_APPLICATION_CREDENTIALS not set"
+Solution: Ensure you've set the environment variable pointing to your JSON credentials file
+Issue 3: "Permission denied" on credentials file
+Solution: Make sure you downloaded the credentials JSON from Google Cloud Console
+Issue 4: API calls return errors
+Solution:
+   * Verify your API is enabled in Google Cloud Console
+   * Check that you're not exceeding free tier quotas
+   * Review API response error messages for details
+Issue 5: Images not found
+Solution:
+   * Ensure images/ folder exists in your project directory
+   * Check image file extensions (.jpg, .png, etc.)
+   * Verify image files are valid (not corrupted)
+________________
+
+
+Next Steps After These Activities
+   1. Explore other APIs: Try OpenAI API, AWS APIs, or Microsoft Azure APIs
+   2. Build a project: Combine APIs to create something useful (e.g., image → caption → email notification)
+   3. Handle production concerns: Add error handling, logging, and rate limiting
+   4. Optimize costs: Monitor API usage and cache results when possible
+   5. Deploy your app: Move your code from scripts to web applications
+________________
+
+
+Additional Resources
+   * Google Cloud Python Clients
+   * API Response Codes & Errors
+   * Google Cloud Pricing Calculator
+   * REST API Best Practices
+________________
+
+
+Total Hands-On Time: 60 minutes Activities Completed: 4 APIs Used: 3 (Natural Language, Text-to-Speech, Vision) Files Created: 10+

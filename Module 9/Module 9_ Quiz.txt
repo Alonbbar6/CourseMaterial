@@ -1,0 +1,487 @@
+﻿Module 9: Building with AI APIs and Tools
+Quiz (10% - Assessment)
+________________
+
+
+Overview
+This quiz contains 10 questions designed to assess learner comprehension of Module 9 concepts. Questions include:
+* 6 Multiple Choice questions
+* 2 Code Analysis questions
+* 2 Scenario-based questions
+Quiz Format: Multiple choice with immediate feedback Passing Score: 70% (7/10 correct) Time Limit: 15 minutes (recommended) Difficulty: Mixed (foundational to advanced)
+________________
+
+
+QUIZ QUESTIONS
+Question 1: Understanding API Fundamentals
+What is the primary advantage of using an AI API instead of training a model from scratch?
+A) APIs are cheaper to develop than training any model B) APIs provide instant access to pre-trained models without requiring ML expertise or large datasets C) APIs can only be used by beginner programmers D) APIs don't require any programming knowledge at all
+Correct Answer: B
+Explanation: APIs democratize AI by providing access to sophisticated pre-trained models immediately. You don't need machine learning expertise, massive datasets, or months of training. This makes them ideal for quick solutions and prototypes. While cheaper in many cases (option A), cost is not the primary advantage. Options C and D are incorrect—APIs still require programming skills and are used by all skill levels.
+Learning Objective Covered: 1.3 - Differentiate between using an API and training a model from scratch
+________________
+
+
+Question 2: REST & HTTP Protocol
+When making an API call to a sentiment analysis service, which HTTP method would you typically use?
+A) GET - to retrieve the sentiment scores from the API B) POST - to send text data to the API for processing C) PUT - to update the sentiment analysis model D) DELETE - to remove your text from the API servers
+Correct Answer: B
+Explanation: POST requests are used when sending data to the server for processing. In sentiment analysis, you POST your text to the API, which then processes it and returns results. GET is for retrieving existing data. PUT updates existing resources. DELETE removes resources. None of these other operations make sense for sentiment analysis API calls.
+Learning Objective Covered: 1.1 - Understand how to interact with an API (REST calls)
+________________
+
+
+Question 3: JSON Response Parsing
+You receive the following JSON response from a Text-to-Speech API. What does the value of "audioContent" most likely contain?
+{
+  "status": "success",
+  "audioContent": "//NExAASDVAAAANIAZQABwAHwAHwAHwAHwAHwAHwAH4AH...",
+  "audioEncoding": "MP3",
+  "bytesGenerated": 12345
+}
+
+
+A) The text that was converted to speech B) The MP3 audio file encoded as a base64 string C) The voice name used for the synthesis D) The duration of the audio in seconds
+Correct Answer: B
+Explanation: The long string of characters starting with //NEx... is base64-encoded binary data representing the MP3 audio file. Base64 encoding converts binary data into text format so it can be transmitted in JSON. The audioEncoding: "MP3" field confirms this is MP3 audio data. To use this audio, you would decode the base64 string back into binary and save it as an MP3 file.
+Learning Objective Covered: 1.1 - Process JSON responses from APIs
+________________
+
+
+Question 4: Choosing the Right API for Your Use Case
+A company needs to automatically extract text from scanned documents (PDFs of invoices). Which Google Cloud API would be most appropriate?
+A) Natural Language API - to understand the meaning of the text B) Vision API - to detect and extract text from images and documents C) Text-to-Speech API - to convert documents into audio D) Translation API - to translate the document content
+Correct Answer: B
+Explanation: The Vision API includes Optical Character Recognition (OCR) capabilities specifically designed to extract text from images and documents. While you could use Natural Language API afterward to understand the extracted text, Vision API is the primary tool for extracting text from scanned documents. Text-to-Speech and Translation are used for different purposes.
+Learning Objective Covered: 1.2 - Use a third-party AI service for a specific task
+________________
+
+
+Question 5: API Authentication & Security
+Which of the following is the MOST secure way to store and use your API key in a Python application?
+A) Store the API key directly in your Python code as a string
+api_key = "sk-1234567890abcdef"
+
+
+B) Store the API key in a .env file and load it using environment variables
+import os
+api_key = os.getenv('GOOGLE_API_KEY')
+
+
+C) Store the API key in a text file in your project folder D) Email your API key to teammates so they can also use it
+Correct Answer: B
+Explanation: Environment variables (Option B) are the industry standard for secure credential management. The .env file is not committed to version control, so the key never appears in your code repository. This prevents accidental exposure if you share your code on GitHub or other platforms. Option A exposes the key in your codebase. Option C is insecure. Option D violates security best practices—each team member should have their own credentials.
+Learning Objective Covered: 1.1 - Understand API integration best practices
+________________
+
+
+Question 6: Cloud AI Platforms Comparison
+Which statement about OpenAI, Google Cloud, and Microsoft Azure is correct?
+A) They all provide identical APIs with the same pricing B) Each platform specializes in different services, and your choice depends on your specific needs (language models, vision, speech, etc.) C) You must choose only one platform and cannot use APIs from multiple providers D) OpenAI provides more languages than Google and Azure combined
+Correct Answer: B
+Explanation: Different platforms have different strengths. OpenAI excels at language models (GPT), Google Cloud offers comprehensive services (Vision, NL, Translation), and Azure provides enterprise integration. You can and should choose platforms based on your specific use case. Pricing and capabilities vary between providers, so there's no one-size-fits-all solution.
+Learning Objective Covered: 1.2 - Understand different public AI services (OpenAI, Google AI, Azure)
+________________
+
+
+Question 7: Code Analysis - Sentiment Analysis
+Analyze this code and identify what the issue is:
+from google.cloud import language_v1
+
+
+client = language_v1.LanguageServiceClient()
+
+
+# Customer review to analyze
+text = "This product is terrible! Broke after one day."
+
+
+document = language_v1.Document(
+    content=text,
+    type_=language_v1.Document.Type.PLAIN_TEXT
+)
+
+
+response = client.analyze_sentiment(request={'document': document})
+
+
+# Display results
+print(f"Sentiment Score: {response.document_sentiment.score}")
+print(f"Sentiment: Positive") # ← ISSUE HERE
+
+
+What is the problem with this code?
+A) The code will crash because the API key is not provided B) The sentiment classification (printing "Positive") doesn't match the actual sentiment score of the negative review C) You cannot use PLAIN_TEXT format for sentiment analysis D) The request parameter should be named "data" instead of "request"
+Correct Answer: B
+Explanation: The review "This product is terrible! Broke after one day." has negative content, so response.document_sentiment.score will return a negative value (around -0.8 to -0.9). However, the code always prints "Positive" regardless of the actual score. The code should check the score first:
+if response.document_sentiment.score > 0.25:
+    print("Sentiment: Positive")
+elif response.document_sentiment.score < -0.25:
+    print("Sentiment: Negative")
+else:
+    print("Sentiment: Neutral")
+
+
+Option A is incorrect—if the API key was missing, the code would fail earlier at the client initialization. Options C and D are also incorrect—PLAIN_TEXT is valid, and "request" is the correct parameter name.
+Learning Objective Covered: 1.1 & 1.2 - Understand API responses and integrate services
+________________
+
+
+Question 8: Code Analysis - Error Handling
+What is the primary purpose of the "retry logic" shown in this code snippet?
+import time
+from google.api_core import exceptions
+
+
+for attempt in range(3):  # Try up to 3 times
+    try:
+        response = client.analyze_sentiment(request={'document': document})
+        print("Success!")
+        break
+    except exceptions.TooManyRequests:
+        wait_time = 2 ** attempt  # Exponential backoff: 1s, 2s, 4s
+        print(f"Rate limited. Waiting {wait_time}s...")
+        time.sleep(wait_time)
+        continue
+
+
+A) To make the API call faster by retrying multiple times B) To automatically handle temporary API failures (like rate limiting) without manually retrying C) To ensure the API key is valid before making the call D) To encrypt the data being sent to the API
+Correct Answer: B
+Explanation: Retry logic automatically attempts the operation again after waiting when encountering transient failures like rate limiting (TooManyRequests). The exponential backoff (1s, 2s, 4s) gives the API time to recover. This improves reliability without requiring manual intervention. Option A is wrong—retrying doesn't make individual calls faster. Options C and D are unrelated to the retry mechanism shown.
+Learning Objective Covered: 1.1 - Understand API best practices and error handling
+________________
+
+
+Question 9: Scenario Analysis - Choosing API vs. Training
+Scenario: Your company has 5 million medical X-ray images from the past 20 years. You want to automatically detect fractures in new X-rays.
+Which approach makes the MOST sense?
+A) Use a pre-trained Vision API from Google Cloud for fracture detection B) Train your own deep learning model using your 5 million historical X-rays C) Use a general-purpose Vision API, then fine-tune it on your domain-specific data D) Manually review each X-ray; APIs can't handle medical imaging
+Correct Answer: C
+Explanation: This is an ideal scenario for fine-tuning. You have three advantages:
+1. Pre-trained base: Use a general-purpose Vision API that already understands images
+2. Domain-specific data: Your 5 million X-rays help specialize the model for your medical use case
+3. Cost-effective: Fine-tuning is cheaper than training from scratch but more accurate than a generic API
+Option A alone would miss medical-specific patterns. Option B from scratch would require massive computational resources. Option D is false—APIs absolutely handle medical imaging. Option C combines the best of both worlds.
+Learning Objective Covered: 1.3 - Differentiate between using an API and training from scratch
+________________
+
+
+Question 10: Scenario Analysis - Multi-API Integration
+Scenario: You're building a customer support chatbot that:
+1. Receives questions in multiple languages
+2. Detects the customer's sentiment (angry vs. calm)
+3. Routes angry customers to human agents
+4. Reads responses aloud to customers
+Which APIs would you need to integrate?
+A) Only Translation API and Sentiment Analysis API B) Translation API, Natural Language API (for sentiment), and Text-to-Speech API C) Translation API, Vision API, Text-to-Speech API, and Speech-to-Text API D) Only Text-to-Speech API; the other tasks require manual programming
+Correct Answer: B
+Explanation: Breaking down the requirements:
+1. Multiple languages → Translation API (detect + translate)
+2. Detect sentiment → Natural Language API (sentiment analysis)
+3. Route angry customers → Uses sentiment results (logic, not API)
+4. Read aloud → Text-to-Speech API
+You don't need Vision API (no images) or Speech-to-Text (no audio input). All these tasks require APIs, not just manual programming. Option B correctly identifies the three necessary APIs.
+Learning Objective Covered: 1.2 - Integrate multiple third-party AI services for complex tasks
+________________
+
+
+ANSWER KEY & SCORING
+Question
+	Answer
+	Difficulty
+	Topic
+	1
+	B
+	Foundational
+	API vs. Training
+	2
+	B
+	Foundational
+	REST/HTTP
+	3
+	B
+	Foundational
+	JSON Parsing
+	4
+	B
+	Intermediate
+	Service Selection
+	5
+	B
+	Intermediate
+	Security
+	6
+	B
+	Intermediate
+	Platform Comparison
+	7
+	B
+	Advanced
+	Code Analysis
+	8
+	B
+	Advanced
+	Error Handling
+	9
+	C
+	Advanced
+	Strategic Decision
+	10
+	B
+	Advanced
+	Multi-API Integration
+	________________
+
+
+Scoring Guide
+10/10 (100%) - Perfect! Mastered all concepts 9/10 (90%) - Excellent! Minor gaps, review one area 8/10 (80%) - Good! Solid understanding, review 2 areas 7/10 (70%) - Passing! Met learning objectives, review 3+ areas Below 7 - Review material and retake
+________________
+
+
+Performance Analytics Template
+Track which questions learners miss to identify knowledge gaps:
+Learning Objective
+	Questions
+	Common Misses
+	Remediation
+	1.1 - API Interaction
+	Q2, Q3, Q7, Q8
+	Understanding HTTP methods and JSON
+	Review "Reading Material: Section 4"
+	1.2 - Use Public Services
+	Q4, Q6, Q10
+	Choosing right API for use case
+	Review "Examples: 1-4" and "Activities"
+	1.3 - API vs. Training
+	Q1, Q9
+	When to use APIs vs. custom models
+	Review "Reading Material: Section 5"
+	________________
+
+
+Extended Response Questions (Optional - For Deeper Assessment)
+Optional Question 11: Short Answer
+Explain why caching API results can save money. Provide a specific example.
+Model Answer (Key points to look for):
+* APIs charge per request
+* Caching stores previous results
+* Repeated queries use cached results instead of new API calls
+* Example: A product review appears 10 times across different users. Without caching, 10 API calls ($0.10). With caching, 1 API call + 9 cache hits ($0.01).
+* Savings: 90% reduction in API costs for duplicate requests
+Scoring:
+* Full answer (5 points): Includes caching concept + specific numbers + example
+* Partial (3 points): Explains caching but vague on savings
+* Basic (1 point): Mentions caching but no clear explanation
+________________
+
+
+Optional Question 12: Application Exercise
+Design an API integration for this scenario:
+Problem: A real estate company wants to automatically generate listing descriptions for 50,000+ property photos.
+Your Task:
+1. Identify which AI API(s) you would use
+2. Describe the workflow (input → API call → output)
+3. Identify one potential issue and how to handle it
+Model Answer Structure:
+APIs Used:
+* Vision API (image analysis)
+* Natural Language API (optional - to improve descriptions)
+* Text-to-Speech (optional - for audio descriptions)
+Workflow:
+Property Photo
+    ↓
+Vision API (detect objects, condition, features)
+    ↓
+Generate Description (e.g., "Spacious bedroom with natural lighting")
+    ↓
+Save to Listing Database
+
+
+Potential Issues:
+1. Cost: 50,000 images × API rate = significant expense
+   * Solution: Batch processing, monitor costs, cache similar properties
+2. Quality: Generic descriptions may miss unique features
+   * Solution: Use API as starting point, have human review
+3. Time: Sequential processing takes hours
+   * Solution: Parallel processing with async calls
+Scoring Rubric:
+* Correct APIs selected (2 points)
+* Clear workflow diagram/description (2 points)
+* Identified realistic issue (1 point)
+* Proposed practical solution (1 point)
+* Total: 6 points
+________________
+
+
+Quiz Delivery Recommendations
+For Online Learning Platforms:
+* Display one question at a time
+* Provide immediate feedback after each answer
+* Show correct answer with explanation if learner answers incorrectly
+* Allow one retake (take best score)
+* Display progress bar (e.g., "Question 3/10")
+Question Display Format:
+═══════════════════════════════════════════════════════
+Question 2 of 10 | Difficulty: ⭐⭐ (Foundational)
+═══════════════════════════════════════════════════════
+
+
+When making an API call to a sentiment analysis service, 
+which HTTP method would you typically use?
+
+
+☐ A) GET - to retrieve sentiment scores from the API
+☐ B) POST - to send text data to the API for processing
+☐ C) PUT - to update the sentiment analysis model
+☐ D) DELETE - to remove your text from the API servers
+
+
+[SUBMIT ANSWER]
+
+
+Feedback Flow (if answer is wrong):
+❌ Incorrect
+
+
+Your Answer: A (GET)
+Correct Answer: B (POST)
+
+
+Explanation:
+POST requests are used when sending data TO the server 
+for processing. In sentiment analysis, you POST your text 
+to the API, which then processes it and returns results...
+
+
+[NEXT QUESTION] or [REVIEW MATERIAL]
+
+
+Feedback Flow (if answer is correct):
+✓ Correct!
+
+
+Explanation:
+POST requests are used when sending data TO the server 
+for processing...
+
+
+[NEXT QUESTION]
+
+
+________________
+
+
+Quiz Variations
+Version A (Standard - 10 questions, 15 minutes)
+Used for first attempt, includes questions 1-10
+Version B (Quick Check - 5 questions, 7 minutes)
+Quick comprehension check, sample: Q1, Q3, Q5, Q7, Q9
+Version C (Advanced Mastery - 10 questions, 20 minutes)
+Includes optional Q11 & Q12, focuses on application and analysis
+Version D (Refresher - 6 questions, 10 minutes)
+For learners revisiting module, focuses on core concepts: Q1, Q2, Q4, Q6, Q9, Q10
+________________
+
+
+Accessibility Features
+✓ For Dyslexic Learners: Provide audio version of questions ✓ For Blind Learners: Ensure screen reader compatibility, alt text for code ✓ For Motor Disabilities: Allow keyboard navigation, ample response time ✓ For ESL Learners: Provide bilingual glossary, highlight technical terms
+________________
+
+
+Bilingual Support
+Spanish Translation Example (Q1):
+¿Cuál es la ventaja principal de usar una API de IA en lugar de entrenar un modelo desde cero?
+A) Las API son más baratas de desarrollar que entrenar cualquier modelo B) Las API proporcionan acceso inmediato a modelos preentrenados sin requerir experiencia en ML o grandes conjuntos de datos C) Las API solo pueden ser utilizadas por programadores principiantes D) Las API no requieren ningún conocimiento de programación
+Respuesta Correcta: B
+________________
+
+
+Remediation Path for Struggling Learners
+If learner scores below 70%:
+1. Identify weak areas using performance analytics table
+2. Review relevant sections:
+   * Concept gaps → Review Reading Material
+   * Implementation gaps → Review Examples & Activities
+   * Integration gaps → Re-do hands-on activity
+3. Practice questions - Review questions in weak area
+4. Retake quiz - Focus on previously missed questions
+5. One-on-one support - If still struggling, connect with instructor
+________________
+
+
+Quiz Statistics Template (For Instructors)
+Track quiz performance across cohorts:
+Module 9 Quiz Performance Report
+═══════════════════════════════════════════════════════
+
+
+Total Learners: 250
+Average Score: 78.4%
+Pass Rate (≥70%): 87%
+
+
+Question Performance:
+Q1: 92% correct (strong understanding)
+Q2: 88% correct
+Q3: 84% correct
+Q4: 76% correct
+Q5: 71% correct (needs reinforcement)
+Q6: 73% correct (needs reinforcement)
+Q7: 65% correct (needs reinforcement) ⚠️
+Q8: 69% correct (needs reinforcement) ⚠️
+Q9: 72% correct
+Q10: 81% correct
+
+
+Recommendation: 
+Code analysis questions (Q7-Q8) need better explanation
+in activities. Consider adding more code walkthroughs.
+
+
+________________
+
+
+Answer Submission & Grading
+Automatic Scoring:
+* Multiple choice questions auto-score immediately
+* Compare learner answer to answer key
+* Display score and feedback instantly
+Manual Review (Optional):
+* Extended response questions (Q11-Q12) can be reviewed by instructors
+* Use scoring rubric provided
+* Give personalized feedback within 24-48 hours
+________________
+
+
+Quiz Time Recommendations
+Recommended Time Allocation:
+* Multiple Choice (Q1-Q6): 1.5 minutes each = 9 minutes
+* Code Analysis (Q7-Q8): 2 minutes each = 4 minutes
+* Scenario (Q9-Q10): 1.5 minutes each = 3 minutes
+* Total: 16 minutes (includes 1 minute buffer)
+________________
+
+
+Post-Quiz Learning Path
+After completing quiz, learners receive personalized recommendations:
+If score 90-100%:
+* ✓ Congratulations! You've mastered Module 9
+* Consider: Advanced topics (fine-tuning APIs, production deployment)
+* Challenge: Build a multi-API integration project
+If score 80-89%:
+* Good work! Review areas where you missed questions
+* Consider: Re-read relevant sections, watch example walkthroughs
+* Challenge: Complete bonus Examples Q11-Q12
+If score 70-79%:
+* You've met the learning objectives. Some areas need reinforcement.
+* Required: Review one hands-on activity you found challenging
+* Challenge: Teach a peer one of the examples
+If score Below 70%:
+* Let's strengthen your understanding
+* Required: Review all reading material, redo hands-on activities
+* Support: Connect with instructor for one-on-one guidance
+* Opportunity: Retake quiz after review
+________________
+
+
+Total Quiz Questions: 10 (plus 2 optional) Estimated Completion Time: 15 minutes Passing Score: 70% (7/10) Format: Multiple choice + Code analysis + Scenarios

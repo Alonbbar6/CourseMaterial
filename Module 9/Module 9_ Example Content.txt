@@ -1,0 +1,1139 @@
+﻿Module 9: Building with AI APIs and Tools
+Example Content (20% - Real-World Use Cases & Code Examples)
+________________
+
+
+Overview
+This section contains practical, real-world examples demonstrating how AI APIs are used in production applications. Each example includes use cases, code snippets, output demonstrations, and lessons learned.
+Examples Included: 8 comprehensive scenarios
+* 3 Business Use Cases
+* 2 Developer Walkthroughs
+* 2 Integration Patterns
+* 1 Advanced Scenario
+________________
+
+
+EXAMPLE 1: E-Commerce Product Review Analysis
+The Business Problem
+An online retailer processes 10,000+ customer reviews daily. Manually reading each review is impossible. They need to automatically identify which reviews are praising the product and which are complaints.
+Solution Overview
+Use sentiment analysis API to automatically classify reviews and flag negative ones for immediate attention.
+Code Example
+from google.cloud import language_v1
+import json
+
+
+class ReviewAnalyzer:
+    def __init__(self):
+        self.client = language_v1.LanguageServiceClient()
+    
+    def analyze_review(self, review_text):
+        """Analyzes a single product review"""
+        document = language_v1.Document(
+            content=review_text,
+            type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+        
+        response = self.client.analyze_sentiment(
+            request={'document': document}
+        )
+        
+        return {
+            'text': review_text[:100],
+            'sentiment_score': response.document_sentiment.score,
+            'magnitude': response.document_sentiment.magnitude,
+            'sentiment_type': self._classify_sentiment(response.document_sentiment.score)
+        }
+    
+    def _classify_sentiment(self, score):
+        if score >= 0.5:
+            return 'HIGHLY_POSITIVE'
+        elif score >= 0.1:
+            return 'POSITIVE'
+        elif score <= -0.5:
+            return 'HIGHLY_NEGATIVE'
+        elif score <= -0.1:
+            return 'NEGATIVE'
+        else:
+            return 'NEUTRAL'
+    
+    def process_batch_reviews(self, reviews_list):
+        """Process multiple reviews and categorize them"""
+        results = {
+            'HIGHLY_POSITIVE': [],
+            'POSITIVE': [],
+            'NEUTRAL': [],
+            'NEGATIVE': [],
+            'HIGHLY_NEGATIVE': []
+        }
+        
+        for review in reviews_list:
+            analysis = self.analyze_review(review)
+            category = analysis['sentiment_type']
+            results[category].append(analysis)
+        
+        return results
+
+
+# Real-world example
+sample_reviews = [
+    "This product is AMAZING! Best purchase ever. Five stars!",
+    "Good quality but arrived late. Overall satisfied.",
+    "It's okay, nothing special. Does what it says.",
+    "Terrible quality. Broke after 2 days. Very disappointed.",
+    "Worst product I've ever bought. Waste of money!",
+]
+
+
+analyzer = ReviewAnalyzer()
+categorized_reviews = analyzer.process_batch_reviews(sample_reviews)
+
+
+print("=" * 70)
+print("PRODUCT REVIEW ANALYSIS REPORT")
+print("=" * 70)
+
+
+for category in ['HIGHLY_POSITIVE', 'POSITIVE', 'NEUTRAL', 'NEGATIVE', 'HIGHLY_NEGATIVE']:
+    count = len(categorized_reviews[category])
+    percentage = (count / len(sample_reviews)) * 100
+    print(f"{category:20} : {count} reviews ({percentage:.1f}%)")
+    
+    for review in categorized_reviews[category][:2]:  # Show first 2
+        print(f"  ├─ Score: {review['sentiment_score']:.3f} | {review['text']}")
+
+
+Output Example
+======================================================================
+PRODUCT REVIEW ANALYSIS REPORT
+======================================================================
+HIGHLY_POSITIVE      : 2 reviews (40.0%)
+  ├─ Score: 0.900 | This product is AMAZING! Best purchase ever.
+  ├─ Score: 0.800 | Excellent product! Exceeded expectations!
+
+
+POSITIVE             : 1 reviews (20.0%)
+  ├─ Score: 0.400 | Good quality but arrived late. Overall sati
+
+
+NEUTRAL              : 1 reviews (20.0%)
+  ├─ Score: 0.100 | It's okay, nothing special. Does what it s
+
+
+HIGHLY_NEGATIVE      : 1 reviews (20.0%)
+  ├─ Score: -0.900 | Worst product I've ever bought. Waste of
+
+
+Business Impact
+Before API Implementation:
+* Manual review of 10,000 reviews = 40+ hours/week
+* Inconsistent classification
+* Late problem identification
+After API Implementation:
+* Automated processing: 10,000 reviews in < 1 minute
+* Consistent, objective scoring
+* Negative reviews flagged immediately for response
+* Cost savings: ~$2,000/month in labor
+Key Lessons
+✓ Scalability: APIs handle volume that would overwhelm manual processes ✓ Consistency: Automated analysis applies same criteria to all data ✓ Speed: Results returned instantly, enabling real-time action ✗ Limitation: May miss context-specific meanings or sarcasm
+________________
+
+
+EXAMPLE 2: Accessible Audio Content for Educational Videos
+The Business Problem
+An online education platform has 1,000+ video lectures but no transcripts. Students with hearing disabilities cannot access content. Adding manual transcription would cost $50,000+.
+Solution Overview
+Use Text-to-Speech API to automatically generate audio descriptions and narration for educational content.
+Code Example
+from google.cloud import texttospeech
+from pathlib import Path
+
+
+class AccessibleContentGenerator:
+    def __init__(self):
+        self.client = texttospeech.TextToSpeechClient()
+        self.voices = {
+            'instructor': {
+                'language_code': 'en-US',
+                'name': 'en-US-Neural2-A',  # Professional male voice
+                'speaking_rate': 0.95
+            },
+            'narrator': {
+                'language_code': 'en-US',
+                'name': 'en-US-Neural2-C',  # Clear female voice
+                'speaking_rate': 1.0
+            },
+            'spanish': {
+                'language_code': 'es-ES',
+                'name': 'es-ES-Neural2-A',
+                'speaking_rate': 1.0
+            }
+        }
+    
+    def create_narration(self, text, voice_type='narrator'):
+        """Generate speech from educational content"""
+        
+        voice_config = self.voices[voice_type]
+        
+        synthesis_input = texttospeech.SynthesisInput(text=text)
+        
+        voice = texttospeech.VoiceSelectionParams(
+            language_code=voice_config['language_code'],
+            name=voice_config['name']
+        )
+        
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3,
+            speaking_rate=voice_config['speaking_rate']
+        )
+        
+        response = self.client.synthesize_speech(
+            input=synthesis_input,
+            voice=voice,
+            audio_config=audio_config
+        )
+        
+        return response.audio_content
+    
+    def generate_course_narration(self, course_content):
+        """Generate complete course narration"""
+        
+        results = []
+        
+        for lesson_index, lesson in enumerate(course_content, 1):
+            print(f"Generating narration for Lesson {lesson_index}...")
+            
+            # Main content
+            main_audio = self.create_narration(lesson['title'], 'instructor')
+            
+            # Description
+            desc_audio = self.create_narration(lesson['description'], 'narrator')
+            
+            filename = f"lesson_{lesson_index:02d}_narration.mp3"
+            with open(filename, "wb") as out:
+                out.write(main_audio + desc_audio)
+            
+            results.append({
+                'lesson': lesson['title'],
+                'audio_file': filename,
+                'size_bytes': len(main_audio) + len(desc_audio)
+            })
+        
+        return results
+
+
+# Example course content
+math_course = [
+    {
+        'title': 'Algebra Fundamentals',
+        'description': 'Learn the basics of algebraic equations, including variables, coefficients, and solving for X.'
+    },
+    {
+        'title': 'Quadratic Equations',
+        'description': 'Explore quadratic functions, their graphs, and methods for finding solutions.'
+    },
+    {
+        'title': 'Systems of Equations',
+        'description': 'Understand how to solve systems with multiple equations and variables.'
+    }
+]
+
+
+generator = AccessibleContentGenerator()
+course_narrations = generator.generate_course_narration(math_course)
+
+
+print("\n" + "=" * 70)
+print("ACCESSIBILITY REPORT")
+print("=" * 70)
+print(f"Total lessons: {len(course_narrations)}")
+print(f"Total audio generated: {sum(r['size_bytes'] for r in course_narrations):,} bytes")
+print("\nGenerated Files:")
+for item in course_narrations:
+    print(f"  ✓ {item['audio_file']} ({item['size_bytes']:,} bytes)")
+
+
+Output Example
+Generating narration for Lesson 1...
+Generating narration for Lesson 2...
+Generating narration for Lesson 3...
+
+
+======================================================================
+ACCESSIBILITY REPORT
+======================================================================
+Total lessons: 3
+Total audio generated: 156,234 bytes
+
+
+Generated Files:
+  ✓ lesson_01_narration.mp3 (45,678 bytes)
+  ✓ lesson_02_narration.mp3 (52,341 bytes)
+  ✓ lesson_03_narration.mp3 (58,215 bytes)
+
+
+Business Impact
+Before API Implementation:
+* 1,000 videos without accessibility features
+* Manual transcription: $50,000+ investment
+* Timeline: 3-6 months to complete
+* Excludes non-English speakers
+After API Implementation:
+* 1,000 videos with instant audio narration
+* Cost: ~$500 (API charges)
+* Timeline: 1-2 days to generate all content
+* Multi-language support available
+* Improved SEO (transcripts help search engines)
+Key Lessons
+✓ Accessibility: APIs enable inclusive design at scale ✓ Cost Reduction: Automates expensive manual processes ✓ Quality: Neural voices sound natural and professional ✓ Flexibility: Multiple voice options for different contexts ✗ Limitation: May mispronounce technical terms (fixable with SSML)
+________________
+
+
+EXAMPLE 3: Smart Document Processing for Insurance Claims
+The Business Problem
+Insurance company receives 500+ claims daily. Each claim includes photos of damaged property. Extracting text from images and identifying object types manually takes hours.
+Solution Overview
+Use Vision API to automatically extract text and identify damage patterns from claim photos.
+Code Example
+from google.cloud import vision
+import os
+
+
+class InsuranceClaimProcessor:
+    def __init__(self):
+        self.client = vision.ImageAnnotatorClient()
+    
+    def process_claim_image(self, image_path):
+        """Analyze insurance claim photo"""
+        
+        with open(image_path, "rb") as image_file:
+            content = image_file.read()
+        
+        image = vision.Image(content=content)
+        
+        # Text extraction (for claim notes, policy numbers)
+        text_response = self.client.text_detection(image=image)
+        
+        # Object detection (identify damage type)
+        objects_response = self.client.object_localization(image=image)
+        
+        # Label detection (general damage assessment)
+        labels_response = self.client.label_detection(image=image)
+        
+        return {
+            'extracted_text': self._extract_text(text_response),
+            'detected_objects': self._extract_objects(objects_response),
+            'damage_assessment': self._assess_damage(labels_response)
+        }
+    
+    def _extract_text(self, response):
+        """Extract readable text from image"""
+        texts = []
+        for annotation in response.text_annotations[1:]:  # Skip full-page annotation
+            texts.append(annotation.description)
+        return texts
+    
+    def _extract_objects(self, response):
+        """Identify specific objects in image"""
+        objects = []
+        for obj in response.localized_object_annotations[:5]:
+            objects.append({
+                'name': obj.name,
+                'confidence': int(obj.score * 100),
+                'location': f"({obj.bounding_poly.normalized_vertices[0].x}, {obj.bounding_poly.normalized_vertices[0].y})"
+            })
+        return objects
+    
+    def _assess_damage(self, response):
+        """Assess damage severity based on detected labels"""
+        severity_keywords = {
+            'severe': ['fire', 'explosion', 'collapse', 'flooding'],
+            'moderate': ['broken', 'crack', 'dent', 'hole', 'burn'],
+            'minor': ['scratch', 'stain', 'dent']
+        }
+        
+        labels = [label.description.lower() for label in response.label_annotations]
+        
+        for severity, keywords in severity_keywords.items():
+            if any(keyword in label for label in labels for keyword in keywords):
+                return {'severity': severity, 'indicators': labels[:5]}
+        
+        return {'severity': 'undetermined', 'indicators': labels[:5]}
+    
+    def generate_claim_summary(self, claim_images):
+        """Generate automated claim summary"""
+        
+        summary = {
+            'total_images': len(claim_images),
+            'claims': [],
+            'immediate_action_needed': []
+        }
+        
+        for image_path in claim_images:
+            print(f"Processing: {image_path}")
+            analysis = self.process_claim_image(image_path)
+            
+            claim_info = {
+                'image': os.path.basename(image_path),
+                'severity': analysis['damage_assessment']['severity'],
+                'extracted_text': analysis['extracted_text'][:100],
+                'objects_detected': analysis['detected_objects']
+            }
+            
+            summary['claims'].append(claim_info)
+            
+            if analysis['damage_assessment']['severity'] == 'severe':
+                summary['immediate_action_needed'].append(image_path)
+        
+        return summary
+
+
+# Example usage (simulated)
+claim_images = [
+    'claim_photo_1.jpg',  # Fire damage
+    'claim_photo_2.jpg',  # Water damage
+    'claim_photo_3.jpg',  # Minor dent
+]
+
+
+processor = InsuranceClaimProcessor()
+claim_summary = processor.generate_claim_summary(claim_images)
+
+
+print("\n" + "=" * 70)
+print("INSURANCE CLAIM PROCESSING REPORT")
+print("=" * 70)
+print(f"Total images processed: {claim_summary['total_images']}")
+print(f"Severe damage cases requiring immediate attention: {len(claim_summary['immediate_action_needed'])}")
+print("\nClaims Summary:")
+for claim in claim_summary['claims']:
+    print(f"\nImage: {claim['image']}")
+    print(f"  Severity: {claim['severity'].upper()}")
+    print(f"  Objects detected: {', '.join([o['name'] for o in claim['objects_detected']])}")
+    if claim['extracted_text']:
+        print(f"  Text found: {claim['extracted_text'][:60]}...")
+
+
+Output Example
+Processing: claim_photo_1.jpg
+Processing: claim_photo_2.jpg
+Processing: claim_photo_3.jpg
+
+
+======================================================================
+INSURANCE CLAIM PROCESSING REPORT
+======================================================================
+Total images processed: 3
+Severe damage cases requiring immediate attention: 1
+
+
+Claims Summary:
+
+
+Image: claim_photo_1.jpg
+  Severity: SEVERE
+  Objects detected: fire damage, burned wood, ash
+  Text found: Policy #12345, Claim Date: 2024-01-15
+
+
+Image: claim_photo_2.jpg
+  Severity: MODERATE
+  Objects detected: water damage, wet carpet, mold
+  Text found: Water entry from roof leak
+
+
+Image: claim_photo_3.jpg
+  Severity: MINOR
+  Objects detected: minor dent, paint chip
+  Text found: Small accident damage, fender bender
+
+
+Business Impact
+Before API Implementation:
+* Manual review of 500 images/day = 10-15 staff hours
+* Inconsistent damage assessment
+* Average claim processing: 5-7 days
+* High error rate in categorization
+After API Implementation:
+* Automated analysis: 500 images in < 5 minutes
+* Consistent, objective severity ratings
+* Average claim processing: 2-3 days
+* Automatic routing to appropriate adjuster
+* Cost reduction: $3,000/week in labor
+Key Lessons
+✓ Document Processing: Automates labor-intensive data extraction ✓ Classification: Consistently categorizes damage severity ✓ Workflow Automation: Routes claims based on severity ✗ Limitation: May need human review for borderline cases ✗ Context: Cannot assess liability or coverage without additional data
+________________
+
+
+EXAMPLE 4: Developer Walkthrough - Building a Multilingual Customer Support Bot
+Scenario
+A startup wants to build a chatbot that responds to customer questions in any language. The bot should:
+1. Accept messages in any language
+2. Detect the language
+3. Translate to English for processing
+4. Generate response
+5. Translate response back to original language
+Complete Implementation
+Step 1: Set Up
+pip install google-cloud-language google-cloud-translate
+
+
+Step 2: Code Implementation
+from google.cloud import language_v1, translate_v2
+import os
+
+
+class MultilingualSupportBot:
+    def __init__(self):
+        self.language_client = language_v1.LanguageServiceClient()
+        self.translate_client = translate_v2.Client()
+        
+        # Predefined FAQ responses
+        self.faq_responses = {
+            'how do i return': "Our 30-day return policy allows full refunds. Contact our support team for assistance.",
+            'what is shipping': "We offer free shipping on orders over $50. Standard delivery is 5-7 business days.",
+            'track order': "You can track your order using the tracking link sent to your email.",
+            'payment': "We accept credit cards, PayPal, and Apple Pay.",
+            'refund': "Refunds are processed within 5-7 business days after we receive your return.",
+        }
+    
+    def detect_language(self, text):
+        """Detect the language of input text"""
+        document = language_v1.Document(
+            content=text,
+            type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+        response = self.language_client.analyze_entities(
+            request={'document': document}
+        )
+        # Get language from document metadata
+        language = response.language
+        return language  # Returns language code like 'en', 'es', 'fr'
+    
+    def translate_text(self, text, target_language='en'):
+        """Translate text to target language"""
+        result = self.translate_client.translate_text(
+            source_language='auto',
+            target_language=target_language,
+            values=[text]
+        )
+        return result['translations'][0]['translatedText']
+    
+    def find_response(self, customer_question):
+        """Match customer question to FAQ response"""
+        question_lower = customer_question.lower()
+        
+        for key, response in self.faq_responses.items():
+            if key in question_lower:
+                return response
+        
+        return "I'm not sure about that. Please contact our support team at support@company.com"
+    
+    def process_customer_message(self, message):
+        """Complete workflow: detect → translate → respond → translate back"""
+        
+        print("=" * 70)
+        print("PROCESSING CUSTOMER MESSAGE")
+        print("=" * 70)
+        
+        # Step 1: Detect language
+        detected_lang = self.detect_language(message)
+        print(f"✓ Detected language: {detected_lang}")
+        print(f"✓ Original message: {message}")
+        
+        # Step 2: Translate to English if needed
+        if detected_lang != 'en':
+            english_message = self.translate_text(message, 'en')
+            print(f"✓ Translated to English: {english_message}")
+        else:
+            english_message = message
+        
+        # Step 3: Find response
+        response = self.find_response(english_message)
+        print(f"✓ Generated response: {response}")
+        
+        # Step 4: Translate response back to original language
+        if detected_lang != 'en':
+            localized_response = self.translate_text(response, detected_lang)
+            print(f"✓ Translated back to {detected_lang}: {localized_response}")
+        else:
+            localized_response = response
+        
+        return {
+            'original_message': message,
+            'detected_language': detected_lang,
+            'response': localized_response
+        }
+
+
+# Example: Customers from different countries
+bot = MultilingualSupportBot()
+
+
+customer_messages = [
+    "How do I return my order?",  # English
+    "¿Cómo rastreo mi pedido?",  # Spanish: How do I track my order?
+    "Comment puis-je obtenir un remboursement?",  # French: How can I get a refund?
+]
+
+
+print("\n" + "=" * 70)
+print("MULTILINGUAL SUPPORT BOT - PROCESSING QUEUE")
+print("=" * 70 + "\n")
+
+
+for i, message in enumerate(customer_messages, 1):
+    print(f"\n[Message {i}]\n")
+    result = bot.process_customer_message(message)
+    print()
+
+
+Output Example
+======================================================================
+MULTILINGUAL SUPPORT BOT - PROCESSING QUEUE
+======================================================================
+
+
+[Message 1]
+
+
+======================================================================
+PROCESSING CUSTOMER MESSAGE
+======================================================================
+✓ Detected language: en
+✓ Original message: How do I return my order?
+✓ Generated response: Our 30-day return policy allows full refunds. Contact our support team for assistance.
+✓ Translated back to en: Our 30-day return policy allows full refunds. Contact our support team for assistance.
+
+
+[Message 2]
+
+
+======================================================================
+PROCESSING CUSTOMER MESSAGE
+======================================================================
+✓ Detected language: es
+✓ Original message: ¿Cómo rastreo mi pedido?
+✓ Translated to English: How do I track my order?
+✓ Generated response: You can track your order using the tracking link sent to your email.
+✓ Translated back to es: Puede rastrear su pedido utilizando el enlace de seguimiento enviado a su correo electrónico.
+
+
+Key Implementation Points
+Language Detection: Uses natural language understanding to identify language
+Auto-Translation: Automatically converts any language to English for processing
+Response Matching: Simple keyword matching (easily upgraded to ML-based similarity)
+Localization: Translates responses back to customer's original language
+________________
+
+
+EXAMPLE 5: Advanced - Real-Time Video Processing Pipeline
+Scenario
+A security company wants to analyze live security camera feeds to detect suspicious activity and generate alerts.
+Architecture Overview
+Video Stream
+    ↓
+Frame Extraction (every 5 seconds)
+    ↓
+Vision API (Object Detection)
+    ↓
+Anomaly Detection (Suspicious objects?)
+    ↓
+Text-to-Speech Alert (Warn security team)
+    ↓
+Database Log (Record incident)
+
+
+Simplified Code Example
+from google.cloud import vision, texttospeech
+import time
+
+
+class SecurityMonitoringSystem:
+    def __init__(self):
+        self.vision_client = vision.ImageAnnotatorClient()
+        self.tts_client = texttospeech.TextToSpeechClient()
+        self.alert_objects = ['weapon', 'person', 'vehicle', 'fire']
+        self.incident_log = []
+    
+    def analyze_frame(self, frame_path):
+        """Analyze single video frame"""
+        
+        with open(frame_path, "rb") as image_file:
+            content = image_file.read()
+        
+        image = vision.Image(content=content)
+        response = self.client.label_detection(image=image)
+        
+        detected_labels = [label.description.lower() for label in response.label_annotations]
+        return detected_labels
+    
+    def detect_anomaly(self, detected_labels):
+        """Check for suspicious objects"""
+        
+        suspicious_items = [item for item in detected_labels if item in self.alert_objects]
+        
+        if suspicious_items:
+            return {
+                'is_anomaly': True,
+                'items': suspicious_items,
+                'severity': 'HIGH' if 'weapon' in suspicious_items else 'MEDIUM'
+            }
+        
+        return {'is_anomaly': False}
+    
+    def generate_alert(self, anomaly_data):
+        """Generate audio alert for security team"""
+        
+        alert_text = f"ALERT! Suspicious activity detected. {', '.join(anomaly_data['items'])} spotted in sector 5."
+        
+        synthesis_input = texttospeech.SynthesisInput(text=alert_text)
+        voice = texttospeech.VoiceSelectionParams(
+            language_code="en-US",
+            name="en-US-Neural2-B"  # Urgent tone
+        )
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3,
+            speaking_rate=1.1  # Slightly faster for urgency
+        )
+        
+        response = self.tts_client.synthesize_speech(
+            input=synthesis_input,
+            voice=voice,
+            audio_config=audio_config
+        )
+        
+        # Save alert and potentially play through speakers
+        alert_file = f"alert_{int(time.time())}.mp3"
+        with open(alert_file, "wb") as out:
+            out.write(response.audio_content)
+        
+        return alert_file
+    
+    def process_video_stream(self, frame_list):
+        """Process continuous video stream"""
+        
+        for frame_path in frame_list:
+            print(f"Analyzing frame: {frame_path}")
+            
+            # Analyze frame
+            labels = self.analyze_frame(frame_path)
+            
+            # Detect anomaly
+            anomaly = self.detect_anomaly(labels)
+            
+            if anomaly['is_anomaly']:
+                print(f"🚨 ANOMALY DETECTED: {anomaly['items']}")
+                
+                # Generate alert
+                alert_file = self.generate_alert(anomaly)
+                
+                # Log incident
+                incident = {
+                    'timestamp': time.time(),
+                    'frame': frame_path,
+                    'detected_items': anomaly['items'],
+                    'severity': anomaly['severity'],
+                    'alert_file': alert_file
+                }
+                self.incident_log.append(incident)
+            else:
+                print("✓ Frame clear - no anomalies detected")
+
+
+# Usage
+security_system = SecurityMonitoringSystem()
+security_system.process_video_stream([
+    'frame_001.jpg',
+    'frame_002.jpg',
+    'frame_003.jpg'  # This one contains a weapon
+])
+
+
+________________
+
+
+EXAMPLE 6: Common API Integration Pattern - Error Handling
+The Problem
+APIs fail occasionally (network errors, quota limits, service outages). Production code needs robust error handling.
+Solution Pattern
+import time
+from google.cloud import language_v1
+from google.api_core import exceptions
+
+
+class RobustAPIClient:
+    def __init__(self, max_retries=3):
+        self.client = language_v1.LanguageServiceClient()
+        self.max_retries = max_retries
+    
+    def call_with_retry(self, text):
+        """Make API call with automatic retry logic"""
+        
+        for attempt in range(self.max_retries):
+            try:
+                # Attempt API call
+                document = language_v1.Document(
+                    content=text,
+                    type_=language_v1.Document.Type.PLAIN_TEXT
+                )
+                
+                response = self.client.analyze_sentiment(
+                    request={'document': document}
+                )
+                
+                print(f"✓ Success on attempt {attempt + 1}")
+                return response
+            
+            except exceptions.TooManyRequests:
+                # Hit rate limit
+                wait_time = 2 ** attempt  # Exponential backoff
+                print(f"Rate limited. Waiting {wait_time}s before retry...")
+                time.sleep(wait_time)
+            
+            except exceptions.ServiceUnavailable:
+                # Service temporarily down
+                wait_time = 2 ** attempt
+                print(f"Service unavailable. Retrying in {wait_time}s...")
+                time.sleep(wait_time)
+            
+            except exceptions.Unauthenticated:
+                # Credentials invalid
+                print("✗ Authentication failed. Check your credentials.")
+                raise
+            
+            except exceptions.PermissionDenied:
+                # API not enabled
+                print("✗ Permission denied. Ensure API is enabled in Google Cloud.")
+                raise
+            
+            except ValueError as e:
+                # Invalid input
+                print(f"✗ Invalid input: {e}")
+                raise
+        
+        # All retries failed
+        print(f"✗ Failed after {self.max_retries} attempts")
+        raise Exception("API call failed after all retries")
+
+
+# Usage
+client = RobustAPIClient(max_retries=3)
+try:
+    result = client.call_with_retry("This is a great product!")
+    print(f"Sentiment: {result.document_sentiment.score}")
+except Exception as e:
+    print(f"Ultimately failed: {e}")
+
+
+Key Patterns
+✓ Retry Logic: Automatically retry on transient failures
+✓ Exponential Backoff: Wait progressively longer between retries
+✓ Specific Error Handling: Handle different error types differently
+✓ Fail Fast: Immediately raise on permanent failures (auth, permissions)
+________________
+
+
+EXAMPLE 7: Cost Optimization Pattern - Caching Results
+The Problem
+APIs charge per request. Calling the same text/image multiple times wastes money.
+Solution: Cache Results
+from google.cloud import language_v1
+import hashlib
+import json
+
+
+class CachingAPIClient:
+    def __init__(self):
+        self.client = language_v1.LanguageServiceClient()
+        self.cache = {}
+    
+    def _get_cache_key(self, text):
+        """Generate unique key for text"""
+        return hashlib.md5(text.encode()).hexdigest()
+    
+    def analyze_with_cache(self, text):
+        """Analyze sentiment with result caching"""
+        
+        cache_key = self._get_cache_key(text)
+        
+        # Check if already in cache
+        if cache_key in self.cache:
+            print(f"✓ Cache hit! Returning cached result")
+            return self.cache[cache_key]
+        
+        print(f"Cache miss - calling API...")
+        
+        # Call API
+        document = language_v1.Document(
+            content=text,
+            type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+        
+        response = self.client.analyze_sentiment(
+            request={'document': document}
+        )
+        
+        # Store in cache
+        result = {
+            'sentiment': response.document_sentiment.score,
+            'magnitude': response.document_sentiment.magnitude
+        }
+        
+        self.cache[cache_key] = result
+        
+        return result
+
+
+# Example showing cache efficiency
+client = CachingAPIClient()
+
+
+test_reviews = [
+    "I love this product!",
+    "This is terrible.",
+    "I love this product!",  # Duplicate - will hit cache
+    "This is terrible.",      # Duplicate - will hit cache
+]
+
+
+print("Processing 4 reviews:\n")
+for review in test_reviews:
+    result = client.analyze_with_cache(review)
+    print(f"  {review} → Score: {result['sentiment']:.3f}\n")
+
+
+print(f"API Calls Made: 2")
+print(f"Cache Hits: 2")
+print(f"Cost Savings: 50%")
+
+
+Output
+Processing 4 reviews:
+
+
+  I love this product! → Score: 0.900
+Cache miss - calling API...
+
+
+  This is terrible. → Score: -0.850
+Cache miss - calling API...
+
+
+  I love this product! → Score: 0.900
+✓ Cache hit! Returning cached result
+
+
+  This is terrible. → Score: -0.850
+✓ Cache hit! Returning cached result
+
+
+API Calls Made: 2
+Cache Hits: 2
+Cost Savings: 50%
+
+
+________________
+
+
+EXAMPLE 8: Production Deployment - Monitoring & Logging
+Scenario
+An API integration deployed to production needs monitoring to catch issues early.
+Comprehensive Logging Example
+from google.cloud import language_v1
+import logging
+import json
+from datetime import datetime
+
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('api_usage.log'),
+        logging.StreamHandler()
+    ]
+)
+
+
+logger = logging.getLogger(__name__)
+
+
+class MonitoredAPIClient:
+    def __init__(self):
+        self.client = language_v1.LanguageServiceClient()
+        self.metrics = {
+            'total_calls': 0,
+            'successful_calls': 0,
+            'failed_calls': 0,
+            'total_characters_processed': 0,
+            'api_cost': 0
+        }
+    
+    def analyze_sentiment_monitored(self, text):
+        """Analyze sentiment with full monitoring"""
+        
+        start_time = datetime.now()
+        
+        try:
+            # Log incoming request
+            logger.info(f"Sentiment analysis request: {len(text)} characters")
+            
+            # Make API call
+            document = language_v1.Document(
+                content=text,
+                type_=language_v1.Document.Type.PLAIN_TEXT
+            )
+            
+            response = self.client.analyze_sentiment(
+                request={'document': document}
+            )
+            
+            # Calculate metrics
+            duration = (datetime.now() - start_time).total_seconds()
+            estimated_cost = len(text) * 0.00001  # $0.00001 per 1000 chars (example)
+            
+            # Update metrics
+            self.metrics['total_calls'] += 1
+            self.metrics['successful_calls'] += 1
+            self.metrics['total_characters_processed'] += len(text)
+            self.metrics['api_cost'] += estimated_cost
+            
+            # Log success
+            logger.info(f"✓ Sentiment analysis completed in {duration:.2f}s")
+            logger.debug(f"Result: {response.document_sentiment.score:.3f}")
+            
+            return response.document_sentiment.score
+        
+        except Exception as e:
+            # Log failure
+            self.metrics['total_calls'] += 1
+            self.metrics['failed_calls'] += 1
+            
+            logger.error(f"✗ Sentiment analysis failed: {str(e)}")
+            logger.exception("Full traceback:")
+            
+            raise
+    
+    def get_metrics_report(self):
+        """Generate metrics report"""
+        
+        success_rate = (
+            self.metrics['successful_calls'] / self.metrics['total_calls'] * 100
+            if self.metrics['total_calls'] > 0 else 0
+        )
+        
+        report = {
+            'timestamp': datetime.now().isoformat(),
+            'total_api_calls': self.metrics['total_calls'],
+            'successful': self.metrics['successful_calls'],
+            'failed': self.metrics['failed_calls'],
+            'success_rate': f"{success_rate:.1f}%",
+            'total_characters': self.metrics['total_characters_processed'],
+            'estimated_cost': f"${self.metrics['api_cost']:.2f}"
+        }
+        
+        logger.info(f"Metrics Report: {json.dumps(report, indent=2)}")
+        return report
+
+
+# Usage example
+client = MonitoredAPIClient()
+
+
+sample_texts = [
+    "I love this!",
+    "This is okay",
+    "Absolutely terrible",
+]
+
+
+for text in sample_texts:
+    score = client.analyze_sentiment_monitored(text)
+
+
+# Generate report
+report = client.get_metrics_report()
+
+
+Log Output Example
+2024-01-15 10:30:45,123 - __main__ - INFO - Sentiment analysis request: 12 characters
+2024-01-15 10:30:45,456 - __main__ - INFO - ✓ Sentiment analysis completed in 0.33s
+2024-01-15 10:30:46,890 - __main__ - INFO - Sentiment analysis request: 17 characters
+2024-01-15 10:30:47,234 - __main__ - INFO - ✓ Sentiment analysis completed in 0.34s
+
+
+Metrics Report: {
+  "timestamp": "2024-01-15T10:30:47.567890",
+  "total_api_calls": 3,
+  "successful": 3,
+  "failed": 0,
+  "success_rate": "100.0%",
+  "total_characters": 52,
+  "estimated_cost": "$0.00"
+}
+
+
+________________
+
+
+Summary: Key Takeaways from Examples
+Example
+	Key Concept
+	Business Value
+	Review Analysis
+	Batch Processing
+	Scale manual tasks
+	Accessible Content
+	Multi-API Integration
+	Inclusivity + Cost Savings
+	Insurance Claims
+	Document Processing
+	Faster decisions
+	Support Bot
+	Real-time Translation
+	Global customer support
+	Video Security
+	Continuous Monitoring
+	Real-time alerts
+	Error Handling
+	Resilience
+	Production reliability
+	Caching
+	Cost Optimization
+	Reduce API spend
+	Logging
+	Monitoring
+	Track performance
+	________________
+
+
+Common Patterns Across All Examples
+✓ Prepare Data: Format inputs correctly for API ✓ Handle Response: Parse JSON responses accurately ✓ Validate Output: Check for expected results ✓ Error Handling: Implement retry logic and fallbacks ✓ Monitor Usage: Track cost and performance ✓ Scale Safely: Test with small batches first
+________________
+
+
+When to Use Each API
+API
+	Best For
+	Example
+	Sentiment Analysis
+	Customer feedback, social monitoring
+	Product reviews
+	Text-to-Speech
+	Accessibility, audio content
+	Educational videos
+	Vision
+	Document processing, object detection
+	Insurance claims
+	Translation
+	Global applications, support
+	Multilingual chatbot
+	Language Understanding
+	Intent detection, categorization
+	Customer support routing
+	________________
+
+
+Total Example Content: 8 Comprehensive Scenarios Estimated Reading Time: 30-40 minutes Code Examples Provided: 15+ Real-World Use Cases Covered: 5
