@@ -1,0 +1,317 @@
+﻿Module 8: Responsible AI and Ethics
+Quiz: Scenario-Based Questions (12 minutes)
+Module Overview: This quiz comprises 10% of the 120-minute module, testing learners' understanding of Responsible AI principles through realistic scenarios.
+Quiz Format: 10 scenario-based questions requiring ethical judgment and application of concepts Time Allocation: 12 minutes total (approximately 1 minute per question) Passing Score: 70% (7 out of 10 correct)
+________________
+
+
+QUIZ INSTRUCTIONS
+Each question presents a realistic AI ethics scenario. Choose the BEST response that demonstrates understanding of Responsible AI principles (Fairness, Transparency, Accountability) and ethical decision-making. Some questions may have multiple defensible answers, but one option best aligns with Responsible AI practices.
+________________
+
+
+QUESTION 1: Identifying AI Bias
+Scenario: A bank's loan approval AI system approves 78% of applications from suburban zip codes but only 52% from urban zip codes, even when applicants have similar credit scores and income levels.
+Question: What type of bias is MOST likely at play here?
+A) Algorithmic bias - the model's mathematical formulas are flawed
+B) Data bias - the training data reflects historical lending discrimination
+C) Deployment bias - the system is being used incorrectly
+D) Confirmation bias - human reviewers are influencing outcomes
+Correct Answer: B - Data bias
+Explanation: This scenario demonstrates data bias, where historical patterns of discrimination (redlining, differential lending practices) in the training data cause the AI to perpetuate these patterns. While algorithmic choices matter, the root cause is biased historical data that the model learned from.
+Learning Objective Assessed: 1.1 - Define and recognize different types of AI bias
+________________
+
+
+QUESTION 2: Fairness vs. Accuracy Trade-off
+Scenario: A hospital can deploy an AI diagnostic tool with 92% overall accuracy, or wait 6 months to deploy a version with 88% overall accuracy but equal performance across all demographic groups (eliminating the current 15% accuracy gap between groups).
+Question: Which decision BEST reflects Responsible AI principles?
+A) Deploy immediately - higher overall accuracy saves more lives
+B) Wait 6 months - fairness requires equal performance across groups
+C) Deploy now with warnings about limitations for affected groups
+D) Deploy for high-accuracy groups only, use traditional methods for others
+Correct Answer: B - Wait 6 months
+Explanation: Responsible AI prioritizes fairness and equity. Deploying a system that provides significantly worse care to some demographic groups violates fairness principles, even if overall accuracy is higher. The 6-month delay ensures equitable care, aligning with the principle that AI should not exacerbate healthcare disparities.
+Learning Objective Assessed: 1.2 - Explain the core principles of Responsible AI (Fairness)
+________________
+
+
+QUESTION 3: Transparency in High-Stakes Decisions
+Scenario: An AI system denies a family's mortgage application. When asked why, the company explains: "Our AI model considers 423 factors in complex, non-linear ways that cannot be simplified into a clear explanation."
+Question: What is the PRIMARY ethical problem with this response?
+A) The AI model is too complex and should be replaced with a simpler one
+B) Lack of transparency prevents the family from understanding or challenging the decision
+C) The company should have used only traditional credit scoring methods
+D) Too many factors make the system inaccurate
+Correct Answer: B - Lack of transparency prevents understanding or challenging the decision
+Explanation: This violates the transparency principle of Responsible AI. For high-stakes decisions affecting people's lives (housing, healthcare, employment), individuals have a right to understand why decisions were made and to challenge potentially unfair outcomes. Explainable AI (XAI) is essential for accountability in these contexts.
+Learning Objective Assessed: 1.2 - Explain the core principles of Responsible AI (Transparency)
+________________
+
+
+QUESTION 4: Accountability Chain
+Scenario: An autonomous delivery robot hits a pedestrian. Investigation reveals: the AI company's algorithm worked as programmed, the robot manufacturer followed all specifications, the delivery company properly maintained the robot, and the pedestrian was jaywalking.
+Question: From a Responsible AI perspective, who bears PRIMARY accountability?
+A) The pedestrian, for jaywalking
+B) The AI company, as the creator of the decision-making system
+C) The delivery company, as the operator of the robot
+D) All parties share accountability; harm occurred despite proper procedures
+Correct Answer: D - All parties share accountability
+Explanation: Responsible AI requires establishing clear accountability frameworks for complex AI systems. When harm occurs, accountability may be distributed across the entire chain - creators, implementers, and operators all bear responsibility for ensuring safety. This scenario illustrates why AI governance requires multi-stakeholder accountability rather than single-point blame.
+Learning Objective Assessed: 1.2 - Explain the core principles of Responsible AI (Accountability)
+________________
+
+
+QUESTION 5: Privacy and Consent
+Scenario: A health AI startup wants to train a disease prediction model using electronic health records from 5 million patients. The data is anonymized (names removed), but the company did not obtain specific consent for this AI application. The research could potentially save thousands of lives annually.
+Question: What should the company do to align with Responsible AI principles?
+A) Proceed - anonymized data doesn't require additional consent
+B) Proceed - the public health benefit outweighs privacy concerns
+C) Seek institutional review board approval and implement robust de-identification measures beyond basic anonymization
+D) Abandon the project - using data without explicit consent is never ethical
+Correct Answer: C - Seek IRB approval and robust de-identification
+Explanation: Responsible AI requires balancing innovation with privacy protection. While the public health benefit is significant, proper governance through institutional review boards (IRBs) ensures ethical oversight. Robust de-identification (beyond simple anonymization) protects privacy while enabling beneficial research. This approach respects data governance principles while advancing public good.
+Learning Objective Assessed: 1.3 - Analyze the societal and ethical implications of widespread AI adoption
+________________
+
+
+QUESTION 6: Misinformation and Deepfakes
+Scenario: Your company's generative AI tool can create highly realistic videos of anyone saying anything (deepfakes). A political campaign wants to use it to create "parody" videos of their opponent saying outrageous things, clearly labeled as parody.
+Question: What is the MOST significant ethical concern with approving this use?
+A) Even labeled parodies can spread as misinformation when context is removed
+B) Political speech should not involve AI-generated content
+C) The technology might be reverse-engineered by bad actors
+D) Creating videos of real people without consent is always wrong
+Correct Answer: A - Labeled parodies can spread as misinformation
+Explanation: The primary concern is that content labeled as "parody" in its original context often circulates without labels on social media, becoming effective misinformation. Responsible AI considers downstream impacts and potential misuse. This scenario demonstrates how AI-generated content can contribute to misinformation even with good intentions, highlighting the need for careful governance of generative AI tools.
+Learning Objective Assessed: 1.3 - Analyze the societal and ethical implications of widespread AI adoption
+________________
+
+
+QUESTION 7: Recognizing Algorithmic Bias
+Scenario: A content moderation AI removes posts containing the word "gay" at much higher rates than posts containing the word "straight," even when the content is non-violating. The AI was trained to detect hate speech.
+Question: This BEST demonstrates which problem?
+A) Data bias - training data associated LGBTQ+ terms with negative content
+B) The AI is working correctly to protect vulnerable groups
+C) Deployment bias - the system is being applied to the wrong content
+D) Human moderators are overriding the AI incorrectly
+Correct Answer: A - Data bias in training data
+Explanation: This demonstrates data bias where the training data disproportionately contained LGBTQ+ terms in contexts labeled as hate speech (often because such communities are targets of hate). The AI learned an inappropriate association, causing it to over-moderate content from the very communities it should protect. This highlights how biased training data can cause AI to perpetuate discrimination.
+Learning Objective Assessed: 1.1 - Define and recognize different types of AI bias
+________________
+
+
+QUESTION 8: XAI (Explainable AI) Application
+Scenario: A judge uses an AI system that predicts recidivism risk for sentencing decisions. A defendant's lawyer requests an explanation for the high-risk score assigned to their client. The AI company responds that revealing the explanation would allow criminals to "game the system."
+Question: What does Responsible AI require in this situation?
+A) The company is correct - protecting the algorithm is more important
+B) Some level of explanation is required for due process, even if it risks gaming
+C) The system should not be used in judicial contexts at all
+D) Only the judge needs to understand, not the defendant
+Correct Answer: B - Some level of explanation is required for due process
+Explanation: In high-stakes judicial contexts, Responsible AI requires balancing transparency with security concerns. Due process demands that defendants understand factors affecting their sentencing. XAI techniques can provide meaningful explanations without revealing exact algorithms. Using unexplainable AI in judicial contexts violates fundamental fairness and accountability principles.
+Learning Objective Assessed: 1.2 - Explain the core principles of Responsible AI (Transparency/XAI)
+________________
+
+
+QUESTION 9: Bias Impact Assessment
+Scenario: A facial recognition system for building security has these accuracy rates:
+* Light-skinned men: 99.2%
+* Light-skinned women: 98.7%
+* Dark-skinned men: 97.1%
+* Dark-skinned women: 94.3%
+The company claims this is "acceptable performance" since all groups exceed 94%.
+Question: What is the BEST counterargument from a Responsible AI perspective?
+A) Anything above 90% is acceptable; the criticism is invalid
+B) The 5% accuracy gap means dark-skinned women face 10x more false rejections in practice
+C) All facial recognition is inherently biased and should not be used
+D) The system just needs more training data to improve
+Correct Answer: B - The accuracy gap translates to 10x more false rejections
+Explanation: While 94% sounds acceptable, the disparity matters enormously in practice. If the system processes 10,000 people daily, dark-skinned women face ~600 false rejections vs ~80 for light-skinned men - roughly 7-10x more. This creates systematically worse experiences for specific groups, violating fairness principles. Responsible AI evaluates not just overall performance but disparate impact across demographics.
+Learning Objective Assessed: 1.1 - Recognize different types of AI bias and their impact
+________________
+
+
+QUESTION 10: Comprehensive Ethical Decision
+Scenario: Your retail company's AI system optimizes product placement and pricing in real-time based on customer demographics detected by cameras. It increases prices on certain products when it detects customers from wealthier zip codes (determined by credit card data) and decreases them for others. Profit increased 23%, but civil rights groups call it "algorithmic discrimination."
+Question: Which response BEST demonstrates understanding of Responsible AI?
+A) Continue - differential pricing based on willingness to pay is standard economics
+B) Continue but stop using demographic data - use only browsing behavior
+C) Discontinue - the system creates unfair treatment based on protected characteristics
+D) Make the algorithm transparent so customers know when prices are personalized
+Correct Answer: C - Discontinue the system
+Explanation: This system violates multiple Responsible AI principles: it uses demographic data to discriminate, lacks transparency, and creates systematic unfairness. While personalized pricing exists, basing it on characteristics correlated with protected classes (race, income) perpetuates discrimination. Option D (transparency) doesn't solve the fairness problem. This scenario requires weighing profit against ethical responsibility - Responsible AI prioritizes fairness over revenue.
+Learning Objective Assessed: 1.2 and 1.3 - Explain Responsible AI principles and analyze ethical implications
+________________
+
+
+ANSWER KEY SUMMARY
+Question
+	Correct Answer
+	Primary Topic
+	Difficulty
+	1
+	B
+	Data Bias
+	Medium
+	2
+	B
+	Fairness
+	Medium
+	3
+	B
+	Transparency
+	Easy
+	4
+	D
+	Accountability
+	Hard
+	5
+	C
+	Privacy/Data Governance
+	Medium
+	6
+	A
+	Misinformation
+	Medium
+	7
+	A
+	Algorithmic Bias
+	Medium
+	8
+	B
+	XAI
+	Hard
+	9
+	B
+	Bias Impact
+	Hard
+	10
+	C
+	Comprehensive Ethics
+	Hard
+	Difficulty Distribution:
+* Easy: 1 question (10%)
+* Medium: 6 questions (60%)
+* Hard: 3 questions (30%)
+________________
+
+
+SCORING RUBRIC
+90-100% (9-10 correct): Excellent understanding of Responsible AI principles and ability to apply them to complex scenarios.
+70-89% (7-8 correct): Good understanding with minor gaps. Review specific areas where mistakes occurred.
+50-69% (5-6 correct): Developing understanding. Revisit core principles of Fairness, Transparency, and Accountability.
+Below 50% (<5 correct): Needs significant review of module content. Focus on understanding bias types and ethical frameworks.
+________________
+
+
+DETAILED FEEDBACK GUIDANCE
+For Each Wrong Answer, Provide:
+Question 1 Wrong Answers:
+* A: Algorithmic bias is possible, but the scenario points to geographical patterns suggesting historical data issues
+* C: Deployment bias occurs when systems are used in unintended contexts; this appears to be systemic
+* D: No evidence of human intervention; the pattern is systematic across applications
+Question 2 Wrong Answers:
+* A: Prioritizing overall accuracy over equity violates fairness principles
+* C: Warnings don't solve the equity problem; some groups still receive substandard care
+* D: Separate systems create "separate but equal" scenarios, historically problematic
+Question 3 Wrong Answers:
+* A: While simpler models help, the core issue is lack of explanation, not complexity alone
+* C: Traditional methods have their own biases; the issue is explainability
+* D: Number of factors doesn't determine accuracy; transparency is the issue
+Question 4 Wrong Answers:
+* A: Pedestrian behavior doesn't absolve system designers/operators of responsibility
+* B: AI creators share responsibility but aren't solely accountable
+* C: Operators share responsibility but aren't solely accountable
+Question 5 Wrong Answers:
+* A: Anonymization alone doesn't eliminate privacy concerns or consent requirements
+* B: Public benefit doesn't automatically override privacy rights and ethical review
+* D: Too extreme; there are ethical frameworks (like IRB review) that can balance concerns
+Question 6 Wrong Answers:
+* B: Political speech isn't inherently problematic; the issue is misinformation potential
+* C: While concerning, this isn't the primary ethical issue for the immediate decision
+* D: While consent matters, the core issue is misinformation spread
+Question 7 Wrong Answers:
+* B: Over-moderating LGBTQ+ content harms rather than protects these communities
+* C: The system is being deployed as intended; the problem is in its training
+* D: No evidence of human override; this is systematic algorithmic behavior
+Question 8 Wrong Answers:
+* A: Security concerns don't override due process and fundamental fairness rights
+* C: Too extreme; proper use with explainability is possible
+* D: Defendants have rights to understand factors affecting their sentencing
+Question 9 Wrong Answers:
+* A: Absolute accuracy isn't the only metric; disparate impact matters
+* C: Too absolute; some facial recognition may be appropriate with proper safeguards
+* D: While true, this doesn't address why the current disparity is problematic
+Question 10 Wrong Answers:
+* A: Standard economics doesn't justify discrimination based on protected characteristics
+* B: Still creates unfair treatment; changing the data source doesn't solve the ethics problem
+* D: Transparency doesn't make discrimination ethical
+________________
+
+
+ADDITIONAL ASSESSMENT OPTIONS
+For Advanced Learners:
+Include 2-3 bonus questions requiring written justification (50-100 words) for ethical decisions, scored on:
+* Recognition of relevant principles (Fairness, Transparency, Accountability)
+* Consideration of multiple stakeholders
+* Understanding of trade-offs
+* Practical feasibility of proposed solutions
+For Group Settings:
+* Use questions as discussion prompts
+* Have learners defend different answers
+* Explore cultural differences in ethical reasoning
+* Connect to current AI ethics news and controversies
+________________
+
+
+ALIGNMENT WITH MODULE LEARNING OBJECTIVES
+✓ LO 1.1 (Define and recognize AI bias types): Questions 1, 7, 9
+✓ LO 1.2 (Explain Responsible AI principles): Questions 2, 3, 4, 8, 10
+✓ LO 1.3 (Analyze societal/ethical implications): Questions 5, 6, 10
+________________
+
+
+INSTRUCTOR NOTES
+Before Quiz:
+* Review key concepts: bias types, Responsible AI principles, XAI
+* Remind learners that many scenarios have defensible alternative answers
+* Emphasize that quiz tests ethical reasoning, not memorization
+During Quiz:
+* Monitor time (12 minutes total)
+* Consider allowing learners to flag questions for discussion
+* Watch for patterns of confusion on specific topics
+After Quiz:
+* Review questions where >40% answered incorrectly
+* Facilitate discussion on controversial questions (2, 4, 10)
+* Connect quiz scenarios to ethical dilemmas from earlier in module
+* Highlight that real-world AI ethics rarely has clear "right answers"
+Quiz Modifications:
+* Can be administered digitally or on paper
+* Consider open-book format to emphasize application over memorization
+* May allow learners to revise answers after group discussion
+* For asynchronous learning, provide immediate automated feedback
+________________
+
+
+End of Quiz Section
+This assessment represents 10% of Module 8 (12 minutes of 120-minute module)
+ Designed to integrate with: 40% Reading, 30% Ethical Dilemmas, 20% Interactive Content
+________________
+
+
+SPANISH TRANSLATIONS - KEY TERMS IN QUIZ
+For bilingual delivery:
+* Responsible AI = IA Responsable
+* AI Bias = Sesgo de IA
+* Data Bias = Sesgo de Datos
+* Algorithmic Bias = Sesgo Algorítmico
+* Fairness = Equidad
+* Transparency = Transparencia
+* Accountability = Rendición de Cuentas
+* Explainable AI (XAI) = IA Explicable
+* Privacy = Privacidad
+* Data Governance = Gobernanza de Datos
+* Misinformation = Desinformación
+* Deepfakes = Videos Falsos Profundos / Deepfakes
+* Deployment = Implementación / Despliegue
