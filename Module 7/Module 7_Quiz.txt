@@ -1,0 +1,305 @@
+﻿Module 7: AI in Industry - Quiz
+Quiz de IA en la Industria
+Duration: 12 minutes | Questions: 10 (Mix of Multiple Choice & Short Answer) Passing Score: 70% (7/10 correct)
+________________
+
+
+Instructions
+* Read each question carefully
+* For multiple choice: Select the BEST answer
+* For short answer: Provide 2-3 sentence responses
+* Case study questions require specific details from the readings
+* Time limit: 12 minutes (recommended)
+________________
+
+
+QUESTION 1 (Multiple Choice)
+Difficulty: Easy | Points: 1
+What percentage of AI projects fail to move from pilot to production according to the module?
+A) 50%
+B) 65%
+C) 85%
+D) 95%
+Correct Answer: C) 85%
+Explanation: The module states that 85% of AI projects fail to move from pilot to production, highlighting the significant "AI implementation gap" between research/development and real-world deployment.
+________________
+
+
+QUESTION 2 (Multiple Choice - Case Study)
+Difficulty: Medium | Points: 1
+In the Google DeepMind diabetic retinopathy detection case study, what was the sensitivity rate achieved by the AI system?
+A) 85.5%
+B) 93.4%
+C) 97.5%
+D) 99.2%
+Correct Answer: C) 97.5%
+Explanation: The AI system achieved 97.5% sensitivity (meaning it catches 97.5% of diabetic retinopathy cases) and 93.4% specificity, matching or exceeding human ophthalmologist performance.
+________________
+
+
+QUESTION 3 (Multiple Choice - Technical)
+Difficulty: Medium | Points: 1
+Which of the following is NOT a core component of MLOps (Machine Learning Operations)?
+A) Version control for models and data
+B) Continuous integration and deployment (CI/CD)
+C) Manual code review for every prediction
+D) Model monitoring and retraining
+Correct Answer: C) Manual code review for every prediction
+Explanation: MLOps focuses on automation. Core components include version control, CI/CD pipelines, and automated monitoring/retraining. Manual code review for every prediction would be impractical at scale and contradicts MLOps principles.
+________________
+
+
+QUESTION 4 (Multiple Choice - Case Study)
+Difficulty: Medium | Points: 1
+PayPal's fraud detection AI system processes transactions in what timeframe to meet business requirements?
+A) Less than 10 milliseconds
+B) Less than 100 milliseconds
+C) Less than 1 second
+D) Less than 5 seconds
+Correct Answer: B) Less than 100 milliseconds
+Explanation: The case study specifies that PayPal's fraud detection must process transactions in under 100 milliseconds to meet real-time payment processing requirements.
+________________
+
+
+QUESTION 5 (Multiple Choice - Concepts)
+Difficulty: Easy | Points: 1
+What is the primary advantage of Edge AI compared to Cloud AI?
+A) Lower accuracy but faster training
+B) Ultra-low latency and privacy
+C) Higher model complexity
+D) Easier deployment process
+Correct Answer: B) Ultra-low latency and privacy
+Explanation: Edge AI runs models locally on devices, providing ultra-low latency (1-50ms vs 100-500ms for cloud) and better privacy since data never leaves the device. This comes at the cost of model size constraints.
+________________
+
+
+QUESTION 6 (Short Answer - Case Study)
+Difficulty: Medium | Points: 2
+Based on the Johns Hopkins sepsis prediction case study, describe TWO specific benefits the AI system (TREWS) provided to patient care and hospital operations.
+Sample Correct Answer: The TREWS system detected sepsis an average of 4.5 hours earlier than standard care, leading to an 18% reduction in sepsis mortality. Additionally, the system achieved $1,500 in cost savings per patient while maintaining a 99% actionable alert rate with low false positives.
+Grading Rubric:
+* Full credit (2 points): Mentions two specific quantitative benefits with accurate numbers
+* Partial credit (1 point): Mentions two benefits but numbers are missing or incorrect
+* No credit (0 points): Vague or incorrect information
+Key Facts to Include:
+* 4.5 hours earlier detection
+* 18% mortality reduction
+* $1,500 cost savings per patient
+* 99% actionable alert rate
+________________
+
+
+QUESTION 7 (Multiple Choice - Case Study)
+Difficulty: Hard | Points: 1
+What was the primary business impact of JPMorgan's COiN (Contract Intelligence) platform?
+A) Reduced contract review time from 360,000 hours annually to seconds, saving $45 million
+B) Increased loan approval rate by 85%
+C) Eliminated the need for lawyers in contract review
+D) Reduced fraud by $2 billion annually
+Correct Answer: A) Reduced contract review time from 360,000 hours annually to seconds, saving $45 million
+Explanation: COiN automated commercial credit agreement review, reducing what took 360,000 lawyer hours annually to just seconds per contract, resulting in $45 million in annual savings. Importantly, it did not eliminate lawyers but reallocated their time to higher-value work.
+________________
+
+
+QUESTION 8 (Multiple Choice - Deployment)
+Difficulty: Medium | Points: 1
+Which deployment pattern is BEST suited for processing millions of daily product recommendations that don't need to be updated in real-time?
+A) Real-time (Online) prediction
+B) Batch prediction
+C) Streaming prediction
+D) Edge inference
+Correct Answer: B) Batch prediction
+Explanation: Batch prediction processes data in large batches periodically (e.g., nightly), which is efficient for recommendations that can be pre-computed and stored. Real-time would be unnecessarily costly, and streaming is for continuous data flows.
+________________
+
+
+QUESTION 9 (Short Answer - Application)
+Difficulty: Hard | Points: 2
+A retail company wants to implement an AI recommendation system. Based on the case studies, identify TWO critical success factors they should focus on and briefly explain why each is important.
+Sample Correct Answer: First, they need a continuous learning loop where customer interactions (clicks, purchases, returns) feed back into the model to improve recommendations over time, as demonstrated by Amazon and Stitch Fix. Second, they should implement a hybrid approach combining AI with human judgment for complex decisions, ensuring personalization doesn't create filter bubbles and maintains customer trust through explainability.
+Alternative Acceptable Answer: Data quality and volume are critical - they need sufficient historical interaction data (purchases, views, cart additions) to train effective models, as Amazon uses billions of interactions. Additionally, they must carefully balance personalization with diversity to avoid filter bubbles, ensuring customers discover new products rather than seeing only similar items repeatedly.
+Grading Rubric:
+* Full credit (2 points): Identifies two relevant success factors with clear explanations tied to case studies
+* Partial credit (1 point): Identifies two factors but explanations are weak or not connected to learnings
+* No credit (0 points): Generic answers not reflecting module content
+Acceptable Success Factors:
+* Data quality and volume
+* Continuous learning/feedback loops
+* Hybrid AI-human approach
+* Privacy and trust considerations
+* Balancing personalization with diversity
+* Clear business metrics (CTR, conversion, AOV)
+* Scalable infrastructure
+________________
+
+
+QUESTION 10 (Multiple Choice - Trends)
+Difficulty: Medium | Points: 1
+According to the module, what is the median expert prediction for when Artificial General Intelligence (AGI) might be achieved?
+A) 2030
+B) 2035
+C) 2045
+D) 2060
+Correct Answer: C) 2045
+Explanation: Based on a 2024 survey of AI researchers, the median prediction for achieving AGI is 2045, though there is significant variation in expert opinions ranging from before 2030 to never.
+________________
+
+
+BONUS QUESTION (Optional - Extra Credit)
+Difficulty: Hard | Points: 1 (Extra Credit)
+Stitch Fix achieved a 45% "keep rate" (percentage of items customers keep from each shipment). Explain how AI contributed to this metric and why it matters to the business model.
+Sample Correct Answer: AI improved the keep rate from 35% to 45% by creating detailed 500+ dimension style profiles, accurately predicting sizes (better than customer self-reporting), and suggesting optimal outfit combinations to human stylists. This 10 percentage point improvement is critical because higher keep rates mean more revenue per shipment, lower return processing costs, and better customer satisfaction, directly impacting the unit economics of each "Fix."
+Grading Rubric:
+* Full credit (1 point): Explains AI's role AND business impact
+* No credit (0 points): Incomplete or incorrect explanation
+________________
+
+
+Answer Key Summary
+Question
+	Type
+	Correct Answer
+	Points
+	1
+	MC
+	C) 85%
+	1
+	2
+	MC
+	C) 97.5%
+	1
+	3
+	MC
+	C) Manual code review
+	1
+	4
+	MC
+	B) <100 milliseconds
+	1
+	5
+	MC
+	B) Ultra-low latency and privacy
+	1
+	6
+	SA
+	Two specific TREWS benefits
+	2
+	7
+	MC
+	A) 360K hours to seconds, $45M
+	1
+	8
+	MC
+	B) Batch prediction
+	1
+	9
+	SA
+	Two success factors for retail AI
+	2
+	10
+	MC
+	C) 2045
+	1
+	Bonus
+	SA
+	AI's impact on keep rate
+	1 (EC)
+	Total Possible: 12 points (11 regular + 1 bonus) Passing Score: 7/10 (70%)
+________________
+
+
+Quiz Statistics (Expected Performance)
+Difficulty Distribution:
+* Easy (Q1, Q5): 2 questions
+* Medium (Q2, Q3, Q4, Q7, Q8, Q10): 6 questions
+* Hard (Q6, Q9, Bonus): 3 questions
+Question Type Distribution:
+* Multiple Choice: 8 questions (80%)
+* Short Answer: 2 questions (20%)
+* Bonus: 1 question (extra credit)
+Content Coverage:
+* Core Concepts (Deployment/MLOps): 30%
+* Case Studies (Healthcare/Finance/Retail): 50%
+* Emerging Trends: 10%
+* Application/Analysis: 10%
+________________
+
+
+Instructor Notes
+Grading Guidelines for Short Answer Questions
+Question 6 (TREWS Benefits):
+* Look for specific numbers: 4.5 hours, 18%, $1,500
+* Accept any two quantifiable benefits from the case study
+* Give partial credit if concept is right but numbers are approximate
+Question 9 (Retail Success Factors):
+* Must connect to case study learnings (not generic AI advice)
+* Accept various valid success factors as long as explained
+* Reward application of specific examples from Amazon/Stitch Fix
+Bonus Question:
+* Must explain BOTH the AI mechanism AND business impact
+* 45% keep rate and its improvement from 35% should be mentioned
+* Economic impact (revenue, costs) is key
+Common Student Mistakes to Watch For
+1. Confusing sensitivity with specificity (Q2)
+2. Thinking Edge AI is about edges in images (Q5)
+3. Believing COiN replaced lawyers (Q7)
+4. Generic answers on Q9 without case study references
+5. Mixing up statistics between different case studies
+Time Management Guidance
+Advise students to allocate:
+* Multiple choice: 6 minutes (45 seconds each)
+* Short answer: 5 minutes (2.5 minutes each)
+* Review: 1 minute
+Accessibility Accommodations
+For students requiring extended time:
+* Provide 18 minutes (1.5x standard time)
+* Allow use of notes for short answer questions only
+* Offer read-aloud option for questions
+________________
+
+
+Quiz Administration Options
+Option 1: Online Quiz Platform
+* Use LMS built-in quiz tool
+* Auto-grade multiple choice
+* Manual grade short answer
+* Randomize question order
+* One attempt, 12-minute timer
+Option 2: Take-Home Quiz
+* Open book format
+* 24-hour submission window
+* Emphasis on short answer depth
+* Honor code acknowledgment required
+Option 3: In-Class Paper Quiz
+* Printed question sheets
+* Bubble sheet for MC
+* Written responses for SA
+* Immediate collection after 12 minutes
+Recommended: Option 1 (Online) for efficiency and immediate MC feedback
+________________
+
+
+Post-Quiz Discussion Topics
+After students complete the quiz, facilitate discussion on:
+1. Most challenging question - Why was it difficult?
+2. Case study insights - Which example was most surprising?
+3. Real-world application - How would you apply these learnings?
+4. Common misconceptions - Clarify frequent errors
+________________
+
+
+Spanish Translation Note (Nota de Traducción)
+Key terms students should know in both languages:
+* Deployment = Despliegue
+* MLOps = Operaciones de ML
+* Sensitivity = Sensibilidad
+* Specificity = Especificidad
+* Edge AI = IA en el Borde
+* Batch Prediction = Predicción por Lotes
+* Keep Rate = Tasa de Retención
+* Case Study = Estudio de Caso
+________________
+
+
+End of Quiz Materials
+This quiz assesses comprehension of Module 7: AI in Industry covering deployment concepts, real-world case studies, and emerging trends. Questions are designed to test recall, understanding, and application of key concepts.
