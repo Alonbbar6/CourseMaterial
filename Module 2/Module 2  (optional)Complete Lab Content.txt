@@ -1,0 +1,556 @@
+﻿Module 2: Machine Learning Fundamentals - Hands-on Lab
+Complete Lab Content (24 minutes)
+________________
+
+
+Introduction/Setup (3-5 minutes)
+Lab Title: Building Your First Classification Model
+Objetivo del Laboratorio / Lab Objective: Train a machine learning model to classify whether an email is spam or not spam using a simple dataset.
+What You'll Learn:
+* How to load and explore training data
+* How to split data into training and test sets
+* How to train a supervised learning classification model
+* How to evaluate model accuracy and understand overfitting
+Prerequisites:
+* A Google account (to access Google Colab)
+* Basic understanding of the concepts covered in Module 2 readings
+Setup Instructions:
+1. Open Google Colab:
+   * Go to https://colab.research.google.com
+   * Sign in with your Google account
+   * Click "New Notebook" or "File" → "New Notebook"
+2. Name your notebook:
+   * Click on "Untitled.ipynb" at the top
+   * Rename it to: Module2_Spam_Classification_Lab
+3. Understanding the Interface:
+   * Code cells: Where you'll paste and run Python code
+   * Text cells: For notes and explanations
+   * Run button (▶️): Click to execute code in a cell
+   * Runtime: The computing environment where your code runs
+What We're Building:
+You'll create a spam email classifier that learns from examples of spam and legitimate emails. The model will identify patterns in the text (like certain words or phrases) and use those patterns to classify new emails.
+Real-World Context: This is exactly how your email provider filters spam! Gmail, Outlook, and other services use similar (but more sophisticated) machine learning models.
+________________
+
+
+Guided Exercise (15-18 minutes)
+Step 1: Import Libraries and Load Data (3 minutes)
+What's happening: We're importing the tools we need and creating a simple dataset of email messages.
+python
+# Import necessary libraries
+# Bibliotecas necesarias para nuestro modelo de ML
+
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Set random seed for reproducibility
+# Establecer semilla aleatoria para reproducibilidad
+np.random.seed(42)
+
+
+print("✓ Libraries imported successfully!")
+print("✓ ¡Bibliotecas importadas exitosamente!")
+python
+# Create a sample email dataset
+# Crear un conjunto de datos de ejemplo de correos electrónicos
+
+
+# Sample emails (in real scenarios, you'd have thousands)
+emails = [
+    "Get rich quick! Buy now!",
+    "Meeting scheduled for tomorrow at 10am",
+    "Claim your prize now! Limited time offer!",
+    "Can you review the project report?",
+    "FREE money waiting for you!!!",
+    "Lunch plans for today?",
+    "WINNER! You've won $1000000",
+    "Please find attached the document",
+    "Lose weight fast with this one trick",
+    "Team meeting notes from yesterday",
+    "Click here for amazing deals!!!",
+    "Your invoice for last month",
+    "Make money from home TODAY",
+    "Coffee break at 3pm?",
+    "URGENT: Verify your account now",
+    "Quarterly report is ready for review",
+    "Congratulations! You are a winner!",
+    "Can we reschedule our call?",
+    "Buy cheap medications online",
+    "Happy birthday! Hope you have a great day"
+]
+
+
+# Labels: 1 = Spam, 0 = Not Spam (Ham)
+# Etiquetas: 1 = Spam, 0 = No Spam (Ham)
+labels = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+
+
+# Create a DataFrame for easy viewing
+# Crear un DataFrame para fácil visualización
+df = pd.DataFrame({'email': emails, 'is_spam': labels})
+
+
+print("\n📧 Our Email Dataset:")
+print("📧 Nuestro Conjunto de Datos de Correos:\n")
+print(df)
+print(f"\nTotal emails / Total de correos: {len(df)}")
+print(f"Spam emails / Correos spam: {df['is_spam'].sum()}")
+print(f"Ham emails / Correos legítimos: {len(df) - df['is_spam'].sum()}")
+✏️ YOUR TURN / TU TURNO: Run both code cells above. Observe the dataset. Can you identify patterns that might help distinguish spam from legitimate emails?
+________________
+
+
+Step 2: Split Data into Training and Test Sets (3 minutes)
+What's happening: We're dividing our data so the model can learn from some emails (training data) and we can test it on emails it has never seen (test data).
+python
+# Split the data: 70% training, 30% testing
+# Dividir los datos: 70% entrenamiento, 30% prueba
+
+
+X = df['email']  # Features (the email text)
+y = df['is_spam']  # Labels (spam or not spam)
+
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.3,  # 30% for testing
+    random_state=42,  # For reproducibility
+    stratify=y  # Ensures balanced split
+)
+
+
+print("📊 Data Split Summary / Resumen de División de Datos:")
+print("=" * 50)
+print(f"Training emails / Correos de entrenamiento: {len(X_train)}")
+print(f"  - Spam: {y_train.sum()}")
+print(f"  - Ham: {len(y_train) - y_train.sum()}")
+print(f"\nTest emails / Correos de prueba: {len(X_test)}")
+print(f"  - Spam: {y_test.sum()}")
+print(f"  - Ham: {len(y_test) - y_test.sum()}")
+
+
+# Show some training examples
+print("\n📝 Sample Training Emails / Ejemplos de Correos de Entrenamiento:")
+for i, (email, label) in enumerate(zip(X_train.head(3), y_train.head(3))):
+    spam_status = "SPAM 🚫" if label == 1 else "HAM ✅"
+    print(f"{i+1}. [{spam_status}] {email}")
+💡 KEY CONCEPT / CONCEPTO CLAVE:
+* Training Data (Datos de Entrenamiento): The model learns patterns from this data
+* Test Data (Datos de Prueba): We use this to see how well the model performs on new, unseen data
+* Why split? To detect overfitting! If the model only memorizes training data, it will perform poorly on test data.
+________________
+
+
+Step 3: Convert Text to Numbers (Feature Engineering) (3 minutes)
+What's happening: Machine learning models work with numbers, not text. We need to convert our emails into numerical features.
+python
+# Create a CountVectorizer to convert text to numbers
+# Crear un CountVectorizer para convertir texto a números
+
+
+vectorizer = CountVectorizer(
+    lowercase=True,  # Convert all to lowercase
+    stop_words='english'  # Remove common words like 'the', 'is', 'at'
+)
+
+
+# Fit the vectorizer on training data and transform both sets
+# Ajustar el vectorizador en datos de entrenamiento y transformar ambos conjuntos
+X_train_vectorized = vectorizer.fit_transform(X_train)
+X_test_vectorized = vectorizer.transform(X_test)
+
+
+print("🔢 Text Vectorization Complete / Vectorización de Texto Completa")
+print("=" * 50)
+print(f"Vocabulary size / Tamaño del vocabulario: {len(vectorizer.vocabulary_)}")
+print(f"Training matrix shape / Forma de matriz de entrenamiento: {X_train_vectorized.shape}")
+print(f"Test matrix shape / Forma de matriz de prueba: {X_test_vectorized.shape}")
+
+
+# Show some of the vocabulary learned
+print("\n📚 Sample Words in Vocabulary / Palabras de Muestra en Vocabulario:")
+vocab_sample = list(vectorizer.vocabulary_.items())[:10]
+for word, index in vocab_sample:
+    print(f"  '{word}' → index {index}")
+
+
+# Visualize a sample vectorized email
+print("\n🔍 Example: How One Email Looks as Numbers")
+print("🔍 Ejemplo: Cómo se Ve un Correo como Números\n")
+sample_email = X_train.iloc[0]
+sample_vector = X_train_vectorized[0].toarray()[0]
+print(f"Original email / Correo original: '{sample_email}'")
+print(f"Label / Etiqueta: {'SPAM' if y_train.iloc[0] == 1 else 'HAM'}")
+print(f"Vectorized (first 20 values) / Vectorizado (primeros 20 valores):")
+print(sample_vector[:20])
+💡 KEY CONCEPT / CONCEPTO CLAVE: CountVectorizer creates a "bag of words" representation. Each unique word becomes a feature, and we count how many times it appears in each email. This is how we convert text into numbers the model can understand!
+________________
+
+
+Step 4: Train the Machine Learning Model (4 minutes)
+What's happening: Now we'll train a Naive Bayes classifier, a popular algorithm for text classification.
+python
+# Create and train a Multinomial Naive Bayes classifier
+# Crear y entrenar un clasificador Naive Bayes Multinomial
+
+
+print("🎓 Training the Model... / Entrenando el Modelo...")
+print("=" * 50)
+
+
+# Initialize the model
+model = MultinomialNB()
+
+
+# Train the model (this is where the learning happens!)
+# Entrenar el modelo (¡aquí es donde ocurre el aprendizaje!)
+model.fit(X_train_vectorized, y_train)
+
+
+print("✓ Model training complete! / ¡Entrenamiento del modelo completo!")
+print("\n🧠 Model learned from", len(X_train), "training examples")
+
+
+# Make predictions on training data
+# Hacer predicciones en datos de entrenamiento
+y_train_pred = model.predict(X_train_vectorized)
+train_accuracy = accuracy_score(y_train, y_train_pred)
+
+
+print(f"\n📈 Training Accuracy / Precisión de Entrenamiento: {train_accuracy:.2%}")
+print(f"   The model correctly classified {train_accuracy:.1%} of training emails")
+print(f"   El modelo clasificó correctamente {train_accuracy:.1%} de los correos de entrenamiento")
+💡 WHAT JUST HAPPENED? The model analyzed the training emails and learned which words are commonly associated with spam vs. legitimate emails. For example, words like "FREE", "winner", "prize" might be strongly associated with spam!
+________________
+
+
+Step 5: Test the Model and Evaluate Performance (4 minutes)
+What's happening: Let's see how our model performs on emails it has never seen before!
+python
+# Make predictions on test data
+# Hacer predicciones en datos de prueba
+
+
+y_test_pred = model.predict(X_test_vectorized)
+test_accuracy = accuracy_score(y_test, y_test_pred)
+
+
+print("🎯 Model Evaluation / Evaluación del Modelo")
+print("=" * 50)
+print(f"\n✓ Test Accuracy / Precisión de Prueba: {test_accuracy:.2%}")
+print(f"✓ Training Accuracy / Precisión de Entrenamiento: {train_accuracy:.2%}")
+
+
+# Check for overfitting
+accuracy_diff = train_accuracy - test_accuracy
+if accuracy_diff > 0.10:
+    print(f"\n⚠️  WARNING: Possible overfitting detected!")
+    print(f"⚠️  ADVERTENCIA: ¡Posible sobreajuste detectado!")
+    print(f"   Difference / Diferencia: {accuracy_diff:.2%}")
+elif accuracy_diff < 0:
+    print(f"\n✓ Good news: Model generalizes well!")
+    print(f"✓ Buenas noticias: ¡El modelo generaliza bien!")
+else:
+    print(f"\n✓ Model performance is balanced / El rendimiento del modelo está equilibrado")
+
+
+# Detailed classification report
+print("\n📊 Detailed Performance Metrics / Métricas de Rendimiento Detalladas:")
+print(classification_report(y_test, y_test_pred, target_names=['Ham (Legit)', 'Spam']))
+
+
+# Confusion Matrix Visualization
+cm = confusion_matrix(y_test, y_test_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Ham', 'Spam'], 
+            yticklabels=['Ham', 'Spam'])
+plt.title('Confusion Matrix / Matriz de Confusión', fontsize=14, fontweight='bold')
+plt.ylabel('Actual / Real', fontsize=12)
+plt.xlabel('Predicted / Predicho', fontsize=12)
+plt.tight_layout()
+plt.show()
+
+
+print("\n📖 How to Read the Confusion Matrix:")
+print("   - Top-left: Correctly identified Ham emails")
+print("   - Bottom-right: Correctly identified Spam emails")
+print("   - Top-right: Ham emails wrongly marked as Spam (False Positives)")
+print("   - Bottom-left: Spam emails that got through (False Negatives)")
+________________
+
+
+Step 6: Test with Your Own Emails! (2-3 minutes)
+What's happening: Now let's make it interactive! Test the model with custom emails.
+python
+# Function to classify new emails
+# Función para clasificar nuevos correos
+
+
+def classify_email(email_text):
+    """
+    Classify a new email as Spam or Ham
+    Clasificar un nuevo correo como Spam o Ham
+    """
+    # Vectorize the input
+    email_vectorized = vectorizer.transform([email_text])
+    
+    # Make prediction
+    prediction = model.predict(email_vectorized)[0]
+    probability = model.predict_proba(email_vectorized)[0]
+    
+    # Display result
+    result = "SPAM 🚫" if prediction == 1 else "HAM ✅ (Legitimate)"
+    confidence = probability[prediction] * 100
+    
+    print(f"\n{'='*60}")
+    print(f"📧 Email: '{email_text}'")
+    print(f"🔮 Prediction / Predicción: {result}")
+    print(f"📊 Confidence / Confianza: {confidence:.1f}%")
+    print(f"{'='*60}")
+    
+    return prediction
+
+
+# Test with example emails
+# Probar con correos de ejemplo
+print("🧪 Testing the Model / Probando el Modelo\n")
+
+
+test_emails = [
+    "Congratulations! You won a free iPhone!",
+    "Can we schedule a meeting for next week?",
+    "CLICK HERE for amazing discount offers NOW!!!",
+    "Your package will arrive tomorrow"
+]
+
+
+for email in test_emails:
+    classify_email(email)
+
+
+# Try your own!
+print("\n" + "="*60)
+print("💬 NOW IT'S YOUR TURN! / ¡AHORA ES TU TURNO!")
+print("="*60)
+print("\nModify the code below to test your own email:")
+print("Modifica el código abajo para probar tu propio correo:\n")
+python
+# ✏️ MODIFY THIS: Write your own email to test!
+# ✏️ MODIFICA ESTO: ¡Escribe tu propio correo para probar!
+
+
+my_custom_email = "Buy cheap medications online now!"
+
+
+classify_email(my_custom_email)
+
+
+# Try a few more!
+# ¡Prueba algunos más!
+# classify_email("Your message here")
+🎯 CHALLENGE / DESAFÍO: Try to write an email that tricks the model! Can you write a spam-like email that gets classified as legitimate? Or a legitimate email that gets classified as spam?
+________________
+
+
+Reflection/Analysis (3-5 minutes)
+Understanding Your Results
+Answer these questions based on your lab results:
+Question 1: Model Performance / Rendimiento del Modelo
+python
+# Run this cell to see your model's performance summary
+# Ejecuta esta celda para ver el resumen del rendimiento de tu modelo
+
+
+print("📊 YOUR MODEL'S PERFORMANCE SUMMARY")
+print("📊 RESUMEN DEL RENDIMIENTO DE TU MODELO")
+print("="*60)
+print(f"Training Accuracy / Precisión de Entrenamiento: {train_accuracy:.2%}")
+print(f"Test Accuracy / Precisión de Prueba: {test_accuracy:.2%}")
+print(f"Difference / Diferencia: {abs(train_accuracy - test_accuracy):.2%}")
+print("="*60)
+
+
+print("\n🤔 Reflection Questions / Preguntas de Reflexión:\n")
+print("1. Is your model overfitting? How can you tell?")
+print("   ¿Tu modelo tiene sobreajuste? ¿Cómo puedes saberlo?")
+print("\n2. What happens if the training accuracy is 100% but test accuracy is 60%?")
+print("   ¿Qué pasa si la precisión de entrenamiento es 100% pero la de prueba es 60%?")
+print("\n3. Which is worse: marking legitimate email as spam, or letting spam through?")
+print("   ¿Qué es peor: marcar correo legítimo como spam, o dejar pasar spam?")
+Question 2: Feature Importance
+Which words does your model think are most indicative of spam?
+python
+# Show the most "spammy" words according to the model
+# Mostrar las palabras más "spam" según el modelo
+
+
+# Get feature names and their importance scores
+feature_names = vectorizer.get_feature_names_out()
+spam_class_probability = model.feature_log_prob_[1]  # Spam class
+ham_class_probability = model.feature_log_prob_[0]   # Ham class
+
+
+# Calculate the difference (words more associated with spam)
+spam_indicators = spam_class_probability - ham_class_probability
+
+
+# Get top spam indicators
+top_spam_indices = spam_indicators.argsort()[-10:][::-1]
+
+
+print("🚫 TOP 10 SPAM INDICATOR WORDS")
+print("🚫 LAS 10 PALABRAS MÁS INDICADORAS DE SPAM")
+print("="*60)
+for i, idx in enumerate(top_spam_indices, 1):
+    word = feature_names[idx]
+    score = spam_indicators[idx]
+    print(f"{i:2d}. '{word}' (score: {score:.3f})")
+
+
+print("\n💭 Do these words make sense? Why?")
+print("💭 ¿Tienen sentido estas palabras? ¿Por qué?")
+Question 3: Real-World Implications
+python
+print("\n🌍 REAL-WORLD CONSIDERATIONS / CONSIDERACIONES DEL MUNDO REAL")
+print("="*60)
+print("""
+1. DATA SIZE / TAMAÑO DE DATOS:
+   Our model trained on only 14 emails. Real spam filters train on 
+   millions of emails. How would more data improve our model?
+   
+   Nuestro modelo se entrenó con solo 14 correos. Los filtros de spam
+   reales se entrenan con millones de correos. ¿Cómo mejoraría más datos
+   nuestro modelo?
+
+
+2. CONSEQUENCES OF ERRORS / CONSECUENCIAS DE ERRORES:
+   - False Positive: Legitimate email marked as spam (user misses important message)
+   - False Negative: Spam gets through (user annoyed but email is seen)
+   
+   Which error is more costly for users?
+   ¿Qué error es más costoso para los usuarios?
+
+
+3. MODEL UPDATES / ACTUALIZACIONES DEL MODELO:
+   Spammers constantly change their tactics. How often should we retrain?
+   Los spammers cambian constantemente sus tácticas. ¿Con qué frecuencia 
+   deberíamos reentrenar?
+
+
+4. BIAS CONCERNS / PREOCUPACIONES DE SESGO:
+   If we only train on English emails, what happens with other languages?
+   Si solo entrenamos con correos en inglés, ¿qué pasa con otros idiomas?
+""")
+________________
+
+
+Key Takeaways / Conclusiones Clave
+python
+print("🎓 WHAT YOU'VE LEARNED / LO QUE HAS APRENDIDO")
+print("="*60)
+print("""
+✓ How to prepare data for machine learning (train/test split)
+  Cómo preparar datos para aprendizaje automático
+
+
+✓ How to convert text into numerical features (vectorization)
+  Cómo convertir texto en características numéricas
+
+
+✓ How to train a supervised learning classification model
+  Cómo entrenar un modelo de clasificación de aprendizaje supervisado
+
+
+✓ How to evaluate model performance and detect overfitting
+  Cómo evaluar el rendimiento del modelo y detectar sobreajuste
+
+
+✓ Real-world applications and limitations of ML models
+  Aplicaciones y limitaciones del mundo real de los modelos de ML
+""")
+
+
+print("\n🚀 NEXT STEPS / PRÓXIMOS PASOS:")
+print("""
+1. Try adding more training emails to improve accuracy
+   Intenta agregar más correos de entrenamiento para mejorar la precisión
+
+
+2. Experiment with different ML algorithms (try DecisionTreeClassifier)
+   Experimenta con diferentes algoritmos de ML
+
+
+3. Think about how to handle emails in multiple languages
+   Piensa en cómo manejar correos en múltiples idiomas
+
+
+4. Consider ethical implications: privacy, bias, transparency
+   Considera las implicaciones éticas: privacidad, sesgo, transparencia
+""")
+________________
+
+
+Optional Extension Activity / Actividad de Extensión Opcional
+For students who finish early or want extra challenge:
+python
+# 🏆 BONUS CHALLENGE: Improve the Model
+# 🏆 DESAFÍO ADICIONAL: Mejorar el Modelo
+
+
+print("🏆 BONUS CHALLENGE / DESAFÍO ADICIONAL")
+print("="*60)
+print("""
+Can you improve the model's accuracy? Try these modifications:
+
+
+1. Add more training data (create 10 more email examples)
+2. Experiment with different train/test split ratios
+3. Try a different algorithm (e.g., LogisticRegression)
+4. Add more sophisticated features (email length, number of exclamation marks)
+
+
+Share your results with your instructor!
+¡Comparte tus resultados con tu instructor!
+""")
+
+
+# Example: Try Logistic Regression
+from sklearn.linear_model import LogisticRegression
+
+
+# YOUR CODE HERE - Try training with LogisticRegression()
+# TU CÓDIGO AQUÍ - Intenta entrenar con LogisticRegression()
+________________
+
+
+Lab Completion Checklist / Lista de Verificación de Finalización
+Before moving on, make sure you've completed:
+*  ✓ Successfully ran all code cells without errors
+*  ✓ Understood the train/test split concept
+*  ✓ Observed the difference between training and test accuracy
+*  ✓ Tested the model with at least 2 custom emails
+*  ✓ Answered the reflection questions
+*  ✓ Identified potential overfitting or underfitting issues
+*  ✓ Understood what features (words) the model uses for classification
+🎉 Congratulations! You've built your first ML classifier! 🎉 ¡Felicidades! ¡Has construido tu primer clasificador de ML!
+________________
+
+
+Need Help? / ¿Necesitas Ayuda?
+* Review the Module 2 reading materials
+* Ask your instructor or classmates
+* Check the course discussion forum
+* Remember: Making mistakes is part of learning!
+Technical Issues?
+* Make sure you're connected to the internet
+* Try "Runtime" → "Restart Runtime" if code isn't running
+* Verify all libraries imported successfully in Step 1
