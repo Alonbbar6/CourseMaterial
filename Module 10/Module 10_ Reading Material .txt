@@ -1,0 +1,712 @@
+﻿Module 10: Capstone Project: Mini AI Application
+Reading Material (10% - Project Guide & Foundations)
+________________
+
+
+Overview
+This reading material provides the foundation for your capstone project. You'll learn how to structure an AI project from conception to completion, make strategic technology decisions, and present your results professionally.
+Estimated Reading Time: 12 minutes Key Outcome: Ready to begin your capstone project with clear planning and methodology
+________________
+
+
+1. Introduction to the Capstone Project
+What is a Capstone Project?
+A capstone project is the culminating experience of your learning journey. It demonstrates your ability to apply all knowledge gained throughout the course to solve a real-world problem independently.
+Why a Capstone?
+Demonstrates Mastery: Shows you can integrate multiple concepts learned across 10 modules
+Builds Portfolio: Creates a tangible project you can showcase to employers or in job interviews
+Practical Experience: Bridges the gap between theory (lectures) and practice (production code)
+Problem-Solving Skills: Develops your ability to scope, plan, and execute technical projects
+Professional Communication: Teaches you to document and present technical work
+Capstone Scope
+Your capstone is intentionally mini-scale because:
+* ✓ Completable in 84 minutes
+* ✓ Focused on quality over complexity
+* ✓ Demonstrates depth, not breadth
+* ✓ Follows real-world software development practices
+It's better to build one complete, well-documented, polished project than three half-finished ones.
+________________
+
+
+2. Project Phases Overview
+Every successful AI project follows these phases:
+Phase 1: Problem Definition & Scoping (10 minutes)
+Goal: Clearly articulate what you're building and why
+Questions to answer:
+* What problem does your project solve?
+* Who would use this solution?
+* What is the minimum viable product (MVP)?
+* What are your constraints (time, data, skills)?
+Phase 2: Research & Planning (5 minutes)
+Goal: Decide on tools, data, and architecture
+Decisions to make:
+* Which AI API or tool?
+* Where does your data come from?
+* What's your technical approach?
+* How will you measure success?
+Phase 3: Implementation (60 minutes)
+Goal: Build your working solution
+Activities:
+* Set up your development environment
+* Write and test code
+* Iterate and debug
+* Document as you go
+Phase 4: Testing & Refinement (10 minutes)
+Goal: Verify your solution works correctly
+Tasks:
+* Test with different inputs
+* Document edge cases
+* Handle errors gracefully
+* Optimize if needed
+Phase 5: Documentation & Presentation (10 minutes)
+Goal: Communicate your work clearly
+Deliverables:
+* README file explaining your project
+* Code comments and inline documentation
+* README includes: problem, solution, usage, results
+* Visual presentation of results
+Phase 6: Peer Review & Feedback (10 minutes)
+Goal: Learn from peers and receive constructive feedback
+Process:
+* Share your project code and documentation
+* Review another student's project
+* Provide constructive feedback
+* Iterate based on feedback (optional)
+________________
+
+
+3. Project Option Overview
+You have three pre-defined options. Each demonstrates different AI capabilities:
+Option 1: NLP Text Classifier
+What: Build a classifier that automatically categorizes text
+Real-World Applications:
+* Email spam detection
+* Customer feedback categorization (positive/negative/neutral)
+* News article classification by topic
+* Social media content moderation
+Skills Demonstrated:
+* API integration (Natural Language API)
+* Data preparation
+* Performance metrics (accuracy, precision, recall)
+* Batch processing
+Difficulty: Beginner to Intermediate Estimated Time: 60-70 minutes
+Example Outcome:
+Input: "This restaurant has amazing food and great service!"
+Output: Category: POSITIVE_REVIEW, Confidence: 92%
+
+
+________________
+
+
+Option 2: Image Filter/Analyzer
+What: Build a tool that analyzes images and applies transformations or classifications
+Real-World Applications:
+* Automatic photo organization (detect what's in photos)
+* Content moderation (flag inappropriate images)
+* Accessibility features (generate image descriptions)
+* Product quality control
+Skills Demonstrated:
+* Vision API integration
+* Image processing
+* Object detection and classification
+* File I/O and batch operations
+Difficulty: Intermediate Estimated Time: 70-80 minutes
+Example Outcome:
+Input: Photo of a cat
+Output: 
+  - Main object: Cat (92% confidence)
+  - Secondary objects: Couch (78%), Plant (65%)
+  - Scene: Indoor, Residential
+
+
+________________
+
+
+Option 3: Generative AI Productivity Tool
+What: Build a utility that uses generative AI to increase productivity
+Real-World Applications:
+* Email draft generator
+* Meeting note summarizer
+* Code snippet generator
+* Content brainstorming assistant
+* Resume/cover letter reviewer
+Skills Demonstrated:
+* LLM API integration (OpenAI, Gemini, etc.)
+* Prompt engineering
+* Error handling for LLM outputs
+* User experience design
+Difficulty: Intermediate to Advanced Estimated Time: 60-75 minutes
+Example Outcome:
+Input: "Summarize this meeting transcript in 3 bullet points"
+Output: 
+• Discussed Q4 budget allocation - increased by 15%
+• Hired 3 new team members starting next month
+• Next meeting scheduled for February 15th
+
+
+________________
+
+
+4. Understanding Minimum Viable Product (MVP)
+What is an MVP?
+An MVP (Minimum Viable Product) is the smallest, simplest version of your project that still solves the core problem.
+MVP vs. Full Product
+Aspect
+	MVP
+	Full Product
+	Scope
+	Core functionality only
+	Many features
+	Time
+	Hours to days
+	Months to years
+	Features
+	3-5 essential
+	20+ nice-to-haves
+	Testing
+	Basic validation
+	Extensive testing
+	Documentation
+	Core usage
+	Comprehensive
+	Goal
+	Prove concept works
+	Production-ready
+	Why MVP Matters for Your Capstone
+1. Realistic Scope: Completable in 120 minutes
+2. Focus on Fundamentals: Demonstrates core competency
+3. Quality over Quantity: Better to do one thing well than many things poorly
+4. Professional Practice: Real software teams use MVP approach
+Example: Email Draft Generator
+Full Product Vision:
+* Multiple email templates
+* Tone adjustment (formal, casual, humorous)
+* Grammar and spell check
+* Integration with Gmail
+* Multi-language support
+* Auto-send scheduling
+MVP (What You'll Build):
+* Generate email draft based on a topic
+* Output formatted, readable text
+* Handle basic error cases
+* Save draft to text file
+MVP Scope: Achievable in 60-75 minutes ✓
+________________
+
+
+5. Project Planning Framework
+Step 1: Define Your Problem
+Write a one-paragraph problem statement:
+Template:
+"The problem I'm solving is [what issue exists]. Currently, [how is it done now or why is it hard]. My solution will [what your tool does]. This will benefit [who uses it] by [what value it provides]."
+Example:
+"The problem I'm solving is that restaurant managers manually read all customer reviews. Currently, they spend 2+ hours daily sorting through reviews to find common complaints. My solution will automatically categorize reviews as positive or negative, highlighting negative feedback. This will benefit restaurant managers by reducing review analysis time to 5 minutes."
+Step 2: Choose Your Option & Tool
+For Option 1 (NLP Classifier):
+* Google Cloud Natural Language API
+* OpenAI Moderation API
+* AWS Comprehend
+For Option 2 (Image Filter):
+* Google Cloud Vision API
+* AWS Rekognition
+* Azure Computer Vision
+For Option 3 (Generative AI Tool):
+* OpenAI API (GPT-3.5, GPT-4)
+* Google Gemini API
+* Anthropic Claude API
+Step 3: Identify Your Data Source
+Where will your test data come from?
+Option 1 (Text Classifier):
+* Public datasets (movie reviews, product reviews)
+* Generate sample texts yourself
+* Use existing data from your work/life
+Option 2 (Image Analyzer):
+* Download free images from Unsplash, Pexels
+* Use your own photos
+* Screenshot web content
+Option 3 (Generative Tool):
+* Sample prompts you create
+* Example user scenarios
+* Test cases that represent typical usage
+Step 4: Success Metrics
+Define how you'll measure if your project works:
+For Text Classifier:
+* ✓ Accuracy: % of correct classifications
+* ✓ Performance: Time to classify 100 texts
+* ✓ Edge cases: Handles sarcasm, ambiguous text
+For Image Analyzer:
+* ✓ Detection: Identifies 90%+ of main objects
+* ✓ Speed: Analyzes image in < 2 seconds
+* ✓ Descriptions: Generates meaningful captions
+For Generative AI Tool:
+* ✓ Quality: Output is relevant and useful
+* ✓ Safety: Handles edge cases gracefully
+* ✓ Usability: Clear prompts, readable output
+________________
+
+
+6. Making Technology Decisions
+Decision: API vs. Model
+Use an API if:
+* ✓ Pre-trained model fits your use case
+* ✓ You don't have domain-specific data
+* ✓ You want quick implementation
+* ✓ Cost-per-request is acceptable
+* ✓ You need production-grade reliability
+Train a Model if:
+* ✓ You have domain-specific labeled data
+* ✓ Existing models don't fit your use case
+* ✓ You need offline functionality
+* ✓ Long-term cost is lower at scale
+* ✓ You need complete control
+For Your Capstone: Use APIs—they're faster and better for 120-minute projects
+Decision: Python Libraries
+Recommended for Your Projects:
+Option 1 (Text Classification):
+# API interaction
+- google-cloud-language
+- requests (for REST APIs)
+
+
+# Data processing
+- pandas (if analyzing results)
+- json (for responses)
+
+
+Option 2 (Image Processing):
+# API interaction
+- google-cloud-vision
+- requests
+
+
+# Image handling
+- pillow (PIL)
+- opencv-python (optional advanced)
+
+
+Option 3 (Generative AI):
+# API interaction
+- openai (for GPT)
+- google-generativeai (for Gemini)
+- anthropic (for Claude)
+
+
+# Processing
+- json
+- re (regex for text parsing)
+
+
+________________
+
+
+7. Documentation Best Practices
+What to Document
+1. README.md (Core Documentation)
+Every project needs a README that answers:
+# Project Title
+
+
+## Problem Statement
+[What problem does this solve?]
+
+
+## Solution Overview
+[How does your solution work?]
+
+
+## Technology Used
+- Google Cloud Natural Language API
+- Python 3.9+
+- Libraries: google-cloud-language, requests
+
+
+## Setup Instructions
+[How to install and configure]
+
+
+## Usage Example
+[Show how to use your tool]
+
+
+## Results / Outcomes
+[What did you achieve?]
+
+
+## Challenges & Learnings
+[What was hard? What did you learn?]
+
+
+## Future Improvements
+[What would you do with more time?]
+
+
+2. Code Comments
+Add comments explaining the "why", not the "what":
+# ✗ Bad comment - explains what the code does
+# Add one to the number
+x = x + 1
+
+
+# ✓ Good comment - explains why
+# Increment counter to track number of processed items
+processed_count = processed_count + 1
+
+
+# ✓ Excellent comment - explains logic
+# The API returns confidence scores from 0-1, but we need 
+# percentages for reporting. Multiply by 100 for conversion.
+confidence_percentage = api_response['confidence'] * 100
+
+
+3. File Structure
+Organize your project logically:
+my_capstone_project/
+├── README.md              # Main documentation
+├── main.py                # Entry point
+├── config.py              # Configuration (API keys, settings)
+├── utils.py               # Helper functions
+├── requirements.txt       # Python dependencies
+├── data/                  # Sample data
+│   ├── sample_input.txt
+│   └── sample_images/
+├── output/                # Results and logs
+│   └── results.json
+└── credentials.json       # API credentials (gitignore this!)
+
+
+4. Code Quality Checklist
+* [ ] Code runs without errors
+* [ ] Clear variable names (not x, y, temp)
+* [ ] Functions have docstrings
+* [ ] Handles errors gracefully
+* [ ] Follows consistent formatting
+* [ ] Can be run by someone else following README
+________________
+
+
+8. Common Pitfalls & How to Avoid Them
+Pitfall 1: Scope Creep
+Problem: Starting with a simple idea, then adding more features Effect: Never finish within the time limit
+How to Avoid:
+* ✓ Write down your MVP scope at the start
+* ✓ Create a "future features" list separately
+* ✓ Stick to your MVP scope rigorously
+* ✓ Use timer to keep on schedule
+________________
+
+
+Pitfall 2: Poor Error Handling
+Problem: Code crashes on unexpected input Effect: Looks unprofessional and unreliable
+How to Avoid:
+# ✗ No error handling - crashes on bad data
+def analyze_sentiment(text):
+    response = client.analyze_sentiment(request={'document': document})
+    return response.document_sentiment.score
+
+
+# ✓ Proper error handling
+def analyze_sentiment(text):
+    try:
+        if not text or len(text) < 3:
+            return {'error': 'Text too short', 'score': None}
+        
+        document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)
+        response = client.analyze_sentiment(request={'document': document})
+        return {'score': response.document_sentiment.score, 'error': None}
+    
+    except Exception as e:
+        return {'error': f'API call failed: {str(e)}', 'score': None}
+
+
+________________
+
+
+Pitfall 3: Insufficient Testing
+Problem: Only test with happy-path examples Effect: Breaks on real-world edge cases
+How to Test:
+# Create a test function with diverse inputs
+def test_classifier():
+    test_cases = [
+        ("Great product!", "positive"),           # Expected positive
+        ("Terrible quality", "negative"),         # Expected negative
+        ("OK I guess", "neutral"),                # Expected neutral
+        ("", "invalid"),                          # Empty string
+        ("😀", "emoji_only"),                     # Edge case
+        ("Absolutely fabulous!!!", "positive"),   # Intensifiers
+    ]
+    
+    for text, expected_category in test_cases:
+        result = classify(text)
+        print(f"Input: {text}")
+        print(f"Expected: {expected_category}")
+        print(f"Got: {result}")
+        print("---")
+
+
+________________
+
+
+Pitfall 4: Missing Documentation
+Problem: No README or comments in code Effect: Peer reviewers can't understand your work
+How to Avoid:
+* ✓ Write README as you build (not after)
+* ✓ Add docstrings to functions as you write them
+* ✓ Document assumptions and design decisions
+* ✓ Explain any complex algorithms
+________________
+
+
+Pitfall 5: Ignoring Credentials Security
+Problem: Hardcoding API keys in code Effect: Credentials exposed if code is shared
+How to Avoid:
+# ✗ Never do this
+API_KEY = "sk-1234567890abcdef"
+
+
+# ✓ Use environment variables
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+API_KEY = os.getenv('OPENAI_API_KEY')
+
+
+if not API_KEY:
+    raise ValueError("OPENAI_API_KEY not found in environment")
+
+
+________________
+
+
+Pitfall 6: Unclear Results Presentation
+Problem: Results are hard to interpret Effect: Doesn't demonstrate success
+How to Present Results:
+# ✗ Unclear output
+print(0.85)
+print(0.92)
+print(0.78)
+
+
+# ✓ Clear output
+print("=" * 50)
+print("TEXT CLASSIFICATION RESULTS")
+print("=" * 50)
+print("\nInput: 'I love this restaurant!'")
+print("Classification: POSITIVE")
+print("Confidence: 92%")
+print("\nInput: 'Awful service'")
+print("Classification: NEGATIVE")
+print("Confidence: 85%")
+print("\n" + "=" * 50)
+
+
+________________
+
+
+9. Time Management Strategy
+120-Minute Timeline
+Minutes 0-10: Planning
+* [ ] Read project option carefully
+* [ ] Define your problem statement
+* [ ] Choose your API/tool
+* [ ] Write success criteria
+Minutes 10-15: Setup
+* [ ] Create project folder structure
+* [ ] Install required libraries
+* [ ] Set up API credentials
+* [ ] Create main.py file
+Minutes 15-70: Implementation (55 min)
+* [ ] Build core functionality
+* [ ] Integrate with API
+* [ ] Add error handling
+* [ ] Test with sample data
+Minutes 70-85: Testing & Refinement (15 min)
+* [ ] Test with diverse inputs
+* [ ] Fix bugs
+* [ ] Optimize slow operations
+* [ ] Verify edge cases
+Minutes 85-105: Documentation (20 min)
+* [ ] Write README.md
+* [ ] Add code comments
+* [ ] Document assumptions
+* [ ] Save results/examples
+Minutes 105-120: Review & Presentation (15 min)
+* [ ] Final code review
+* [ ] Prepare peer review comments
+* [ ] Take screenshots of output
+* [ ] Plan presentation talking points
+________________
+
+
+10. Presentation Framework
+Effective Project Presentation
+Your presentation should answer these questions in order:
+1. Problem (1 minute)
+"I identified that [specific problem]. This matters because [impact]."
+2. Solution (1 minute)
+"My solution uses [tool/API] to [what it does]. Here's how it works: [brief explanation]."
+3. Implementation (1-2 minutes)
+"I built it using [technologies]. The main components are [key parts]."
+4. Results (1 minute)
+"My project successfully [what it achieves]. Here are examples: [show sample outputs]."
+5. Learnings (30 seconds)
+"Key things I learned: [1-2 insights about APIs, programming, or problem-solving]."
+Total: 4-5 minutes
+Visual Presentation Tips
+✓ Show Examples: Display input/output screenshots ✓ Keep It Simple: Don't show complex code, show results ✓ Tell a Story: Problem → Solution → Results ✓ Be Honest: Acknowledge limitations ✓ Show Enthusiasm: Your passion makes it interesting
+________________
+
+
+11. Peer Review Guidelines
+Giving Feedback (You Review Someone Else's Project)
+When reviewing a peer's project, provide constructive feedback:
+Questions to Answer:
+1. Did it work?
+
+   * "I ran the code and it successfully [what happened]"
+   * "I encountered [issue] when [scenario]"
+   2. Was it clear?
+
+      * "The README was easy/hard to follow because [reason]"
+      * "The code comments [did/didn't] help me understand"
+      3. Strengths (2-3 things they did well):
+
+         * "Great error handling in the [function name]"
+         * "The README clearly explained [aspect]"
+         * "Creative solution for [problem]"
+         4. Suggestions (2-3 things that could improve):
+
+            * "Consider adding [feature] to make it [more useful]"
+            * "The [function name] could be clearer if [suggestion]"
+            * "It might be faster if you added caching for [aspect]"
+            5. Questions:
+
+               * "What would you do differently with more time?"
+               * "Did you encounter any unexpected challenges?"
+Example Peer Review:
+Hi! I reviewed your email draft generator.
+
+
+✓ WHAT WORKED:
+- The program ran without errors on all my test cases
+- Your README was very clear and easy to follow
+- Great use of prompt engineering to get good outputs
+- Excellent error handling for empty input
+
+
+→ SUGGESTIONS:
+- Consider saving drafts with timestamps for version control
+- The function could validate email output more thoroughly
+- It might be useful to add a "tone adjustment" feature
+
+
+? QUESTIONS:
+- Why did you choose GPT-3.5 over GPT-4?
+- How did you handle cases where the API output was incomplete?
+
+
+Overall: Great project! Shows solid understanding of API integration and practical problem-solving.
+
+
+________________
+
+
+Receiving Feedback (People Review Your Project)
+How to Handle Feedback:
+               1. Read Carefully: Understand what they're saying
+               2. Don't Defend: Feedback isn't criticism, it's help
+               3. Ask Questions: "Can you clarify what you mean by [aspect]?"
+               4. Identify Patterns: Multiple reviewers mention the same thing = important
+               5. Decide What to Use: You decide which feedback to implement
+               6. Thank Reviewers: "Thanks for the helpful feedback on [aspect]!"
+________________
+
+
+12. Vocabulary: English & Spanish
+English
+	Spanish
+	Definition
+	Capstone Project
+	Proyecto Final
+	Culminating project demonstrating mastery
+	Minimum Viable Product (MVP)
+	Producto Mínimo Viable
+	Simplest version that solves core problem
+	Scoping
+	Alcance del Proyecto
+	Defining project boundaries
+	Problem Statement
+	Declaración del Problema
+	Clear description of what you're solving
+	Implementation
+	Implementación
+	Actually building/coding the solution
+	Documentation
+	Documentación
+	Written explanation of your project
+	Presentation
+	Presentación
+	Communicating your results to others
+	Iteration
+	Iteración
+	Improving through cycles of testing
+	Debugging
+	Depuración
+	Finding and fixing errors
+	Deliverable
+	Entregable
+	Tangible output (code, documentation)
+	Success Metrics
+	Métricas de Éxito
+	How you measure if project works
+	Peer Review
+	Revisión por Pares
+	Getting feedback from classmates
+	Edge Cases
+	Casos Límite
+	Unusual or boundary scenarios
+	Error Handling
+	Manejo de Errores
+	How code responds to problems
+	API Integration
+	Integración de API
+	Connecting your code to external service
+	________________
+
+
+Summary: Ready to Start?
+Before beginning your capstone, ensure you've:
+✓ Read this guide completely ✓ Chosen your project option (Text, Image, or Generative AI) ✓ Defined your problem statement (one paragraph) ✓ Identified your data source (where will samples come from?) ✓ Set success criteria (how will you know it works?) ✓ Planned your time (use the 120-minute timeline) ✓ Set up your environment (Python, libraries, credentials ready)
+________________
+
+
+Quick Reference Checklist
+Before You Code
+               * [ ] Project option selected
+               * [ ] Problem statement written
+               * [ ] API credentials obtained
+               * [ ] Python environment set up
+               * [ ] Sample data collected
+               * [ ] Success metrics defined
+While You Code
+               * [ ] Add comments as you go
+               * [ ] Test frequently
+               * [ ] Handle errors
+               * [ ] Keep README updated
+Before You Submit
+               * [ ] Code runs without errors
+               * [ ] README is complete and clear
+               * [ ] All functions have docstrings
+               * [ ] Results are documented
+               * [ ] Project folder is organized
+Before Peer Review
+               * [ ] Practice your presentation
+               * [ ] Test edge cases
+               * [ ] Verify all outputs make sense
+               * [ ] Prepare examples to show
+________________
+
+
+You're now ready to begin Module 10. Good luck with your capstone project!
+Estimated Reading Time: 12 minutes ✓ Next Step: Proceed to hands-on project implementation

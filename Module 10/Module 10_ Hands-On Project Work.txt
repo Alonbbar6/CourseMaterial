@@ -1,0 +1,2518 @@
+﻿Module 10: Capstone Project: Mini AI Application
+Hands-On Project Work (70% - Complete Project Implementations)
+________________
+
+
+Overview
+This section contains three complete, independent capstone projects. Each is designed to be completed in 84 minutes and demonstrates mastery of course concepts.
+Choose ONE project based on your interests:
+* Project Option 1: NLP Text Classifier (84 min)
+* Project Option 2: Image Filter & Analyzer (84 min)
+* Project Option 3: Generative AI Productivity Tool (84 min)
+Each project includes:
+* Complete step-by-step implementation guide
+* Full working code
+* Testing procedures
+* Documentation templates
+* Expected outputs
+________________
+
+
+PROJECT OPTION 1: NLP TEXT CLASSIFIER
+Build an Intelligent Text Categorization System
+Time Allocation: 84 minutes
+* Setup & Planning: 10 min
+* Implementation: 50 min
+* Testing & Refinement: 15 min
+* Documentation: 9 min
+Final Output: A working text classifier that categorizes reviews, feedback, or content
+________________
+
+
+Project 1: Phase 1 - Setup & Planning (10 minutes)
+Step 1A: Define Your Problem (3 minutes)
+Your Mission: Build an automated system that categorizes customer reviews as positive, negative, or neutral. This helps businesses quickly identify dissatisfied customers without reading every review.
+Problem Statement (write this down):
+I'm building a text classifier that automatically analyzes customer 
+reviews and categorizes them as positive, negative, or neutral. 
+Currently, restaurants manually read hundreds of reviews monthly to 
+identify complaints. My solution will process reviews in seconds, 
+highlighting negative feedback for immediate attention. This helps 
+restaurant managers save 5+ hours weekly while ensuring no customer 
+concern goes unaddressed.
+
+
+Success Criteria:
+* ✓ Classifies sample reviews with 85%+ accuracy
+* ✓ Processes 100 reviews in under 10 seconds
+* ✓ Handles edge cases (sarcasm, mixed sentiment)
+* ✓ Provides confidence scores
+* ✓ Generates summary report
+Step 1B: Set Up Your Environment (5 minutes)
+Step 1: Create project folder
+mkdir text_classifier_project
+cd text_classifier_project
+
+
+Step 2: Create Python files
+touch main.py config.py requirements.txt README.md .env
+
+
+Step 3: Install libraries
+pip install google-cloud-language python-dotenv
+
+
+Step 4: Your file structure
+text_classifier_project/
+├── main.py                    # Main application
+├── config.py                  # Configuration settings
+├── requirements.txt           # Dependencies
+├── .env                       # API credentials (don't commit!)
+├── README.md                  # Documentation
+├── data/
+│   └── sample_reviews.txt     # Test data
+└── output/
+    └── classification_results.json
+
+
+Step 1C: Prepare Sample Data (2 minutes)
+Create data/sample_reviews.txt:
+This restaurant has amazing food and fantastic service! Highly recommend!
+Terrible experience. Food was cold and waiter was rude.
+The service was okay but the food could be better.
+Best pizza I've ever had. Will definitely come back.
+Waited 45 minutes for our food. Never coming back.
+Good atmosphere but portions are too small for the price.
+Absolutely horrible. Food poisoning from the salad.
+Nice place with decent food. Average experience overall.
+Staff was incredibly helpful and the food was delicious!
+Worst restaurant I've been to. Complete waste of money.
+
+
+Checkpoint: ✓ Environment is set up and data is ready
+________________
+
+
+Project 1: Phase 2 - Implementation (50 minutes)
+Step 2A: Set Up Configuration (5 minutes)
+Create config.py:
+"""
+Configuration settings for text classifier
+"""
+import os
+from dotenv import load_dotenv
+
+
+# Load environment variables
+load_dotenv()
+
+
+# Google Cloud Configuration
+GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+
+# Classifier Settings
+SENTIMENT_THRESHOLDS = {
+    'POSITIVE': 0.25,      # Score > 0.25 = positive
+    'NEGATIVE': -0.25,     # Score < -0.25 = negative
+    'NEUTRAL': (-0.25, 0.25)  # Score between these = neutral
+}
+
+
+# Files
+INPUT_FILE = 'data/sample_reviews.txt'
+OUTPUT_FILE = 'output/classification_results.json'
+
+
+# Display Settings
+VERBOSE = True  # Print detailed output
+MAX_RESULTS_DISPLAY = 5  # Show top 5 results in summary
+
+
+Create .env:
+GOOGLE_PROJECT_ID=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
+
+
+Step 2B: Build Core Classifier (30 minutes)
+Create main.py:
+"""
+Text Classifier - Automatically categorizes reviews as positive, negative, or neutral
+Using Google Cloud Natural Language API
+"""
+
+
+from google.cloud import language_v1
+import json
+import os
+from datetime import datetime
+from config import (
+    SENTIMENT_THRESHOLDS, 
+    INPUT_FILE, 
+    OUTPUT_FILE, 
+    VERBOSE
+)
+
+
+class TextClassifier:
+    """
+    Classifies text reviews using Google Cloud Natural Language API
+    """
+    
+    def __init__(self):
+        """Initialize the classifier with NL client"""
+        try:
+            self.client = language_v1.LanguageServiceClient()
+            self.results = {
+                'total_reviews': 0,
+                'classifications': [],
+                'summary': {
+                    'positive': 0,
+                    'negative': 0,
+                    'neutral': 0
+                },
+                'average_sentiment': 0.0,
+                'timestamp': datetime.now().isoformat()
+            }
+            if VERBOSE:
+                print("✓ Classifier initialized successfully")
+        except Exception as e:
+            print(f"✗ Failed to initialize classifier: {e}")
+            raise
+    
+    def analyze_sentiment(self, text):
+        """
+        Analyze sentiment of given text
+        
+        Args:
+            text (str): Text to analyze
+            
+        Returns:
+            dict: Contains score, magnitude, and classification
+        """
+        try:
+            # Create document
+            document = language_v1.Document(
+                content=text,
+                type_=language_v1.Document.Type.PLAIN_TEXT
+            )
+            
+            # Call API
+            response = self.client.analyze_sentiment(
+                request={'document': document}
+            )
+            
+            sentiment = response.document_sentiment
+            
+            return {
+                'score': sentiment.score,
+                'magnitude': sentiment.magnitude,
+                'sentences': [
+                    {
+                        'text': sentence.text.content,
+                        'score': sentence.sentiment.score
+                    }
+                    for sentence in response.sentences
+                ]
+            }
+        
+        except Exception as e:
+            return {
+                'score': 0,
+                'magnitude': 0,
+                'sentences': [],
+                'error': str(e)
+            }
+    
+    def classify_sentiment(self, score):
+        """
+        Convert sentiment score to classification
+        
+        Args:
+            score (float): Sentiment score from API (-1.0 to 1.0)
+            
+        Returns:
+            str: Classification ('POSITIVE', 'NEGATIVE', or 'NEUTRAL')
+        """
+        positive_threshold = SENTIMENT_THRESHOLDS['POSITIVE']
+        negative_threshold = SENTIMENT_THRESHOLDS['NEGATIVE']
+        
+        if score >= positive_threshold:
+            return 'POSITIVE'
+        elif score <= negative_threshold:
+            return 'NEGATIVE'
+        else:
+            return 'NEUTRAL'
+    
+    def process_review(self, review_text):
+        """
+        Process a single review: analyze and classify
+        
+        Args:
+            review_text (str): Customer review
+            
+        Returns:
+            dict: Processed review with all metadata
+        """
+        # Validate input
+        if not review_text or len(review_text.strip()) < 3:
+            return {
+                'text': review_text,
+                'classification': 'INVALID',
+                'score': 0,
+                'magnitude': 0,
+                'error': 'Text too short or empty'
+            }
+        
+        # Analyze sentiment
+        analysis = self.analyze_sentiment(review_text)
+        
+        # Check for API errors
+        if 'error' in analysis:
+            return {
+                'text': review_text[:100],
+                'classification': 'ERROR',
+                'score': 0,
+                'magnitude': 0,
+                'error': analysis['error']
+            }
+        
+        # Classify
+        classification = self.classify_sentiment(analysis['score'])
+        
+        return {
+            'text': review_text[:150],  # Store first 150 chars
+            'classification': classification,
+            'score': round(analysis['score'], 3),
+            'magnitude': round(analysis['magnitude'], 3),
+            'sentences': analysis['sentences'][:3],  # First 3 sentences
+            'confidence': int(abs(analysis['score']) * 100)  # Confidence %
+        }
+    
+    def process_batch(self, reviews_list):
+        """
+        Process multiple reviews
+        
+        Args:
+            reviews_list (list): List of review texts
+            
+        Returns:
+            dict: Summary of all classifications
+        """
+        if VERBOSE:
+            print(f"\nProcessing {len(reviews_list)} reviews...")
+            print("=" * 70)
+        
+        self.results['total_reviews'] = len(reviews_list)
+        
+        for i, review in enumerate(reviews_list, 1):
+            if VERBOSE and i % 2 == 0:
+                print(f"  [{i}/{len(reviews_list)}] Processed...")
+            
+            # Process review
+            result = self.process_review(review)
+            self.results['classifications'].append(result)
+            
+            # Update summary
+            if result['classification'] in self.results['summary']:
+                self.results['summary'][result['classification']] += 1
+        
+        # Calculate statistics
+        self._calculate_statistics()
+        
+        if VERBOSE:
+            print("=" * 70)
+            self._print_summary()
+        
+        return self.results
+    
+    def _calculate_statistics(self):
+        """Calculate summary statistics"""
+        # Calculate average sentiment
+        valid_scores = [
+            c['score'] for c in self.results['classifications']
+            if c['classification'] not in ['ERROR', 'INVALID']
+        ]
+        
+        if valid_scores:
+            self.results['average_sentiment'] = round(
+                sum(valid_scores) / len(valid_scores), 3
+            )
+    
+    def _print_summary(self):
+        """Print human-readable summary"""
+        summary = self.results['summary']
+        total = self.results['total_reviews']
+        
+        print("\n" + "=" * 70)
+        print("CLASSIFICATION SUMMARY")
+        print("=" * 70)
+        print(f"\nTotal Reviews Analyzed: {total}")
+        print(f"\nResults:")
+        print(f"  ✓ POSITIVE:  {summary['positive']:3d} ({summary['positive']/total*100:5.1f}%)")
+        print(f"  ✗ NEGATIVE:  {summary['negative']:3d} ({summary['negative']/total*100:5.1f}%)")
+        print(f"  ~ NEUTRAL:   {summary['neutral']:3d} ({summary['neutral']/total*100:5.1f}%)")
+        
+        print(f"\nAverage Sentiment Score: {self.results['average_sentiment']:.3f}")
+        print(f"Scale: -1.0 (Very Negative) to +1.0 (Very Positive)")
+        
+        # Highlight key finding
+        if summary['negative'] > summary['positive']:
+            print(f"\n⚠️  ALERT: More negative reviews ({summary['negative']}) than positive ({summary['positive']})")
+        else:
+            print(f"\n✓ More positive reviews ({summary['positive']}) than negative ({summary['negative']})")
+        
+        print("\n" + "=" * 70)
+    
+    def save_results(self, filepath=OUTPUT_FILE):
+        """
+        Save results to JSON file
+        
+        Args:
+            filepath (str): Where to save results
+        """
+        # Create output directory if needed
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        with open(filepath, 'w') as f:
+            json.dump(self.results, f, indent=2)
+        
+        if VERBOSE:
+            print(f"✓ Results saved to: {filepath}")
+    
+    def display_detailed_results(self):
+        """Display detailed breakdown of each review"""
+        print("\n" + "=" * 70)
+        print("DETAILED REVIEW ANALYSIS")
+        print("=" * 70)
+        
+        for i, result in enumerate(self.results['classifications'][:5], 1):
+            print(f"\n[Review {i}]")
+            print(f"Text: {result['text']}")
+            print(f"Classification: {result['classification']}")
+            print(f"Sentiment Score: {result['score']}")
+            print(f"Confidence: {result['confidence']}%")
+            print("-" * 70)
+
+
+
+
+def load_reviews_from_file(filepath):
+    """Load reviews from text file"""
+    try:
+        with open(filepath, 'r') as f:
+            reviews = [line.strip() for line in f if line.strip()]
+        return reviews
+    except FileNotFoundError:
+        print(f"✗ File not found: {filepath}")
+        return []
+
+
+
+
+def main():
+    """Main execution"""
+    
+    print("\n" + "=" * 70)
+    print("TEXT CLASSIFIER - SENTIMENT ANALYSIS")
+    print("=" * 70)
+    
+    # Initialize classifier
+    classifier = TextClassifier()
+    
+    # Load reviews
+    print(f"\nLoading reviews from {INPUT_FILE}...")
+    reviews = load_reviews_from_file(INPUT_FILE)
+    
+    if not reviews:
+        print("✗ No reviews loaded. Exiting.")
+        return
+    
+    print(f"✓ Loaded {len(reviews)} reviews")
+    
+    # Process reviews
+    results = classifier.process_batch(reviews)
+    
+    # Display detailed results
+    classifier.display_detailed_results()
+    
+    # Save results
+    classifier.save_results()
+    
+    print("\n✓ Classification complete!")
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+Checkpoint: ✓ Core classifier is built and working
+Step 2C: Add Advanced Features (15 minutes)
+Create an enhanced version with additional analytics. Add to main.py:
+def analyze_by_rating(reviews_with_ratings):
+    """
+    Analyze reviews grouped by rating
+    
+    Example: [(review_text, rating), ...]
+    """
+    pass
+
+
+def find_common_keywords(reviews, classification='NEGATIVE'):
+    """
+    Find commonly mentioned topics in reviews of specific type
+    Useful for identifying main complaints or praise
+    """
+    pass
+
+
+def export_to_csv(results, filepath):
+    """Export results to CSV for spreadsheet analysis"""
+    import csv
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    
+    with open(filepath, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Review', 'Classification', 'Score', 'Confidence'])
+        
+        for result in results['classifications']:
+            writer.writerow([
+                result['text'],
+                result['classification'],
+                result['score'],
+                result['confidence']
+            ])
+    
+    print(f"✓ Results exported to: {filepath}")
+
+
+Checkpoint: ✓ Enhanced features added
+________________
+
+
+Project 1: Phase 3 - Testing & Refinement (15 minutes)
+Step 3A: Create Test Cases (8 minutes)
+Create test_classifier.py:
+"""
+Test suite for text classifier
+"""
+
+
+from main import TextClassifier
+
+
+def test_positive_sentiment():
+    """Test positive review classification"""
+    classifier = TextClassifier()
+    
+    positive_texts = [
+        "I absolutely love this! Best ever!",
+        "Amazing product, highly recommend",
+        "Perfect! Couldn't ask for better",
+    ]
+    
+    print("\n" + "="*60)
+    print("TEST: POSITIVE SENTIMENT DETECTION")
+    print("="*60)
+    
+    for text in positive_texts:
+        result = classifier.process_review(text)
+        status = "✓ PASS" if result['classification'] == 'POSITIVE' else "✗ FAIL"
+        print(f"{status} | {text[:40]}")
+        print(f"       Score: {result['score']}, Classification: {result['classification']}\n")
+
+
+def test_negative_sentiment():
+    """Test negative review classification"""
+    classifier = TextClassifier()
+    
+    negative_texts = [
+        "Terrible! Worst experience ever.",
+        "Horrible quality, waste of money",
+        "Awful service, never coming back",
+    ]
+    
+    print("\n" + "="*60)
+    print("TEST: NEGATIVE SENTIMENT DETECTION")
+    print("="*60)
+    
+    for text in negative_texts:
+        result = classifier.process_review(text)
+        status = "✓ PASS" if result['classification'] == 'NEGATIVE' else "✗ FAIL"
+        print(f"{status} | {text[:40]}")
+        print(f"       Score: {result['score']}, Classification: {result['classification']}\n")
+
+
+def test_neutral_sentiment():
+    """Test neutral review classification"""
+    classifier = TextClassifier()
+    
+    neutral_texts = [
+        "It was okay.",
+        "Average experience",
+        "Nothing special",
+    ]
+    
+    print("\n" + "="*60)
+    print("TEST: NEUTRAL SENTIMENT DETECTION")
+    print("="*60)
+    
+    for text in neutral_texts:
+        result = classifier.process_review(text)
+        status = "✓ PASS" if result['classification'] == 'NEUTRAL' else "✗ FAIL"
+        print(f"{status} | {text[:40]}")
+        print(f"       Score: {result['score']}, Classification: {result['classification']}\n")
+
+
+def test_edge_cases():
+    """Test edge cases and error handling"""
+    classifier = TextClassifier()
+    
+    edge_cases = [
+        ("", "empty string"),
+        ("Hi", "very short"),
+        ("😀😀😀", "emoji only"),
+    ]
+    
+    print("\n" + "="*60)
+    print("TEST: EDGE CASES")
+    print("="*60)
+    
+    for text, description in edge_cases:
+        result = classifier.process_review(text)
+        status = "✓ HANDLED" if 'error' in result or result['classification'] == 'INVALID' else "? UNKNOWN"
+        print(f"{status} | {description}: '{text}'")
+        print(f"       Classification: {result.get('classification', 'N/A')}\n")
+
+
+if __name__ == "__main__":
+    print("\n" + "#"*60)
+    print("# TEXT CLASSIFIER - TEST SUITE")
+    print("#"*60)
+    
+    test_positive_sentiment()
+    test_negative_sentiment()
+    test_neutral_sentiment()
+    test_edge_cases()
+    
+    print("\n" + "#"*60)
+    print("# TESTS COMPLETE")
+    print("#"*60 + "\n")
+
+
+Run tests:
+python test_classifier.py
+
+
+Step 3B: Verify and Debug (7 minutes)
+Testing Checklist:
+* [ ] Code runs without crashes
+* [ ] All reviews get classified
+* [ ] Positive reviews score positive (> 0.25)
+* [ ] Negative reviews score negative (< -0.25)
+* [ ] Results are saved to JSON
+* [ ] Edge cases handled gracefully
+If tests fail, debug by:
+1. Check API credentials are set
+2. Verify API is enabled in Google Cloud
+3. Print intermediate values to understand flow
+4. Add try-catch for specific error lines
+Checkpoint: ✓ All tests pass
+________________
+
+
+Project 1: Phase 4 - Documentation (9 minutes)
+Step 4A: Write README.md (6 minutes)
+# Text Classifier - Sentiment Analysis Tool
+
+
+## Problem Statement
+
+
+Restaurant managers spend 2+ hours daily reading customer reviews to identify 
+complaints and praise. This tool automatically classifies reviews as positive, 
+negative, or neutral, saving time and ensuring quick response to dissatisfied 
+customers.
+
+
+## Solution Overview
+
+
+This Python application uses Google Cloud Natural Language API to automatically 
+analyze customer reviews and categorize them by sentiment. It provides:
+- Automatic sentiment classification (positive/negative/neutral)
+- Confidence scores for each classification
+- Summary statistics and reporting
+- Batch processing for efficiency
+
+
+## Technology Used
+
+
+- **Python 3.7+**
+- **Google Cloud Natural Language API**
+- **Libraries**: google-cloud-language, python-dotenv
+
+
+## Setup Instructions
+
+
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+
+
+2. Set Up Google Cloud Credentials
+# Create .env file with:
+GOOGLE_PROJECT_ID=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+
+
+3. Prepare Sample Reviews
+Add reviews to data/sample_reviews.txt, one per line.
+Usage Example
+python main.py
+
+
+Expected Output
+TEXT CLASSIFIER - SENTIMENT ANALYSIS
+======================================================================
+
+
+Processing 10 reviews...
+======================================================================
+  [2/10] Processed...
+  [4/10] Processed...
+  [6/10] Processed...
+  [8/10] Processed...
+  [10/10] Processed...
+======================================================================
+
+
+======================================================================
+CLASSIFICATION SUMMARY
+======================================================================
+
+
+Total Reviews Analyzed: 10
+
+
+Results:
+  ✓ POSITIVE:    6 ( 60.0%)
+  ✗ NEGATIVE:    2 ( 20.0%)
+  ~ NEUTRAL:     2 ( 20.0%)
+
+
+Average Sentiment Score: 0.425
+Scale: -1.0 (Very Negative) to +1.0 (Very Positive)
+
+
+✓ More positive reviews (6) than negative (2)
+
+
+Key Files
+* main.py - Core classifier implementation
+* config.py - Configuration settings
+* test_classifier.py - Test suite
+* data/sample_reviews.txt - Test reviews
+* output/classification_results.json - Results
+Results / Outcomes
+Successfully classified 10 sample reviews with the following distribution:
+* 60% positive sentiment
+* 20% negative sentiment
+* 20% neutral sentiment
+Average sentiment score: +0.425 (slightly positive overall)
+Challenges & Learnings
+Challenge 1: Sarcasm Detection
+Problem: The phrase "Great service... if you like waiting 30 minutes!" scores as positive because the word "Great" is positive.
+Learning: Context and sarcasm are difficult for sentiment analysis. Solutions include:
+* Using more advanced models
+* Training custom classifiers on domain-specific data
+* Human review for edge cases
+Challenge 2: Mixed Sentiment in Single Review
+Problem: "Food was amazing but service was terrible"
+Learning: Reviews with mixed sentiment are challenging. The API returns an overall score, but analyzing sentence-by-sentence can help identify conflicting emotions.
+Future Improvements
+With more time, I would add:
+1. Aspect-Based Sentiment Analysis
+
+   * Identify if sentiment is about food, service, ambiance, etc.
+   * Would require more sophisticated NLP
+   2. Language Support
+
+      * Extend to Spanish, French, etc. for international restaurants
+      * API already supports this
+      3. Response Generation
+
+         * Auto-generate response templates for negative reviews
+         * Integrate with email/review platform APIs
+         4. Visualization
+
+            * Dashboard showing sentiment trends over time
+            * Comparison across restaurant locations
+            5. Export Options
+
+               * Generate PDF reports
+               * Integration with spreadsheet tools
+Running Tests
+python test_classifier.py
+
+
+Tests cover:
+               * ✓ Positive sentiment detection
+               * ✓ Negative sentiment detection
+               * ✓ Neutral sentiment handling
+               * ✓ Edge case handling (empty strings, emoji, etc.)
+Questions & Support
+For questions or issues:
+               1. Check that Google Cloud API is enabled
+               2. Verify credentials are correctly set in .env
+               3. Review error messages in console output
+Author
+AI Learning Course - Module 10 Capstone Project
+License
+Educational use
+
+
+### Step 4B: Add Code Comments (3 minutes)
+
+
+Update key functions in `main.py` with inline documentation:
+
+
+```python
+def analyze_sentiment(self, text):
+    """
+    Analyze sentiment of given text using Google Cloud NL API
+    
+    The API returns:
+    - score: sentiment strength (-1.0 to +1.0)
+    - magnitude: emotion intensity (0 to infinity)
+    
+    Args:
+        text (str): Review text to analyze
+        
+    Returns:
+        dict: {score, magnitude, sentences}
+        
+    Example:
+        >>> result = classifier.analyze_sentiment("Great service!")
+        >>> result['score']
+        0.8
+    """
+    try:
+        # Create document object - tells API this is plain text (not HTML/etc)
+        document = language_v1.Document(
+            content=text,
+            type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+        
+        # Call the API - this sends request to Google's servers
+        response = self.client.analyze_sentiment(
+            request={'document': document}
+        )
+        
+        # Extract results from response
+        sentiment = response.document_sentiment
+        
+        # Return structured data
+        return {
+            'score': sentiment.score,
+            'magnitude': sentiment.magnitude,
+            'sentences': [
+                {
+                    'text': sentence.text.content,
+                    'score': sentence.sentiment.score
+                }
+                for sentence in response.sentences
+            ]
+        }
+    
+    except Exception as e:
+        # If API call fails, return error info instead of crashing
+        return {
+            'score': 0,
+            'magnitude': 0,
+            'sentences': [],
+            'error': str(e)
+        }
+
+
+Checkpoint: ✓ Documentation complete
+________________
+
+
+Project 1: Summary & Submission
+What You Built:
+               * ✓ Fully functional text classifier using Google Cloud NL API
+               * ✓ Processes multiple reviews and categorizes by sentiment
+               * ✓ Provides confidence scores and statistics
+               * ✓ Handles error cases gracefully
+               * ✓ Comprehensive documentation and testing
+Files to Submit:
+text_classifier_project/
+├── main.py                          # Core implementation
+├── config.py                        # Configuration
+├── test_classifier.py               # Test suite
+├── requirements.txt                 # Dependencies
+├── README.md                        # Documentation
+├── data/
+│   └── sample_reviews.txt          # Test data
+└── output/
+    └── classification_results.json  # Results
+
+
+Testing Output Checklist:
+               * [ ] python main.py runs successfully
+               * [ ] Produces classification summary
+               * [ ] Saves results to JSON
+               * [ ] python test_classifier.py passes all tests
+               * [ ] Edge cases handled without crashing
+Estimated Time to Complete: 84 minutes total Difficulty Level: Intermediate Skills Demonstrated: API integration, batch processing, error handling, documentation
+________________
+________________
+
+
+PROJECT OPTION 2: IMAGE FILTER & ANALYZER
+Build an Intelligent Image Analysis System
+Time Allocation: 84 minutes
+               * Setup & Planning: 10 min
+               * Implementation: 50 min
+               * Testing & Refinement: 15 min
+               * Documentation: 9 min
+Final Output: A tool that analyzes images and generates descriptions, detects objects, and extracts text
+________________
+
+
+Project 2: Phase 1 - Setup & Planning (10 minutes)
+Step 1A: Define Your Problem (3 minutes)
+Your Mission: Build an image analyzer that automatically describes photos, detects objects, and extracts text. This helps photographers organize their library, enables accessibility for visually impaired users, and automates content moderation.
+Problem Statement (write this down):
+I'm building an image analyzer that automatically generates descriptions 
+of photos and identifies key objects within them. Photography companies 
+spend hours manually tagging and describing photos for their portfolio. 
+My solution uses computer vision to instantly analyze images, provide 
+detailed descriptions, and identify main subjects. This helps photographers 
+save 4+ hours weekly on organization while making content accessible 
+to visually impaired users.
+
+
+Success Criteria:
+               * ✓ Accurately identifies main objects (90%+ correct)
+               * ✓ Generates meaningful image descriptions
+               * ✓ Extracts and displays any text in images
+               * ✓ Processes images in under 3 seconds each
+               * ✓ Generates summary report
+Step 1B: Set Up Your Environment (5 minutes)
+Step 1: Create project folder
+mkdir image_analyzer_project
+cd image_analyzer_project
+
+
+Step 2: Create Python files
+touch main.py config.py requirements.txt README.md .env
+mkdir -p data/images output
+
+
+Step 3: Install libraries
+pip install google-cloud-vision pillow python-dotenv
+
+
+Step 4: Your file structure
+image_analyzer_project/
+├── main.py                    # Main application
+├── config.py                  # Configuration
+├── requirements.txt           # Dependencies
+├── .env                       # API credentials
+├── README.md                  # Documentation
+├── data/
+│   └── images/               # Sample images go here
+├── output/
+│   ├── analysis_results.json
+│   └── image_descriptions.txt
+└── test_images/              # For testing
+
+
+Step 1C: Prepare Sample Images (2 minutes)
+Download 3-5 free images from Unsplash or Pexels:
+               1. A portrait photo (to test face detection)
+               2. A street scene (to test object detection)
+               3. A document with text (to test OCR)
+               4. A nature/landscape photo (to test scene analysis)
+Save to data/images/ folder.
+Checkpoint: ✓ Environment is set up and images are ready
+________________
+
+
+Project 2: Phase 2 - Implementation (50 minutes)
+Step 2A: Set Up Configuration (5 minutes)
+Create config.py:
+"""
+Configuration settings for image analyzer
+"""
+import os
+from dotenv import load_dotenv
+
+
+# Load environment variables
+load_dotenv()
+
+
+# Google Cloud Configuration
+GOOGLE_PROJECT_ID = os.getenv('GOOGLE_PROJECT_ID')
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+
+# Image Analysis Settings
+MAX_LABELS = 10          # Maximum labels to return
+MIN_CONFIDENCE = 0.60    # Minimum confidence threshold
+FEATURES_TO_EXTRACT = [
+    'LABEL_DETECTION',   # What objects are in the image?
+    'TEXT_DETECTION',    # Is there text in the image?
+    'OBJECT_LOCALIZATION' # Where are objects located?
+]
+
+
+# File Paths
+IMAGE_DIRECTORY = 'data/images'
+OUTPUT_DIRECTORY = 'output'
+RESULTS_FILE = os.path.join(OUTPUT_DIRECTORY, 'analysis_results.json')
+DESCRIPTIONS_FILE = os.path.join(OUTPUT_DIRECTORY, 'image_descriptions.txt')
+
+
+# Display Settings
+VERBOSE = True
+SHOW_DETAILED_ANALYSIS = True
+
+
+Step 2B: Build Core Image Analyzer (30 minutes)
+Create main.py:
+"""
+Image Analyzer - Automatically analyzes images to detect objects, 
+extract text, and generate descriptions using Google Cloud Vision API
+"""
+
+
+from google.cloud import vision
+import os
+import json
+from datetime import datetime
+from pathlib import Path
+from config import (
+    IMAGE_DIRECTORY, OUTPUT_DIRECTORY, RESULTS_FILE, 
+    DESCRIPTIONS_FILE, MAX_LABELS, MIN_CONFIDENCE, VERBOSE,
+    SHOW_DETAILED_ANALYSIS
+)
+
+
+class ImageAnalyzer:
+    """
+    Analyzes images using Google Cloud Vision API
+    """
+    
+    def __init__(self):
+        """Initialize the analyzer with Vision client"""
+        try:
+            self.client = vision.ImageAnnotatorClient()
+            self.results = {
+                'total_images': 0,
+                'analysis': [],
+                'summary': {
+                    'successful': 0,
+                    'failed': 0,
+                    'average_objects_detected': 0
+                },
+                'timestamp': datetime.now().isoformat()
+            }
+            if VERBOSE:
+                print("✓ Image analyzer initialized successfully")
+        except Exception as e:
+            print(f"✗ Failed to initialize analyzer: {e}")
+            raise
+    
+    def analyze_image(self, image_path):
+        """
+        Analyze a single image
+        
+        Args:
+            image_path (str): Path to image file
+            
+        Returns:
+            dict: Analysis results containing labels, text, objects
+        """
+        try:
+            # Validate file exists
+            if not os.path.exists(image_path):
+                return {
+                    'filename': os.path.basename(image_path),
+                    'error': 'File not found',
+                    'labels': [],
+                    'text': '',
+                    'objects': []
+                }
+            
+            # Read image file
+            with open(image_path, "rb") as image_file:
+                content = image_file.read()
+            
+            image = vision.Image(content=content)
+            
+            # Perform label detection (identify objects/concepts)
+            labels_response = self.client.label_detection(image=image)
+            labels = [
+                {
+                    'description': label.description,
+                    'confidence': round(label.score, 3),
+                    'confidence_percent': int(label.score * 100)
+                }
+                for label in labels_response.label_annotations[:MAX_LABELS]
+                if label.score >= MIN_CONFIDENCE
+            ]
+            
+            # Perform text detection (OCR)
+            text_response = self.client.text_detection(image=image)
+            full_text = ''
+            if text_response.text_annotations:
+                full_text = text_response.text_annotations[0].description
+            
+            # Perform object detection
+            objects_response = self.client.object_localization(image=image)
+            objects = [
+                {
+                    'name': obj.name,
+                    'confidence': round(obj.score, 3),
+                    'confidence_percent': int(obj.score * 100),
+                    'bounding_box': {
+                        'top_left': (
+                            round(obj.bounding_poly.normalized_vertices[0].x, 3),
+                            round(obj.bounding_poly.normalized_vertices[0].y, 3)
+                        ),
+                        'bottom_right': (
+                            round(obj.bounding_poly.normalized_vertices[2].x, 3),
+                            round(obj.bounding_poly.normalized_vertices[2].y, 3)
+                        )
+                    }
+                }
+                for obj in objects_response.localized_object_annotations
+            ]
+            
+            return {
+                'filename': os.path.basename(image_path),
+                'filepath': image_path,
+                'error': None,
+                'labels': labels,
+                'text': full_text,
+                'objects': objects,
+                'analysis_successful': True
+            }
+        
+        except Exception as e:
+            return {
+                'filename': os.path.basename(image_path),
+                'error': str(e),
+                'labels': [],
+                'text': '',
+                'objects': [],
+                'analysis_successful': False
+            }
+    
+    def generate_description(self, analysis_result):
+        """
+        Generate human-readable description from analysis
+        
+        Args:
+            analysis_result (dict): Results from analyze_image()
+            
+        Returns:
+            str: Human-readable description
+        """
+        if analysis_result['error'] or not analysis_result['labels']:
+            return "Unable to analyze image"
+        
+        # Get top labels
+        top_labels = analysis_result['labels'][:3]
+        label_names = [label['description'] for label in top_labels]
+        
+        # Build description
+        description = f"This image contains {', '.join(label_names)}."
+        
+        # Add detected objects
+        if analysis_result['objects']:
+            object_names = [obj['name'] for obj in analysis_result['objects'][:3]]
+            description += f" Detected objects include: {', '.join(object_names)}."
+        
+        # Add text if found
+        if analysis_result['text']:
+            text_preview = analysis_result['text'][:100].replace('\n', ' ')
+            description += f" Text in image: '{text_preview}'..."
+        
+        return description
+    
+    def process_directory(self, directory_path=IMAGE_DIRECTORY):
+        """
+        Process all images in a directory
+        
+        Args:
+            directory_path (str): Path to directory containing images
+        """
+        # Find all image files
+        supported_formats = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'}
+        image_files = [
+            f for f in os.listdir(directory_path)
+            if os.path.splitext(f)[1].lower() in supported_formats
+        ]
+        
+        if not image_files:
+            print(f"✗ No images found in {directory_path}")
+            return
+        
+        self.results['total_images'] = len(image_files)
+        
+        if VERBOSE:
+            print(f"\nProcessing {len(image_files)} image(s)...")
+            print("=" * 70)
+        
+        for i, filename in enumerate(image_files, 1):
+            image_path = os.path.join(directory_path, filename)
+            
+            if VERBOSE:
+                print(f"[{i}/{len(image_files)}] Analyzing: {filename}")
+            
+            # Analyze image
+            analysis = self.analyze_image(image_path)
+            self.results['analysis'].append(analysis)
+            
+            # Update summary
+            if analysis['analysis_successful']:
+                self.results['summary']['successful'] += 1
+            else:
+                self.results['summary']['failed'] += 1
+            
+            # Display results if verbose
+            if VERBOSE and SHOW_DETAILED_ANALYSIS:
+                self._print_image_analysis(analysis)
+        
+        # Calculate statistics
+        self._calculate_statistics()
+        
+        if VERBOSE:
+            print("=" * 70)
+            self._print_summary()
+    
+    def _print_image_analysis(self, analysis):
+        """Print analysis for single image"""
+        print(f"\n  File: {analysis['filename']}")
+        
+        if analysis['error']:
+            print(f"  ✗ Error: {analysis['error']}")
+        else:
+            # Print labels
+            if analysis['labels']:
+                labels_str = ', '.join([f"{l['description']} ({l['confidence_percent']}%)" 
+                                       for l in analysis['labels'][:3]])
+                print(f"  Labels: {labels_str}")
+            
+            # Print objects
+            if analysis['objects']:
+                objects_str = ', '.join([f"{o['name']} ({o['confidence_percent']}%)" 
+                                        for o in analysis['objects'][:3]])
+                print(f"  Objects: {objects_str}")
+            
+            # Print text
+            if analysis['text']:
+                text_preview = analysis['text'][:60].replace('\n', ' ')
+                print(f"  Text: '{text_preview}'...")
+            
+            # Print generated description
+            description = self.generate_description(analysis)
+            print(f"  Description: {description}")
+        
+        print("  " + "-" * 66)
+    
+    def _calculate_statistics(self):
+        """Calculate summary statistics"""
+        successful = [a for a in self.results['analysis'] if a['analysis_successful']]
+        
+        if successful:
+            total_objects = sum(len(a['labels']) for a in successful)
+            avg_objects = round(total_objects / len(successful), 1)
+            self.results['summary']['average_objects_detected'] = avg_objects
+    
+    def _print_summary(self):
+        """Print human-readable summary"""
+        summary = self.results['summary']
+        total = self.results['total_images']
+        
+        print("\n" + "=" * 70)
+        print("IMAGE ANALYSIS SUMMARY")
+        print("=" * 70)
+        print(f"\nTotal Images Analyzed: {total}")
+        print(f"Successful: {summary['successful']}")
+        print(f"Failed: {summary['failed']}")
+        print(f"Average Objects Detected per Image: {summary['average_objects_detected']}")
+        print("=" * 70)
+    
+    def save_results(self, json_path=RESULTS_FILE):
+        """Save results to JSON"""
+        os.makedirs(os.path.dirname(json_path), exist_ok=True)
+        
+        with open(json_path, 'w') as f:
+            json.dump(self.results, f, indent=2)
+        
+        if VERBOSE:
+            print(f"✓ Results saved to: {json_path}")
+    
+    def save_descriptions(self, txt_path=DESCRIPTIONS_FILE):
+        """Save image descriptions to text file"""
+        os.makedirs(os.path.dirname(txt_path), exist_ok=True)
+        
+        with open(txt_path, 'w') as f:
+            f.write("IMAGE ANALYSIS DESCRIPTIONS\n")
+            f.write("=" * 70 + "\n\n")
+            
+            for analysis in self.results['analysis']:
+                f.write(f"File: {analysis['filename']}\n")
+                description = self.generate_description(analysis)
+                f.write(f"Description: {description}\n")
+                f.write("-" * 70 + "\n\n")
+        
+        if VERBOSE:
+            print(f"✓ Descriptions saved to: {txt_path}")
+
+
+
+
+def main():
+    """Main execution"""
+    
+    print("\n" + "=" * 70)
+    print("IMAGE ANALYZER - COMPUTER VISION ANALYSIS")
+    print("=" * 70)
+    
+    # Initialize analyzer
+    analyzer = ImageAnalyzer()
+    
+    # Process images
+    analyzer.process_directory()
+    
+    # Save results
+    analyzer.save_results()
+    analyzer.save_descriptions()
+    
+    print("\n✓ Image analysis complete!")
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+Checkpoint: ✓ Core analyzer is built and working
+Step 2C: Add Advanced Features (15 minutes)
+Add enhanced functionality to main.py:
+def compare_images(image1_analysis, image2_analysis):
+    """
+    Compare two images - what's similar/different?
+    """
+    labels1 = set(l['description'] for l in image1_analysis['labels'])
+    labels2 = set(l['description'] for l in image2_analysis['labels'])
+    
+    common = labels1 & labels2
+    unique_to_1 = labels1 - labels2
+    unique_to_2 = labels2 - labels1
+    
+    return {
+        'common_features': list(common),
+        'unique_to_image1': list(unique_to_1),
+        'unique_to_image2': list(unique_to_2),
+        'similarity_percent': len(common) / len(labels1 | labels2) * 100
+    }
+
+
+def export_to_csv(results, filepath):
+    """Export analysis results to CSV"""
+    import csv
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    
+    with open(filepath, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Filename', 'Top Labels', 'Objects Detected', 'Text Found'])
+        
+        for analysis in results['analysis']:
+            labels = ', '.join([l['description'] for l in analysis['labels'][:3]])
+            objects = ', '.join([o['name'] for o in analysis['objects'][:3]])
+            text = 'Yes' if analysis['text'] else 'No'
+            
+            writer.writerow([
+                analysis['filename'],
+                labels,
+                objects,
+                text
+            ])
+    
+    print(f"✓ Results exported to: {filepath}")
+
+
+def get_image_summary(analysis_result):
+    """Get quick summary of image"""
+    if analysis_result['error']:
+        return f"Error: {analysis_result['error']}"
+    
+    main_subject = analysis_result['labels'][0]['description'] if analysis_result['labels'] else 'Unknown'
+    confidence = analysis_result['labels'][0]['confidence_percent'] if analysis_result['labels'] else 0
+    
+    return f"{main_subject} ({confidence}% confidence)"
+
+
+Checkpoint: ✓ Enhanced features added
+________________
+
+
+Project 2: Phase 3 - Testing & Refinement (15 minutes)
+Step 3A: Create Test Suite (8 minutes)
+Create test_analyzer.py:
+"""
+Test suite for image analyzer
+"""
+
+
+from main import ImageAnalyzer
+from config import IMAGE_DIRECTORY
+import os
+
+
+def test_image_loading():
+    """Test that images are properly loaded and analyzed"""
+    analyzer = ImageAnalyzer()
+    
+    print("\n" + "="*60)
+    print("TEST: IMAGE LOADING AND ANALYSIS")
+    print("="*60)
+    
+    if not os.path.exists(IMAGE_DIRECTORY):
+        print("✗ FAIL - Image directory not found")
+        return
+    
+    images = [f for f in os.listdir(IMAGE_DIRECTORY) 
+              if f.lower().endswith(('.jpg', '.png', '.jpeg', '.gif'))]
+    
+    if not images:
+        print("✗ FAIL - No images found in directory")
+        return
+    
+    for image_file in images[:2]:  # Test first 2
+        image_path = os.path.join(IMAGE_DIRECTORY, image_file)
+        result = analyzer.analyze_image(image_path)
+        
+        if result['analysis_successful']:
+            print(f"✓ PASS - {image_file} analyzed successfully")
+            print(f"  Labels found: {len(result['labels'])}")
+            print(f"  Objects detected: {len(result['objects'])}")
+        else:
+            print(f"✗ FAIL - {image_file}: {result['error']}")
+
+
+def test_label_detection():
+    """Test that labels have confidence scores"""
+    analyzer = ImageAnalyzer()
+    
+    print("\n" + "="*60)
+    print("TEST: LABEL DETECTION WITH CONFIDENCE")
+    print("="*60)
+    
+    image_path = os.path.join(IMAGE_DIRECTORY, os.listdir(IMAGE_DIRECTORY)[0])
+    result = analyzer.analyze_image(image_path)
+    
+    if result['analysis_successful'] and result['labels']:
+        all_have_confidence = all('confidence' in l for l in result['labels'])
+        
+        if all_have_confidence:
+            print("✓ PASS - All labels have confidence scores")
+            for label in result['labels'][:3]:
+                print(f"  {label['description']}: {label['confidence_percent']}%")
+        else:
+            print("✗ FAIL - Some labels missing confidence")
+    else:
+        print("✗ FAIL - No labels detected")
+
+
+def test_error_handling():
+    """Test error handling for missing/invalid files"""
+    analyzer = ImageAnalyzer()
+    
+    print("\n" + "="*60)
+    print("TEST: ERROR HANDLING")
+    print("="*60)
+    
+    # Test non-existent file
+    result = analyzer.analyze_image("nonexistent.jpg")
+    
+    if result['error']:
+        print("✓ PASS - Handles missing files gracefully")
+        print(f"  Error message: {result['error']}")
+    else:
+        print("✗ FAIL - Should report error for missing file")
+
+
+if __name__ == "__main__":
+    print("\n" + "#"*60)
+    print("# IMAGE ANALYZER - TEST SUITE")
+    print("#"*60)
+    
+    test_image_loading()
+    test_label_detection()
+    test_error_handling()
+    
+    print("\n" + "#"*60)
+    print("# TESTS COMPLETE")
+    print("#"*60 + "\n")
+
+
+Step 3B: Verify and Debug (7 minutes)
+Testing Checklist:
+               * [ ] Images are loaded correctly
+               * [ ] Labels detected with confidence scores
+               * [ ] Objects localized with bounding boxes
+               * [ ] Text extraction works (if text present in test images)
+               * [ ] Error handling works (handles missing files)
+               * [ ] Results saved to JSON and text file
+If tests fail, debug by:
+               1. Verify images are in correct format (JPG, PNG, etc.)
+               2. Check Vision API is enabled in Google Cloud
+               3. Print intermediate API responses
+               4. Check image file permissions
+Checkpoint: ✓ All tests pass
+________________
+
+
+Project 2: Phase 4 - Documentation (9 minutes)
+Create README.md:
+# Image Analyzer - Computer Vision Tool
+
+
+## Problem Statement
+
+
+Photographers spend hours manually organizing and describing photos in their 
+portfolio. This tool automatically analyzes images to identify objects, extract 
+text, and generate descriptions, saving time and improving accessibility.
+
+
+## Solution Overview
+
+
+This Python application uses Google Cloud Vision API to automatically analyze 
+images and provide:
+- Automatic object detection and classification
+- Text extraction from images (OCR)
+- Bounding box localization of detected objects
+- AI-generated image descriptions
+- Batch processing for efficiency
+
+
+## Technology Used
+
+
+- **Python 3.7+**
+- **Google Cloud Vision API**
+- **Libraries**: google-cloud-vision, pillow, python-dotenv
+
+
+## Setup Instructions
+
+
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+
+
+2. Set Up Google Cloud Credentials
+# Create .env file with:
+GOOGLE_PROJECT_ID=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+
+
+3. Add Sample Images
+Place JPG, PNG, or GIF images in data/images/ folder.
+Usage Example
+python main.py
+
+
+Expected Output
+IMAGE ANALYZER - COMPUTER VISION ANALYSIS
+======================================================================
+
+
+Processing 3 image(s)...
+======================================================================
+[1/3] Analyzing: landscape.jpg
+
+
+  File: landscape.jpg
+  Labels: Mountain (95%), Nature (92%), Outdoor (88%)
+  Objects: Mountain range, Sky, Vegetation
+  Description: This image contains Mountain, Nature, Outdoor. Detected objects 
+               include: Mountain range, Sky, Vegetation.
+  --------------------...
+
+
+======================================================================
+
+
+IMAGE ANALYSIS SUMMARY
+======================================================================
+
+
+Total Images Analyzed: 3
+Successful: 3
+Failed: 0
+Average Objects Detected per Image: 8.5
+======================================================================
+
+
+✓ Results saved to: output/analysis_results.json
+✓ Descriptions saved to: output/image_descriptions.txt
+
+
+Key Files
+               * main.py - Core analyzer implementation
+               * config.py - Configuration settings
+               * test_analyzer.py - Test suite
+               * data/images/ - Input images
+               * output/ - Analysis results
+Results / Outcomes
+Successfully analyzed 4 sample images:
+               * Detected average 8-10 objects per image
+               * 100% accuracy on primary object classification
+               * Successfully extracted text from document images
+               * Generated meaningful descriptions for each image
+Challenges & Learnings
+Challenge 1: Low-Quality or Blurry Images
+Problem: Blurry images produce less accurate results.
+Learning: API performance depends on image quality. Tips:
+               * Use high-resolution, well-lit images
+               * Avoid motion blur
+               * For critical applications, implement quality checks
+Challenge 2: Multiple Objects
+Problem: Images with 10+ objects are hard to describe concisely.
+Learning: Focusing on the 2-3 most confident labels provides better summaries than trying to list everything.
+Future Improvements
+With more time, I would add:
+               1. Crowd/Face Detection
+
+                  * Detect and count people
+                  * Identify familiar faces (with permission)
+                  2. NSFW Content Filtering
+
+                     * Automatically flag inappropriate content
+                     * Useful for content moderation
+                     3. Web Detection
+
+                        * Find visually similar images online
+                        * Detect duplicate content
+                        4. Logo Detection
+
+                           * Identify brand logos in images
+                           * Track brand presence in content
+                           5. Visual Question Answering
+
+                              * Answer questions about image content
+                              * "How many people are in this photo?"
+                              6. Dashboard/UI
+
+                                 * Web interface for uploading images
+                                 * Real-time analysis visualization
+Running Tests
+python test_analyzer.py
+
+
+Tests verify:
+                                 * ✓ Image loading and analysis
+                                 * ✓ Label detection with confidence scores
+                                 * ✓ Error handling for invalid inputs
+Author
+AI Learning Course - Module 10 Capstone Project
+License
+Educational use
+
+
+---
+
+
+## Project 2: Summary & Submission
+
+
+**What You Built**:
+- ✓ Image analysis system using Google Cloud Vision API
+- ✓ Detects objects with bounding boxes
+- ✓ Extracts text from images (OCR)
+- ✓ Generates AI descriptions
+- ✓ Handles batch processing
+- ✓ Comprehensive documentation
+
+
+**Files to Submit**:
+
+
+image_analyzer_project/ ├── main.py ├── config.py ├── test_analyzer.py ├── requirements.txt ├── README.md ├── data/ │ └── images/ # Sample images └── output/ ├── analysis_results.json └── image_descriptions.txt
+
+
+**Estimated Time**: 84 minutes
+**Difficulty**: Intermediate to Advanced
+**Skills Demonstrated**: Vision API integration, computer vision concepts, batch processing, file I/O
+
+
+---
+
+
+---
+
+
+# PROJECT OPTION 3: GENERATIVE AI PRODUCTIVITY TOOL
+## Build a Smart Content Generation System
+
+
+**Time Allocation**: 84 minutes
+- Setup & Planning: 10 min
+- Implementation: 50 min
+- Testing & Refinement: 15 min
+- Documentation: 9 min
+
+
+**Final Output**: A productivity tool powered by generative AI that assists with content creation
+
+
+---
+
+
+## Project 3: Phase 1 - Setup & Planning (10 minutes)
+
+
+### Step 1A: Define Your Problem (3 minutes)
+
+
+**Your Mission**: Build a tool that uses AI to generate content and boost productivity. Examples include: email draft generator, meeting summarizer, code documentation writer, or brainstorming assistant.
+
+
+**Problem Statement** (example - choose your own tool):
+
+
+I'm building an email draft generator that helps professionals quickly compose professional emails. Currently, employees spend 10-15 minutes crafting each email. My tool generates a complete draft based on a brief topic/purpose, which users can edit or send directly. This helps professionals save 5+ hours weekly while ensuring email quality and consistency across teams.
+
+
+**Success Criteria**:
+- ✓ Generates relevant, grammatically correct content
+- ✓ Produces output in under 5 seconds
+- ✓ Handles various input scenarios
+- ✓ Output is useful and ready to use (with minimal editing)
+- ✓ Saves time compared to manual writing
+
+
+### Step 1B: Set Up Your Environment (5 minutes)
+
+
+**Step 1**: Create project folder
+```bash
+mkdir ai_tool_project
+cd ai_tool_project
+
+
+Step 2: Create Python files
+touch main.py config.py requirements.txt README.md .env
+mkdir output
+
+
+Step 3: Install libraries
+# For OpenAI
+pip install openai python-dotenv
+
+
+# OR for Google Gemini
+pip install google-generativeai python-dotenv
+
+
+# OR for Anthropic Claude
+pip install anthropic python-dotenv
+
+
+Step 4: Your file structure
+ai_tool_project/
+├── main.py                    # Main application
+├── config.py                  # Configuration
+├── requirements.txt           # Dependencies
+├── .env                       # API credentials
+├── README.md                  # Documentation
+└── output/
+    ├── generated_emails.txt
+    ├── usage_log.json
+    └── test_results.txt
+
+
+Step 1C: Prepare Test Scenarios (2 minutes)
+Create test cases for your tool:
+If Email Generator:
+                                 * "Write a thank you email to a client after a meeting"
+                                 * "Compose a professional follow-up email"
+                                 * "Write a meeting rescheduling email"
+If Meeting Summarizer:
+                                 * "Summarize this 30-minute meeting transcript in 3 bullets"
+                                 * "Extract action items from this meeting notes"
+If Code Documentation:
+                                 * "Write docstring for a function that calculates factorial"
+                                 * "Generate README section for a web scraper"
+Checkpoint: ✓ Environment is set up and test scenarios prepared
+________________
+
+
+Project 3: Phase 2 - Implementation (50 minutes)
+Step 3A: Set Up Configuration (5 minutes)
+Create config.py:
+"""
+Configuration for generative AI tool
+"""
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+
+# Choose your AI provider
+# Options: 'openai', 'gemini', 'claude'
+AI_PROVIDER = 'openai'
+
+
+# API Configuration
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_MODEL = 'gpt-3.5-turbo'
+
+
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+GOOGLE_MODEL = 'gemini-pro'
+
+
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+ANTHROPIC_MODEL = 'claude-3-haiku-20240307'
+
+
+# Tool Settings
+TEMPERATURE = 0.7              # Creativity: 0 (factual) to 1 (creative)
+MAX_TOKENS = 500               # Maximum response length
+TIMEOUT = 30                   # API call timeout in seconds
+
+
+# Files
+OUTPUT_DIR = 'output'
+GENERATED_FILE = os.path.join(OUTPUT_DIR, 'generated_content.txt')
+LOG_FILE = os.path.join(OUTPUT_DIR, 'usage_log.json')
+
+
+# Display
+VERBOSE = True
+
+
+Step 3B: Build Core Tool with OpenAI (30 minutes)
+Create main.py:
+"""
+Generative AI Productivity Tool - Generate professional emails using ChatGPT
+"""
+
+
+import os
+import json
+from datetime import datetime
+from config import (
+    AI_PROVIDER, OPENAI_API_KEY, OPENAI_MODEL, 
+    TEMPERATURE, MAX_TOKENS, OUTPUT_DIR, GENERATED_FILE, 
+    LOG_FILE, VERBOSE
+)
+
+
+class EmailGenerator:
+    """
+    Generates professional emails using OpenAI API
+    """
+    
+    def __init__(self):
+        """Initialize email generator"""
+        try:
+            import openai
+            self.openai = openai
+            self.client = openai.OpenAI(api_key=OPENAI_API_KEY)
+            self.usage_log = {
+                'total_generated': 0,
+                'total_tokens_used': 0,
+                'generations': [],
+                'timestamp': datetime.now().isoformat()
+            }
+            if VERBOSE:
+                print("✓ Email Generator initialized with OpenAI")
+        except ImportError:
+            print("✗ OpenAI library not installed. Run: pip install openai")
+            raise
+        except Exception as e:
+            print(f"✗ Failed to initialize: {e}")
+            raise
+    
+    def _build_system_prompt(self):
+        """Build system prompt for consistent behavior"""
+        return """You are a professional email writing assistant. Your job is to:
+1. Write clear, concise, professional emails
+2. Use appropriate tone (formal, friendly, or assertive as needed)
+3. Keep emails brief but complete (3-5 short paragraphs max)
+4. Always include a greeting and professional closing
+5. Proofread for grammar and clarity
+6. Format with clear paragraph breaks
+
+
+Important: Return ONLY the email content, no explanations or metadata."""
+    
+    def _build_user_prompt(self, topic, tone='professional', context=''):
+        """Build user prompt from topic and context"""
+        prompt = f"""Generate a professional email with the following details:
+
+
+Topic/Purpose: {topic}
+Tone: {tone}
+"""
+        if context:
+            prompt += f"Context/Additional Info: {context}\n"
+        
+        prompt += "\nPlease generate the email now:"
+        
+        return prompt
+    
+    def generate_email(self, topic, tone='professional', context=''):
+        """
+        Generate an email using OpenAI
+        
+        Args:
+            topic (str): What the email is about
+            tone (str): 'professional', 'friendly', or 'assertive'
+            context (str): Additional context information
+            
+        Returns:
+            dict: Generated email and metadata
+        """
+        try:
+            # Build prompts
+            system_prompt = self._build_system_prompt()
+            user_prompt = self._build_user_prompt(topic, tone, context)
+            
+            # Call API
+            print(f"Generating email... (topic: {topic[:40]}...)")
+            
+            response = self.client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                temperature=TEMPERATURE,
+                max_tokens=MAX_TOKENS,
+            )
+            
+            # Extract email content
+            email_content = response.choices[0].message.content
+            tokens_used = response.usage.total_tokens
+            
+            # Create result
+            result = {
+                'topic': topic,
+                'tone': tone,
+                'context': context,
+                'email': email_content,
+                'tokens_used': tokens_used,
+                'model': OPENAI_MODEL,
+                'timestamp': datetime.now().isoformat(),
+                'success': True
+            }
+            
+            # Update usage log
+            self.usage_log['total_generated'] += 1
+            self.usage_log['total_tokens_used'] += tokens_used
+            self.usage_log['generations'].append(result)
+            
+            return result
+        
+        except Exception as e:
+            error_result = {
+                'topic': topic,
+                'error': str(e),
+                'success': False,
+                'timestamp': datetime.now().isoformat()
+            }
+            self.usage_log['generations'].append(error_result)
+            return error_result
+    
+    def generate_multiple_emails(self, email_requests):
+        """
+        Generate multiple emails
+        
+        Args:
+            email_requests (list): List of dicts with topic, tone, context
+            
+        Returns:
+            list: Results for each email
+        """
+        print(f"\nGenerating {len(email_requests)} emails...\n")
+        print("=" * 70)
+        
+        results = []
+        
+        for i, request in enumerate(email_requests, 1):
+            print(f"[{i}/{len(email_requests)}] {request.get('topic', 'Email')[:40]}...")
+            
+            result = self.generate_email(
+                topic=request.get('topic', ''),
+                tone=request.get('tone', 'professional'),
+                context=request.get('context', '')
+            )
+            
+            results.append(result)
+            
+            if result['success']:
+                print(f"  ✓ Generated successfully ({result['tokens_used']} tokens)")
+            else:
+                print(f"  ✗ Failed: {result['error']}")
+        
+        print("=" * 70)
+        
+        return results
+    
+    def save_generated_content(self, filepath=GENERATED_FILE):
+        """Save generated emails to file"""
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        with open(filepath, 'w') as f:
+            f.write("GENERATED EMAILS\n")
+            f.write("=" * 70 + "\n\n")
+            
+            for gen in self.usage_log['generations']:
+                if gen['success']:
+                    f.write(f"Topic: {gen['topic']}\n")
+                    f.write(f"Tone: {gen['tone']}\n")
+                    if gen['context']:
+                        f.write(f"Context: {gen['context']}\n")
+                    f.write("\n" + gen['email'] + "\n\n")
+                    f.write("-" * 70 + "\n\n")
+        
+        if VERBOSE:
+            print(f"✓ Generated content saved to: {filepath}")
+    
+    def save_usage_log(self, filepath=LOG_FILE):
+        """Save usage statistics to JSON"""
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        with open(filepath, 'w') as f:
+            json.dump(self.usage_log, f, indent=2)
+        
+        if VERBOSE:
+            print(f"✓ Usage log saved to: {filepath}")
+    
+    def print_summary(self):
+        """Print summary statistics"""
+        print("\n" + "=" * 70)
+        print("EMAIL GENERATION SUMMARY")
+        print("=" * 70)
+        print(f"Total emails generated: {self.usage_log['total_generated']}")
+        print(f"Total tokens used: {self.usage_log['total_tokens_used']}")
+        
+        if self.usage_log['total_generated'] > 0:
+            avg_tokens = self.usage_log['total_tokens_used'] / self.usage_log['total_generated']
+            print(f"Average tokens per email: {avg_tokens:.1f}")
+        
+        print("=" * 70)
+    
+    def display_sample_email(self, index=0):
+        """Display a generated email"""
+        if index < len(self.usage_log['generations']):
+            email = self.usage_log['generations'][index]
+            
+            if email['success']:
+                print("\n" + "=" * 70)
+                print("SAMPLE GENERATED EMAIL")
+                print("=" * 70)
+                print(f"\nTopic: {email['topic']}")
+                print(f"Tone: {email['tone']}\n")
+                print("Content:")
+                print("-" * 70)
+                print(email['email'])
+                print("-" * 70)
+            else:
+                print(f"Error in generation {index}: {email['error']}")
+
+
+
+
+def main():
+    """Main execution"""
+    
+    print("\n" + "=" * 70)
+    print("GENERATIVE AI EMAIL GENERATOR")
+    print("=" * 70)
+    
+    # Initialize generator
+    generator = EmailGenerator()
+    
+    # Define emails to generate
+    email_requests = [
+        {
+            'topic': 'Thank client for their business after a successful project',
+            'tone': 'professional',
+            'context': 'Project completed on time and under budget'
+        },
+        {
+            'topic': 'Request a meeting with team lead to discuss career goals',
+            'tone': 'professional',
+            'context': 'Been with company for 2 years, interested in promotion'
+        },
+        {
+            'topic': 'Reschedule a meeting that was planned for tomorrow',
+            'tone': 'friendly',
+            'context': 'Need to push back by one week due to unexpected conflict'
+        },
+        {
+            'topic': 'Follow up with a prospect after initial contact',
+            'tone': 'professional',
+            'context': 'Met at conference, exchanged contact info'
+        },
+    ]
+    
+    # Generate emails
+    results = generator.generate_multiple_emails(email_requests)
+    
+    # Display sample
+    generator.display_sample_email(0)
+    
+    # Print summary
+    generator.print_summary()
+    
+    # Save results
+    generator.save_generated_content()
+    generator.save_usage_log()
+    
+    print("\n✓ Email generation complete!")
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+Checkpoint: ✓ Core tool is working with OpenAI
+Step 3C: Add Advanced Features (15 minutes)
+Add enhanced capabilities:
+def generate_email_variants(self, topic, tones=['professional', 'friendly', 'assertive']):
+    """
+    Generate same email in different tones for comparison
+    """
+    variants = []
+    for tone in tones:
+        result = self.generate_email(topic, tone=tone)
+        variants.append(result)
+    return variants
+
+
+def improve_email(self, draft_email):
+    """
+    Take an existing email and improve it
+    """
+    improvement_prompt = f"""I have drafted an email. Please improve it by:
+1. Making it more professional
+2. Improving clarity and conciseness
+3. Fixing any grammar issues
+4. Enhancing the tone
+
+
+Original email:
+{draft_email}
+
+
+Please provide the improved version:"""
+    
+    # API call with improvement prompt
+    pass
+
+
+def extract_key_points(self, email_thread):
+    """
+    Extract key action items and decisions from email thread
+    """
+    pass
+
+
+def calculate_reading_time(self, email_text):
+    """Calculate approximate reading time"""
+    words = len(email_text.split())
+    minutes = max(1, words // 200)  # Average reading speed
+    return f"{minutes} minute(s)"
+
+
+________________
+
+
+Project 3: Phase 3 - Testing & Refinement (15 minutes)
+Step 3A: Create Test Suite (8 minutes)
+Create test_tool.py:
+"""
+Test suite for email generator
+"""
+
+
+from main import EmailGenerator
+import time
+
+
+def test_basic_generation():
+    """Test basic email generation"""
+    generator = EmailGenerator()
+    
+    print("\n" + "="*60)
+    print("TEST: BASIC EMAIL GENERATION")
+    print("="*60)
+    
+    topic = "Thank you for attending my presentation"
+    result = generator.generate_email(topic)
+    
+    if result['success']:
+        print("✓ PASS - Email generated successfully")
+        print(f"  Tokens used: {result['tokens_used']}")
+        print(f"  Email preview: {result['email'][:100]}...")
+    else:
+        print(f"✗ FAIL - {result['error']}")
+
+
+def test_response_time():
+    """Test API response time"""
+    generator = EmailGenerator()
+    
+    print("\n" + "="*60)
+    print("TEST: RESPONSE TIME")
+    print("="*60)
+    
+    start = time.time()
+    result = generator.generate_email("Quick test email")
+    elapsed = time.time() - start
+    
+    if elapsed < 10:
+        print(f"✓ PASS - Response time acceptable ({elapsed:.2f}s)")
+    else:
+        print(f"⚠ SLOW - Response took {elapsed:.2f}s")
+
+
+def test_tone_variation():
+    """Test different tones"""
+    generator = EmailGenerator()
+    
+    print("\n" + "="*60)
+    print("TEST: TONE VARIATION")
+    print("="*60)
+    
+    topic = "Meeting reschedule"
+    tones = ['professional', 'friendly']
+    
+    for tone in tones:
+        result = generator.generate_email(topic, tone=tone)
+        if result['success']:
+            print(f"✓ PASS - Generated {tone} tone email")
+        else:
+            print(f"✗ FAIL - {tone}: {result['error']}")
+
+
+def test_error_handling():
+    """Test error handling"""
+    generator = EmailGenerator()
+    
+    print("\n" + "="*60)
+    print("TEST: ERROR HANDLING")
+    print("="*60)
+    
+    # Test empty topic
+    result = generator.generate_email("")
+    
+    if 'error' in result or not result['success']:
+        print("✓ PASS - Handles empty topic")
+    else:
+        print("✗ FAIL - Should handle empty input")
+
+
+if __name__ == "__main__":
+    print("\n" + "#"*60)
+    print("# EMAIL GENERATOR - TEST SUITE")
+    print("#"*60)
+    
+    test_basic_generation()
+    test_response_time()
+    test_tone_variation()
+    test_error_handling()
+    
+    print("\n" + "#"*60)
+    print("# TESTS COMPLETE")
+    print("#"*60 + "\n")
+
+
+Step 3B: Verify and Debug (7 minutes)
+Testing Checklist:
+                                 * [ ] Emails generate successfully
+                                 * [ ] Response time < 10 seconds
+                                 * [ ] Different tones produce different emails
+                                 * [ ] Error handling works
+                                 * [ ] Output is grammatically correct
+                                 * [ ] Results saved to files
+If tests fail, debug by:
+                                 1. Verify API key is correct in .env
+                                 2. Check internet connection
+                                 3. Test API key manually
+                                 4. Check API rate limits
+Checkpoint: ✓ All tests pass
+________________
+
+
+Project 3: Phase 4 - Documentation (9 minutes)
+Create README.md:
+# Generative AI Email Generator
+
+
+## Problem Statement
+
+
+Professionals spend 10-15 minutes composing each email, adding up to 5+ hours 
+weekly. This tool uses AI to instantly generate professional email drafts, 
+allowing employees to spend more time on strategic work.
+
+
+## Solution Overview
+
+
+An intelligent email generation system powered by OpenAI's GPT-3.5. The tool:
+- Generates professional emails from a topic and context
+- Supports multiple tones (formal, friendly, assertive)
+- Produces email-ready content in under 5 seconds
+- Logs usage for analytics and cost tracking
+
+
+## Technology Used
+
+
+- **Python 3.7+**
+- **OpenAI API (GPT-3.5)**
+- **Libraries**: openai, python-dotenv
+
+
+## Setup Instructions
+
+
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+
+
+2. Get OpenAI API Key
+                                 * Sign up at https://platform.openai.com/
+                                 * Create API key
+                                 * Add to .env file
+3. Configure Environment
+# Create .env file with:
+OPENAI_API_KEY=your-api-key-here
+
+
+Usage Example
+python main.py
+
+
+Sample Output
+GENERATIVE AI EMAIL GENERATOR
+======================================================================
+
+
+Generating 4 emails...
+
+
+======================================================================
+[1/4] Thank client for their business...
+  ✓ Generated successfully (142 tokens)
+[2/4] Request meeting with team lead...
+  ✓ Generated successfully (158 tokens)
+[3/4] Reschedule meeting...
+  ✓ Generated successfully (126 tokens)
+[4/4] Follow up with prospect...
+  ✓ Generated successfully (151 tokens)
+======================================================================
+
+
+======================================================================
+SAMPLE GENERATED EMAIL
+======================================================================
+
+
+Topic: Thank client for their business after a successful project
+Tone: professional
+
+
+Content:
+---------- --------
+Dear [Client Name],
+
+
+I wanted to take a moment to express my sincere gratitude for your 
+business and partnership on this project. Your vision, flexibility, 
+and collaborative spirit were instrumental in our success.
+
+
+We're thrilled that we were able to deliver the project on time 
+and under budget. Your trust in our team was invaluable, and we 
+look forward to future opportunities to work together.
+
+
+Best regards,
+[Your Name]
+---------- --------
+
+
+======================================================================
+EMAIL GENERATION SUMMARY
+======================================================================
+Total emails generated: 4
+Total tokens used: 577
+Average tokens per email: 144.3
+======================================================================
+
+
+Key Features
+                                 * Fast Generation: Emails created in under 5 seconds
+                                 * Tone Flexibility: Professional, friendly, or assertive options
+                                 * Context Aware: Accepts additional context for personalized emails
+                                 * Usage Tracking: Logs all generations with token usage
+                                 * Easy Export: Saves all generated emails to file
+Results / Outcomes
+Successfully generated 4 professional emails:
+                                 * Average generation time: 2.3 seconds
+                                 * Average email length: 150-180 words
+                                 * All emails grammatically correct and ready to send
+                                 * Total cost: < $0.01 for all 4 emails
+Challenges & Learnings
+Challenge 1: Consistency Across Tones
+Problem: Different tones sometimes felt similar
+Learning: Using more specific prompt engineering helps. Including tone definitions in the system prompt produced more distinct variations.
+Challenge 2: Generic Content
+Problem: AI tends to produce somewhat generic emails
+Learning: More specific context improves results. "Meeting reschedule" is too vague. "Reschedule Monday meeting to Friday due to medical appointment" produces better, more personalized content.
+Future Improvements
+With more time, I would add:
+                                 1. Email Chains
+
+                                    * Generate back-and-forth email conversations
+                                    * Handle complex multi-person discussions
+                                    2. Template Library
+
+                                       * Save frequently-used email templates
+                                       * Pre-defined contexts for common scenarios
+                                       3. Integration with Email Clients
+
+                                          * Direct Gmail/Outlook integration
+                                          * Send drafts directly from app
+                                          4. Personalization Engine
+
+                                             * Learn user's writing style
+                                             * Automatically adjust AI output to match
+                                             5. Accessibility Features
+
+                                                * Text-to-speech for reading drafts
+                                                * Accessibility scoring (readability level)
+                                                6. Cost Calculator
+
+                                                   * Show cost per email
+                                                   * Budget tracking
+Running Tests
+python test_tool.py
+
+
+Tests include:
+                                                   * ✓ Basic generation
+                                                   * ✓ Response time validation
+                                                   * ✓ Tone variation
+                                                   * ✓ Error handling
+Cost Considerations
+OpenAI Pricing (as of 2024):
+                                                   * GPT-3.5: ~$0.001 per 1K tokens
+                                                   * Average email: ~150 tokens
+                                                   * Cost per email: ~$0.00015
+Monthly estimate (500 emails):
+                                                   * Tokens: ~75,000
+                                                   * Cost: ~$0.08
+Author
+AI Learning Course - Module 10 Capstone Project
+License
+Educational use
+
+
+---
+
+
+## Project 3: Summary & Submission
+
+
+**What You Built**:
+- ✓ Generative AI productivity tool using OpenAI
+- ✓ Generates professional emails on demand
+- ✓ Supports multiple tones and contexts
+- ✓ Fast, reliable output
+- ✓ Usage tracking and logging
+- ✓ Comprehensive documentation
+
+
+**Files to Submit**:
+
+
+ai_tool_project/ ├── main.py ├── config.py ├── test_tool.py ├── requirements.txt ├── README.md ├── .env # Don't commit (add to .gitignore) └── output/ ├── generated_content.txt ├── usage_log.json └── test_results.txt
+
+
+**Estimated Time**: 84 minutes
+**Difficulty**: Intermediate
+**Skills Demonstrated**: LLM API integration, prompt engineering, error handling, practical productivity tools
+
+
+---
+
+
+## Completing Your Capstone
+
+
+You've now completed **70% of Module 10** (84 minutes of hands-on project work):
+
+
+**Choose ONE of the three projects above:**
+1. ✅ **Text Classifier** - Sentiment analysis for reviews
+2. ✅ **Image Analyzer** - Computer vision analysis tool
+3. ✅ **Email Generator** - Generative AI productivity tool
+
+
+**Remaining 30% of Module 10**:
+- 10% Peer Review/Feedback
+- 10% Course Review Quiz (20 questions)
+- 10% Final Presentation
+
+
+**Next Steps**:
+1. Complete your chosen project
+2. Test thoroughly
+3. Document clearly
+4. Prepare for peer review
+5. Take final course quiz
+
+
+**Congratulations on completing the capstone project work!**
+
+
+---
+
+
+**Total Project Time: 84 minutes**
+**Technologies Used: Google Cloud APIs / OpenAI**
+**Final Deliverable: Working AI application with full documentation**
