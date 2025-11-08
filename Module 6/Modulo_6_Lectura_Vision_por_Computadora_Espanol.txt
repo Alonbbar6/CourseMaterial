@@ -1,0 +1,334 @@
+MÓDULO 6: MATERIA DE LECTURA — FUNDAMENTOS Y CASOS DE USO DE VISIÓN POR COMPUTADORA
+Fundamentos y Casos de Uso de la Visión por Computadora
+Tiempo de lectura: 48 minutos
+Duración del módulo: 120 minutos
+Curso: MTW AI Platform - Fundamentos de Inteligencia Artificial y Aplicaciones Prácticas
+________________
+
+TABLA DE CONTENIDOS
+1. Introducción a la Visión por Computadora (4 minutos)
+2. Cómo “ven” las computadoras: píxeles y representación de imágenes (8 minutos)
+3. Redes Neuronales Convolucionales (CNN): la arquitectura detrás de la visión por computadora (12 minutos)
+4. Clasificación de Imágenes: categorizar contenido visual (6 minutos)
+5. Detección de Objetos: encontrar y localizar objetos (6 minutos)
+6. Segmentación de Imágenes: comprensión a nivel de píxel (4 minutos)
+7. Aplicaciones reales de la Visión por Computadora (8 minutos)
+________________
+
+1. INTRODUCCIÓN A LA VISIÓN POR COMPUTADORA (4 minutos)
+¿Qué es la Visión por Computadora?
+La Visión por Computadora es un campo de la Inteligencia Artificial que permite a las computadoras interpretar, comprender y extraer información significativa de entradas visuales como imágenes y videos. Así como los humanos usan ojos y cerebro para entender el mundo, los sistemas de Visión por Computadora usan cámaras (u otros sensores de imagen) y algoritmos para “ver” y dar sentido a los datos visuales.
+
+La evolución de la Visión por Computadora
+La Visión por Computadora ha evolucionado drásticamente en las últimas décadas. En sus inicios, los investigadores programaban reglas explícitas para detectar bordes, esquinas y formas simples. Sin embargo, esos sistemas basados en reglas eran frágiles y fallaban ante la complejidad del mundo real.
+El gran avance llegó con el Aprendizaje Profundo, particularmente con el desarrollo de las Redes Neuronales Convolucionales (CNN) en la década de 2010. Estas redes pueden aprender automáticamente características visuales a partir de grandes conjuntos de imágenes, logrando precisión sin precedentes en tareas como reconocimiento facial, análisis de imágenes médicas y conducción autónoma.
+
+¿Por qué importa la Visión por Computadora?
+La Visión por Computadora está transformando industrias y la vida diaria:
+* Salud: Detección de enfermedades en radiografías y resonancias.
+* Automotriz: Habilita a los autos autónomos a percibir su entorno.
+* Seguridad: Identificación de personas mediante reconocimiento facial.
+* Manufactura: Inspección de calidad de productos.
+* Retail: Tiendas sin caja mediante seguimiento visual.
+* Agricultura: Monitoreo de cultivos con imágenes de drones.
+La Visión por Computadora puentea el mundo digital y la realidad física, permitiendo que las máquinas comprendan e interactúen con su entorno de formas antes exclusivas de los humanos.
+________________
+
+2. CÓMO “VEN” LAS COMPUTADORAS: PÍXELES Y REPRESENTACIÓN DE IMÁGENES (8 minutos)
+Entendiendo las imágenes digitales
+A diferencia de los humanos, que vemos información continua, las computadoras procesan imágenes como rejillas de números. Toda imagen digital se compone de pequeños cuadrados llamados píxeles: los bloques fundamentales de la imagen digital.
+
+¿Qué es un píxel?
+Un píxel es la unidad más pequeña de una imagen digital (del inglés “picture element”). Cada píxel contiene valores numéricos que representan color y brillo. La resolución de una imagen viene dada por su cantidad de píxeles; por ejemplo, 1920×1080 tiene 1,920 píxeles horizontales y 1,080 verticales, superando los 2 millones de píxeles.
+
+Representación del color: modelo RGB
+La mayoría de las imágenes en color usan el modelo RGB, donde cada píxel se representa por tres números:
+* R (Rojo): intensidad de rojo (0-255)
+* G (Verde): intensidad de verde (0-255)
+* B (Azul): intensidad de azul (0-255)
+Combinando intensidades se representan millones de colores. Ejemplos:
+* Rojo puro: (255, 0, 0)
+* Blanco puro: (255, 255, 255)
+* Negro puro: (0, 0, 0)
+* Gris: (128, 128, 128)
+* Morado: (128, 0, 128)
+
+Imágenes en escala de grises
+Contienen solo información de brillo: un valor por píxel (0-255), donde 0 es negro y 255 blanco. Son más simples de procesar y útiles cuando el color no es esencial (p. ej., MNIST).
+
+Dimensiones y canales
+Al trabajar con imágenes se usan tres dimensiones:
+1. Ancho: píxeles horizontales
+2. Alto: píxeles verticales
+3. Canales: componentes de color (1 para grises, 3 para RGB)
+Una imagen 224×224×3 tiene 224 de ancho, 224 de alto y 3 canales (RGB).
+
+¿Cómo procesan imágenes las computadoras?
+Para una computadora, una imagen es una gran matriz de números. Ejemplo, imagen 3×3 en grises:
+[120, 135, 140]
+[110, 255, 142]
+[105, 100, 138]
+Los algoritmos analizan estos patrones numéricos para identificar bordes, texturas, formas y, finalmente, reconocer objetos y escenas. El reto es extraer información útil de números crudos; ahí brillan las CNN.
+________________
+
+3. REDES NEURONALES CONVOLUCIONALES (CNN): LA ARQUITECTURA DETRÁS DE LA VISIÓN POR COMPUTADORA (12 minutos)
+¿Por qué fallan las redes tradicionales con imágenes?
+Antes de las CNN se probaron redes totalmente conectadas, pero tenían limitaciones críticas:
+* Demasiados parámetros: una imagen 224×224 RGB tiene 150,528 valores de entrada, implicando millones de pesos incluso en redes pequeñas.
+* Sin conciencia espacial: tratan píxeles de forma independiente, ignorando relaciones espaciales.
+* Coste computacional alto: entrenamiento lento y memoria enorme.
+
+La revolución de las CNN
+Las Redes Neuronales Convolucionales fueron diseñadas para datos en rejilla (imágenes). Inspiradas en la corteza visual humana, siguen un enfoque jerárquico: detectan características simples (bordes, colores) y luego patrones complejos (caras, objetos).
+El momento decisivo llegó en 2012 cuando AlexNet ganó ImageNet con una reducción de error sin precedentes (>10%). Ese éxito encendió la revolución del deep learning.
+
+Componentes clave de las CNN
+1) Capas convolucionales
+El bloque central. En lugar de conectar cada píxel con cada neurona, usan filtros (kernels) pequeños que se deslizan sobre la imagen.
+Cómo funciona la convolución:
+* Un filtro (p. ej., 3×3 o 5×5) con pesos aprendibles se desliza por la imagen.
+* En cada posición, multiplica elemento a elemento y suma.
+* Produce un valor y así se forma un mapa de características.
+Qué detectan los filtros:
+* Capas tempranas: bordes, esquinas, gradientes de color.
+* Capas medias: texturas, patrones, formas simples.
+* Capas profundas: objetos complejos, caras, conceptos semánticos.
+Los filtros se aprenden automáticamente durante el entrenamiento.
+
+2) Capas de pooling
+Reducen las dimensiones espaciales y enfocan la información esencial. El más común es max pooling (máximo de una ventana 2×2).
+Beneficios:
+* Menor cómputo.
+* Invariancia a traslaciones (detectar rasgos sin importar posición exacta).
+* Ayuda a evitar sobreajuste reduciendo parámetros.
+
+3) Funciones de activación
+Tras convolución y pooling se aplican activaciones para introducir no linealidad. La más común es ReLU:
+ReLU(x) = max(0, x)
+La no linealidad permite aprender patrones complejos.
+
+4) Capas totalmente conectadas
+Tras varias capas convolucionales/pooling que extraen rasgos de alto nivel, capas densas finales combinan esas características para predecir.
+
+Arquitectura típica
+Imagen de entrada → [Convolución → Activación → Pooling] × N → Densas → Salida
+Ejemplo simple de clasificación:
+1. Entrada: 224×224×3
+2. Conv1: 32 filtros → 224×224×32
+3. Pool1: → 112×112×32
+4. Conv2: 64 filtros → 112×112×64
+5. Pool2: → 56×56×64
+6. Aplanado: → 200,704 valores
+7. Densa: → 1000 neuronas
+8. Salida: → 10 clases
+
+¿Cómo aprenden las CNN?
+Mediante retropropagación:
+1) Predicción sobre una imagen de entrenamiento.
+2) Cálculo del error vs. la etiqueta real.
+3) Propagación del error hacia atrás por la red.
+4) Ajuste de pesos de los filtros para reducir el error.
+5) Repetir con miles/millones de imágenes.
+Con el tiempo, los filtros aprenden características cada vez más útiles.
+
+Arquitecturas famosas
+* AlexNet (2012): detonó la revolución.
+* VGGNet (2014): demostró que más profundidad mejora el rendimiento.
+* ResNet (2015): introdujo conexiones residuales, permitiendo 100+ capas.
+* Inception/GoogLeNet: convoluciones paralelas de distintos tamaños.
+* MobileNet: optimizada para móviles y dispositivos de borde.
+________________
+
+4. CLASIFICACIÓN DE IMÁGENES: CATEGORIZAR CONTENIDO VISUAL (6 minutos)
+¿Qué es la clasificación de imágenes?
+Asignar una sola etiqueta a una imagen completa desde un conjunto de clases. Responde: “¿Qué hay en esta imagen?”
+Ejemplo:
+* Entrada: una foto.
+* Salida: “Perro”, “Gato”, “Coche”, “Avión”, etc.
+
+¿Cómo funciona?
+1) Entrada normalizada (p. ej., 224×224).
+2) Extracción de características: CNN con múltiples capas.
+3) Clasificación: capas densas producen probabilidades por clase.
+4) Salida: clase con mayor probabilidad.
+
+Entrenamiento
+Requiere:
+* Conjunto etiquetado (miles o millones de imágenes).
+* Arquitectura CNN adecuada.
+* Función de pérdida (cross-entropy).
+* Optimizador (descenso de gradiente, etc.).
+
+Datasets famosos:
+* MNIST (dígitos 0-9).
+* CIFAR-10 (10 clases de objetos pequeños).
+* ImageNet (14M+ imágenes, 20k+ categorías).
+
+Aplicaciones
+* Diagnóstico médico (normal/anormal, tipos de lesiones).
+* Agricultura (enfermedades en hojas).
+* Control de calidad (aceptable/defectuoso).
+* Moderación de contenido.
+* Monitoreo de vida silvestre.
+
+Desafíos
+* Variación de punto de vista y escala.
+* Oclusión, iluminación, fondos complejos.
+* Variación intra-clase (razas de perro muy diferentes).
+Las CNN modernas son robustas gracias a arquitecturas profundas, datos masivos y aumento de datos.
+________________
+
+5. DETECCIÓN DE OBJETOS: ENCONTRAR Y LOCALIZAR OBJETOS (6 minutos)
+¿Qué es la detección de objetos?
+Va más allá de “qué hay” para decir “dónde está”. Identifica múltiples objetos y dibuja cajas delimitadoras (bounding boxes).
+
+Ejemplo (foto de calle):
+* “Coche” en (120, 50, 280, 180)
+* “Persona” en (300, 100, 350, 250)
+* “Semáforo” en (450, 20, 480, 80)
+
+Retos: cuántos objetos hay, qué son (clasificación) y dónde están (localización).
+
+¿Cómo funciona?
+Dos enfoques principales basados en CNN:
+1) Detectores de dos etapas (R-CNN, Faster R-CNN)
+   * Propuestas de regiones → Clasificación y refinamiento.
+   * Más precisos, más lentos.
+2) Detectores de una etapa (YOLO, SSD)
+   * Predicen clases y cajas en un solo paso.
+   * Muy rápidos, a veces ligeramente menos precisos.
+Salidas típicas:
+* Coordenadas de caja (x, y, ancho, alto).
+* Etiqueta de clase.
+* Puntaje de confianza (%). Se filtran detecciones con baja confianza.
+
+Métricas
+* Precisión (precision), Cobertura (recall).
+* mAP (mean Average Precision) combina ambas.
+
+Aplicaciones
+* Vehículos autónomos (peatones, vehículos, señales, obstáculos).
+* Vigilancia y seguimiento.
+* Analítica en retail (conteo, inventario).
+* Manufactura (defectos/anomalías).
+* Analítica deportiva (jugadores, balón).
+* Realidad aumentada.
+
+Desafíos
+* Variaciones de escala y oclusiones.
+* Requisitos de tiempo real (30+ FPS).
+* Clases raras y falsos positivos.
+________________
+
+6. SEGMENTACIÓN DE IMÁGENES: COMPRENSIÓN A NIVEL DE PÍXEL (4 minutos)
+¿Qué es la segmentación?
+Asigna a cada píxel una categoría. En lugar de cajas, produce contornos precisos.
+
+Tipos:
+1) Segmentación semántica
+   * Etiqueta por clase sin distinguir instancias.
+2) Segmentación por instancias
+   * Distingue objetos individuales de la misma clase.
+
+¿Cómo funciona?
+Redes tipo encoder–decoder (U-Net, Mask R-CNN):
+* Encoder: reduce resolución y extrae características.
+* Decoder: reescala a tamaño original y predice por píxel.
+Salida: mapa de segmentación con color por clase.
+
+Aplicaciones
+* Imágenes médicas (delimitar tumores, órganos).
+* Conducción autónoma (carretera, acera, vehículos, peatones).
+* Imágenes satelitales (uso de suelo, deforestación).
+* Edición de video (eliminar/reemplazar fondos).
+* Agricultura (medir plantas/frutos).
+Alta precisión, alto costo de anotación (etiquetar cada píxel) y cómputo.
+________________
+
+7. APLICACIONES REALES DE LA VISIÓN POR COMPUTADORA (8 minutos)
+Salud e imágenes médicas
+Detección de enfermedades con precisión comparable o superior a expertos:
+* Tumores en mamografías y tomografías.
+* Retinopatía diabética en imágenes del ojo.
+* Neumonía en radiografías de tórax.
+* Lesiones cutáneas (melanoma).
+Beneficios: diagnósticos más rápidos, menos error humano, acceso en zonas desatendidas y apoyo a radiólogos.
+Ejemplo: Sistemas que detectan decenas de patologías oculares en escaneos de retina con alta precisión.
+
+Vehículos autónomos y transporte
+Los autos autónomos dependen de la Visión por Computadora para percibir el entorno.
+Tareas clave:
+* Detección de carriles.
+* Detección de objetos (peatones, vehículos, ciclistas, obstáculos).
+* Reconocimiento de señales de tráfico.
+* Estimación de profundidad.
+Múltiples cámaras/sensores alimentan CNN en tiempo real para tomar decisiones de conducción.
+
+Seguridad y vigilancia
+Reconocimiento facial: identificar individuos para seguridad aeroportuaria, desbloqueo de móviles, búsqueda de desaparecidos y control de asistencia.
+Desafíos: privacidad, posibles sesgos en precisión por demografía, ética de la vigilancia.
+Detección de anomalías: objetos/bahías desatendidas, conductas inusuales, áreas restringidas.
+
+Manufactura y control de calidad
+Inspección automatizada a velocidades sobrehumanas:
+* Detectar rayones, abolladuras, grietas.
+* Componentes faltantes o montaje incorrecto.
+* Errores de empaquetado.
+Beneficios: inspección 100%, consistencia, operación 24/7 y retroalimentación inmediata.
+
+Retail y comercio electrónico
+Búsqueda visual (Lens): buscar por imagen.
+Tiendas sin caja: seguimiento visual para cobrar automáticamente.
+Prueba virtual (AR): visualizar muebles, maquillaje o ropa.
+Gestión de inventario: detectar estantes vacíos y alertar para reabastecer.
+
+Agricultura y monitoreo ambiental
+Agricultura de precisión con drones:
+* Detección temprana de enfermedades.
+* Monitoreo de crecimiento.
+* Conteo/medición de frutos.
+* Guía para robots de cosecha.
+Conservación de fauna:
+* Conteo e identificación en cámaras trampa.
+* Seguimiento de especies en peligro.
+* Detección de caza furtiva.
+* Monitoreo de hábitats.
+
+Creación de contenido y redes sociales
+* Mejora automática de fotos (brillo/contraste/color).
+* Eliminación inteligente de objetos.
+* Transferencia de estilo artístico.
+* Moderación de contenido visual.
+* Accesibilidad: descripciones de imágenes para personas con discapacidad visual.
+
+El futuro de la Visión por Computadora
+Tendencias:
+* Realidad aumentada (AR) con detección/seguimiento en tiempo real.
+* Robótica médica de alta precisión.
+* Ciudades inteligentes (tráfico, estacionamiento, planeación).
+* Reconstrucción 3D (gemelos digitales, tours virtuales).
+* Cómputo en el borde (móviles/IoT) en lugar de la nube.
+* IA multimodal: combinar visión y lenguaje para entendimiento más rico.
+Consideraciones éticas
+* Privacidad: ¿cuánta vigilancia es aceptable?
+* Sesgo: ¿igual precisión entre grupos demográficos?
+* Transparencia: ¿debe informarse el análisis por IA?
+* Responsabilidad: ¿quién responde ante errores?
+* Acceso: ¿tecnología disponible para todos o solo grandes actores?
+Se requiere un desarrollo responsable y dialogado entre tecnólogos, reguladores y sociedad.
+________________
+
+RESUMEN Y PUNTOS CLAVE
+La Visión por Computadora permite a las máquinas entender lo visual mediante:
+1) Representación de imágenes como píxeles y canales (RGB).
+2) CNN que aprenden automáticamente características visuales.
+3) Clasificación de imágenes para categorizar fotos completas.
+4) Detección de objetos para localizar e identificar múltiples elementos.
+5) Segmentación de imágenes para comprensión a nivel de píxel.
+Las aplicaciones abarcan salud, vehículos autónomos, seguridad, manufactura, retail, agricultura y más, transformando industrias y la vida diaria.
+El futuro traerá comprensión visual aún más sofisticada conforme los modelos ganen precisión y eficiencia, con atención constante a las implicaciones éticas.
+________________
+
+Módulo 6: Fundamentos y Casos de Uso de Visión por Computadora
+Tiempo de lectura: 48 minutos | Duración total del módulo: 120 minutos
+Siguiente: Continúe con visualizaciones y demostraciones interactivas para ver estos conceptos en acción.
