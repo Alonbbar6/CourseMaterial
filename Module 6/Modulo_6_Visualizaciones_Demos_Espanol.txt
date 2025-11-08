@@ -1,0 +1,251 @@
+MÓDULO 6: Fundamentos y Casos de Uso de Visión por Computadora
+Visualizaciones/Demos (30% de 120 minutos = 36 minutos)
+Basado en la estructura del curso, a continuación se presentan visualizaciones y demostraciones completas para el Módulo 6.
+________________
+
+VISUALIZACIÓN 1: Cómo “ven” las computadoras las imágenes (8 minutos)
+Demo 1.1: De la foto a los píxeles
+Título (Español): Entendiendo Imágenes Digitales: Píxeles y Canales de Color
+
+Descripción de la visualización interactiva:
+Cree una pantalla interactiva de tres paneles que muestre:
+Panel 1: La imagen original
+* Mostrar una imagen simple y colorida (p. ej., una manzana roja sobre un fondo azul)
+* Dimensiones: 100x100 píxeles
+* Incluir un control deslizante de zoom
+
+Panel 2: Vista pixelada
+* A medida que el usuario hace zoom, revelar los cuadrados individuales de píxeles
+* Mostrar cómo la imagen está compuesta por pequeños cuadrados de color
+* Mostrar coordenadas de píxel (x, y) al pasar el cursor
+
+Panel 3: Representación numérica
+* Mostrar los valores RGB del píxel seleccionado
+* Ejemplo: píxel de la manzana roja = (255, 0, 0)
+* Píxel del fondo azul = (0, 0, 255)
+
+Componentes visuales:
+┌─────────────────────────────────────────────────────┐
+│  IMAGEN ORIGINAL  │  VISTA PIXELADA   │  VALORES RGB│
+│                   │                   │             │
+│   [Foto Manzana]  │   [Cuadrícula de  │  Selección: │
+│                   │    cuadros         │  X: 45      │
+│   100x100 píxeles │    coloreados]     │  Y: 67      │
+│                   │                   │             │
+│   [Zoom]          │   Nivel de Zoom: 8x│ R: 255     │
+│   ├────────────┤  │                   │  G: 20      │
+│   1x        16x   │ ¡Haz clic en un   │  B: 15      │
+│                   │ píxel!            │             │
+└─────────────────────────────────────────────────────┘
+
+Guion de narración:
+“Una imagen digital es simplemente una cuadrícula de pequeños cuadrados de color llamados píxeles. Cada píxel tiene una ubicación específica (coordenadas x, y) y un color definido por tres números: valores Rojo, Verde y Azul (RGB). Estos números van de 0 a 255. Por ejemplo, el rojo puro es (255, 0, 0), mientras que el azul puro es (0, 0, 255). ¡Una computadora no ‘ve’ la manzana: procesa millones de estos números!”
+
+---
+
+Demo 1.2: Separación de canales de color
+Visualización interactiva:
+Mostrar una fotografía a color separada en sus tres canales:
+┌──────────────────────────────────────────────────────────┐
+│              IMAGEN ORIGINAL A COLOR                     │
+│         [Foto colorida de un atardecer]                  │
+└──────────────────────────────────────────────────────────┘
+                        ↓  DESCOMPONER
+┌─────────────┬──────────────┬──────────────┬─────────────┐
+│   ROJO      │    VERDE     │     AZUL     │  COMBINADO  │
+│  (Canal)    │   (Canal)    │   (Canal)    │             │
+│ [Escala de  │ [Escala de   │ [Escala de   │ [Imagen     │
+│ grises que  │ grises que   │ grises que   │ a color     │
+│ muestra     │ muestra      │ muestra      │ original]   │
+│ intensidad] │ intensidad]  │ intensidad]  │             │
+│ Toggle: ☑   │ Toggle: ☑    │ Toggle: ☑    │             │
+└─────────────┴──────────────┴──────────────┴─────────────┘
+
+Puntos clave de aprendizaje:
+- Las computadoras procesan las imágenes como tres capas separadas (canales)
+- Cada canal es solo una cuadrícula de números (0-255)
+- Una CNN procesa cada canal para comprender la imagen
+
+________________
+
+VISUALIZACIÓN 2: Introducción a los filtros convolucionales (10 minutos)
+
+Demo 2.1: Aplicación interactiva de filtros
+Título: Ve los filtros en acción: detección de bordes y extracción de características
+
+Interfaz de la demo:
+┌────────────────────────────────────────────────────────────┐
+│                    EXPLORADOR DE FILTROS                   │
+│                                                            │
+│  SELECCIONA UN FILTRO:                                     │
+│  ○ Imagen original  ○ Detección de bordes (vertical)       │
+│  ○ Detección de bordes (horizontal)  ○ Desenfoque          │
+│  ○ Enfocar                                               │
+├────────────────────────────────────────────────────────────┤
+│  ANTES                          DESPUÉS                    │
+│  ┌──────────────┐               ┌──────────────┐           │
+│  │  [Original]  │   ──→         │  [Filtrada]  │           │
+│  └──────────────┘               └──────────────┘           │
+│                                                            │
+│  MATRIZ DEL FILTRO (Kernel 3x3):                           │
+│  ┌─────────────────┐                                       │
+│  │  -1 │ -1 │ -1   │                                       │
+│  │  -1 │  8 │ -1   │  ← ¡Esto detecta bordes!              │
+│  │  -1 │ -1 │ -1   │                                       │
+│  └─────────────────┘                                       │
+│  [BOTÓN APLICAR FILTRO]                                    │
+└────────────────────────────────────────────────────────────┘
+
+Filtros disponibles (con ejemplos):
+1) Detección de bordes (Laplaciano/Sobel)
+Matriz:
+-1 -1 -1
+-1  8 -1
+-1 -1 -1
+Efecto: resalta contornos y bordes.
+
+2) Desenfoque (promedio)
+Matriz:
+1/9 1/9 1/9
+1/9 1/9 1/9
+1/9 1/9 1/9
+Efecto: suaviza la imagen.
+
+3) Enfocar (sharpen)
+Matriz:
+ 0 -1  0
+-1  5 -1
+ 0 -1  0
+Efecto: acentúa detalles.
+
+4) Bordes verticales
+Matriz:
+-1  0  1
+-1  0  1
+-1  0  1
+
+5) Bordes horizontales
+Matriz:
+-1 -1 -1
+ 0  0  0
+ 1  1  1
+
+---
+
+Demo 2.2: Cómo funciona la convolución (animación paso a paso)
+Mostrar un filtro 3x3 deslizándose sobre una imagen 5x5 y calcular multiplicar‑y‑sumar en cada posición para producir el mapa de características (feature map).
+
+Narración:
+“¡Esto es la convolución! El kernel se desliza por la imagen, multiplica sus valores con los píxeles debajo y suma los resultados. Cada cálculo produce un número en la salida (mapa de características). Distintos filtros detectan distintos rasgos: bordes, texturas, patrones. ¡Una CNN usa docenas de estos filtros en múltiples capas!”
+
+________________
+
+VISUALIZACIÓN 3: Recorrido por la arquitectura CNN (8 minutos)
+
+Demo 3.1: Visualización capa por capa
+Diagrama interactivo:
+- Imagen de entrada 224×224×3
+- Capa Convolucional 1 (32 filtros 3×3) → Mapas de características
+- Capa de Pooling (Max Pooling 2×2) → reduce a la mitad
+- Capa Convolucional 2 (64 filtros 3×3) → patrones más complejos
+- Pooling 2×2
+- Aplanado (Flatten) → vector 1D
+- Capas totalmente conectadas
+- Capa de salida con probabilidades por clase
+
+Funciones interactivas:
+- Clic en cada capa para ver explicación
+- Hover sobre mapas de características para ver patrones
+- Ajustar número de filtros y observar impacto
+
+Demo 3.2: ¿Qué “ve” cada capa?
+- Capas tempranas: bordes, colores, texturas simples
+- Capas medias: texturas y partes (pelaje, ruedas, ojos, orejas)
+- Capas profundas: objetos complejos (cara completa, carrocería, ala de ave)
+
+Mensaje clave: “¡Cada capa construye sobre la anterior!”
+
+________________
+
+VISUALIZACIÓN 4: Clasificación vs Detección vs Segmentación (6 minutos)
+
+Demo 4.1: Comparación lado a lado
+- Clasificación de imágenes: 1 etiqueta para la imagen completa (“Escena callejera”)
+- Detección de objetos: múltiples cajas con clases y coordenadas (auto, persona, perro)
+- Segmentación de imágenes: máscara a nivel de píxel (auto, persona, perro, carretera, cielo)
+
+Interactividad:
+- Subir una imagen y ver las tres salidas
+- Conmutar vistas y ver tiempos y confidencias
+
+________________
+
+VISUALIZACIÓN 5: Demostración de capa de pooling (4 minutos)
+
+Demo 5.1: Animación de Max Pooling
+- Antes: mapa 4×4
+- Ventana 2×2 → toma el máximo
+- Después: mapa 2×2
+Beneficios:
+✓ Reduce tamaño y cómputo
+✓ Conserva rasgos prominentes
+✓ Aporta invarianza a traslación
+✓ Ayuda a evitar sobreajuste
+
+________________
+
+VISUALIZACIÓN 6: Muestrario de aplicaciones reales (montaje de video – 6 minutos)
+
+Demo 6.1: Visión por Computadora en acción (con anotaciones)
+Segmentos sugeridos (90 s cada uno):
+1) Reconocimiento facial (seguridad aeroportuaria, Face ID, etiquetado de fotos)
+   * Overlay: “CNN detecta puntos/landmarks faciales”
+2) Vehículos autónomos (peatones, semáforos, carriles, otros vehículos)
+   * Overlay: “Procesamiento a 30 fps en tiempo real”
+3) Imagen médica (rayos X, segmentación en RM, lesiones cutáneas)
+   * Overlay: “Precisión que iguala a especialistas”
+4) Control de calidad en manufactura (inspección en línea)
+   * Overlay: “1000 ítems por minuto – 24/7”
+5) Realidad aumentada (filtros, muebles AR, try‑on virtual)
+   * Overlay: “Seguimiento y segmentación en tiempo real”
+
+Resumen en pantalla:
+┌────────────────────────────────────────┐
+│  APLICACIONES DE VISIÓN POR COMPUTADORA│
+├────────────────────────────────────────┤
+│  • Seguridad y autenticación           │
+│  • Vehículos autónomos                 │
+│  • Salud y diagnósticos                │
+│  • Manufactura y control de calidad    │
+│  • Entretenimiento y RA/RV             │
+└────────────────────────────────────────┘
+
+________________
+
+NOTAS DE IMPLEMENTACIÓN PARA EL LMS
+Requisitos técnicos:
+1) Demos interactivas con Canvas HTML5 o bibliotecas JS (p5.js, TensorFlow.js)
+2) Subida de imagen: permitir que alumnado use sus fotos para filtros
+3) Diseño responsive: móvil y escritorio
+4) Accesibilidad: texto alternativo y descripciones de audio
+
+Herramientas sugeridas:
+- Visualizaciones: D3.js, Plotly, Canvas API
+- Procesamiento de imágenes en navegador: TensorFlow.js, ml5.js
+- Video: YouTube (no listado) o Vimeo
+- Interactividad en LMS: H5P
+
+Desglose temporal:
+Visualización  | Tiempo | Tipo
+1. Píxeles & RGB | 8 min | Interactiva
+2. Filtros       |10 min | Interactiva
+3. Arquitectura  | 8 min | Diagrama interactivo
+4. Comparación   | 6 min | Herramienta comparativa
+5. Pooling       | 4 min | Animación
+6. Aplicaciones  | 6 min | Montaje de video
+TOTAL             42 min | Medios mixtos
+Nota: 42 min ofrecen ~6 min extra por interacción y pausas.
+
+________________
+
+Este paquete de visualizaciones brinda múltiples modalidades (visual, interactiva, video) para comprender conceptos complejos de visión por computadora en un formato bilingüe y atractivo.
