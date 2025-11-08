@@ -1,0 +1,149 @@
+SECCIÓN A: PREGUNTAS DE OPCIÓN MÚLTIPLE
+Question 1
+¿Qué es la tokenización en PLN?
+A) El proceso de encriptar texto por motivos de seguridad
+B) El proceso de dividir el texto en unidades más pequeñas como palabras o subpalabras
+C) El proceso de traducir texto de un idioma a otro
+D) El proceso de eliminar la puntuación del texto
+________________
+
+Question 2
+¿Qué son las palabras vacías (stop words)?
+A) Palabras que terminan una oración
+B) Palabras comunes como "el", "es", "y" que a menudo se eliminan durante el procesamiento de PLN
+C) Palabras clave que identifican el tema principal de un texto
+D) Palabras que contienen errores tipográficos
+________________
+
+Question 3
+¿Cuál es el propósito principal del análisis de sentimiento?
+A) Contar el número de palabras en un documento
+B) Determinar el tono emocional o actitud expresada en el texto (positivo, negativo, neutral)
+C) Traducir texto entre idiomas
+D) Identificar errores gramaticales en la escritura
+________________
+
+Question 4
+¿Qué hace el Reconocimiento de Entidades Nombradas (NER)?
+A) Identifica y clasifica entidades nombradas como personas, organizaciones, lugares y fechas en un texto
+B) Reconoce al autor de un documento
+C) Detecta errores ortográficos en nombres propios
+D) Traduce nombres de un idioma a otro
+________________
+
+Question 5
+¿Cómo representan el lenguaje las incrustaciones de palabras (word embeddings) como Word2Vec?
+A) Como listas ordenadas alfabéticamente
+B) Como vectores numéricos en un espacio multidimensional donde las palabras similares están más cerca entre sí
+C) Como imágenes que las computadoras pueden procesar
+D) Como señales de audio que pueden analizarse
+________________
+
+Question 6
+¿Cuál de las siguientes es una aplicación del mundo real del PLN?
+A) Sistemas de reconocimiento facial
+B) Chatbots de servicio al cliente que entienden y responden consultas de texto
+C) Navegación de autos autónomos
+D) Modelos de predicción meteorológica
+________________
+
+Question 7
+¿Qué ventaja proporcionan las incrustaciones de palabras sobre el simple conteo de palabras?
+A) Son más rápidas de calcular
+B) Capturan relaciones semánticas y significados entre palabras
+C) Requieren menos espacio de almacenamiento
+D) Solo funcionan con texto en inglés
+________________
+
+SECCIÓN B: EMPAREJAMIENTO DE DEFINICIONES
+Instrucciones: Empareje cada término de PLN con su definición correcta.
+________________
+
+Question 8
+Empareje las Tareas de PLN con sus Descripciones:
+Tareas de PLN:
+1. Análisis de Sentimiento
+2. Reconocimiento de Entidades Nombradas (NER)
+3. Traducción Automática
+Descripciones:
+A. Convertir automáticamente texto de un idioma a otro
+B. Identificar y clasificar elementos clave como nombres, lugares y organizaciones
+C. Determinar si el texto expresa emociones positivas, negativas o neutrales
+Sus respuestas:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+Question 9
+Empareje los Conceptos de PLN con sus Ejemplos:
+Conceptos:
+1. Tokenización
+2. Palabras Vacías (Stop Words)
+3. Incrustación de Palabras (Word Embedding)
+Ejemplos:
+A. Convertir "rey" en un vector como [0.25, 0.67, -0.12, 0.89...]
+B. Dividir "¡Hola mundo!" en ["Hola", "mundo", "!"]
+C. Eliminar palabras como "el", "la", "es", "son" del análisis
+Sus respuestas:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+Question 10
+Empareje las Aplicaciones de PLN con sus Casos de Uso Empresariales:
+Aplicaciones:
+1. Chatbots / Asistentes Virtuales
+2. Monitoreo de Redes Sociales
+3. Resumen Automático
+Casos de Uso:
+A. Analizar tuits de clientes para determinar el sentimiento y reputación de marca
+B. Brindar soporte al cliente 24/7 entendiendo y respondiendo consultas de usuarios
+C. Crear resúmenes breves de informes o artículos extensos
+Sus respuestas:
+________________
+1. ________________
+2. ________________
+3. ________________
+
+CLAVE DE RESPUESTAS
+Opción Múltiple:
+1. B - Dividir texto en unidades pequeñas (palabras o subpalabras)
+2. B - Palabras comunes eliminadas en PLN
+3. B - Determinar tono emocional
+4. A - Identificar personas, lugares, organizaciones, fechas
+5. B - Representar palabras como vectores numéricos
+6. B - Chatbots de servicio al cliente
+7. B - Capturan relaciones semánticas
+
+Emparejamiento:
+Pregunta 8:
+1. C - Análisis de Sentimiento → Determinar emociones en texto
+2. B - NER → Identificar nombres, lugares, organizaciones
+3. A - Traducción Automática → Convertir entre idiomas
+Pregunta 9:
+1. B - Tokenización → Dividir texto en tokens
+2. C - Stop Words → Eliminar palabras comunes
+3. A - Word Embedding → Convertir palabras en vectores
+Pregunta 10:
+1. B - Chatbots → Soporte al cliente
+2. A - Redes Sociales → Análisis de sentimiento de marca
+3. C - Resumen Automático → Crear resúmenes cortos
+________________
+
+NOTAS EXPLICATIVAS
+Pregunta 5 – Incrustaciones de Palabras:
+Revolucionaron el PLN al representar palabras como vectores numéricos densos, donde palabras con significados similares están más cerca. Ejemplo: “rey” y “reina” están próximas; la relación “rey - hombre + mujer ≈ reina” muestra cómo capturan relaciones semánticas.
+
+Pregunta 7 – Ventaja de las Incrustaciones:
+El método tradicional (bolsa de palabras) trata cada palabra de forma independiente. Las incrustaciones aprenden similitudes, entendiendo que “coche” y “automóvil” son parecidos.
+
+Contexto Real:
+* Chatbots: respuestas automáticas a usuarios
+* Traducción automática: eliminar barreras lingüísticas
+* Monitoreo de redes sociales: análisis de sentimiento de marca
+
+________________
+Módulo 5: Aplicaciones de Procesamiento de Lenguaje Natural (PLN)
+Duración: 120 minutos | Tiempo del Quiz: 12 minutos
