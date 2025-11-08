@@ -1,0 +1,240 @@
+MÓDULO 4: IA GENERATIVA Y MODELOS DE LENGUAJE GRANDE (LLMs)
+Evaluación de 10 Preguntas
+Límite de tiempo: 12 minutos | Puntaje de aprobación: 70% (7/10 correctas)
+________________
+
+INSTRUCCIONES
+Tipos de preguntas:
+* Opción múltiple (seleccione la mejor respuesta)
+* Basadas en escenarios (aplique conceptos a situaciones reales)
+* Verdadero/Falso con explicación
+Notas importantes:
+* Lea todas las opciones antes de seleccionar
+* Algunas preguntas evalúan la comprensión de los estudios de caso del Módulo 4
+* Aplique conceptos de la lectura y del laboratorio práctico
+________________
+
+SECCIÓN A: CONCEPTOS FUNDAMENTALES (Preguntas 1-4)
+Pregunta 1: IA Generativa vs. IA Discriminativa
+¿Cuál de las siguientes opciones describe mejor la diferencia fundamental entre la IA Generativa y la IA Discriminativa?
+A) La IA Generativa es más rápida; la IA Discriminativa es más precisa
+B) La IA Generativa crea contenido nuevo; la IA Discriminativa clasifica o predice a partir de datos existentes
+C) La IA Generativa requiere más datos de entrenamiento; la IA Discriminativa funciona con menos datos
+D) La IA Generativa solo funciona con texto; la IA Discriminativa solo funciona con imágenes
+Respuesta correcta: B
+Explicación: La distinción central es el propósito y la salida:
+* IA Generativa: Crea contenido completamente nuevo (texto, imágenes, código, música). Aprende P(X) o P(X,Y): la distribución de los datos.
+* IA Discriminativa: Clasifica, etiqueta o predice a partir de entradas existentes. Aprende P(Y|X): los límites de decisión entre clases.
+Ejemplos:
+* Generativa: ChatGPT escribiendo un ensayo, DALL‑E creando una imagen
+* Discriminativa: Filtro de spam clasificando correos, IA médica diagnosticando a partir de radiografías
+Por qué las otras opciones son incorrectas:
+* A: La velocidad y la precisión dependen de la implementación, no del tipo
+* C: Ambas pueden requerir grandes conjuntos de datos; depende de la tarea
+* D: Ambas funcionan con múltiples tipos de datos (texto, imágenes, audio)
+________________
+
+Pregunta 2: Arquitectura Transformer
+¿Cuál es la innovación clave de la arquitectura Transformer que habilitó los modelos de lenguaje grandes modernos?
+A) Procesa las palabras secuencialmente, una por una, garantizando gramática perfecta
+B) Utiliza el mecanismo de atención para procesar todas las palabras simultáneamente y entender sus relaciones
+C) Elimina la necesidad de datos de entrenamiento generando texto al azar
+D) Requiere menos potencia de cómputo que las arquitecturas anteriores
+Respuesta correcta: B
+Explicación: El mecanismo de atención es el avance del artículo de 2017 “Attention Is All You Need”.
+Cómo funciona:
+Enfoque antiguo (RNNs): “The” → “cat” → “sat” → … (secuencial)
+Problema: Olvida el contexto temprano
+
+Enfoque Transformer: Analiza TODAS las palabras simultáneamente
+“it” puede atender directamente a “cat” aunque estén lejos
+
+La autoatención permite que cada palabra considere sus relaciones con todas las demás a la vez, lo que habilita:
+* Procesamiento en paralelo (entrenamiento más rápido)
+* Dependencias de largo alcance (comprensión de documentos completos)
+* Escalabilidad (apilar más capas = mejor rendimiento)
+Por qué las otras opciones son incorrectas:
+* A: Los Transformers procesan en paralelo; lo secuencial era limitación de las RNN
+* C: Aún requieren datos masivos (miles de millones de tokens)
+* D: Requieren MUCHO cómputo (GPUs/TPUs), aunque entrenan más rápido por paralelización
+________________
+
+Pregunta 3: Modelos de Lenguaje Grande (LLMs)
+¿Cuál afirmación describe con precisión cómo se entrenan LLMs como GPT‑4?
+A) Se programan con reglas explícitas de gramática y hechos
+B) Pasan por un preentrenamiento con texto masivo prediciendo la siguiente palabra y luego un ajuste fino con retroalimentación humana
+C) Memorizan bases de datos completas de internet para recuperar respuestas exactas
+D) Se entrenan solo con contenido curado y verificado para evitar errores
+Respuesta correcta: B
+Explicación: El entrenamiento de LLM tiene dos fases:
+Fase 1: Preentrenamiento (auto-supervisado)
+* Se alimenta al modelo con billones de palabras (libros, web, código)
+* Objetivo: predecir la siguiente palabra
+* Ejemplo: “The capital of France is ___” → aprende que “Paris” es probable
+* No necesita etiquetado humano
+Fase 2: Ajuste fino (RLHF: Aprendizaje por Refuerzo con Retroalimentación Humana)
+* Humanos dan ejemplos de buenas/malas respuestas y las ranquean
+* El modelo aprende a preferir respuestas de mayor calidad
+Por qué las otras opciones son incorrectas:
+* A: No es basado en reglas; aprende patrones
+* C: No memoriza literalmente; modela patrones estadísticos
+* D: Se entrena con texto de internet (incluye errores y sesgos)
+________________
+
+Pregunta 4: Alucinaciones
+En el contexto de LLMs, ¿qué es una “alucinación”?
+A) Cuando el modelo genera historias creativas y ficticias a petición
+B) Cuando el modelo genera información falsa presentada con confianza como si fuera un hecho
+C) Cuando el modelo se niega a responder por razones de seguridad
+D) Cuando el modelo produce oraciones con errores gramaticales
+Respuesta correcta: B
+Explicación: Alucinación: el LLM produce información verosímil pero incorrecta, afirmada con seguridad.
+Ejemplo:
+Usuario: “¿Quién ganó el Premio Nobel de Química 2025?”
+LLM: “La Dra. Sarah Chen de Stanford lo ganó por polímeros sostenibles.”
+Realidad: Fabricado; el modelo lo inventó.
+
+Mitigación:
+* Verifique hechos críticos externamente
+* Pida fuentes (sabendo que a veces pueden ser inventadas)
+* Use modelos ajustados para mayor factualidad
+* Aplique pensamiento crítico
+________________
+
+SECCIÓN B: INGENIERÍA DE PROMPTS (Preguntas 5-7)
+Pregunta 5: Prompts Eficaces
+¿Qué prompt probablemente producirá la MEJOR salida de un LLM para crear contenido de marketing?
+A) “Escribe sobre café”
+B) “Escribe una publicación para redes sociales”
+C) “Eres un profesional de marketing en redes sociales. Escribe un pie de foto para Instagram de 150 caracteres para café frío artesanal dirigido a millennials conscientes de la salud. Usa un tono entusiasta pero auténtico e incluye un llamado a la acción.”
+D) “El café es bueno. Escribe algo.”
+Respuesta correcta: C
+Explicación: Los prompts eficaces incluyen:
+✓ Rol: “Eres un profesional…” ✓ Especificidad: “pie de foto para Instagram” ✓ Restricciones: “150 caracteres” ✓ Contexto: “café frío artesanal” ✓ Audiencia: “millennials conscientes de la salud” ✓ Tono: “entusiasta pero auténtico” ✓ Formato: “incluye CTA”
+________________
+
+Pregunta 6: Few‑Shot Prompting
+¿Qué es el “few‑shot prompting” (aprendizaje con pocos ejemplos)?
+A) Hacer preguntas muy cortas al LLM
+B) Proporcionar de 1 a 3 ejemplos de pares entrada‑salida antes de la solicitud real
+C) Usar un LLM con menos parámetros
+D) Limitar al LLM a respuestas cortas
+Respuesta correcta: B
+Explicación: El few‑shot prompting incluye ejemplos en el prompt para mostrar el patrón deseado. Mejora precisión y reduce ambigüedad.
+________________
+
+Pregunta 7: Escenario – Refinamiento de Prompt
+Envía al LLM: “Explica la computación cuántica” y recibe una respuesta muy técnica con ecuaciones. Quiere algo más simple. ¿Cuál es la MEJOR forma de refinar el prompt?
+A) “Explica la computación cuántica” (igual)
+B) “Hazlo más simple”
+C) “Eres un profesor paciente explicando a un niño de 10 años. Explica la computación cuántica con analogías cotidianas y sin jerga técnica.”
+D) “Solo dame lo básico”
+Respuesta correcta: C
+Explicación: Un refinamiento eficaz define rol, audiencia, restricciones y método (analogías, sin jerga). A y D son vagas; B es ambigua.
+________________
+
+SECCIÓN C: APLICACIÓN DE ESTUDIOS DE CASO (Preguntas 8-10)
+Pregunta 8: Estudio de Caso Jasper AI
+Con base en el caso de Jasper AI, ¿por qué Jasper aporta valor más allá de dar acceso a GPT‑4?
+A) Jasper tiene un modelo base mejor que GPT‑4
+B) Jasper añade plantillas, personalización de voz de marca y flujos de trabajo de marketing sobre GPT‑4
+C) Jasper es más barato que usar GPT‑4 directamente
+D) Jasper no usa GPT‑4
+Respuesta correcta: B
+Explicación: La propuesta de valor de Jasper está en la capa de aplicación:
+1) Plantillas (prompts expertos), 2) Voz de marca, 3) Flujos de trabajo, 4) Optimización SEO/CTA. No es un modelo mejor, es infraestructura de prompts.
+________________
+
+Pregunta 9: Estudio de Caso GitHub Copilot
+El caso mostró que desarrolladores completan tareas 55% más rápido con Copilot. ¿Qué limitación crítica hace que los desarrolladores humanos sigan siendo esenciales?
+A) Copilot solo escribe Python
+B) Copilot puede generar código verosímil pero incorrecto o inseguro que requiere revisión y pruebas humanas
+C) Copilot necesita conexión a internet para funcionar
+D) Copilot solo escribe 10 líneas a la vez
+Respuesta correcta: B
+Explicación: Riesgo de “alucinaciones” en código: errores lógicos, vulnerabilidades (p.ej., inyección SQL), ineficiencias. Se requiere revisión, pruebas y criterio humano.
+________________
+
+Pregunta 10: Estudio de Caso Lensa AI
+El estudio destacó preocupaciones éticas de artistas. ¿Qué enunciado representa MEJOR su preocupación principal?
+A) La IA hará que el arte sea completamente obsoleto
+B) Stable Diffusion se entrenó con su obra con copyright sin permiso ni compensación y ahora genera arte “en su estilo” que compite económicamente
+C) Los avatares de Lensa siempre son de mayor calidad que el arte humano
+D) Las imágenes generadas por IA violan todas las leyes internacionales de copyright
+Respuesta correcta: B
+Explicación: Núcleo del problema: entrenamiento con obras sin consentimiento → generación “en su estilo” → impacto económico. El estado legal es incierto y está en litigio.
+________________
+
+CLAVE DE RESPUESTAS Y GUÍA DE PUNTAJE
+Pregunta | Respuesta | Tema                               | Dificultad
+1        | B         | Generativa vs. Discriminativa      | Fácil
+2        | B         | Arquitectura Transformer           | Media
+3        | B         | Entrenamiento de LLM               | Media
+4        | B         | Alucinaciones                      | Fácil
+5        | C         | Prompts eficaces                   | Fácil
+6        | B         | Few‑shot prompting                 | Media
+7        | C         | Refinamiento de prompt             | Difícil
+8        | B         | Caso: Jasper                       | Media
+9        | B         | Caso: Copilot                      | Difícil
+10       | B         | Caso: Ética en Lensa               | Media
+________________
+
+INTERPRETACIÓN DEL PUNTAJE
+Puntos totales: 10 (1 punto por pregunta)
+Rangos:
+* 9‑10 (90‑100%): Excelente – Dominio de conceptos del Módulo 4
+* 8 (80%): Bueno – Comprensión sólida con pequeños vacíos
+* 7 (70%): Aprobado – Competencia mínima
+* 5‑6 (50‑60%): Debajo del aprobado – Revise lectura y casos
+* 0‑4 (0‑40%): Insuficiente – Repase todo el material
+________________
+
+GUÍA DE REMEDIACIÓN
+Si obtuvo menos de 70%, revise:
+Preguntas 1‑4 (Conceptos): Parte 1 (Generativa vs. Discriminativa), Parte 2 (Transformer), Parte 3 (LLMs), Parte 6 (Alucinaciones)
+Preguntas 5‑7 (Prompts): Parte 4 (Fundamentos de Ingeniería de Prompts) y sus 6 técnicas
+Preguntas 8‑10 (Casos): Revise los tres estudios, enfoque en “Conceptos Clave”
+________________
+
+EVALUACIÓN DE OBJETIVOS DE APRENDIZAJE
+Obj. 1: Definir IA Generativa y diferenciarla de Discriminativa
+* Evaluado por: 1, 8 | Indicador: ambos correctos
+Obj. 2: Explicar el papel del Transformer en los LLMs
+* Evaluado por: 2, 3 | Indicador: ambos correctos
+Obj. 3: Dominar fundamentos de prompts
+* Evaluado por: 5, 6, 7 | Indicador: ≥2 correctas
+Comprensión aplicada (mundo real)
+* Evaluado por: 4, 8, 9, 10 | Indicador: ≥3 correctas
+________________
+
+ACCIONES TRAS COMPLETAR EL QUIZ
+Si aprueba (≥70%):
+* Se desbloquea: “Fundamentos de IA Generativa”
+* Progreso: Módulo 4 completo
+* Módulo 5 (Aplicaciones de PLN) desbloqueado
+* Insignia: “Ingeniero/a de Prompts”
+Si no aprueba (<70%):
+* Retroalimentación: “Revise estos temas específicos: [lista]”
+* Recomendación: “Vuelva a la lectura y a los casos”
+* Reintento: “Puede repetir el quiz tras repasar”
+* Soporte: “¿Necesita ayuda? Use el chatbot de FAQ”
+________________
+
+TÉRMINOS BILINGÜES EVALUADOS
+* IA Generativa (Generative AI)
+* IA Discriminativa (Discriminative AI)
+* Transformador (Transformer)
+* Mecanismo de Atención (Attention Mechanism)
+* Modelo de Lenguaje Grande – LLM (Large Language Model)
+* Alucinación (Hallucination)
+* Ingeniería de Prompts (Prompt Engineering)
+* Aprendizaje con Pocos Ejemplos (Few‑Shot Learning)
+________________
+
+QUIZ COMPLETO ✓
+Total de preguntas: 10
+Tiempo estimado: 10‑12 minutos
+Formato: Opción múltiple y escenarios
+Puntaje de aprobación: 70% (7/10)
+Listo para: Implementación en plataforma (Vercel/Supabase)
+Estado del Módulo 4: Lectura ✓ | Casos ✓ | Quiz ✓ | Laboratorio (Pendiente)
