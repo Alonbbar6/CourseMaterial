@@ -1,0 +1,293 @@
+MÓDULO 1: TRES ESTUDIOS DE CASO EN IA
+Aplicaciones prácticas de los conceptos de IA
+Tiempo total: 30 minutos (3 estudios de caso × 12 minutos cada uno)
+________________
+
+ESTUDIO DE CASO 1: Sistema de recomendaciones de Netflix
+«¿Por qué Netflix sabe lo que quieres ver?»
+Asignación de tiempo: 12 minutos | Lectura: 2–3 min | Explicación: 3–5 min | Discusión: 5–10 min
+
+Resumen del escenario (lectura de 2–3 minutos)
+La situación: María, una suscriptora de Netflix en Miami, abre la app un martes por la noche. En lugar de hojear miles de títulos, la reciben de inmediato recomendaciones personalizadas: «Porque viste The Office, quizá te guste Parks and Recreation». Debajo: «Popular en Drama». Otra sección: «Como calificaste Stranger Things con 5 estrellas, prueba The Witcher».
+María está asombrada. No le ha dicho explícitamente a Netflix lo que le gusta. No ha llenado un formulario de preferencias. Y aun así, la plataforma entiende muy bien sus gustos. ¿Cómo?
+Los datos detrás de la experiencia de María: Netflix recolecta grandes cantidades de datos de comportamiento:
+* Cada serie y película que ve (visualización completa vs. parcial)
+* Cuándo pausa, rebobina o adelanta
+* Qué califica (pulgar arriba/abajo)
+* Hora del día en que ve contenido
+* Dispositivo que utiliza
+* Preferencias de género inferidas por patrones
+* Datos similares de millones de otras personas suscritas
+Netflix no le «vende» contenido a María: vende atención a productores de contenido. Mejores recomendaciones = más tiempo de visualización = más valor para anunciantes y productores. La empresa ha invertido miles de millones en perfeccionar su motor de recomendaciones.
+Impacto en el negocio:
+* Las personas suscritas que reciben recomendaciones personalizadas ven un 37% más de contenido
+* Las tasas de retención mejoran de forma notable con buenas recomendaciones
+* Netflix gasta aproximadamente 1000 millones de dólares anuales en algoritmos de recomendación
+* La empresa acredita a las recomendaciones la prevención de cancelaciones (churn)
+________________
+
+Explicación del concepto de IA (3–5 minutos)
+Por qué esto es «Aprendizaje Automático» y no «IA» genérica
+El sistema de recomendaciones de Netflix es un ejemplo perfecto de Aprendizaje Automático (Machine Learning, ML), no de «IA» en sentido general.
+Por qué es Aprendizaje Automático:
+1. Aprende de datos: El sistema no sigue reglas explícitas programadas por ingenieros; aprende patrones a partir de millones de interacciones de usuarios.
+2. Aprendizaje supervisado: Netflix aporta ejemplos etiquetados—calificaciones explícitas (pulgar arriba/abajo) e implícitas (ver hasta el final vs. abandonar). El sistema aprende a predecir estos patrones.
+3. Reconocimiento de patrones: El algoritmo descubre, por ejemplo, que quienes ven dramas policíacos suelen disfrutar de procedimentales, o que a quienes ven comedias británicas les gusta el humor ingenioso.
+Tipo de ML: Filtrado colaborativo
+Netflix utiliza «filtrado colaborativo», que opera con un principio simple: personas con hábitos de visualización similares en el pasado probablemente disfrutarán contenidos futuros similares.
+Cómo funciona (simplificado):
+Paso 1: Netflix crea una matriz masiva
+        Usuario 1  Usuario 2  Usuario 3  Usuario 4  María
+Película A    5         5         3         ?          5
+Película B    3         4         2         4          ?
+Película C    1         2         4         5          1
+
+Paso 2: El algoritmo encuentra usuarios similares a María
+        (Los Usuarios 1 y 2 tienen preferencias muy parecidas)
+
+Paso 3: El algoritmo revisa lo que los Usuarios 1 y 2 calificaron alto y que María no ha visto
+        (Ambos calificaron alto la Película B; María no la ha visto)
+
+Paso 4: El sistema recomienda la Película B a María
+        («Porque a personas similares a ti les gustó…»)
+
+El elemento de ML:
+En lugar de programar «SI la persona ve drama criminal ENTONCES recomendar policial», el sistema aprende estas asociaciones de los datos. Si los hábitos cambian (p. ej., sube la ciencia ficción), el sistema se adapta automáticamente.
+Por qué esto no es «Deep Learning» (todavía)
+El núcleo del recomendador de Netflix es ML sofisticado, pero no necesariamente Aprendizaje Profundo (DL).
+El DL usa redes neuronales con múltiples capas y destaca en:
+* Reconocer patrones complejos en datos no estructurados (imágenes, audio)
+* Procesar información secuencial (texto, video)
+* Aprender características jerárquicas
+Los recomendadores pueden usar DL (Netflix ha experimentado con redes), pero técnicas de ML más simples a menudo funcionan igual de bien, son más transparentes y requieren menos cómputo.
+Evolución de Netflix:
+* Sistema temprano: Filtrado colaborativo simple (ML puro, no DL)
+* Sistema moderno: Enfoque híbrido que combina filtrado colaborativo, filtrado basado en contenido (analiza trama, género, reparto) y DL sobre secuencias de comportamiento
+________________
+
+Preguntas para discusión y reflexión (5–10 minutos)
+Preguntas de comprensión:
+1. ¿Por qué el sistema de Netflix es ML y no reglas explícitas?  
+   * ¿Cómo serían reglas explícitas? («Si vio ≥3 series policíacas, recomendar policíacas»: demasiado rígido).  
+   * ¿Cómo aprende el sistema? Descubre patrones en datos que un humano podría pasar por alto (p. ej., «quien ve TV danesa también ve ‘noir’ nórdico»).
+2. ¿Qué datos usa Netflix y de dónde vienen?
+   * Lista: historial de visualización, calificaciones, tiempo visto, tipo de dispositivo, hora, patrones de pausa/avance, búsquedas.
+   * ¿Es ética esta recolección? ¿Cuáles son los compromisos?
+3. Explica en lenguaje llano el principio del filtrado colaborativo.
+   * Personas con gustos similares antes, suelen tener gustos similares después.
+   * ¿Siempre es cierto? ¿Cuándo falla? (Cambios drásticos de gusto, exploración de géneros nuevos).
+Preguntas de análisis:
+4. ¿Qué tipo de ML usa Netflix: supervisado, no supervisado o por refuerzo?
+   * Principalmente supervisado (calificaciones como etiquetas).
+   * Secundario: por refuerzo (pruebas A/B de recomendaciones y «recompensa» = tiempo de reproducción).
+5. Limitaciones del filtrado colaborativo:
+   * Problema de usuario nuevo: sin historial no hay buenas recomendaciones.
+   * Problema de contenido nuevo: hasta que otros vean/valoren, es difícil recomendar.
+   * Preferencias minoritarias: gustos poco comunes reciben peores sugerencias.
+   * Sesgo de popularidad: se favorece lo popular frente a «joyas ocultas».
+Ética:
+6. Implicaciones éticas del recomendador de Netflix:
+   * Positivas: las personas descubren contenido que disfrutan.
+   * Preocupaciones: vigilancia (amplia recolección de datos), burbujas de filtro, posible manipulación (optimizar beneficio vs. satisfacción), seguridad de datos.
+7. Si fueras María, ¿qué tan cómoda estarías con la recolección de tus hábitos?
+   * ¿Qué información tiene Netflix? ¿Qué se puede inferir? ¿Vale la pena la conveniencia?
+Aplicación real:
+8. ¿Dónde más encuentras sistemas similares? (YouTube, Amazon, Spotify, redes sociales, apps de citas, noticias).
+9. ¿Cómo pueden fallar? (Radicalización algorítmica, recomendaciones extrañas, precios inflados, discriminación).
+________________
+
+
+
+
+
+
+
+
+ESTUDIO DE CASO 2: Reconocimiento facial en la aplicación de la ley
+«¿Puede la IA identificar de forma fiable a sospechosos?»
+Asignación de tiempo: 12 minutos | Lectura: 2–3 min | Explicación: 3–5 min | Discusión: 5–10 min
+
+Resumen del escenario (lectura de 2–3 minutos)
+La situación: La policía de Orlando recibe el reporte de un robo de joyería. Cámaras de seguridad capturan al sospechoso. En lugar de revisar miles de fotos, una persona detective sube la imagen a un sistema de reconocimiento facial.
+En segundos, la IA sugiere tres posibles coincidencias de una base de 6 millones de rostros. Una arroja 94% de confianza: «Probable coincidencia con James Rodríguez, condena previa por robo».
+Con esta pista, la policía localiza y arresta a Rodríguez. Luego, evidencia de ADN confirma que estuvo en la escena. Caso resuelto con eficiencia.
+Pero esto ocurrió 15 veces ese mes—y en dos casos, la primera coincidencia era inocente. Un hombre inocente fue arrestado, detenido 36 horas y liberado solo cuando el ADN no coincidió. Otro cumplía el «perfil» del algoritmo, pero su coartada (video de una tienda) probó su inocencia.
+Escala del problema:
+* La base de reconocimiento facial del FBI contiene millones de imágenes (licencias de conducir, fichas policiales, pasaportes).
+* Estudios muestran tasas de error mayores en mujeres y en personas con piel más oscura.
+* Los departamentos usan estos sistemas miles de veces al día como pistas investigativas.
+* Muchas personas inocentes podrían enfrentar escrutinio por sugerencias algorítmicas.
+* La pregunta: ¿Es esto «IA funcionando» o «IA equivocándose»?
+________________
+
+Explicación del concepto de IA (3–5 minutos)
+Esto es «IA Estrecha» + «Aprendizaje Profundo»
+El reconocimiento facial policial es IA Estrecha (una tarea específica) impulsada por Aprendizaje Profundo (DL).
+¿Por qué es IA Estrecha?
+Hace una sola cosa: comparar un rostro con una base de datos. No puede:
+* Entender contexto («Esta persona parece sospechosa»).
+* Razonar sobre probabilidad («¿Vive en Orlando?»).
+* Transferir aprendizaje a otras tareas (voces, documentos).
+* Explicar su razonamiento («Reconozco esta forma de nariz y distancia entre ojos…»).
+¿Por qué interviene el DL?
+Se utilizan Redes Neuronales Convolucionales (CNN).
+Cómo funciona (simplificado):
+Paso 1: Imagen de entrada (píxeles).
+Paso 2: Capas tempranas extraen rasgos simples (bordes, contornos).
+Paso 3: Capas intermedias combinan rasgos en formas (ojos, nariz, boca).
+Paso 4: Capas profundas aprenden patrones de identidad y generan un «vector huella».
+Paso 5: Comparación: se compara el vector del sospechoso con la base y se listan los más similares.
+Salida: «94% coincidencia con Rodríguez», etc.
+Proceso de aprendizaje:
+* Millones de rostros etiquetados con identidad.
+* La red aprende a transformar rostros en vectores donde los similares quedan cerca.
+* Aprendizaje supervisado con retropropagación.
+El problema del sesgo:
+Investigaciones muestran sesgos significativos:
+* Raza/etnicidad: tasas de error hasta 34% más altas en mujeres negras vs. hombres blancos.
+* Género: más errores con mujeres.
+* Edad: peor desempeño en personas mayores o menores.
+* Tono de piel: peor en pieles más oscuras.
+Causas:
+1) Sesgo en datos de entrenamiento (más rostros de piel clara).  
+2) Sesgo histórico (bases policiales sobrerrepresentan minorías).  
+3) Factores técnicos (iluminación/cámaras).  
+Esto es IA Estrecha + (a menudo) Memoria Limitada: usa solo la imagen actual; no razona contexto.
+________________
+
+Preguntas para discusión y reflexión (5–10 minutos)
+Comprensión:
+1. ¿Por qué se considera DL y no ML «simple»? (Capas múltiples para extraer rasgos cada vez más complejos).
+2. ¿Qué tipo de aprendizaje usa? (Supervisado: imágenes etiquetadas con identidad).
+3. ¿Por qué puede tener más errores con piel más oscura? (Sesgo de datos, factores técnicos, sesgos históricos).
+Análisis:
+4. ¿Qué significa «94% de confianza»? (Similitud del vector, no probabilidad real de culpabilidad; problema de tasas base en bases masivas).
+5. Si arrestan a un inocente por la sugerencia de IA, ¿quién es responsable? (Responsabilidad compartida; verificación humana imprescindible).
+6. ¿Cómo debería usarse? a) Prueba primaria, b) Pista investigativa con verificación, c) No usar. (Argumentos pro/contra; políticas actuales suelen exigir verificación independiente).
+Ética:
+7. Preocupaciones éticas: precisión/sesgo, presunción de inocencia, privacidad/supervisión, riesgo de identificaciones erróneas, desigualdad sistémica.
+8. Una empresa afirma que «arregló» el sesgo con datos diversos. ¿Confiar? (Escepticismo; pedir métricas por grupo, auditorías independientes, supervisión humana).
+Contexto real:
+9. Otros usos e implicaciones: fronteras, retail, aeropuertos, verificación en apps, escuelas, vigilancia masiva.
+10. ¿Cómo equilibrar beneficios de eficiencia con riesgos? (Exigir umbrales de precisión por caso de uso, consentimiento, evitar «deriva de misión», mecanismos de responsabilidad).
+________________
+
+ESTUDIO DE CASO 3: Diagnóstico médico asistido por IA
+«¿Puede la IA ser la médica de tu médico?»
+Asignación de tiempo: 12 minutos | Lectura: 2–3 min | Explicación: 3–5 min | Discusión: 5–10 min
+
+Resumen del escenario (lectura de 2–3 minutos)
+La situación: La Dra. Sarah Chen trabaja en radiología. Cada día revisa cientos de radiografías, TAC y RM para detectar tumores, fracturas, infecciones u otras anomalías. Es un trabajo mentalmente exigente.
+Hace seis meses, el hospital implementó un asistente diagnóstico de IA. Al subir una placa de tórax, la IA resalta regiones sospechosas y asigna puntajes de confianza: «97% neumonía; 73% nódulo compatible con malignidad; 34% anomalía cardíaca».
+La realidad:
+* La IA detecta 89% de neumonías; la Dra. Chen 91%.
+* La IA detecta 85% de cáncer de pulmón temprano; la Dra. Chen 87%.
+* Cuando discrepan, la Dra. Chen acierta 63% de las veces; la IA 37%.
+* Cuando coinciden en «normal», casi nunca se equivocan.
+El impacto:
+* El hospital eliminó un puesto de radiólogo para ahorrar costos.
+* El resto trabaja turnos de 12 horas revisando alertas de la IA.
+* Algunas personas validan sin revisar («rubber-stamping»).
+* Otras se resisten por temor a perder pericia/autonomía.
+* Los errores diagnósticos aumentaron levemente (0.8% → 1.2%).
+La pregunta: La IA debía mejorar la atención. ¿Lo hizo? ¿Para quién? ¿Y a qué costo?
+________________
+
+Explicación del concepto de IA (3–5 minutos)
+Esto es IA de Memoria Limitada + Aprendizaje Profundo supervisado
+¿Por qué Memoria Limitada?
+El sistema revisa imágenes actuales y recomienda sobre esa imagen; no mantiene historial continuo del paciente ni recuerda interacciones previas ni aprende de este caso específico después.
+¿Por qué DL supervisado?
+Proceso de entrenamiento (resumen):
+* Datos: 100 000+ imágenes médicas etiquetadas por especialistas (neumonía, normal, cáncer, etc.).
+* Red neuronal: capas que detectan bordes/densidades → patrones vasculares/nódulos → patrones de enfermedad; salida de probabilidades.
+* Entrenamiento: retropropagación para ajustar pesos con base en las etiquetas.
+* Prueba: evaluación en imágenes no vistas; sensibilidad/especificidad.
+Reto de IA Estrecha en medicina:
+1) Tarea específica (p. ej., neumonía en tórax), 2) Dominio específico (rayos X vs. RM cerebral), 3) Población específica (rendimiento varía), 4) Contexto limitado.
+Colaboración Humano–IA:
+* Fortalezas de IA: no se cansa, recuerda todo, capta patrones sutiles.
+* Fortalezas humanas: contexto, ética, comunicación, casos novedosos.
+Problemas comunes: confianza excesiva, desatención, pérdida de pericia, fatiga por alertas.
+________________
+
+Preguntas para discusión y reflexión (5–10 minutos)
+Comprensión:
+1. ¿Por qué es «Memoria Limitada» y no «Reactiva»? (Puede considerar comparaciones recientes; la reactiva no).
+2. Tipo de aprendizaje: Supervisado (etiquetas de especialistas).
+3. ¿Por qué es «Estrecha» y no «General»? (Se entrena por tarea/imagen; no generaliza sin reentrenar).
+Análisis:
+4. La IA detecta 89% de neumonías vs. 91% de la doctora. ¿Es peor? (No necesariamente: patrones de error complementarios, fatiga humana, costos).
+5. ¿Fue buena idea eliminar un puesto? (Errores aumentaron; mejor usar IA para potenciar, no reemplazar; evitar sobrecarga).
+6. ¿Por qué es problemático validar sin revisar? (Riesgo de errores sistemáticos; la IA pasa a dictar decisiones).
+Ética y práctica:
+7. ¿Quién es responsable si se omite un cáncer? (Responsabilidad compartida: clínica, hospital, proveedor de IA).
+8. ¿Debe informarse al paciente que hubo apoyo de IA? (Transparencia/autonomía vs. confianza; buenas prácticas: revelar cuando la IA contribuye de forma significativa).
+9. ¿Cómo diseñar IA que aumente al radiólogo? (Explicabilidad, indicadores de confianza, métricas de error, fácil anulación, bucles de retroalimentación, gestión de carga).
+Aplicaciones reales:
+10. Otros usos: patología, cardiología, dermatología, oftalmología, salud mental. Implicaciones: acceso, precisión, desplazamiento laboral, validación por poblaciones.
+________________
+
+COMPARACIÓN DE LOS TRES ESTUDIOS DE CASO
+Aspecto
+	Netflix
+	Reconocimiento facial
+	Diagnóstico médico
+Tipo de IA
+	ML (Filtrado colaborativo)
+	IA Estrecha + DL
+	IA Estrecha + DL supervisado
+Tipo de aprendizaje
+	Supervisado + Refuerzo
+	Supervisado
+	Supervisado
+Memoria
+	Memoria limitada (historial reciente)
+	Reactiva (imagen actual)
+	Memoria limitada (estudio actual + recientes)
+Desafío principal
+	Burbujas de filtro; privacidad
+	Sesgo; arrestos falsos; privacidad
+	Variación de precisión; integración en flujo de trabajo
+Preocupación ética
+	Manipulación; vigilancia
+	Discriminación; falsos positivos
+	Responsabilidad; transparencia; desplazamiento laboral
+Rol humano
+	Elección del usuario
+	Verificación crítica
+	Colaboración y supervisión esenciales
+________________
+
+IDEAS CLAVE DE LOS ESTUDIOS DE CASO
+1. El éxito de la IA requiere contexto:
+   * Netflix funciona porque para muchas personas la conveniencia pesa más que la privacidad.
+   * El reconocimiento facial requiere verificación humana por sesgos/limitaciones.
+   * La IA médica necesita supervisión de radiólogos; no se puede automatizar por completo.
+2. Las limitaciones de la IA Estrecha son reales:
+   * Cada sistema destaca en su dominio, pero falla fuera de él.
+   * Estamos lejos de la IA General.
+3. «Mejor que humanos» no significa «suficientemente bueno»:
+   * Recomendaciones de ocio toleran errores; arrestos/diagnósticos no.
+4. La ética exige transparencia y responsabilidad:
+   * Las personas deben entender los sistemas que toman decisiones sobre ellas.
+   * Las consecuencias marcan el rigor requerido.
+   * Debe haber responsables cuando el sistema falla.
+5. La tecnología no resuelve problemas subyacentes:
+   * El sesgo del reconocimiento facial refleja sesgos históricos de seguridad.
+   * Las desigualdades en IA médica reflejan inequidades del sistema de salud.
+   * Las burbujas de Netflix reflejan tendencias humanas a buscar lo similar.
+________________
+
+FIN DE LOS ESTUDIOS DE CASO
+Tiempo total: 30 minutos (12 min × 3)
+Formato: cada caso avanza desde el escenario concreto → explicación conceptual → reflexión crítica
+Términos bilingües usados:
+* Inteligencia Artificial (IA)
+* Aprendizaje Automático (ML)
+* Aprendizaje Profundo (DL)
+* Red Neuronal Convolucional (CNN)
+* IA Estrecha (Narrow AI)
+* IA de Memoria Limitada (Limited Memory AI)
+* Aprendizaje Supervisado (Supervised Learning)
+Preparación para evaluación: Estos casos preparan para preguntas sobre aplicaciones reales de IA y pensamiento crítico sobre limitaciones y ética.
