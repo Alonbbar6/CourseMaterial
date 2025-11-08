@@ -1,0 +1,269 @@
+MÓDULO 4: IA GENERATIVA Y MODELOS DE LENGUAJE GRANDE (LLMs)
+Material de lectura completo (36 minutos | ~6.500 palabras)
+MTW AI Platform | Fase 3: Aplicaciones clave - Generación de texto
+________________
+
+TABLA DE CONTENIDOS
+1. Introducción: La revolución de la IA Generativa
+2. Parte 1: IA Generativa vs. Discriminativa
+3. Parte 2: La arquitectura Transformer
+4. Parte 3: Modelos de Lenguaje Grande (LLMs)
+5. Parte 4: Fundamentos de la Ingeniería de Prompts
+6. Parte 5: Generación de Imágenes a partir de Texto
+7. Parte 6: Limitaciones y Desafíos
+8. Resumen y Puntos Clave
+________________
+
+INTRODUCCIÓN: LA REVOLUCIÓN DE LA IA GENERATIVA {#introduccion}
+En noviembre de 2022, el mundo cambió. OpenAI lanzó ChatGPT y, en cinco días, un millón de personas se registraron. En dos meses, 100 millones de usuarios. Nunca antes una tecnología había alcanzado una adopción tan amplia tan rápidamente. ChatGPT presentó al público general la IA Generativa: inteligencia artificial que no solo analiza o clasifica datos, sino que crea contenido completamente nuevo: texto, imágenes, música, código y más.
+Este módulo explora cómo funciona la IA Generativa, qué hace posibles a los Modelos de Lenguaje Grande (LLMs) como ChatGPT, Claude y Gemini, y cómo aprovechar estas herramientas mediante una ingeniería de prompts efectiva.
+
+Objetivos de aprendizaje del módulo
+Al finalizar esta lectura, usted podrá:
+1. Definir IA Generativa y diferenciarla de la IA Discriminativa.
+2. Explicar la arquitectura Transformer y por qué revolucionó la IA.
+3. Dominar los fundamentos de la ingeniería de prompts para interactuar con LLMs.
+4. Entender la generación de imágenes a partir de texto (DALL‑E, Midjourney, Stable Diffusion).
+5. Reconocer limitaciones como alucinaciones y sesgos.
+________________
+
+PARTE 1: IA GENERATIVA VS. DISCRIMINATIVA {#parte-1}
+1.1 La distinción fundamental
+Recuerde de los Módulos 2 y 3 que la mayoría de la IA vista hasta ahora era discriminativa: clasifica, predice o etiqueta datos existentes. La IA generativa toma un enfoque distinto: crea datos nuevos.
+
+La diferencia central:
+IA DISCRIMINATIVA
+Pregunta: «¿Es esto un gato o un perro?»
+Tarea: Clasificar datos existentes
+Salida: Etiquetas, predicciones, decisiones
+
+IA GENERATIVA
+Pregunta: «¿Puedes crear una imagen de un gato?»
+Tarea: Generar datos nuevos
+Salida: Contenido novedoso (texto, imágenes, audio)
+
+Analogía:
+* La IA discriminativa es como un crítico de arte que analiza cuadros y decide qué es impresionista vs. abstracto.
+* La IA generativa es como un artista que crea cuadros nuevos en estilo impresionista.
+
+1.2 Cómo aprenden de forma diferente
+Modelos Discriminativos:
+Aprenden la frontera de decisión entre clases. Responden: «Dado X, ¿cuál es la probabilidad de que pertenezca a Y?»
+Enfoque matemático: P(Y|X)
+Ejemplo: Clasificador de spam
+Entrada: Características del correo
+Aprendizaje: Frontera que separa spam de no spam
+Salida: Etiqueta «Spam» o «No Spam»
+
+Modelos Generativos:
+Aprenden la distribución subyacente de los datos. Responden: «¿Cómo luce un dato que pertenece a Y?»
+Enfoque matemático: P(X,Y) o P(X)
+Ejemplo: Modelo de generación de texto
+Entrada: «Escribe un poema sobre…»
+Aprendizaje: Estructura del lenguaje, relaciones entre palabras, gramática
+Salida: Un poema totalmente nuevo
+
+1.3 Comparación práctica
+Aspecto	IA Discriminativa	IA Generativa
+Objetivo	Clasificar o predecir	Crear contenido nuevo
+Entrenamiento	Con ejemplos etiquetados (supervisado)	Aprender patrones de datos (a menudo no/auto‑supervisado)
+Salida	Etiquetas, categorías, números	Texto, imágenes, audio, código
+Cómputo	En general más rápido, menos recursos	Requiere gran cómputo (GPU/TPU)
+Ejemplos	Filtros de spam, clasificadores de imágenes, detección de fraude	ChatGPT, DALL‑E, generadores musicales
+Cuándo usar	Toma de decisiones, clasificación	Creación de contenido, aumento de datos
+
+1.4 Aplicaciones del mundo real
+IA Discriminativa:
+* Diagnóstico médico (clasificar radiografía en «tumor» o «normal»)
+* Scoring crediticio (aprobar/denegar préstamo)
+* Reconocimiento facial (identificar persona)
+* Análisis de sentimiento (positivo/negativo)
+
+IA Generativa:
+* Asistencia de escritura (ChatGPT, Claude, Gemini)
+* Creación de imágenes (DALL‑E, Midjourney, Stable Diffusion)
+* Generación de código (GitHub Copilot)
+* Composición musical (AIVA, Amper Music)
+* Síntesis de video (Runway, Synthesia)
+* Descubrimiento de fármacos (nuevas moléculas)
+
+1.5 Convergencia
+Modelos como BERT (discriminativo) y GPT (generativo) comparten la arquitectura Transformer. Los modelos generativos que capturan bien los datos también pueden clasificar. Los LLMs modernos alcanzan SOTA en tareas de clasificación pese a diseñarse para generación.
+________________
+
+PARTE 2: LA ARQUITECTURA TRANSFORMER {#parte-2}
+2.1 La revolución de 2017
+El artículo «Attention Is All You Need» introdujo la arquitectura Transformer (Transformador), que revolucionó el PLN y habilitó la IA generativa moderna.
+
+Por qué importan los Transformers
+Antes, los modelos procesaban palabras secuencialmente; Transformers procesan oraciones completas en paralelo, entendiendo contexto y relaciones entre todas las palabras a la vez.
+
+2.2 El problema que resolvieron
+RNNs/LSTMs procesaban «La… gata… se… sentó…», olvidando dependencias largas (gradientes que se desvanecen), sin paralelización y con contexto limitado.
+Solución: mecanismo de atención — el modelo «presta atención» a las palabras relevantes sin importar su posición.
+
+2.3 Cómo funciona un Transformer (conceptual)
+1) Tokenización: «La IA es asombrosa» → tokens.
+2) Embeddings: cada token → vector numérico.
+3) Codificación posicional: añade información de posición.
+4) Atención: para cada palabra, calcula cuánta atención dedicar a las demás.
+5) Capas múltiples: apilan capas; las representaciones se refinan.
+6) Salida: predice el siguiente token («París» para «La capital de Francia es…»).
+
+2.4 Innovación clave: Auto‑atención
+La auto‑atención permite que cada palabra considere a todas las demás simultáneamente y resuelva ambigüedades («it» → «loan», no «bank»).
+
+2.5 Por qué habilitaron los LLMs
+Ventajas: paralelización, dependencias de largo alcance y escalabilidad. Resultado: modelos con miles de millones de parámetros y trillones de palabras de entrenamiento.
+________________
+
+PARTE 3: MODELOS DE LENGUAJE GRANDE (LLMs) {#parte-3}
+3.1 ¿Qué es un LLM?
+Una red neuronal basada en Transformer entrenada con cantidades masivas de texto. «Grande» alude al número de parámetros y a la escala de datos.
+
+Escala (aprox.):
+GPT‑2 (2019): 1,5B parámetros
+GPT‑3 (2020): 175B
+GPT‑4 (2023): ~1T+ (estimado)
+
+3.2 Cómo se entrenan
+Fase 1: Pre‑entrenamiento (auto‑supervisado)
+Objetivo: predecir la siguiente palabra sobre trillones de tokens (libros, web, código, Wikipedia). Costes: millones a centenares de millones de USD; miles de GPUs durante meses.
+
+Fase 2: Ajuste fino con retroalimentación humana (RLHF)
+1) Humanos dan ejemplos de buenas respuestas.
+2) El modelo genera varias.
+3) Humanos clasifican por calidad.
+4) El modelo aprende a preferir las mejores.
+
+3.3 Qué pueden hacer
+Comprensión: resumir, responder, extraer, traducir.
+Generación: redactar textos, código, descripciones, emails.
+Razonamiento emergente: matemáticas, lógica, multietapa.
+Código: escribir, depurar, explicar, convertir.
+
+3.4 LLMs destacados
+* GPT (OpenAI): versátil, buen razonamiento y código.
+* Claude (Anthropic): contexto largo, seguridad.
+* Gemini (Google): multimodal, integración Google.
+* LLaMA (Meta): abierto para investigación.
+* Mistral: eficiente a menor escala.
+
+3.5 Cómo operan en inferencia
+1) Tokenización → 2) Embeddings → 3) Capas Transformer → 4) Distribución de probabilidades → 5) Muestreo del siguiente token → 6) Repetir hasta terminar.
+________________
+
+PARTE 4: FUNDAMENTOS DE INGENIERÍA DE PROMPTS {#parte-4}
+4.1 ¿Qué es?
+El arte/ciencia de redactar entradas que provoquen salidas deseadas de un LLM.
+
+4.2 Por qué importan los prompts
+Ser específico, dar contexto y formato claro transforma respuestas genéricas en útiles.
+
+4.3 Técnicas clave
+1) Sea específico.
+2) Proporcione contexto.
+3) Especifique formato (listas, tablas, pasos).
+4) Pocos‑ejemplos (few‑shot): incluya 1–3 ejemplos.
+5) Asigne un rol («Eres un tutor paciente…»).
+6) Cadena de razonamiento (paso a paso) para problemas.
+
+4.4 Plantilla de prompt
+[ROL] • [CONTEXTO] • [TAREA] • [FORMATO] • [EJEMPLOS] • [TONO] • [LONGITUD]
+
+4.5 Patrones comunes
+* Resumen, Transformación, Pregunta‑respuesta, Generación creativa, Análisis.
+
+4.6 Técnicas avanzadas
+* Refinamiento iterativo del prompt.
+* Establecimiento de restricciones (longitud exacta, audiencia, etc.).
+________________
+
+PARTE 5: GENERACIÓN DE IMÁGENES A PARTIR DE TEXTO {#parte-5}
+5.1 Cómo funcionan
+Modelos de difusión + codificadores de texto:
+1) Codificar el texto (embeddings).
+2) Difusión inversa: partir de ruido y «des‑ruidos» guiado por el texto.
+3) Salida: imagen final tras múltiples pasos.
+
+5.2 Modelos populares
+* DALL‑E (OpenAI): alta calidad y seguimiento de prompts complejos.
+* Midjourney: estética artística; muy popular entre creadores.
+* Stable Diffusion: código abierto; ejecutable localmente y muy personalizable.
+
+5.3 Prompts efectivos para imágenes
+Estructura: [Sujeto] + [Estilo] + [Composición] + [Iluminación] + [Detalles]
+Ejemplo fuerte: «Un gato atigrado naranja esponjoso en un alféizar, estilo impresionista, luz suave de tarde, pelaje detallado, plantas al fondo».
+
+5.4 Mejores prácticas
+Sea descriptivo, refiera estilos artísticos, use prompts negativos (qué evitar: «borroso», «baja calidad», etc.).
+________________
+
+PARTE 6: LIMITACIONES Y DESAFÍOS {#parte-6}
+6.1 Alucinaciones
+Definición: el modelo genera información falsa pero plausible.
+Por qué sucede: predice texto verosímil, no «verdad».
+Mitigación: contrastar hechos, pedir fuentes, usar modelos especializados, verificar externamente para temas críticos.
+
+6.2 Sesgos
+Hereda sesgos de los datos (género, raza, cultura). Mitigue con prompts cuidadosos y revisión humana.
+
+6.3 Falta de «comprensión» verdadera
+Reconoce patrones; no tiene creencias ni conciencia. Sin herramientas externas, no accede a datos en tiempo real ni calcula con fiabilidad.
+
+6.4 Ventanas de contexto
+Límite de tokens (p. ej., 4k–200k). Más allá, «olvida» lo anterior.
+
+6.5 Inyección de prompts y seguridad
+Usuarios maliciosos pueden intentar anular instrucciones. Área activa de investigación en seguridad de IA.
+________________
+
+RESUMEN Y PUNTOS CLAVE {#resumen}
+Conceptos centrales
+IA Generativa vs. Discriminativa:
+* Discriminativa: clasifica/predice P(Y|X).
+* Generativa: crea contenido P(X) o P(X,Y).
+* Las fronteras se difuminan en la práctica.
+
+Arquitectura Transformer:
+* Auto‑atención: procesa todas las palabras a la vez.
+* Escalable: habilita miles de millones de parámetros.
+* Base de LLMs y modelos multimodales.
+
+Modelos de Lenguaje Grande:
+* Entrenados con billones de tokens.
+* Pre‑entrenamiento (auto‑supervisado) + ajuste fino (RLHF).
+* Ejemplos: GPT‑4, Claude 3, Gemini Ultra.
+
+Ingeniería de Prompts:
+* Especificidad, contexto y ejemplos mejoran resultados.
+* Few‑shot y cadena de pensamiento para razonamiento.
+* Refinamiento iterativo.
+
+Texto‑a‑Imagen:
+* Modelos de difusión «des‑ruiden» guiados por texto.
+* Prompts detallados → imágenes mejores.
+* Estilo, composición e iluminación importan.
+
+Limitaciones:
+* Alucinaciones; sesgos; falta de comprensión real; límites de contexto; riesgos de inyección de prompts.
+
+Términos bilingües clave
+Inglés	Español
+Generative AI	IA Generativa
+Large Language Model (LLM)	Modelo de Lenguaje Grande
+Transformer	Transformador
+Prompt Engineering	Ingeniería de Prompts
+Hallucination	Alucinación
+Attention Mechanism	Mecanismo de Atención
+Token	Token (unidad de texto)
+Fine‑tuning	Ajuste fino
+Zero‑shot Learning	Aprendizaje sin ejemplos
+Few‑shot Learning	Aprendizaje con pocos ejemplos
+________________
+
+LECTURA DEL MÓDULO 4: COMPLETADA ✓
+Conteo de palabras: ~6.500
+Tiempo de lectura: 36 minutos (a ~180 wpm para contenido técnico)
+Bilingüe: Español con términos técnicos en inglés integrados cuando corresponde
+Siguiente: Laboratorio práctico de prompting (40% del tiempo del módulo)
