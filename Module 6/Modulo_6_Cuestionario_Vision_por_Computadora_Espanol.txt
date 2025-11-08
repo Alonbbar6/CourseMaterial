@@ -1,0 +1,252 @@
+MÓDULO 6: CUESTIONARIO — FUNDAMENTOS Y CASOS DE USO DE VISIÓN POR COMPUTADORA
+Tiempo estimado: 12 minutos (10% de 120 min)
+Total de preguntas: 10 (7 de opción múltiple + 3 de etiquetado de diagramas)
+Puntaje de aprobación: 70%
+
+________________
+
+INSTRUCCIONES
+Lea cada pregunta cuidadosamente y seleccione la mejor respuesta. Para las preguntas de etiquetado de diagramas, identifique los componentes correctos mostrados en la imagen.
+
+________________
+
+SECCIÓN A: Preguntas de Opción Múltiple (7 preguntas)
+
+Pregunta 1 (1.5 minutos)
+¿Cómo “ve” una computadora una imagen digital?
+Opciones:
+A) Como una cuadrícula de píxeles, donde cada píxel tiene valores de color RGB (números de 0‑255)
+B) Como una señal analógica continua que necesita ser interpretada
+C) Reconociendo formas y objetos de la misma manera que los humanos
+D) Como descripciones de texto de lo que aparece en la imagen
+Respuesta correcta: A
+Explicación:
+Las computadoras procesan imágenes como matrices numéricas. Cada píxel está representado por tres números (valores Rojo, Verde y Azul entre 0 y 255). Una computadora no “entiende” qué hay en la imagen; procesa millones de números mediante operaciones matemáticas. Por eso necesitamos CNN para extraer patrones significativos.
+
+________________
+
+Pregunta 2 (1.5 minutos)
+¿Cuál es la función principal de un filtro convolucional (kernel) en una CNN?
+Opciones:
+A) Comprimir el tamaño del archivo de imagen para almacenamiento
+B) Detectar características específicas como bordes, texturas o patrones deslizándose por la imagen
+C) Convertir imágenes a color en blanco y negro
+D) Aumentar la resolución y la calidad de la imagen
+Respuesta correcta: B
+Explicación:
+Un filtro convolucional (kernel) es una matriz pequeña (típicamente 3×3 o 5×5) que se desliza sobre la imagen realizando multiplicación elemento a elemento y suma. Distintos filtros detectan diferentes características: bordes verticales u horizontales, texturas y patrones más complejos. Esta operación permite a las CNN “ver” características en las imágenes.
+
+________________
+
+Pregunta 3 (1.5 minutos)
+En una CNN, ¿qué detectan típicamente las capas tempranas comparadas con las capas más profundas?
+Opciones:
+A) Las capas tempranas detectan objetos complejos (como caras) y las profundas bordes simples
+B) Las capas tempranas detectan características simples (bordes, colores) y las profundas patrones y objetos complejos
+C) Ambas detectan los mismos tipos de características
+D) Las capas tempranas detectan texto y las profundas imágenes
+Respuesta correcta: B
+Explicación:
+Las CNN aprenden de manera jerárquica. Las primeras capas capturan rasgos de bajo nivel (bordes, esquinas, manchas de color). Las capas posteriores combinan estos rasgos para reconocer patrones más complejos (texturas), luego partes (ojos, ruedas) y finalmente objetos completos (caras, autos).
+
+________________
+
+Pregunta 4 (1.5 minutos)
+¿Cuál es el propósito principal de una capa de pooling (como Max Pooling) en una CNN?
+Opciones:
+A) Aumentar el tamaño de los mapas de características para mayor detalle
+B) Reducir las dimensiones espaciales de los mapas de características conservando la información importante
+C) Agregar más canales de color a la imagen
+D) Convertir la imagen en descripciones de texto
+Respuesta correcta: B
+Explicación:
+El pooling reduce (downsampling) los mapas de características tomando el valor máximo (o promedio) en una ventana deslizante. Con ello: (1) disminuye el tamaño espacial y el cómputo, (2) reduce parámetros y sobreajuste, (3) aporta invarianza a traslación y (4) preserva las activaciones más relevantes.
+
+________________
+
+Pregunta 5 (1.5 minutos)
+Estás construyendo una app que debe categorizar automáticamente fotos en álbumes (“Playa”, “Montañas”, “Ciudad”, “Comida”). ¿Qué tarea es más apropiada?
+Opciones:
+A) Detección de Objetos
+B) Segmentación de Imágenes
+C) Clasificación de Imágenes
+D) Reconocimiento Facial
+Respuesta correcta: C
+Explicación:
+La Clasificación de Imágenes asigna una sola etiqueta a la imagen completa. La CNN analiza la foto y decide la categoría de la escena. La Detección sería excesiva porque no necesitas ubicar objetos, solo etiquetar la escena global.
+
+________________
+
+Pregunta 6 (1.5 minutos)
+¿Cuál es la diferencia clave entre Clasificación de Imágenes y Detección de Objetos?
+Opciones:
+A) La Clasificación identifica qué hay en una imagen (una etiqueta), mientras que la Detección localiza e identifica múltiples objetos con cajas delimitadoras
+B) La Clasificación solo funciona con blanco y negro y la Detección con color
+C) Son la misma tarea con nombres distintos
+D) La Clasificación es más rápida pero menos precisa que la Detección
+Respuesta correcta: A
+Explicación:
+La Clasificación responde “¿qué es?” con una etiqueta global. La Detección responde “¿qué y dónde?” con múltiples cajas y etiquetas, lo que la hace más compleja y costosa computacionalmente.
+
+________________
+
+Pregunta 7 (1.5 minutos)
+Un sistema médico debe marcar píxel a píxel los límites de un tumor en una RM. ¿Qué tarea se requiere?
+Opciones:
+A) Clasificación de Imágenes
+B) Detección de Objetos
+C) Segmentación de Imágenes
+D) Reconocimiento Facial
+Respuesta correcta: C
+Explicación:
+La Segmentación etiqueta cada píxel y produce una máscara precisa (p. ej., tumor vs. tejido sano). La Clasificación solo diría “tumor presente” y la Detección aportaría una caja, no límites exactos.
+
+________________
+
+SECCIÓN B: Preguntas de Etiquetado de Diagramas (3 preguntas)
+
+Pregunta 8 (1.5 minutos)
+Estudie el diagrama de una arquitectura CNN e identifique la etiqueta correcta para cada componente.
+
+Diagrama (letras → bloques):
+[A] Imagen de entrada 224×224 RGB → [B] Múltiples filtros → [C] Tamaño menor (pool) → [D] Red neuronal (densa) → [E] Salida (clases)
+
+Componentes a emparejar:
+1. Capa de Entrada
+2. Capa Convolucional
+3. Capa de Pooling
+4. Capa Totalmente Conectada
+5. Capa de Salida
+
+Correspondencia correcta:
+A → 1 (Capa de Entrada)
+B → 2 (Capa Convolucional)
+C → 3 (Capa de Pooling)
+D → 4 (Capa Totalmente Conectada)
+E → 5 (Capa de Salida)
+
+Explicación:
+Flujo típico de una CNN: entrada (imagen) → convolución (mapas de características) → pooling (reducción espacial) → totalmente conectada (decisión) → salida (probabilidades).
+
+________________
+
+Pregunta 9 (1.5 minutos)
+Observe la separación de canales RGB. Identifique qué canal (Rojo, Verde o Azul) representa cada imagen en escala de grises.
+
+Escenario de ejemplo: Manzana roja sobre pasto verde bajo cielo azul.
+Canal A: la manzana es muy brillante, pasto y cielo oscuros → Canal Rojo
+Canal B: el pasto es brillante, manzana y cielo oscuros → Canal Verde
+Canal C: el cielo es brillante, manzana y pasto oscuros → Canal Azul
+
+Correspondencia correcta:
+A → Rojo, B → Verde, C → Azul
+
+Explicación:
+Cada canal es una imagen en escala de grises que muestra la intensidad de ese color. Objetos del color del canal aparecen claros (alta intensidad).
+
+________________
+
+Pregunta 10 (1.5 minutos)
+Examine tres salidas de Visión por Computadora y etiquete cada una con la tarea correcta.
+
+Salidas:
+A) Una sola etiqueta global para la imagen: “Calle” (confianza 94%)
+B) Varias cajas con etiquetas y coordenadas: “CAR”, “DOG”, “PERSON”
+C) Cada píxel etiquetado (máscara): leyenda con clases (coche, carretera, persona, cielo)
+
+Tareas:
+1. Clasificación de Imágenes
+2. Detección de Objetos
+3. Segmentación de Imágenes
+
+Correspondencia correcta:
+A → 1 (Clasificación)
+B → 2 (Detección)
+C → 3 (Segmentación)
+
+Explicación:
+La Clasificación da una etiqueta global; la Detección entrega “qué y dónde” con cajas; la Segmentación clasifica píxel a píxel.
+
+________________
+
+CLAVE DE RESPUESTAS
+Pregunta — Respuesta — Tipo
+1 — A — Opción múltiple
+2 — B — Opción múltiple
+3 — B — Opción múltiple
+4 — B — Opción múltiple
+5 — C — Opción múltiple
+6 — A — Opción múltiple
+7 — C — Opción múltiple
+8 — A→1, B→2, C→3, D→4, E→5 — Etiquetado de diagrama
+9 — A→Rojo, B→Verde, C→Azul — Etiquetado de diagrama
+10 — A→1, B→2, C→3 — Etiquetado de diagrama
+
+________________
+
+RÚBRICA DE CALIFICACIÓN
+• Opción múltiple (1–7): 1 punto c/u = 7 puntos
+• Etiquetado de diagramas (8–10): 1 punto c/u = 3 puntos
+• Total: 10 puntos
+• Aprobación: 7/10 (70%)
+
+Crédito parcial para diagramas:
+• P8: 0.2 puntos por emparejamiento correcto (5 en total)
+• P9: 0.33 puntos por emparejamiento correcto (3 en total)
+• P10: 0.33 puntos por emparejamiento correcto (3 en total)
+
+________________
+
+RETROALIMENTACIÓN POST‑CUESTIONARIO
+
+Si Puntaje ≥ 70%:
+🎉 ¡Excelente trabajo! Tienes una comprensión sólida de los fundamentos de Visión por Computadora. Ahora puedes:
+• Explicar cómo las computadoras procesan imágenes (píxeles, canales RGB)
+• Entender la arquitectura de una CNN y el rol de sus capas
+• Diferenciar Clasificación, Detección y Segmentación
+• Identificar aplicaciones reales de Visión por Computadora
+Siguiente paso: Continúa al Módulo 7: IA en la Industria — Casos de Estudio y Tendencias Emergentes.
+
+Si Puntaje < 70%:
+📚 ¡Sigue aprendiendo! La Visión por Computadora es compleja pero poderosa. Revisa según tus errores:
+• Fallos en 1, 9: Representación digital de imágenes (píxeles, RGB). Recurso: Visualización 1 del Módulo 6.
+• Fallos en 2, 3: Filtros convolucionales y aprendizaje jerárquico. Recurso: Visualización 2 y demo interactiva de filtros.
+• Fallos en 4, 8: Componentes de arquitectura CNN (pooling, capas densas). Recurso: Visualización 3.
+• Fallos en 5, 6, 7, 10: Tareas principales (clasificación vs. detección vs. segmentación). Recurso: Visualización 4.
+
+________________
+
+RECURSOS RECOMENDADOS
+Para todos los estudiantes:
+1) Stanford CS231n: Convolutional Neural Networks for Visual Recognition — Material y videos gratuitos: http://cs231n.stanford.edu/
+2) 3Blue1Brown: “What is a convolution?” — Video con excelente visualización (YouTube)
+3) Tutorial de CNN con TensorFlow — Práctica guiada: https://www.tensorflow.org/tutorials/images/cnn
+4) ImageNet Challenge — Conozca la competencia que impulsó la Visión por Computadora y arquitecturas ganadoras (AlexNet, VGG, ResNet)
+Práctica interactiva:
+• Teachable Machine de Google: entrene su propio clasificador — https://teachablemachine.withgoogle.com/
+
+________________
+
+CONCEPTOS ERRÓNEOS COMUNES
+1) ❌ “Las CNN entienden imágenes como los humanos” → ✅ Procesan patrones numéricos; aprenden correlaciones estadísticas.
+2) ❌ “Más capas siempre significa mejor desempeño” → ✅ Redes más profundas pueden sobreajustar y ser difíciles de entrenar; se requiere equilibrio.
+3) ❌ “La Detección es solo Clasificación repetida” → ✅ La Detección predice clases y cajas a la vez (p. ej., YOLO, R‑CNN), tarea diferente.
+4) ❌ “El pooling pierde información importante” → ✅ Aporta invarianza y reduce sobreajuste; preserva activaciones más relevantes.
+
+________________
+
+PREGUNTA DESAFÍO (Opcional)
+Un auto autónomo debe procesar video a 30 fps y detectar peatones, autos, semáforos y carriles.
+¿Qué combinación de tareas usarías y por qué?
+Sugerencia de respuesta:
+• Clasificación para el color del semáforo (rápido)
+• Detección para peatones y vehículos (necesitas ‘qué y dónde’)
+• Segmentación para zona transitable y carriles (límites precisos)
+• Optimización: modelos ligeros (MobileNet), aceleradores (GPU/TPU) y seguimiento temporal para no redetectar cada cuadro.
+
+________________
+
+Fin del Cuestionario del Módulo 6
+Tiempo para completar: 12–15 minutos
+Dificultad estimada: Intermedia
+Habilidades evaluadas: Fundamentos de Visión por Computadora, arquitectura CNN y aplicaciones prácticas
