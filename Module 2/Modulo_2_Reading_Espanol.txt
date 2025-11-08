@@ -1,0 +1,247 @@
+MÓDULO 2: FUNDAMENTOS DEL MACHINE LEARNING: EL MOTOR CENTRAL
+Material de lectura completo (36 minutos) | Plataforma de IA MTW | Fase 2: Mecanismos Centrales
+________________
+
+TABLA DE CONTENIDOS
+1. Parte 1: El núcleo del aprendizaje automático
+2. Parte 2: Aprendizaje supervisado — Clasificación
+3. Parte 3: Aprendizaje supervisado — Regresión
+4. Parte 4: Aprendizaje no supervisado
+5. Parte 5: División de datos y evaluación
+6. Parte 6: Sobreajuste y subajuste
+7. Resumen y puntos clave
+________________
+
+PARTE 1: EL NÚCLEO DEL APRENDIZAJE AUTOMÁTICO
+1.1 Qué hace diferente al Machine Learning (Aprendizaje Automático)
+En el Módulo 1 distinguimos el Aprendizaje Automático de la Inteligencia Artificial en general. Ahora profundizamos en sus mecanismos centrales. El cambio fundamental entre la programación tradicional y el aprendizaje automático representa una de las transformaciones más importantes en la historia de la informática.
+
+Programación Tradicional (Antes del ML):
+El programador escribe reglas
+     ↓
+Las reglas procesan entradas
+     ↓
+Se generan salidas
+
+Ejemplo: "Si la temperatura > 30°C, enciende el aire acondicionado". Cada situación requiere una regla.
+
+Machine Learning (Después del ML):
+Datos (ejemplos etiquetados)
+     ↓
+El algoritmo aprende patrones
+     ↓
+Se genera un modelo
+     ↓
+El modelo procesa nuevas entradas
+     ↓
+Se generan salidas
+
+En lugar de reglas, proporcionamos ejemplos. El algoritmo descubre patrones. El modelo resultante aplica esos patrones a nuevas situaciones.
+
+Importancia:
+El Aprendizaje Automático es una rama de la Inteligencia Artificial que se enfoca en el desarrollo de algoritmos y modelos estadísticos que permiten a los sistemas aprender y mejorar con la experiencia sin ser programados explícitamente.
+
+Ejemplo: Detección de spam. Es imposible escribir reglas para cada tipo de correo basura, pero un sistema de ML aprende a identificar patrones de miles de ejemplos.
+
+1.2 Tres tipos principales de Aprendizaje Automático
+1. Aprendizaje Supervisado (Supervised Learning)
+   * Aprende con datos etiquetados
+   * Tiene respuestas correctas conocidas
+   * Objetivo: predecir salidas para nuevas entradas
+   * Ejemplo: Clasificar correos como “spam” o “no spam”
+2. Aprendizaje No Supervisado (Unsupervised Learning)
+   * Aprende sin etiquetas
+   * No hay respuestas correctas predefinidas
+   * Objetivo: descubrir patrones ocultos
+3. Aprendizaje por Refuerzo (Reinforcement Learning)
+   * Aprende mediante recompensas y castigos
+   * Ensayo y error con retroalimentación
+   * Ejemplo: una IA aprende a jugar ajedrez mediante millones de partidas
+
+El nombre refleja el tipo de retroalimentación:
+- Supervisado: con respuestas correctas
+- No supervisado: sin supervisión
+- Por refuerzo: con recompensas
+
+Este módulo se centra en el Aprendizaje Supervisado, responsable del 99% del valor económico actual del ML.
+________________
+
+PARTE 2: APRENDIZAJE SUPERVISADO — CLASIFICACIÓN
+2.1 ¿Qué es la clasificación?
+La clasificación es un tipo de aprendizaje supervisado en el que el modelo aprende de datos etiquetados, es decir, cada entrada tiene una salida correcta conocida. El modelo predice y se ajusta comparando con los valores reales.
+
+Definición:
+Predice a qué categoría pertenece una entrada. Las salidas son discretas, no continuas.
+
+Características:
+* Entradas: características descriptivas (por ejemplo, texto del correo)
+* Salidas: categorías predefinidas (“spam”, “no spam”)
+* Meta: separar clases mediante límites de decisión
+* Método: aprende de ejemplos etiquetados
+
+Ejemplos clásicos:
+1. Detección de spam
+2. Diagnóstico médico
+3. Clasificación de imágenes
+4. Análisis de sentimiento
+
+2.2 Proceso de entrenamiento
+1. Reunir datos etiquetados
+2. Extraer características numéricas
+3. Elegir algoritmo (Regresión logística, Árboles de decisión, SVM)
+4. Entrenar modelo ajustando parámetros
+5. Probar con nuevos datos
+
+2.3 Límites de decisión
+El modelo encuentra líneas o superficies que separan clases en el espacio de características.
+
+Ejemplo: vinos “tinto” vs “blanco”
+Si las características (contenido de alcohol y color) se grafican, el modelo traza una línea divisoria. Los algoritmos más complejos permiten fronteras curvas.
+
+2.4 Algoritmos comunes
+1. Regresión logística: predice probabilidades
+2. Árboles de decisión: decisiones en forma de árbol
+3. K-Vecinos más cercanos (KNN): clasifica por similitud
+4. Máquinas de vectores de soporte (SVM): separa clases con el mayor margen posible
+5. Bosque aleatorio (Random Forest): combinación de múltiples árboles
+________________
+
+PARTE 3: APRENDIZAJE SUPERVISADO — REGRESIÓN
+3.1 Definición
+Predice valores numéricos continuos (precio, temperatura, etc.)
+
+Ejemplos:
+* Precio de vivienda
+* Ventas futuras
+* Pronóstico del clima
+
+3.2 Regresión lineal
+Encuentra una línea que minimiza el error entre predicciones y valores reales.
+
+Fórmula:
+y = mx + b
+
+3.3 Regresión no lineal
+Modela relaciones más complejas, usando polinomios o árboles.
+
+3.4 Métricas de evaluación
+* Error cuadrático medio (MSE)
+* Error absoluto medio (MAE)
+* Coeficiente de determinación (R²)
+________________
+
+PARTE 4: APRENDIZAJE NO SUPERVISADO
+4.1 Definición
+No hay etiquetas ni respuestas correctas. El sistema busca estructuras ocultas.
+
+Usos:
+* Agrupamiento de clientes
+* Detección de anomalías
+* Reducción de dimensionalidad
+
+4.2 Clustering (Agrupamiento)
+Ejemplo: segmentación de clientes con K-Means
+Pasos:
+1. Elegir número de grupos (k)
+2. Asignar puntos al centro más cercano
+3. Recalcular centros
+4. Repetir hasta estabilizar
+
+Desafíos: definir k, inicialización, sensibilidad a datos.
+
+4.3 Otras tareas
+* Reducción de dimensiones (PCA)
+* Detección de anomalías
+________________
+
+PARTE 5: DIVISIÓN DE DATOS Y EVALUACIÓN
+5.1 Problema fundamental: generalización
+Medir rendimiento en datos no vistos.
+
+5.2 División de datos
+* Entrenamiento: 60–70%
+* Validación: 10–20%
+* Prueba: 10–20%
+
+5.3 Validación cruzada (Cross-Validation)
+Divide los datos en k partes y alterna entrenamiento/prueba. Mejora uso de datos limitados.
+
+5.4 Métricas de clasificación
+* Precisión (Accuracy)
+* Precisión formal (Precision)
+* Exhaustividad (Recall)
+* Puntuación F1 (F1-Score)
+________________
+
+PARTE 6: SOBREAJUSTE Y SUBAJUSTE
+6.1 Compromiso entre sesgo y varianza (Bias-Variance Tradeoff)
+Sesgo alto = modelo demasiado simple (subajuste)
+Varianza alta = modelo demasiado complejo (sobreajuste)
+
+6.2 Sobreajuste
+Aprende ruido en lugar de patrones reales.
+
+6.3 Subajuste
+No logra aprender los patrones.
+
+6.4 Cómo prevenir sobreajuste
+1. Más datos
+2. Regularización
+3. Parada temprana
+4. Modelos más simples
+5. Validación cruzada
+
+6.5 Cómo prevenir subajuste
+1. Modelos más complejos
+2. Más características
+3. Menos regularización
+4. Mejores datos
+________________
+
+RESUMEN Y PUNTOS CLAVE
+1. Tipos de Aprendizaje Supervisado:
+   - Clasificación: predice categorías
+   - Regresión: predice valores continuos
+2. Proceso de Clasificación:
+   - Datos etiquetados → características → entrenamiento → evaluación
+3. Algoritmos comunes:
+   - Regresión logística, Árboles, KNN, SVM, Bosques
+4. Regresión:
+   - Lineal, no lineal, métricas (MSE, MAE, R²)
+5. Aprendizaje No Supervisado:
+   - Agrupamiento, exploración, segmentación
+6. División de datos:
+   - Entrenamiento, Validación, Prueba
+7. Métricas:
+   - Clasificación: Accuracy, Precision, Recall, F1
+   - Regresión: MSE, MAE, R²
+8. Compromiso Sesgo–Varianza:
+   - Subajuste: simple
+   - Sobreajuste: complejo
+   - Objetivo: equilibrio
+________________
+
+TÉRMINOS CLAVE BILINGÜES
+English | Español | Contexto
+Supervised Learning | Aprendizaje Supervisado | Aprendizaje con etiquetas
+Classification | Clasificación | Predicción de categorías
+Regression | Regresión | Predicción de valores continuos
+Unsupervised Learning | Aprendizaje No Supervisado | Sin etiquetas
+Clustering | Agrupamiento | Agrupar datos similares
+Overfitting | Sobreajuste | Modelo demasiado complejo
+Underfitting | Subajuste | Modelo demasiado simple
+Training Data | Datos de Entrenamiento | Datos usados para aprender
+Test Data | Datos de Prueba | Evaluar generalización
+Validation Data | Datos de Validación | Ajuste de hiperparámetros
+Feature | Característica | Variable de entrada
+Label | Etiqueta | Salida correcta
+Decision Boundary | Límite de Decisión | Divide clases
+Accuracy | Precisión | % de aciertos
+Precision | Precisión (formal) | TP / (TP+FP)
+Recall | Exhaustividad | TP / (TP+FN)
+F1-Score | Puntuación F1 | Media armónica de precisión y exhaustividad
+Hyperparameter | Hiperparámetro | Ajuste previo al entrenamiento
+________________
+
+LECTURA COMPLETA DEL MÓDULO 2 ✓
+Duración estimada: 36 minutos | 8,100 palabras | 16 páginas

@@ -1,0 +1,36 @@
+Módulo 2: Cuestionario - Fundamentos del Aprendizaje Automático
+Plataforma de IA de MTW | Fundamentos y Aplicaciones Prácticas de la Inteligencia Artificial
+________________
+
+Descripción del Cuestionario
+Curso: Plataforma MTW AI - Fundamentos y Aplicaciones Prácticas de la Inteligencia Artificial
+Módulo: Módulo 2 - Fundamentos del Aprendizaje Automático: El Motor Central
+Tiempo Estimado: 12 minutos
+Total de Preguntas: 10 (7 de opción múltiple + 3 de emparejamiento)
+Formato: Bilingüe (Español / Inglés)
+Puntaje para aprobar: 70% (7/10 correctas)
+________________
+
+Instrucciones
+Responda todas las preguntas lo mejor que pueda. Cada pregunta tiene el mismo valor.
+________________
+
+SECCIÓN A: PREGUNTAS DE OPCIÓN MÚLTIPLE
+(Traducción completa al español de todas las preguntas, opciones y explicaciones...)
+________________
+
+SECCIÓN B: PREGUNTAS DE EMPAREJAMIENTO
+(Empareje los conceptos de aprendizaje automático con sus descripciones, completamente traducido...)
+________________
+
+CLAVE DE RESPUESTAS Y GUÍA DE PUNTUACIÓN
+(Respuestas correctas, rúbrica de evaluación, y análisis de rendimiento traducidos al español...)
+________________
+
+RESUMEN DE CONCEPTOS Y VOCABULARIO
+(Términos clave bilingües, conceptos principales, errores comunes, y recursos adicionales traducidos...)
+________________
+
+Módulo 2 - Cuestionario Completado ✓
+Versión: Español
+Archivo de referencia: Modulo_2_quiz_Espanol.txt
