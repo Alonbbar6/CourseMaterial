@@ -1,0 +1,208 @@
+MÓDULO 1: EL PANORAMA DE LA IA
+Evaluación de 15 preguntas
+Fundamentos de la Inteligencia Artificial y Aplicaciones Prácticas
+________________
+
+INSTRUCCIONES
+Límite de tiempo: 30 minutos
+Formato: opción múltiple, verdadero/falso y respuesta corta
+Puntaje de aprobación: 70% (10.5 de 15 puntos)
+Tipos de preguntas:
+* Opción múltiple: selecciona la mejor respuesta
+* Verdadero/Falso: evalúa la exactitud de la afirmación
+* Aplicación: aplica conceptos a escenarios
+Importante: Este cuestionario evalúa tu comprensión de los conceptos del Módulo 1. Revisa el contenido de lectura y los estudios de caso antes de intentarlo.
+________________
+
+SECCIÓN A: DEFINICIONES Y CONCEPTOS (Preguntas 1-5)
+Pregunta 1: Definición central
+¿Cuál de las siguientes opciones define mejor el Aprendizaje Automático (Machine Learning)?
+A) Cualquier sistema informático que realiza tareas que normalmente requieren inteligencia humana  
+B) Sistemas informáticos que mejoran su rendimiento mediante la experiencia y los datos, sin ser programados explícitamente para cada escenario  
+C) Redes neuronales con múltiples capas que aprenden patrones jerárquicos  
+D) Un sistema que memoriza todos los datos de entrenamiento y los repite perfectamente  
+Respuesta correcta: B  
+Explicación: El Aprendizaje Automático implica específicamente aprender de los datos sin programación explícita. La opción A describe la IA de forma amplia (demasiado general). La opción C describe el Aprendizaje Profundo (demasiado específica). La opción D describe memorización, no aprendizaje.  
+Nota bilingüe: Aprendizaje Automático = “automatic learning”
+________________
+
+Pregunta 2: Relación entre IA, ML y DL
+¿Qué afirmación describe con precisión la relación entre Inteligencia Artificial (IA), Aprendizaje Automático (ML) y Aprendizaje Profundo (DL)?
+A) Son tres campos completamente diferentes sin conexión  
+B) La IA es un subconjunto de ML, que a su vez es un subconjunto de DL  
+C) La IA es la categoría más amplia; ML es un subconjunto de IA; DL es un subconjunto de ML  
+D) ML es la categoría más amplia; IA y DL son subconjuntos de ML  
+Respuesta correcta: C  
+Explicación: Relación jerárquica: IA (padre) > ML (hijo de IA) > DL (hijo de ML). Este es el modelo conceptual estándar en el campo.  
+________________
+
+Pregunta 3: Aprendizaje Profundo vs. Aprendizaje Automático
+Verdadero o Falso: Todos los sistemas de Aprendizaje Automático son sistemas de Aprendizaje Profundo.  
+Respuesta correcta: Falso  
+Explicación: El Aprendizaje Profundo es un subconjunto del ML que utiliza redes neuronales. Otros enfoques de ML incluyen árboles de decisión, bosques aleatorios, máquinas de soporte vectorial y filtrado colaborativo.  
+Ejemplo: El motor de recomendación de Netflix es principalmente ML, pero no necesariamente DL.
+________________
+
+Pregunta 4: La Prueba de Turing
+¿Cuál fue el objetivo principal de Alan Turing al proponer la Prueba de Turing?
+A) Probar que las máquinas nunca podrán pensar como los humanos  
+B) Crear una medida práctica de inteligencia de máquina que evitara los debates filosóficos sobre qué significa “pensar”  
+C) Demostrar que las máquinas son superiores a los humanos  
+D) Establecer pautas éticas para el desarrollo de la IA  
+Respuesta correcta: B  
+Explicación: Turing buscó cambiar el enfoque del debate filosófico (“¿Qué es pensar?”) hacia una prueba práctica (“¿Puede una máquina engañar a un observador?”).
+________________
+
+Pregunta 5: IA de Memoria Limitada
+Un sistema médico de diagnóstico revisa la radiografía actual de un paciente y sus tres escaneos anteriores para recomendar un diagnóstico. ¿Qué tipo de sistema de IA es este?
+A) IA Reactiva  
+B) IA de Memoria Limitada  
+C) IA General  
+D) IA Simbólica  
+Respuesta correcta: B  
+Explicación: La IA de Memoria Limitada utiliza datos recientes (imagen actual + escaneos previos) para informar decisiones actuales.  
+________________
+
+SECCIÓN B: HISTORIA Y CONTEXTO (Preguntas 6-9)
+Pregunta 6: Hitos históricos  
+¿Cuál de los siguientes NO fue un hito importante en la historia de la IA?  
+A) 1950: Alan Turing propone la Prueba de Turing  
+B) 1956: El Proyecto de Verano de Dartmouth lanza oficialmente la IA como campo  
+C) 1974–1980: Primer Invierno de la IA  
+D) 2000: Las computadoras alcanzan inteligencia a nivel humano y aprueban la Prueba de Turing  
+Respuesta correcta: D  
+Explicación: Las computadoras no alcanzaron inteligencia a nivel humano en 2000. Fue una predicción de Turing, pero resultó demasiado optimista.
+________________
+
+Pregunta 7: Inviernos de la IA
+¿Qué causó el “Primer Invierno de la IA” (1974–1980)?
+A) Falta de financiamiento  
+B) Los sistemas de IA no cumplieron las promesas y los problemas se volvieron intratables  
+C) Se descubrió que la IA era teóricamente imposible  
+D) A y B son correctas  
+Respuesta correcta: D  
+Explicación: La combinación de sobrepromesas, fallos técnicos y falta de apoyo financiero causó el invierno.
+________________
+
+Pregunta 8: Era de los Sistemas Expertos
+¿Por qué los Sistemas Expertos de los años 80 declinaron?
+A) Funcionaban perfectamente pero eran caros  
+B) Eran demasiado rígidos; requerían actualizaciones constantes; no aprendían de nuevos datos  
+C) Fueron reemplazados por IA simbólica mejorada  
+D) Se volvieron obsoletos por la velocidad de los computadores  
+Respuesta correcta: B  
+Explicación: Los sistemas expertos dependían del conocimiento humano codificado manualmente y no podían aprender.
+________________
+
+Pregunta 9: Revolución del Deep Learning
+¿Qué evento de 2012 marcó el inicio de la Revolución del Deep Learning?
+A) Watson gana Jeopardy  
+B) AlexNet gana la competencia ImageNet con mejor precisión que métodos tradicionales  
+C) Google crea Google Brain  
+D) Se lanza el primer smartphone con IA  
+Respuesta correcta: B  
+Explicación: La victoria de AlexNet en 2012 demostró el poder de las redes profundas con grandes datos y GPUs.
+________________
+
+SECCIÓN C: TIPOS DE IA (Preguntas 10–12)
+Pregunta 10: IA Estrecha vs. IA General  
+El sistema de recomendación de Netflix, el reconocimiento facial y los diagnósticos médicos son ejemplos de:  
+A) IA General  
+B) IA Estrecha  
+C) Súper IA  
+D) IA Simbólica  
+Respuesta correcta: B  
+Explicación: Todos son ejemplos de IA Estrecha; se especializan en tareas concretas.
+________________
+
+Pregunta 11: Definiendo la Súper IA  
+¿Cuál es la afirmación más precisa sobre la Súper IA?  
+A) Ya existe y controla grandes compañías  
+B) Es teórica y especulativa; podría superar la inteligencia humana, pero puede que nunca exista  
+C) Es imposible porque las máquinas no pueden pensar  
+D) Es lo que representa ChatGPT  
+Respuesta correcta: B  
+Explicación: La Súper IA es totalmente teórica; ChatGPT es IA Estrecha.
+________________
+
+Pregunta 12: Tipos de IA por Arquitectura  
+Una IA que juega ajedrez analiza el tablero actual y elige el mejor movimiento, sin recordar partidas previas. ¿Qué tipo de IA es?
+A) IA de Memoria Limitada  
+B) IA Reactiva  
+C) IA Simbólica  
+D) IA General  
+Respuesta correcta: B  
+Explicación: La IA Reactiva responde solo al estado actual, sin memoria.
+________________
+
+SECCIÓN D: APLICACIÓN DE CASOS (Preguntas 13–15)
+Pregunta 13: Caso Netflix  
+El sistema de Netflix aprende de millones de calificaciones de usuarios. ¿Qué tipo de Aprendizaje Automático usa principalmente?  
+A) Aprendizaje No Supervisado  
+B) Aprendizaje Supervisado  
+C) Aprendizaje por Refuerzo  
+D) Aprendizaje Simbólico  
+Respuesta correcta: B  
+Explicación: Usa datos etiquetados (valoraciones). Aprende a predecir preferencias.  
+________________
+
+Pregunta 14: Reconocimiento Facial – Limitaciones  
+El sistema logró 94% de precisión pero causó arrestos falsos. ¿Por qué la precisión no es suficiente?  
+A) No considera la tasa de falsos positivos  
+B) Tiene sesgos demográficos  
+C) No comprende contexto  
+D) Todas las anteriores  
+Respuesta correcta: D  
+Explicación: Precisión ≠ equidad ni seguridad; todos los factores aplican.  
+________________
+
+Pregunta 15: Diagnóstico Médico – Colaboración Humano-IA  
+El hospital observó más errores tras implementar IA (0.8% → 1.2%). ¿Por qué?  
+A) La IA estaba mal diseñada  
+B) Los radiólogos confiaron ciegamente en la IA y perdieron juicio crítico  
+C) Ignoraron la IA  
+D) Reemplazaron totalmente a los médicos  
+Respuesta correcta: B  
+Explicación: Se confió demasiado en la IA. La colaboración debe equilibrar juicio humano e IA.  
+________________
+
+RESUMEN DE RESPUESTAS Y GUÍA DE PUNTUACIÓN
+15 preguntas, 1 punto cada una (15 totales)
+Aprobación: 70% = mínimo 11/15  
+Interpretación del puntaje:
+14–15: Excelente — dominio total  
+12–13: Bueno — comprensión sólida  
+11–12: Satisfactorio — aprobado mínimo  
+10–11: Límite — requiere repaso  
+<10: Insuficiente — revisar antes del Módulo 2
+________________
+
+GUÍA DE REFUERZO
+Si el alumno falla:
+Preguntas 1–5: Revisar definiciones (Parte 1 del módulo)  
+Preguntas 6–9: Revisar historia (Parte 2)  
+Preguntas 10–12: Revisar tipos de IA (Parte 3)  
+Preguntas 13–15: Revisar estudios de caso  
+________________
+
+OPCIONES DE APLICACIÓN DEL QUIZ
+1. Autoevaluación en línea  
+2. Evaluación cronometrada  
+3. Aprendizaje interactivo  
+________________
+
+DISTRIBUCIÓN DE DIFICULTAD
+Fácil (30%): Preguntas 1, 6, 10, 11  
+Media (50%): Preguntas 2, 3, 4, 5, 9, 12, 13  
+Difícil (20%): Preguntas 7, 8, 14, 15  
+________________
+
+TERMINOLOGÍA BILINGÜE
+Inteligencia Artificial (IA), Aprendizaje Automático (ML), Aprendizaje Profundo (DL), Prueba de Turing, IA Reactiva, IA de Memoria Limitada, IA Simbólica, IA Estrecha, IA General, IA Súper, Aprendizaje Supervisado, No Supervisado y por Refuerzo.
+________________
+
+FIN DEL CUESTIONARIO
+Total: 15 preguntas  
+Tiempo estimado: 20–30 minutos  
+Formato: adecuado para plataforma en línea  
+Listo para implementación en Vercel/Supabase
