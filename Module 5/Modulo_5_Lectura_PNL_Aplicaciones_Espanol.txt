@@ -1,0 +1,193 @@
+MÓDULO 5: APLICACIONES DEL PROCESAMIENTO DEL LENGUAJE NATURAL (PLN)
+Duración: 48 minutos de lectura | Páginas: 20
+________________
+
+Tabla de Contenido
+1. Introducción al PLN (Páginas 1-3)
+2. Tokenización: Descomponiendo el Lenguaje (Páginas 4-6)
+3. Incrustaciones de Palabras: Números con Significado (Páginas 7-10)
+4. Análisis de Sentimiento: Entendiendo las Emociones (Páginas 11-14)
+5. Reconocimiento de Entidades Nombradas (Páginas 15-16)
+6. Aplicaciones Reales del PLN (Páginas 17-20)
+________________
+
+SECCIÓN 1: Introducción al Procesamiento del Lenguaje Natural
+Páginas 1-3 | Tiempo de lectura: 6 minutos
+
+1.1 ¿Qué es el Procesamiento del Lenguaje Natural?
+El Procesamiento del Lenguaje Natural (PLN) es la rama de la inteligencia artificial que permite a las computadoras entender, interpretar y generar lenguaje humano.
+
+Importancia del PLN
+Cada día, los humanos generan enormes cantidades de texto:
+* 5 mil millones de búsquedas en Google diarias
+* 500 millones de tweets publicados cada día
+* 306 mil millones de correos electrónicos enviados al día
+* Incontables reseñas, mensajes de chat y documentos
+
+La informática tradicional puede almacenar y recuperar texto, pero el PLN permite que las computadoras lo comprendan realmente: extrayendo significado, emoción e información útil.
+
+Impacto Revolucionario
+Antes del PLN:
+* Los motores de búsqueda coincidían palabras clave literalmente
+* La traducción requería lingüistas humanos
+* La atención al cliente dependía completamente de humanos
+* El análisis documental era totalmente manual
+
+Con el PLN moderno:
+* Los motores de búsqueda entienden intención y contexto
+* Traducción en tiempo real en más de 100 idiomas
+* Chatbots de IA manejan millones de consultas simultáneamente
+* Análisis automatizado de documentos a gran escala
+
+1.2 Evolución del PLN
+Era Basada en Reglas (1950s–1990s): Reglas lingüísticas hechas a mano. Requería lingüistas para codificar patrones. No podía manejar ambigüedad ni complejidad del mundo real.
+Era Estadística (1990s–2010s): Aprendía patrones de datos usando probabilidades. Mejor manejo de ambigüedad, pero sin captar matices.
+Era de Redes Neuronales (2010s–Presente): El aprendizaje profundo revolucionó el PLN con:
+* Incrustaciones de Palabras (2013): Palabras como vectores significativos
+* Mecanismos de Atención (2017): Foco en partes relevantes del texto
+* Transformadores: Base de los modelos de lenguaje modernos (GPT, BERT)
+
+Los sistemas modernos pueden entender contexto, generar texto de calidad humana y traducir con precisión casi humana.
+
+1.3 Tareas Principales del PLN
+1. Tokenización: Dividir texto en unidades significativas
+   Ejemplo: "¡Amo el PLN!" → ["Amo", "el", "PLN", "!"]
+2. Incrustaciones de Palabras: Representar palabras como vectores numéricos
+   Ejemplo: "rey" y "reina" tienen representaciones similares
+3. Análisis de Sentimiento: Determinar tono emocional
+   Ejemplo: "¡Este producto es increíble!" → Positivo (95%)
+4. Reconocimiento de Entidades Nombradas: Identificar entidades clave
+   Ejemplo: "Apple lanzó el iPhone en California" → [Apple: Empresa, iPhone: Producto, California: Lugar]
+5. Aplicaciones Reales: Chatbots, traducción, monitoreo de redes sociales, análisis documental
+
+1.4 ¿Por Qué el Lenguaje es Difícil para las Computadoras?
+Desafío 1: Ambigüedad — “banco” puede ser institución financiera o borde del río.
+Desafío 2: Dependencia del Contexto — “¡Eso está enfermo!” cambia de negativo a positivo con el tiempo.
+Desafío 3: Conocimiento Implícito — “Juan comió el helado. Estaba delicioso.” → “Estaba” se refiere al helado.
+Desafío 4: Lenguaje Creativo — Metáforas, sarcasmo e idioms como “Está lloviendo a cántaros.”
+
+Cómo el PLN lo Supera:
+* Aprende de datos masivos
+* Usa atención para centrarse en palabras clave
+* Transferencia de aprendizaje para adaptarse a tareas nuevas
+________________
+
+SECCIÓN 2: Tokenización – Descomponiendo el Lenguaje
+Páginas 4–6 | Tiempo de lectura: 6 minutos
+
+2.1 Qué es la Tokenización
+Dividir el texto en unidades más pequeñas llamadas tokens. Es el primer paso esencial: las computadoras no pueden procesar texto en bruto directamente.
+
+2.2 Tipos de Tokenización
+Palabras, oraciones y subpalabras. El enfoque moderno utiliza subpalabras, lo que permite manejar palabras desconocidas (“ungooglable” → “un”, “google”, “able”) y funciona entre idiomas.
+
+2.3 Palabras Vacías (Stop Words)
+Son palabras comunes como “el”, “es”, “a”. En el PLN moderno, muchas veces se conservan, ya que cambian el sentido de las frases (“no bueno” ≠ “bueno”).
+
+2.4 Normalización
+Minimiza diferencias en el texto (minúsculas, lematización, sustitución de URLs, números o emojis).
+
+2.5 Tokenización Multilingüe
+Modelos como BERT Multilingüe y GPT manejan múltiples idiomas automáticamente, incluso aquellos con escritura compleja como chino o árabe.
+________________
+
+SECCIÓN 3: Incrustaciones de Palabras – Números con Significado
+Páginas 7–10 | Tiempo de lectura: 8 minutos
+
+3.1 De Palabras a Números
+Las redes neuronales necesitan números. Las incrustaciones de palabras convierten palabras en vectores que preservan significado. Palabras similares están más cerca en el espacio vectorial.
+
+3.2 Word2Vec – El Avance (2013)
+Aprende que palabras con contextos similares tienen significados similares. Ejemplo: “El gato se sentó en la alfombra” y “El perro se sentó en la alfombra” → gato y perro similares.
+
+3.3 Propiedades Sorprendentes
+Ejemplo famoso: rey - hombre + mujer ≈ reina
+Relaciones semánticas se reflejan matemáticamente.
+
+3.4 Incrustaciones Contextuales
+Modelos modernos como BERT y GPT generan vectores diferentes según contexto (“bank” → banco o ribera).
+
+3.5 Aplicaciones
+Búsqueda semántica, sistemas de recomendación, análisis de similitud documental.
+________________
+
+SECCIÓN 4: Análisis de Sentimiento – Entendiendo Emociones
+Páginas 11–14 | Tiempo de lectura: 8 minutos
+
+El Análisis de Sentimiento determina el tono emocional de un texto (positivo, negativo o neutral).
+Se usa en:
+* Reseñas de productos
+* Opiniones de clientes
+* Monitoreo de redes sociales
+
+Modelos Modernos: Los transformadores (BERT, RoBERTa) alcanzan hasta 95% de precisión en clasificación de sentimiento.
+
+Desafíos: sarcasmo, negaciones, diferencias de dominio, sentimientos mixtos.
+________________
+
+SECCIÓN 5: Reconocimiento de Entidades Nombradas (NER)
+Páginas 15–16 | Tiempo de lectura: 4 minutos
+
+Identifica y clasifica entidades como personas, organizaciones, lugares, fechas, dinero o productos.
+
+Ejemplo:
+“Apple CEO Tim Cook anunció el iPhone 15 en California el 12 de septiembre de 2024, a $999.”
+→ Apple: Organización | Tim Cook: Persona | iPhone 15: Producto | California: Lugar | $999: Dinero
+
+Aplicaciones:
+* Extracción de información
+* Respuesta automática a preguntas
+* Recomendación de contenido
+* Construcción de grafos de conocimiento
+________________
+
+SECCIÓN 6: Aplicaciones Reales del PLN
+Páginas 17–20 | Tiempo de lectura: 8 minutos
+
+6.1 Chatbots y Asistentes Virtuales
+Ejemplo: “Quiero rastrear mi pedido #12345” → El bot identifica la intención (“rastrear pedido”) y el número de pedido.
+
+Impacto empresarial:
+* 24/7 atención automatizada
+* Reducción del 30–50% en costos de soporte
+
+6.2 Traducción Automática
+Modelos neuronales (Google Translate, DeepL) traducen con 85–95% de precisión en idiomas principales. El mecanismo de atención permite contexto preciso en oraciones completas.
+
+6.3 Monitoreo de Redes Sociales
+Analiza menciones y sentimientos sobre marcas. Detecta crisis, evalúa campañas y mejora productos.
+
+6.4 Moderación de Contenido
+Detecta discurso de odio, spam, desinformación o lenguaje inapropiado con precisión >95% en redes sociales.
+
+6.5 Análisis y Resumen de Documentos
+Resumen automático: extrae oraciones clave o genera versiones breves. Aplicaciones en derecho, periodismo y negocios.
+
+6.6 PLN en Salud
+Extrae información de notas clínicas, detecta interacciones de medicamentos y analiza literatura médica. Mejora seguridad del paciente y eficiencia clínica.
+
+6.7 Comercio Electrónico
+Analiza reseñas de productos, genera recomendaciones y automatiza atención al cliente mediante PLN.
+
+6.8 El Futuro del PLN
+Tendencias: comprensión multimodal (texto + imágenes + audio), razonamiento complejo, personalización y soporte para idiomas poco representados.
+Desafíos: sesgo, explicabilidad, privacidad y alucinaciones.
+________________
+
+Resumen del Módulo 5 – Conclusiones Clave
+1. Tokenización: División de texto en unidades procesables
+2. Incrustaciones de Palabras: Representación numérica del significado
+3. Análisis de Sentimiento: Detección del tono emocional
+4. Reconocimiento de Entidades Nombradas: Identificación de personas, lugares, organizaciones, fechas
+5. Aplicaciones Reales: Chatbots, traducción, redes sociales, moderación, análisis de documentos
+
+Glosario Español:
+* NLP = PLN (Procesamiento del Lenguaje Natural)
+* Tokenization = Tokenización
+* Sentiment Analysis = Análisis de Sentimiento
+* Word Embedding = Incrustación de Palabras
+* Named Entity Recognition = Reconocimiento de Entidades Nombradas
+
+Próximos Pasos:
+El Módulo 6 explorará Visión por Computadora – cómo las redes neuronales procesan imágenes.
+________________
