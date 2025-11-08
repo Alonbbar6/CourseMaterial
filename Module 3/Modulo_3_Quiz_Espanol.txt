@@ -1,0 +1,148 @@
+# MÓDULO 3 – QUIZ: INTRODUCCIÓN A LAS REDES NEURONALES Y AL APRENDIZAJE PROFUNDO
+
+**Tiempo estimado:** 12 minutos  
+**Total de preguntas:** 10 (6 de opción múltiple + 2 de completar + 2 de verdadero/falso)  
+**Curso:** MTW AI Platform – Fundamentos de Inteligencia Artificial y Aplicaciones Prácticas
+
+---
+
+## INSTRUCCIONES
+
+Responda todas las preguntas según su comprensión de los conceptos de redes neuronales y aprendizaje profundo.
+
+---
+
+## SECCIÓN A: PREGUNTAS DE OPCIÓN MÚLTIPLE
+
+### Pregunta 1
+**¿Qué es un perceptrón?**
+
+A) Una neurona biológica del cerebro humano  
+B) El tipo más simple de red neuronal artificial con una sola neurona  
+C) Una capa dentro de una red neuronal profunda  
+D) Un tipo de función de activación
+
+---
+
+### Pregunta 2
+**¿Qué función de activación se usa más comúnmente en el aprendizaje profundo moderno para las capas ocultas?**
+
+A) Sigmoide  
+B) ReLU (Unidad Lineal Rectificada)  
+C) Lineal  
+D) Función escalón
+
+---
+
+### Pregunta 3
+**En una red neuronal, ¿cuál es el propósito de la capa oculta?**
+
+A) Recibir los datos de entrada iniciales  
+B) Procesar y transformar la información entre las capas de entrada y salida  
+C) Producir las predicciones finales de salida  
+D) Almacenar los datos de entrenamiento
+
+---
+
+### Pregunta 4
+**¿Qué es la retropropagación (backpropagation)?**
+
+A) El paso hacia adelante de los datos a través de la red  
+B) El algoritmo que calcula gradientes y actualiza los pesos propagando los errores hacia atrás  
+C) Un método para añadir más capas a una red neuronal  
+D) Una técnica para reducir el sobreajuste
+
+---
+
+### Pregunta 5
+**El conjunto de datos MNIST se utiliza comúnmente para:**
+
+A) Tareas de procesamiento de lenguaje natural  
+B) Reconocer dígitos manuscritos (0–9)  
+C) Reconocimiento de voz  
+D) Predicción de series temporales
+
+---
+
+### Pregunta 6
+**¿Qué distingue al Aprendizaje Profundo de las redes neuronales “tradicionales”?**
+
+A) El Aprendizaje Profundo usa solo una capa oculta  
+B) Las redes de Aprendizaje Profundo tienen múltiples capas ocultas (arquitecturas profundas)  
+C) El Aprendizaje Profundo no requiere datos de entrenamiento  
+D) El Aprendizaje Profundo solo se usa para imágenes
+
+---
+
+## SECCIÓN B: COMPLETE LOS ESPACIOS EN BLANCO
+
+### Pregunta 7
+**Complete la oración:**
+
+Una neurona artificial recibe múltiples entradas, multiplica cada una por un **________________**, las suma y luego aplica una función de **________________** para producir una salida.
+
+Banco de palabras: peso, activación, sesgo, umbral
+
+---
+
+### Pregunta 8
+**Complete la oración:**
+
+Los tres tipos principales de capas en una red neuronal son la capa de **________________**, la(s) capa(s) **________________** y la capa de **________________**.
+
+Banco de palabras: entrada, oculta, salida, procesamiento
+
+---
+
+## SECCIÓN C: VERDADERO O FALSO
+
+### Pregunta 9
+**¿Verdadero o falso?**
+
+Un perceptrón puede aprender a resolver problemas no lineales complejos como la puerta lógica XOR sin capas ocultas adicionales.
+
+□ Verdadero    □ Falso
+
+---
+
+### Pregunta 10
+**¿Verdadero o falso?**
+
+Las funciones de activación introducen no linealidad en las redes neuronales, permitiéndoles aprender patrones complejos más allá de relaciones lineales simples.
+
+□ Verdadero    □ Falso
+
+---
+
+## CLAVE DE RESPUESTAS
+
+### Opción múltiple
+1. **B** – El tipo más simple de red neuronal artificial con una sola neurona  
+2. **B** – ReLU (Unidad Lineal Rectificada)  
+3. **B** – Procesar y transformar la información entre entrada y salida  
+4. **B** – Algoritmo que calcula gradientes y actualiza pesos propagando errores hacia atrás  
+5. **B** – Reconocimiento de dígitos manuscritos (0–9)  
+6. **B** – Redes con múltiples capas ocultas (arquitecturas profundas)
+
+### Complete los espacios en blanco
+7. **peso**, **activación**  
+8. **entrada**, **oculta**, **salida**
+
+### Verdadero o falso
+9. **Falso** – Un solo perceptrón no puede resolver XOR; se requieren capas ocultas para problemas no lineales  
+10. **Verdadero** – Las funciones de activación aportan la no linealidad esencial
+
+---
+
+## NOTAS EXPLICATIVAS
+
+**Explicación de la Pregunta 9:**  
+Esta es una limitación clásica descrita en los años 60 por Marvin Minsky y Seymour Papert. Un perceptrón de una sola capa solo resuelve problemas linealmente separables (como AND u OR). El problema XOR no es linealmente separable y requiere al menos una capa oculta. Esta limitación contribuyó al “invierno de la IA” hasta el auge de las redes multicapa y la retropropagación.
+
+**Explicación de la Pregunta 10:**  
+Sin funciones de activación, una red neuronal realizaría únicamente transformaciones lineales, aunque tuviera muchas capas. Sería matemáticamente equivalente a una red de una sola capa y no más potente que una regresión lineal. Funciones como ReLU, sigmoide y tanh introducen la no linealidad necesaria para modelar patrones complejos del mundo real.
+
+---
+
+**Módulo 3: Introducción a Redes Neuronales y Aprendizaje Profundo**  
+**Duración del curso:** 120 minutos | **Tiempo del quiz:** 12 minutos
