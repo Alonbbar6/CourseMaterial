@@ -1,0 +1,176 @@
+
+SECCIÓN 1: Del Laboratorio al Mercado: Panorama del Despliegue de IA (Páginas 1–3)
+
+1.1 La Brecha en la Implementación de la IA
+La Realidad:
+- 85% de los proyectos de IA no pasa del piloto a producción.
+- Solo el 53% llega de prototipo a despliegue.
+- Tiempo promedio desde concepto hasta producción: 18–24 meses.
+
+Por qué existe la brecha:
+1. Desafíos técnicos: Modelos que funcionan en laboratorio fallan en escenarios reales.
+2. Calidad de datos: Los datos de entrenamiento no coinciden con los datos operativos.
+3. Infraestructura: Falta de sistemas escalables.
+4. Brecha de habilidades: Investigación vs producción requieren habilidades distintas.
+5. Alineación empresarial: Éxito técnico ≠ valor de negocio.
+
+1.2 Qué hace diferente al despliegue de IA
+Software Tradicional:
+- Determinista
+- Estático
+- Depuración clara
+- Pruebas unitarias
+
+Sistemas de IA:
+- Probabilísticos
+- Dinámicos
+- Difíciles de depurar
+- Requieren validación en casos extremos
+
+Ejemplo:
+Cálculo de impuestos = exacto
+Predicción de churn = probabilística
+
+1.3 Ciclo de Vida de un Proyecto de IA
+Fase 1: Definición del Problema (2–4 semanas)
+Fase 2: Recolección y Preparación de Datos (4–12 semanas)
+Fase 3: Desarrollo del Modelo (4–16 semanas)
+Fase 4: Despliegue (2–8 semanas)
+Fase 5: Monitoreo y Mantenimiento (continuo)
+Total: 3–12 meses
+
+1.4 Factores Clave de Éxito
+1. Objetivos de negocio claros
+2. Preparación de datos
+3. Equipos multifuncionales
+4. Enfoque iterativo
+5. Gestión del cambio
+
+1.5 Panorama de Adopción (2025)
+Líderes: Google, Microsoft, Meta, Amazon
+Seguidores rápidos: manufactura, logística
+Etapa temprana: construcción, agricultura, pymes
+Tendencias: gasto global de $300+ mil millones
+
+------------------------------------------------------------
+
+SECCIÓN 2: Estudio de Caso 1 — IA en Salud: La Revolución del Diagnóstico (Páginas 4–7)
+
+2.1 La oportunidad de la IA en salud
+Desafíos: escasez de especialistas, errores diagnósticos, saturación de radiólogos.
+Promesa de IA: apoyo, no reemplazo; análisis constante; sin fatiga.
+
+2.2 Retinopatía Diabética
+Problema: principal causa de ceguera en adultos; 93M afectados; detección temprana previene 95% casos.
+Cuello de botella: pocos oftalmólogos; 1,000 imágenes/día.
+
+Solución DeepMind:
+- 128,000 imágenes
+- Inception-v3
+- Sensibilidad: 97.5%
+- Especificidad: 93.4%
+
+Implementación en India:
+- 250,000 pacientes
+- 15,000 casos detectados
+- Costo: $1 por examen
+
+Modelo de negocio: licencias, tarifa por examen, suscripción.
+
+2.3 Predicción de Sepsis (TREWS — Johns Hopkins)
+- 11M muertes globales
+- 1 de 3 muertes hospitalarias en EE.UU.
+- Detecta sepsis 4.5 horas antes
+- 18% menos mortalidad
+
+Lecciones: integración con EHR, explicabilidad, monitoreo.
+
+2.4 Conclusiones
+Funcionan: casos claros, abundancia de datos, impacto medible.
+Desafíos: regulación, privacidad, sesgo.
+
+------------------------------------------------------------
+
+SECCIÓN 3: Estudio de Caso 2 — IA en Finanzas: Detección de Fraude (Páginas 8–11)
+
+3.1 Panorama del fraude
+- $32B perdidos globalmente
+- 1 de 5 adultos víctima
+- Detección tradicional: 40–50%
+
+3.2 PayPal
+Problema: 22B transacciones/año; decisiones en milisegundos.
+Limitaciones de reglas: altos falsos positivos, no se adaptan.
+
+Solución IA:
+Capa 1: scoring en tiempo real (<100 ms)
+Capa 2: deep learning
+Capa 3: análisis de grafos
+
+Señales analizadas: monto, dispositivo, IP, patrones de usuario, velocidad, conexiones.
+
+Resultados:
+- 96% detección
+- 0.32% falsos positivos
+- $2B ahorro anual
+
+3.3 JPMorgan COiN
+Problema: 360,000 horas revisión de contratos.
+Solución: NLP + visión + ML.
+Resultados: segundos en lugar de horas, ahorros de $45M.
+
+3.4 Lecciones:
+- Calidad de datos
+- Latencia sub-segundo
+- Aprendizaje continuo
+- Human-in-the-loop
+
+3.5 Impacto:
+- Menos fraude
+- Más ingresos
+- Mejor cumplimiento
+
+------------------------------------------------------------
+
+SECCIÓN 4: Estudio de Caso 3 — IA en Retail: Personalización a Escala (Páginas 12–15)
+
+4.1 Transformación del retail
+- Crecimiento e-commerce
+- Expectativas altas de personalización
+- Competencia online vs físico
+
+4.2 Amazon
+Tecnologías:
+- Filtrado colaborativo
+- Filtrado basado en contenido
+- Deep learning
+- Señales contextuales
+
+Resultados:
+- 35% ingresos por recomendaciones
+- +10–30% valor del pedido
+
+Recorrido del cliente:
+- Búsqueda de audífonos
+- Revisión de producto
+- Email de recordatorio
+- Compra final
+
+4.3 Stitch Fix
+Modelo híbrido IA + estilistas.
+Perfil: 500+ dimensiones.
+Impacto:
+- 85% retención
+- $1,800 LTV
+- +10% keep rate
+
+4.4 Patrones de IA en retail
+- Recomendaciones
+- Precios dinámicos
+- Búsqueda visual
+- Chatbots
+
+4.5 Desafíos: privacidad, burbujas, inventario, atribución.
+4.6 Futuro: AR, hiperpersonalización, tiendas autónomas, IA sostenible.
+
+------------------------------------------------------------
