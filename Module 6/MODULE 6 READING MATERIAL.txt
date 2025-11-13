@@ -1,4 +1,4 @@
-﻿MODULE 6 READING MATERIAL: COMPUTER VISION FUNDAMENTALS AND USE CASES
+MODULE 6 READING MATERIAL: COMPUTER VISION FUNDAMENTALS AND USE CASES
 Fundamentos y Casos de Uso de la Visión por Computadora
 Reading Time: 48 minutes
 Module Duration: 120 minutes

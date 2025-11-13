@@ -1,4 +1,4 @@
-﻿MODULE 2: MACHINE LEARNING FUNDAMENTALS: THE CORE ENGINE
+MODULE 2: MACHINE LEARNING FUNDAMENTALS: THE CORE ENGINE
 Complete Reading Material (36 minutes ) MTW AI Platform | Phase 2: Core Mechanisms
 ________________
 

@@ -1,4 +1,4 @@
-﻿MODULE 4: GENERATIVE AI AND LARGE LANGUAGE MODELS (LLMs)
+MODULE 4: GENERATIVE AI AND LARGE LANGUAGE MODELS (LLMs)
 Complete Reading Material (36 minutes | ~6,500 words)
 MTW AI Platform | Phase 3: Key Applications - Text Generation
 ________________

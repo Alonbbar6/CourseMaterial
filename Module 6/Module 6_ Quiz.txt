@@ -1,4 +1,4 @@
-﻿Module 6: Computer Vision Fundamentals and Use Cases - Quiz
+Module 6: Computer Vision Fundamentals and Use Cases - Quiz
 Estimated Time: 12 minutes (10% of 120 min)
 Total Questions: 10 (7 Multiple Choice + 3 Diagram Labeling)
 Passing Score: 70%

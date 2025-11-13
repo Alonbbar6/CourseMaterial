@@ -1,4 +1,4 @@
-﻿MODULE 1: HANDS-ON LABS INTEGRATION
+MODULE 1: HANDS-ON LABS INTEGRATION
 Two 10-12 Minute Interactive Labs + Google Colab Setup
 MTW AI Platform | Phase 1: Foundations
 ________________

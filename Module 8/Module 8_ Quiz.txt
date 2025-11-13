@@ -1,4 +1,4 @@
-﻿Module 8: Responsible AI and Ethics
+Module 8: Responsible AI and Ethics
 Quiz: Scenario-Based Questions (12 minutes)
 Module Overview: This quiz comprises 10% of the 120-minute module, testing learners' understanding of Responsible AI principles through realistic scenarios.
 Quiz Format: 10 scenario-based questions requiring ethical judgment and application of concepts Time Allocation: 12 minutes total (approximately 1 minute per question) Passing Score: 70% (7 out of 10 correct)
