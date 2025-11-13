@@ -1,0 +1,689 @@
+Módulo 10: Proyecto Final: Mini Aplicación de IA  
+Material de Lectura (10% - Guía del Proyecto y Fundamentos)  
+________________  
+
+
+Resumen  
+Este material de lectura proporciona la base para tu proyecto final. Aprenderás cómo estructurar un proyecto de IA desde la concepción hasta la finalización, tomar decisiones estratégicas sobre tecnología y presentar tus resultados de manera profesional.  
+Tiempo Estimado de Lectura: 12 minutos  
+Resultado Clave: Listo para comenzar tu proyecto final con una planificación y metodología claras  
+________________  
+
+
+1. Introducción al Proyecto Final  
+¿Qué es un Proyecto Final?  
+Un proyecto final es la experiencia culminante de tu recorrido de aprendizaje. Demuestra tu capacidad para aplicar todo el conocimiento adquirido a lo largo del curso para resolver un problema real de manera independiente.  
+¿Por qué un Proyecto Final?  
+Demuestra Dominio: Muestra que puedes integrar múltiples conceptos aprendidos a lo largo de los 10 módulos  
+Construye Portafolio: Crea un proyecto tangible que puedes mostrar a empleadores o en entrevistas de trabajo  
+Experiencia Práctica: Conecta la teoría (clases) con la práctica (código en producción)  
+Habilidades de Resolución de Problemas: Desarrolla tu capacidad para definir, planificar y ejecutar proyectos técnicos  
+Comunicación Profesional: Te enseña a documentar y presentar trabajos técnicos  
+Alcance del Proyecto Final  
+Tu proyecto final es intencionalmente de escala pequeña porque:  
+* ✓ Se puede completar en 84 minutos  
+* ✓ Se enfoca en calidad sobre complejidad  
+* ✓ Demuestra profundidad, no amplitud  
+* ✓ Sigue prácticas reales de desarrollo de software  
+Es mejor construir un proyecto completo, bien documentado y pulido que tres proyectos a medio terminar.  
+________________  
+
+
+2. Resumen de las Fases del Proyecto  
+Todo proyecto de IA exitoso sigue estas fases:  
+Fase 1: Definición y Alcance del Problema (10 minutos)  
+Objetivo: Articular claramente qué construirás y por qué  
+Preguntas a responder:  
+* ¿Qué problema resuelve tu proyecto?  
+* ¿Quién usaría esta solución?  
+* ¿Cuál es el producto mínimo viable (MVP)?  
+* ¿Cuáles son tus limitaciones (tiempo, datos, habilidades)?  
+Fase 2: Investigación y Planificación (5 minutos)  
+Objetivo: Decidir herramientas, datos y arquitectura  
+Decisiones a tomar:  
+* ¿Qué API o herramienta de IA usarás?  
+* ¿De dónde provienen tus datos?  
+* ¿Cuál es tu enfoque técnico?  
+* ¿Cómo medirás el éxito?  
+Fase 3: Implementación (60 minutos)  
+Objetivo: Construir tu solución funcional  
+Actividades:  
+* Configurar tu entorno de desarrollo  
+* Escribir y probar código  
+* Iterar y depurar  
+* Documentar conforme avanzas  
+Fase 4: Pruebas y Refinamiento (10 minutos)  
+Objetivo: Verificar que tu solución funcione correctamente  
+Tareas:  
+* Probar con diferentes entradas  
+* Documentar casos límite  
+* Manejar errores de forma adecuada  
+* Optimizar si es necesario  
+Fase 5: Documentación y Presentación (10 minutos)  
+Objetivo: Comunicar tu trabajo claramente  
+Entregables:  
+* Archivo README explicando tu proyecto  
+* Comentarios en el código y documentación inline  
+* README incluye: problema, solución, uso, resultados  
+* Presentación visual de resultados  
+Fase 6: Revisión por Pares y Retroalimentación (10 minutos)  
+Objetivo: Aprender de tus compañeros y recibir retroalimentación constructiva  
+Proceso:  
+* Compartir el código y documentación de tu proyecto  
+* Revisar el proyecto de otro estudiante  
+* Proporcionar retroalimentación constructiva  
+* Iterar basado en la retroalimentación (opcional)  
+________________  
+
+
+3. Resumen de Opciones de Proyecto  
+Tienes tres opciones predefinidas. Cada una demuestra diferentes capacidades de IA:  
+Opción 1: Clasificador de Texto NLP  
+Qué es: Construir un clasificador que categorice texto automáticamente  
+Aplicaciones en el Mundo Real:  
+* Detección de spam en correos electrónicos  
+* Categorización de opiniones de clientes (positivo/negativo/neutro)  
+* Clasificación de artículos de noticias por tema  
+* Moderación de contenido en redes sociales  
+Habilidades Demostradas:  
+* Integración de API (Natural Language API)  
+* Preparación de datos  
+* Métricas de rendimiento (precisión, exactitud, recall)  
+* Procesamiento por lotes  
+Dificultad: De principiante a intermedio  
+Tiempo Estimado: 60-70 minutos  
+Ejemplo de Resultado:  
+Entrada: "¡Este restaurante tiene comida increíble y un gran servicio!"  
+Salida: Categoría: POSITIVE_REVIEW, Confianza: 92%  
+
+
+________________  
+
+
+Opción 2: Filtro/Analizador de Imágenes  
+Qué es: Construir una herramienta que analice imágenes y aplique transformaciones o clasificaciones  
+Aplicaciones en el Mundo Real:  
+* Organización automática de fotos (detectar qué hay en las fotos)  
+* Moderación de contenido (marcar imágenes inapropiadas)  
+* Funciones de accesibilidad (generar descripciones de imágenes)  
+* Control de calidad de productos  
+Habilidades Demostradas:  
+* Integración de Vision API  
+* Procesamiento de imágenes  
+* Detección y clasificación de objetos  
+* Entrada/salida de archivos y operaciones por lotes  
+Dificultad: Intermedio  
+Tiempo Estimado: 70-80 minutos  
+Ejemplo de Resultado:  
+Entrada: Foto de un gato  
+Salida:  
+  - Objeto principal: Gato (92% de confianza)  
+  - Objetos secundarios: Sofá (78%), Planta (65%)  
+  - Escena: Interior, Residencial  
+
+
+________________  
+
+
+Opción 3: Herramienta de Productividad con IA Generativa  
+Qué es: Construir una utilidad que use IA generativa para aumentar la productividad  
+Aplicaciones en el Mundo Real:  
+* Generador de borradores de correo electrónico  
+* Resumidor de notas de reuniones  
+* Generador de fragmentos de código  
+* Asistente para lluvia de ideas de contenido  
+* Revisor de currículum/carta de presentación  
+Habilidades Demostradas:  
+* Integración de API de LLM (OpenAI, Gemini, etc.)  
+* Ingeniería de prompts  
+* Manejo de errores en salidas de LLM  
+* Diseño de experiencia de usuario  
+Dificultad: De intermedio a avanzado  
+Tiempo Estimado: 60-75 minutos  
+Ejemplo de Resultado:  
+Entrada: "Resume esta transcripción de reunión en 3 puntos clave"  
+Salida:  
+• Se discutió la asignación del presupuesto para Q4 - aumento del 15%  
+• Se contrataron 3 nuevos miembros para el equipo a partir del próximo mes  
+• Próxima reunión programada para el 15 de febrero  
+
+
+________________  
+
+
+4. Entendiendo el Producto Mínimo Viable (MVP)  
+¿Qué es un MVP?  
+Un MVP (Producto Mínimo Viable) es la versión más pequeña y simple de tu proyecto que aún resuelve el problema central.  
+MVP vs. Producto Completo  
+| Aspecto       | MVP                        | Producto Completo           |  
+|--------------|----------------------------|----------------------------|  
+| Alcance      | Solo funcionalidad central | Muchas características     |  
+| Tiempo       | Horas a días               | Meses a años               |  
+| Características | 3-5 esenciales           | 20+ deseables              |  
+| Pruebas      | Validación básica          | Pruebas extensas           |  
+| Documentación| Uso básico                 | Completa                   |  
+| Objetivo     | Probar que el concepto funciona | Listo para producción |  
+
+¿Por qué importa el MVP para tu Proyecto Final?  
+1. Alcance Realista: Se puede completar en 120 minutos  
+2. Enfoque en lo Fundamental: Demuestra competencia central  
+3. Calidad sobre Cantidad: Mejor hacer bien una cosa que muchas mal  
+4. Práctica Profesional: Los equipos reales de software usan el enfoque MVP  
+Ejemplo: Generador de Borradores de Correo  
+Visión del Producto Completo:  
+* Múltiples plantillas de correo  
+* Ajuste de tono (formal, casual, humorístico)  
+* Revisión gramatical y ortográfica  
+* Integración con Gmail  
+* Soporte multilenguaje  
+* Programación de envío automático  
+MVP (Lo que construirás):  
+* Generar borrador de correo basado en un tema  
+* Salida en texto formateado y legible  
+* Manejar casos básicos de error  
+* Guardar borrador en archivo de texto  
+Alcance del MVP: Alcanzable en 60-75 minutos ✓  
+________________
+
+5. Marco de Planificación del Proyecto  
+Paso 1: Define Tu Problema  
+Escribe una declaración del problema en un párrafo:  
+Plantilla:  
+"El problema que estoy resolviendo es [qué problema existe]. Actualmente, [cómo se hace ahora o por qué es difícil]. Mi solución [qué hace tu herramienta]. Esto beneficiará a [quién la usa] al [qué valor proporciona]."  
+Ejemplo:  
+"El problema que estoy resolviendo es que los gerentes de restaurantes leen manualmente todas las reseñas de clientes. Actualmente, dedican más de 2 horas diarias a clasificar reseñas para encontrar quejas comunes. Mi solución categorizará automáticamente las reseñas como positivas o negativas, destacando los comentarios negativos. Esto beneficiará a los gerentes de restaurantes al reducir el tiempo de análisis de reseñas a 5 minutos."  
+
+Paso 2: Elige Tu Opción y Herramienta  
+Para Opción 1 (Clasificador NLP):  
+* Google Cloud Natural Language API  
+* OpenAI Moderation API  
+* AWS Comprehend  
+Para Opción 2 (Filtro de Imágenes):  
+* Google Cloud Vision API  
+* AWS Rekognition  
+* Azure Computer Vision  
+Para Opción 3 (Herramienta de IA Generativa):  
+* OpenAI API (GPT-3.5, GPT-4)  
+* Google Gemini API  
+* Anthropic Claude API  
+
+Paso 3: Identifica Tu Fuente de Datos  
+¿De dónde provendrá tu conjunto de datos de prueba?  
+Opción 1 (Clasificador de Texto):  
+* Conjuntos de datos públicos (reseñas de películas, reseñas de productos)  
+* Generar textos de muestra tú mismo  
+* Usar datos existentes de tu trabajo/vida personal  
+Opción 2 (Analizador de Imágenes):  
+* Descargar imágenes gratuitas de Unsplash, Pexels  
+* Usar tus propias fotos  
+* Capturas de pantalla de contenido web  
+Opción 3 (Herramienta Generativa):  
+* Prompts de ejemplo que crees  
+* Escenarios de usuario ejemplares  
+* Casos de prueba que representen uso típico  
+
+Paso 4: Métricas de Éxito  
+Define cómo medirás si tu proyecto funciona:  
+Para Clasificador de Texto:  
+* ✓ Precisión: % de clasificaciones correctas  
+* ✓ Rendimiento: Tiempo para clasificar 100 textos  
+* ✓ Casos límite: Maneja sarcasmo, texto ambiguo  
+Para Analizador de Imágenes:  
+* ✓ Detección: Identifica más del 90% de los objetos principales  
+* ✓ Velocidad: Analiza imagen en menos de 2 segundos  
+* ✓ Descripciones: Genera leyendas significativas  
+Para Herramienta de IA Generativa:  
+* ✓ Calidad: La salida es relevante y útil  
+* ✓ Seguridad: Maneja casos límite con gracia  
+* ✓ Usabilidad: Prompts claros, salida legible  
+________________  
+
+6. Tomando Decisiones Tecnológicas  
+Decisión: API vs. Modelo  
+Usa una API si:  
+* ✓ El modelo preentrenado se ajusta a tu caso de uso  
+* ✓ No tienes datos específicos del dominio  
+* ✓ Quieres implementación rápida  
+* ✓ El costo por solicitud es aceptable  
+* ✓ Necesitas confiabilidad para producción  
+Entrena un Modelo si:  
+* ✓ Tienes datos etiquetados específicos del dominio  
+* ✓ Los modelos existentes no se ajustan a tu caso  
+* ✓ Necesitas funcionalidad offline  
+* ✓ El costo a largo plazo es menor a escala  
+* ✓ Necesitas control total  
+Para Tu Proyecto Final: Usa APIs—son más rápidas y mejores para proyectos de 120 minutos  
+
+Decisión: Bibliotecas de Python  
+Recomendadas para Tus Proyectos:  
+Opción 1 (Clasificación de Texto):  
+# Interacción con API  
+- google-cloud-language  
+- requests (para APIs REST)  
+
+# Procesamiento de datos  
+- pandas (si analizas resultados)  
+- json (para respuestas)  
+
+Opción 2 (Procesamiento de Imágenes):  
+# Interacción con API  
+- google-cloud-vision  
+- requests  
+
+# Manejo de imágenes  
+- pillow (PIL)  
+- opencv-python (opcional avanzado)  
+
+Opción 3 (IA Generativa):  
+# Interacción con API  
+- openai (para GPT)  
+- google-generativeai (para Gemini)  
+- anthropic (para Claude)  
+
+# Procesamiento  
+- json  
+- re (expresiones regulares para análisis de texto)  
+________________  
+
+7. Mejores Prácticas para la Documentación  
+Qué Documentar  
+1. README.md (Documentación Principal)  
+Todo proyecto necesita un README que responda:  
+# Título del Proyecto  
+
+## Declaración del Problema  
+[¿Qué problema resuelve?]  
+
+## Resumen de la Solución  
+[¿Cómo funciona tu solución?]  
+
+## Tecnología Utilizada  
+- Google Cloud Natural Language API  
+- Python 3.9+  
+- Bibliotecas: google-cloud-language, requests  
+
+## Instrucciones de Configuración  
+[Cómo instalar y configurar]  
+
+## Ejemplo de Uso  
+[Muestra cómo usar tu herramienta]  
+
+## Resultados / Logros  
+[¿Qué lograste?]  
+
+## Retos y Aprendizajes  
+[¿Qué fue difícil? ¿Qué aprendiste?]  
+
+## Mejoras Futuras  
+[¿Qué harías con más tiempo?]  
+
+2. Comentarios en el Código  
+Agrega comentarios que expliquen el “por qué”, no el “qué”:  
+# ✗ Comentario malo - explica qué hace el código  
+# Añade uno al número  
+x = x + 1  
+
+# ✓ Comentario bueno - explica por qué  
+# Incrementa el contador para rastrear el número de ítems procesados  
+processed_count = processed_count + 1  
+
+# ✓ Comentario excelente - explica la lógica  
+# La API devuelve puntuaciones de confianza de 0 a 1, pero necesitamos  
+# porcentajes para el reporte. Multiplicamos por 100 para la conversión.  
+confidence_percentage = api_response['confidence'] * 100  
+
+3. Estructura de Archivos  
+Organiza tu proyecto de forma lógica:  
+my_capstone_project/  
+├── README.md              # Documentación principal  
+├── main.py                # Punto de entrada  
+├── config.py              # Configuración (claves API, ajustes)  
+├── utils.py               # Funciones auxiliares  
+├── requirements.txt       # Dependencias de Python  
+├── data/                  # Datos de muestra  
+│   ├── sample_input.txt  
+│   └── sample_images/  
+├── output/                # Resultados y registros  
+│   └── results.json  
+└── credentials.json       # Credenciales API (¡ignóralo en git!)  
+
+4. Lista de Verificación de Calidad de Código  
+* [ ] El código se ejecuta sin errores  
+* [ ] Nombres de variables claros (no x, y, temp)  
+* [ ] Las funciones tienen docstrings  
+* [ ] Maneja errores correctamente  
+* [ ] Sigue un formato consistente  
+* [ ] Puede ser ejecutado por otra persona siguiendo el README  
+________________  
+
+8. Errores Comunes y Cómo Evitarlos  
+Error 1: Ampliación del Alcance (Scope Creep)  
+Problema: Empezar con una idea simple y luego añadir más funciones  
+Efecto: Nunca se termina dentro del tiempo límite  
+Cómo Evitarlo:  
+* ✓ Escribe el alcance de tu MVP al inicio  
+* ✓ Crea una lista separada de “funciones futuras”  
+* ✓ Mantente rigurosamente en el alcance del MVP  
+* ✓ Usa un temporizador para mantener el horario  
+________________  
+
+Error 2: Manejo Deficiente de Errores  
+Problema: El código falla con entradas inesperadas  
+Efecto: Se ve poco profesional e poco confiable  
+Cómo Evitarlo:  
+# ✗ Sin manejo de errores - falla con datos incorrectos  
+def analyze_sentiment(text):  
+    response = client.analyze_sentiment(request={'document': document})  
+    return response.document_sentiment.score  
+
+# ✓ Manejo adecuado de errores  
+def analyze_sentiment(text):  
+    try:  
+        if not text or len(text) < 3:  
+            return {'error': 'Texto demasiado corto', 'score': None}  
+          
+        document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)  
+        response = client.analyze_sentiment(request={'document': document})  
+        return {'score': response.document_sentiment.score, 'error': None}  
+      
+    except Exception as e:  
+        return {'error': f'Fallo en llamada API: {str(e)}', 'score': None}  
+
+________________  
+
+Error 3: Pruebas Insuficientes  
+Problema: Solo probar con ejemplos ideales  
+Efecto: Falla en casos límite del mundo real  
+Cómo Probar:  
+# Crea una función de prueba con entradas diversas  
+def test_classifier():  
+    test_cases = [  
+        ("¡Gran producto!", "positive"),           # Se espera positivo  
+        ("Calidad terrible", "negative"),          # Se espera negativo  
+        ("Está bien, supongo", "neutral"),         # Se espera neutral  
+        ("", "invalid"),                            # Cadena vacía  
+        ("😀", "emoji_only"),                       # Caso límite  
+        ("¡Absolutamente fabuloso!!!", "positive"), # Intensificadores  
+    ]  
+      
+    for text, expected_category in test_cases:  
+        result = classify(text)  
+        print(f"Entrada: {text}")  
+        print(f"Esperado: {expected_category}")  
+        print(f"Obtenido: {result}")  
+        print("---")  
+
+________________  
+
+Error 4: Falta de Documentación  
+Problema: No hay README ni comentarios en el código  
+Efecto: Los revisores no pueden entender tu trabajo  
+Cómo Evitarlo:  
+* ✓ Escribe el README mientras construyes (no después)  
+* ✓ Añade docstrings a las funciones al escribirlas  
+* ✓ Documenta supuestos y decisiones de diseño  
+* ✓ Explica cualquier algoritmo complejo  
+________________  
+
+Error 5: Ignorar la Seguridad de las Credenciales  
+Problema: Claves API codificadas directamente en el código  
+Efecto: Credenciales expuestas si se comparte el código  
+Cómo Evitarlo:  
+# ✗ Nunca hagas esto  
+API_KEY = "sk-1234567890abcdef"  
+
+# ✓ Usa variables de entorno  
+import os  
+from dotenv import load_dotenv  
+
+load_dotenv()  
+API_KEY = os.getenv('OPENAI_API_KEY')  
+
+if not API_KEY:  
+    raise ValueError("OPENAI_API_KEY no encontrada en el entorno")  
+
+________________
+
+Trampa 6: Presentación poco clara de los resultados  
+Problema: Los resultados son difíciles de interpretar  
+Efecto: No demuestra éxito  
+Cómo presentar resultados:  
+# ✗ Salida poco clara  
+print(0.85)  
+print(0.92)  
+print(0.78)  
+
+
+# ✓ Salida clara  
+print("=" * 50)  
+print("RESULTADOS DE CLASIFICACIÓN DE TEXTO")  
+print("=" * 50)  
+print("\nEntrada: '¡Me encanta este restaurante!'")  
+print("Clasificación: POSITIVA")  
+print("Confianza: 92%")  
+print("\nEntrada: 'Servicio horrible'")  
+print("Clasificación: NEGATIVA")  
+print("Confianza: 85%")  
+print("\n" + "=" * 50)  
+
+
+________________  
+
+
+9. Estrategia de Gestión del Tiempo  
+Cronograma de 120 minutos  
+Minutos 0-10: Planificación  
+* [ ] Leer cuidadosamente la opción de proyecto  
+* [ ] Definir la declaración del problema  
+* [ ] Elegir tu API/herramienta  
+* [ ] Escribir criterios de éxito  
+Minutos 10-15: Configuración  
+* [ ] Crear estructura de carpetas del proyecto  
+* [ ] Instalar librerías requeridas  
+* [ ] Configurar credenciales de API  
+* [ ] Crear archivo main.py  
+Minutos 15-70: Implementación (55 min)  
+* [ ] Construir funcionalidad principal  
+* [ ] Integrar con API  
+* [ ] Añadir manejo de errores  
+* [ ] Probar con datos de ejemplo  
+Minutos 70-85: Pruebas y Refinamiento (15 min)  
+* [ ] Probar con entradas diversas  
+* [ ] Corregir errores  
+* [ ] Optimizar operaciones lentas  
+* [ ] Verificar casos límite  
+Minutos 85-105: Documentación (20 min)  
+* [ ] Escribir README.md  
+* [ ] Añadir comentarios en el código  
+* [ ] Documentar suposiciones  
+* [ ] Guardar resultados/ejemplos  
+Minutos 105-120: Revisión y Presentación (15 min)  
+* [ ] Revisión final del código  
+* [ ] Preparar comentarios para revisión por pares  
+* [ ] Tomar capturas de pantalla de la salida  
+* [ ] Planificar puntos clave para la presentación  
+________________  
+
+
+10. Marco para la Presentación  
+Presentación Efectiva del Proyecto  
+Tu presentación debe responder estas preguntas en orden:  
+1. Problema (1 minuto)  
+"Identifiqué que [problema específico]. Esto es importante porque [impacto]."  
+2. Solución (1 minuto)  
+"Mi solución usa [herramienta/API] para [lo que hace]. Así es como funciona: [explicación breve]."  
+3. Implementación (1-2 minutos)  
+"Lo construí usando [tecnologías]. Los componentes principales son [partes clave]."  
+4. Resultados (1 minuto)  
+"Mi proyecto logró exitosamente [lo que consigue]. Aquí hay ejemplos: [mostrar salidas de ejemplo]."  
+5. Aprendizajes (30 segundos)  
+"Cosas clave que aprendí: [1-2 ideas sobre APIs, programación o resolución de problemas]."  
+Total: 4-5 minutos  
+Consejos para Presentación Visual  
+✓ Mostrar ejemplos: Muestra capturas de pantalla de entrada/salida  
+✓ Mantenerlo simple: No muestres código complejo, muestra resultados  
+✓ Contar una historia: Problema → Solución → Resultados  
+✓ Ser honesto: Reconoce limitaciones  
+✓ Mostrar entusiasmo: Tu pasión lo hace interesante  
+________________  
+
+
+11. Directrices para la Revisión por Pares  
+Dar Retroalimentación (Tú revisas el proyecto de otro)  
+Al revisar el proyecto de un compañero, ofrece retroalimentación constructiva:  
+Preguntas para responder:  
+1. ¿Funcionó?  
+
+   * "Ejecuté el código y logró [lo que pasó]"  
+   * "Encontré [problema] cuando [escenario]"  
+2. ¿Fue claro?  
+
+   * "El README fue fácil/difícil de seguir porque [razón]"  
+   * "Los comentarios en el código [sí/no] me ayudaron a entender"  
+3. Fortalezas (2-3 cosas que hizo bien):  
+
+   * "Excelente manejo de errores en la función [nombre]"  
+   * "El README explicó claramente [aspecto]"  
+   * "Solución creativa para [problema]"  
+4. Sugerencias (2-3 cosas que podrían mejorar):  
+
+   * "Considera añadir [funcionalidad] para hacerlo [más útil]"  
+   * "La función [nombre] podría ser más clara si [sugerencia]"  
+   * "Podría ser más rápido si agregas caché para [aspecto]"  
+5. Preguntas:  
+
+   * "¿Qué harías diferente con más tiempo?"  
+   * "¿Encontraste desafíos inesperados?"  
+Ejemplo de Revisión por Pares:  
+¡Hola! Revisé tu generador de borradores de email.  
+
+
+✓ LO QUE FUNCIONÓ:  
+- El programa corrió sin errores en todos mis casos de prueba  
+- Tu README fue muy claro y fácil de seguir  
+- Gran uso de ingeniería de prompts para obtener buenas salidas  
+- Excelente manejo de errores para entradas vacías  
+
+
+→ SUGERENCIAS:  
+- Considera guardar borradores con marcas de tiempo para control de versiones  
+- La función podría validar mejor la salida del email  
+- Sería útil añadir una función de "ajuste de tono"  
+
+
+? PREGUNTAS:  
+- ¿Por qué elegiste GPT-3.5 en lugar de GPT-4?  
+- ¿Cómo manejaste casos donde la salida de la API estaba incompleta?  
+
+
+En general: ¡Gran proyecto! Demuestra un sólido entendimiento de integración de API y resolución práctica de problemas.  
+
+
+________________  
+
+
+Recibir Retroalimentación (Otros revisan tu proyecto)  
+Cómo manejar la retroalimentación:  
+               1. Leer cuidadosamente: Entender lo que dicen  
+               2. No defenderse: La retroalimentación no es crítica, es ayuda  
+               3. Hacer preguntas: "¿Puedes aclarar qué quieres decir con [aspecto]?"  
+               4. Identificar patrones: Si varios revisores mencionan lo mismo = importante  
+               5. Decidir qué usar: Tú decides qué retroalimentación implementar  
+               6. Agradecer a los revisores: "¡Gracias por la retroalimentación útil sobre [aspecto]!"  
+________________  
+
+
+12. Vocabulario: Inglés y Español  
+Inglés  
+	Español  
+	Definición  
+	Capstone Project  
+	Proyecto Final  
+	Proyecto culminante que demuestra dominio  
+	Minimum Viable Product (MVP)  
+	Producto Mínimo Viable  
+	La versión más simple que resuelve el problema principal  
+	Scoping  
+	Alcance del Proyecto  
+	Definir los límites del proyecto  
+	Problem Statement  
+	Declaración del Problema  
+	Descripción clara de lo que estás resolviendo  
+	Implementation  
+	Implementación  
+	Construir/codificar la solución  
+	Documentation  
+	Documentación  
+	Explicación escrita de tu proyecto  
+	Presentation  
+	Presentación  
+	Comunicar tus resultados a otros  
+	Iteration  
+	Iteración  
+	Mejorar mediante ciclos de prueba  
+	Debugging  
+	Depuración  
+	Encontrar y corregir errores  
+	Deliverable  
+	Entregable  
+	Producto tangible (código, documentación)  
+	Success Metrics  
+	Métricas de Éxito  
+	Cómo mides si el proyecto funciona  
+	Peer Review  
+	Revisión por Pares  
+	Recibir retroalimentación de compañeros  
+	Edge Cases  
+	Casos Límite  
+	Escenarios inusuales o en los límites  
+	Error Handling  
+	Manejo de Errores  
+	Cómo responde el código a problemas  
+	API Integration  
+	Integración de API  
+	Conectar tu código con un servicio externo  
+	________________  
+
+
+Resumen: ¿Listo para comenzar?  
+Antes de iniciar tu proyecto final, asegúrate de:  
+✓ Haber leído esta guía completamente  
+✓ Haber elegido tu opción de proyecto (Texto, Imagen o IA Generativa)  
+✓ Haber definido tu declaración del problema (un párrafo)  
+✓ Haber identificado tu fuente de datos (¿de dónde vendrán las muestras?)  
+✓ Haber establecido criterios de éxito (¿cómo sabrás que funciona?)  
+✓ Haber planificado tu tiempo (usa el cronograma de 120 minutos)  
+✓ Haber configurado tu entorno (Python, librerías, credenciales listas)  
+________________  
+
+
+Lista de Verificación Rápida  
+Antes de codificar  
+               * [ ] Opción de proyecto seleccionada  
+               * [ ] Declaración del problema escrita  
+               * [ ] Credenciales de API obtenidas  
+               * [ ] Entorno Python configurado  
+               * [ ] Datos de muestra recolectados  
+               * [ ] Métricas de éxito definidas  
+Mientras codificas  
+               * [ ] Añadir comentarios conforme avanzas  
+               * [ ] Probar frecuentemente  
+               * [ ] Manejar errores  
+               * [ ] Mantener README actualizado  
+Antes de enviar  
+               * [ ] El código corre sin errores  
+               * [ ] README está completo y claro  
+               * [ ] Todas las funciones tienen docstrings  
+               * [ ] Resultados están documentados  
+               * [ ] Carpeta del proyecto está organizada  
+Antes de la revisión por pares  
+               * [ ] Practicar tu presentación  
+               * [ ] Probar casos límite  
+               * [ ] Verificar que todas las salidas tengan sentido  
+               * [ ] Preparar ejemplos para mostrar  
+________________  
+
+
+¡Ahora estás listo para comenzar el Módulo 10! ¡Buena suerte con tu proyecto final!  
+Tiempo estimado de lectura: 12 minutos  
+✓ Próximo paso: Proceder a la implementación práctica del proyecto
