@@ -1,0 +1,114 @@
+
+MÓDULO 7: IA EN LA INDUSTRIA – QUIZ (TRADUCCIÓN COMPLETA)
+
+Duración: 12 minutos | Preguntas: 10 (Opción múltiple y respuesta corta) | Puntaje mínimo: 70%
+
+------------------------------------------------------------
+INSTRUCCIONES
+- Lee cada pregunta con atención.
+- Para opción múltiple: selecciona la MEJOR respuesta.
+- Para respuestas cortas: responde en 2–3 oraciones.
+- Las preguntas basadas en casos requieren detalles específicos de las lecturas.
+- Tiempo recomendado: 12 minutos.
+------------------------------------------------------------
+
+PREGUNTA 1 (Opción múltiple)
+¿Qué porcentaje de proyectos de IA no pasan del piloto a producción según el módulo?
+A) 50%
+B) 65%
+C) 85%
+D) 95%
+Respuesta correcta: C) 85%
+Explicación: El módulo indica que el 85% de los proyectos de IA fallan en avanzar del piloto a producción.
+
+------------------------------------------------------------
+
+PREGUNTA 2 (Caso de estudio)
+En el caso de DeepMind para detectar retinopatía diabética, ¿cuál fue la sensibilidad lograda?
+A) 85.5%
+B) 93.4%
+C) 97.5%
+D) 99.2%
+Respuesta correcta: C) 97.5%
+Explicación: El sistema logró 97.5% de sensibilidad.
+
+------------------------------------------------------------
+
+PREGUNTA 3 (Técnica)
+¿Cuál NO es un componente de MLOps?
+A) Control de versiones
+B) CI/CD
+C) Revisión manual de cada predicción
+D) Monitoreo y reentrenamiento
+Respuesta correcta: C
+Explicación: MLOps se basa en automatización.
+
+------------------------------------------------------------
+
+PREGUNTA 4 (Caso de estudio)
+El sistema de detección de fraude de PayPal procesa transacciones en:
+A) <10 ms
+B) <100 ms
+C) <1 s
+D) <5 s
+Respuesta correcta: B) <100 ms
+
+------------------------------------------------------------
+
+PREGUNTA 5 (Conceptos)
+¿Cuál es la principal ventaja de Edge AI?
+A) Menor precisión
+B) Ultra-baja latencia y privacidad
+C) Mayor complejidad
+D) Despliegue sencillo
+Respuesta correcta: B
+
+------------------------------------------------------------
+
+PREGUNTA 6 (Respuesta corta)
+Describe dos beneficios del sistema TREWS de Johns Hopkins.
+Respuesta ideal: Detecta sepsis 4.5 horas antes, reduce la mortalidad 18%, ahorra $1,500 por paciente, 99% alertas útiles.
+
+------------------------------------------------------------
+
+PREGUNTA 7 (Caso de estudio)
+Impacto principal de COiN de JPMorgan:
+A) 360,000 horas → segundos, ahorro $45M
+B) 85% más aprobaciones
+C) Eliminó abogados
+D) Reducir fraude $2B
+Respuesta correcta: A
+
+------------------------------------------------------------
+
+PREGUNTA 8 (Despliegue)
+Mejor patrón para recomendaciones diarias no en tiempo real:
+A) Tiempo real
+B) Batch
+C) Streaming
+D) Edge
+Respuesta correcta: B
+
+------------------------------------------------------------
+
+PREGUNTA 9 (Respuesta corta)
+Dos factores críticos para un sistema de recomendaciones en retail.
+Ejemplos: datos de calidad, loop de aprendizaje continuo, enfoque híbrido humano-IA, diversidad en recomendaciones.
+
+------------------------------------------------------------
+
+PREGUNTA 10 (Tendencias)
+Predicción mediana para AGI:
+A) 2030
+B) 2035
+C) 2045
+D) 2060
+Respuesta correcta: C) 2045
+
+------------------------------------------------------------
+
+BONUS
+¿Cómo contribuyó la IA al 45% de keep rate de Stitch Fix?
+Respuesta ideal: Perfiles de 500+ dimensiones, predicción de tallas, sugerencias optimizadas, aumento ingreso por envío.
+
+------------------------------------------------------------
