@@ -1,0 +1,458 @@
+Módulo 9: Construyendo con APIs y Herramientas de IA  
+Quiz (10% - Evaluación)  
+________________  
+
+
+Resumen  
+Este quiz contiene 10 preguntas diseñadas para evaluar la comprensión del estudiante sobre los conceptos del Módulo 9. Las preguntas incluyen:  
+* 6 preguntas de opción múltiple  
+* 2 preguntas de análisis de código  
+* 2 preguntas basadas en escenarios  
+Formato del Quiz: Opción múltiple con retroalimentación inmediata  
+Puntaje de aprobación: 70% (7/10 correctas)  
+Límite de tiempo: 15 minutos (recomendado)  
+Dificultad: Mixta (desde fundamentos hasta avanzado)  
+________________  
+
+
+PREGUNTAS DEL QUIZ  
+Pregunta 1: Comprendiendo los Fundamentos de las APIs  
+¿Cuál es la principal ventaja de usar una API de IA en lugar de entrenar un modelo desde cero?  
+A) Las APIs son más baratas de desarrollar que entrenar cualquier modelo  
+B) Las APIs proporcionan acceso instantáneo a modelos preentrenados sin requerir experiencia en ML ni grandes conjuntos de datos  
+C) Las APIs solo pueden ser usadas por programadores principiantes  
+D) Las APIs no requieren ningún conocimiento de programación  
+Respuesta Correcta: B  
+Explicación: Las APIs democratizan la IA al proporcionar acceso inmediato a modelos sofisticados preentrenados. No necesitas experiencia en aprendizaje automático, conjuntos de datos masivos ni meses de entrenamiento. Esto las hace ideales para soluciones rápidas y prototipos. Aunque en muchos casos son más económicas (opción A), el costo no es la ventaja principal. Las opciones C y D son incorrectas: las APIs aún requieren habilidades de programación y son usadas por todos los niveles de experiencia.  
+Objetivo de Aprendizaje Cubierto: 1.3 - Diferenciar entre usar una API y entrenar un modelo desde cero  
+________________  
+
+
+Pregunta 2: Protocolo REST y HTTP  
+Al hacer una llamada API a un servicio de análisis de sentimiento, ¿qué método HTTP usarías típicamente?  
+A) GET - para recuperar las puntuaciones de sentimiento de la API  
+B) POST - para enviar datos de texto a la API para su procesamiento  
+C) PUT - para actualizar el modelo de análisis de sentimiento  
+D) DELETE - para eliminar tu texto de los servidores de la API  
+Respuesta Correcta: B  
+Explicación: Las solicitudes POST se usan cuando se envían datos al servidor para procesamiento. En análisis de sentimiento, envías (POST) tu texto a la API, que lo procesa y devuelve resultados. GET es para recuperar datos existentes. PUT actualiza recursos existentes. DELETE elimina recursos. Ninguna de estas otras operaciones tiene sentido para llamadas API de análisis de sentimiento.  
+Objetivo de Aprendizaje Cubierto: 1.1 - Entender cómo interactuar con una API (llamadas REST)  
+________________  
+
+
+Pregunta 3: Análisis de Respuesta JSON  
+Recibes la siguiente respuesta JSON de una API de Texto a Voz (Text-to-Speech). ¿Qué contiene probablemente el valor de "audioContent"?  
+{  
+  "status": "success",  
+  "audioContent": "//NExAASDVAAAANIAZQABwAHwAHwAHwAHwAHwAHwAH4AH...",  
+  "audioEncoding": "MP3",  
+  "bytesGenerated": 12345  
+}  
+
+
+A) El texto que fue convertido a voz  
+B) El archivo de audio MP3 codificado como una cadena base64  
+C) El nombre de la voz usada para la síntesis  
+D) La duración del audio en segundos  
+Respuesta Correcta: B  
+Explicación: La larga cadena de caracteres que comienza con //NEx... es un dato binario codificado en base64 que representa el archivo de audio MP3. La codificación base64 convierte datos binarios en formato texto para poder ser transmitidos en JSON. El campo audioEncoding: "MP3" confirma que se trata de datos de audio MP3. Para usar este audio, deberías decodificar la cadena base64 de nuevo a binario y guardarla como un archivo MP3.  
+Objetivo de Aprendizaje Cubierto: 1.1 - Procesar respuestas JSON de APIs  
+________________  
+
+
+Pregunta 4: Elegir la API Correcta para tu Caso de Uso  
+Una empresa necesita extraer automáticamente texto de documentos escaneados (PDFs de facturas). ¿Cuál API de Google Cloud sería la más apropiada?  
+A) Natural Language API - para entender el significado del texto  
+B) Vision API - para detectar y extraer texto de imágenes y documentos  
+C) Text-to-Speech API - para convertir documentos en audio  
+D) Translation API - para traducir el contenido del documento  
+Respuesta Correcta: B  
+Explicación: La Vision API incluye capacidades de Reconocimiento Óptico de Caracteres (OCR) diseñadas específicamente para extraer texto de imágenes y documentos. Aunque podrías usar Natural Language API después para entender el texto extraído, Vision API es la herramienta principal para extraer texto de documentos escaneados. Text-to-Speech y Translation se usan para otros propósitos.  
+Objetivo de Aprendizaje Cubierto: 1.2 - Usar un servicio de IA de terceros para una tarea específica  
+________________  
+
+
+Pregunta 5: Autenticación y Seguridad de API  
+¿Cuál de las siguientes es la forma MÁS segura de almacenar y usar tu clave API en una aplicación Python?  
+A) Almacenar la clave API directamente en tu código Python como una cadena  
+api_key = "sk-1234567890abcdef"  
+
+
+B) Almacenar la clave API en un archivo .env y cargarla usando variables de entorno  
+import os  
+api_key = os.getenv('GOOGLE_API_KEY')  
+
+
+C) Almacenar la clave API en un archivo de texto en tu carpeta de proyecto  
+D) Enviar tu clave API por correo electrónico a tus compañeros para que también la usen  
+Respuesta Correcta: B  
+Explicación: Las variables de entorno (Opción B) son el estándar industrial para la gestión segura de credenciales. El archivo .env no se incluye en el control de versiones, por lo que la clave nunca aparece en tu repositorio de código. Esto previene exposiciones accidentales si compartes tu código en GitHub u otras plataformas. La opción A expone la clave en tu base de código. La opción C es insegura. La opción D viola las mejores prácticas de seguridad: cada miembro del equipo debería tener sus propias credenciales.  
+Objetivo de Aprendizaje Cubierto: 1.1 - Entender las mejores prácticas de integración de APIs  
+________________  
+
+
+Pregunta 6: Comparación de Plataformas de IA en la Nube  
+¿Cuál afirmación sobre OpenAI, Google Cloud y Microsoft Azure es correcta?  
+A) Todas proporcionan APIs idénticas con los mismos precios  
+B) Cada plataforma se especializa en diferentes servicios, y tu elección depende de tus necesidades específicas (modelos de lenguaje, visión, voz, etc.)  
+C) Debes elegir solo una plataforma y no puedes usar APIs de múltiples proveedores  
+D) OpenAI ofrece más idiomas que Google y Azure combinados  
+Respuesta Correcta: B  
+Explicación: Las diferentes plataformas tienen distintas fortalezas. OpenAI destaca en modelos de lenguaje (GPT), Google Cloud ofrece servicios integrales (Visión, NL, Traducción) y Azure proporciona integración empresarial. Puedes y debes elegir plataformas según tu caso de uso específico. Los precios y capacidades varían entre proveedores, por lo que no existe una solución única para todos.  
+Objetivo de Aprendizaje Cubierto: 1.2 - Entender diferentes servicios públicos de IA (OpenAI, Google AI, Azure)  
+________________  
+
+
+Pregunta 7: Análisis de Código - Análisis de Sentimiento  
+Analiza este código e identifica cuál es el problema:  
+```python  
+from google.cloud import language_v1  
+
+
+client = language_v1.LanguageServiceClient()  
+
+
+# Reseña de cliente para analizar  
+text = "This product is terrible! Broke after one day."  
+
+
+document = language_v1.Document(  
+    content=text,  
+    type_=language_v1.Document.Type.PLAIN_TEXT  
+)  
+
+
+response = client.analyze_sentiment(request={'document': document})  
+
+
+# Mostrar resultados  
+print(f"Sentiment Score: {response.document_sentiment.score}")  
+print(f"Sentiment: Positive") # ← PROBLEMA AQUÍ  
+```  
+
+
+¿Cuál es el problema con este código?  
+A) El código fallará porque no se proporcionó la clave API  
+B) La clasificación del sentimiento (imprimir "Positive") no coincide con la puntuación real del sentimiento de la reseña negativa  
+C) No se puede usar el formato PLAIN_TEXT para análisis de sentimiento  
+D) El parámetro de la solicitud debería llamarse "data" en lugar de "request"  
+Respuesta Correcta: B  
+Explicación: La reseña "This product is terrible! Broke after one day." tiene contenido negativo, por lo que response.document_sentiment.score devolverá un valor negativo (alrededor de -0.8 a -0.9). Sin embargo, el código siempre imprime "Positive" sin importar la puntuación real. El código debería verificar la puntuación primero:  
+```python  
+if response.document_sentiment.score > 0.25:  
+    print("Sentiment: Positive")  
+elif response.document_sentiment.score < -0.25:  
+    print("Sentiment: Negative")  
+else:  
+    print("Sentiment: Neutral")  
+```  
+La opción A es incorrecta: si faltara la clave API, el código fallaría antes en la inicialización del cliente. Las opciones C y D también son incorrectas: PLAIN_TEXT es válido y "request" es el nombre correcto del parámetro.  
+Objetivo de Aprendizaje Cubierto: 1.1 & 1.2 - Entender respuestas de APIs e integrar servicios  
+________________  
+
+
+Pregunta 8: Análisis de Código - Manejo de Errores  
+¿Cuál es el propósito principal de la "lógica de reintento" mostrada en este fragmento de código?  
+```python
+import time
+from google.api_core import exceptions
+
+
+for attempt in range(3):  # Intentar hasta 3 veces
+    try:
+        response = client.analyze_sentiment(request={'document': document})
+        print("¡Éxito!")
+        break
+    except exceptions.TooManyRequests:
+        wait_time = 2 ** attempt  # Retroceso exponencial: 1s, 2s, 4s
+        print(f"Limitado por tasa. Esperando {wait_time}s...")
+        time.sleep(wait_time)
+        continue
+```
+
+A) Hacer la llamada a la API más rápida reintentando varias veces  
+B) Manejar automáticamente fallos temporales de la API (como limitación de tasa) sin reintentos manuales  
+C) Asegurar que la clave de API sea válida antes de hacer la llamada  
+D) Encriptar los datos enviados a la API  
+
+Respuesta Correcta: B  
+Explicación: La lógica de reintento intenta automáticamente la operación nuevamente después de esperar cuando se encuentran fallos transitorios como la limitación de tasa (TooManyRequests). El retroceso exponencial (1s, 2s, 4s) da tiempo a la API para recuperarse. Esto mejora la confiabilidad sin requerir intervención manual. La opción A es incorrecta—reintentar no hace que las llamadas individuales sean más rápidas. Las opciones C y D no están relacionadas con el mecanismo de reintento mostrado.  
+Objetivo de Aprendizaje Cubierto: 1.1 - Entender las mejores prácticas de API y manejo de errores  
+________________  
+
+Pregunta 9: Análisis de Escenario - Elegir API vs. Entrenamiento  
+Escenario: Su empresa tiene 5 millones de imágenes médicas de rayos X de los últimos 20 años. Desea detectar automáticamente fracturas en nuevos rayos X.  
+¿Cuál enfoque tiene MÁS sentido?  
+A) Usar una API Vision preentrenada de Google Cloud para detección de fracturas  
+B) Entrenar su propio modelo de deep learning usando sus 5 millones de rayos X históricos  
+C) Usar una API Vision de propósito general y luego ajustarla (fine-tune) con sus datos específicos del dominio  
+D) Revisar manualmente cada rayos X; las APIs no pueden manejar imágenes médicas  
+
+Respuesta Correcta: C  
+Explicación: Este es un escenario ideal para fine-tuning. Usted tiene tres ventajas:  
+1. Base preentrenada: Usar una API Vision de propósito general que ya entiende imágenes  
+2. Datos específicos del dominio: Sus 5 millones de rayos X ayudan a especializar el modelo para su caso médico  
+3. Rentable: El fine-tuning es más barato que entrenar desde cero pero más preciso que una API genérica  
+La opción A sola perdería patrones específicos médicos. La opción B desde cero requeriría recursos computacionales masivos. La opción D es falsa—las APIs sí manejan imágenes médicas. La opción C combina lo mejor de ambos mundos.  
+Objetivo de Aprendizaje Cubierto: 1.3 - Diferenciar entre usar una API y entrenar desde cero  
+________________  
+
+Pregunta 10: Análisis de Escenario - Integración Multi-API  
+Escenario: Está construyendo un chatbot de soporte al cliente que:  
+1. Recibe preguntas en múltiples idiomas  
+2. Detecta el sentimiento del cliente (enojado vs. calmado)  
+3. Redirige clientes enojados a agentes humanos  
+4. Lee las respuestas en voz alta para los clientes  
+¿Qué APIs necesitaría integrar?  
+A) Solo Translation API y Sentiment Analysis API  
+B) Translation API, Natural Language API (para sentimiento) y Text-to-Speech API  
+C) Translation API, Vision API, Text-to-Speech API y Speech-to-Text API  
+D) Solo Text-to-Speech API; las otras tareas requieren programación manual  
+
+Respuesta Correcta: B  
+Explicación: Desglose de los requerimientos:  
+1. Múltiples idiomas → Translation API (detección + traducción)  
+2. Detectar sentimiento → Natural Language API (análisis de sentimiento)  
+3. Redirigir clientes enojados → Usa resultados de sentimiento (lógica, no API)  
+4. Leer en voz alta → Text-to-Speech API  
+No se necesita Vision API (no hay imágenes) ni Speech-to-Text (no hay entrada de audio). Todas estas tareas requieren APIs, no solo programación manual. La opción B identifica correctamente las tres APIs necesarias.  
+Objetivo de Aprendizaje Cubierto: 1.2 - Integrar múltiples servicios AI de terceros para tareas complejas  
+________________  
+
+CLAVE DE RESPUESTAS Y PUNTAJE  
+| Pregunta | Respuesta | Dificultad  | Tema                  |  
+|----------|-----------|------------|-----------------------|  
+| 1        | B         | Fundamental| API vs. Entrenamiento |  
+| 2        | B         | Fundamental| REST/HTTP             |  
+| 3        | B         | Fundamental| Análisis JSON         |  
+| 4        | B         | Intermedio | Selección de Servicio |  
+| 5        | B         | Intermedio | Seguridad             |  
+| 6        | B         | Intermedio | Comparación de Plataformas |  
+| 7        | B         | Avanzado   | Análisis de Código    |  
+| 8        | B         | Avanzado   | Manejo de Errores     |  
+| 9        | C         | Avanzado   | Decisión Estratégica  |  
+| 10       | B         | Avanzado   | Integración Multi-API |  
+________________  
+
+Guía de Puntuación  
+10/10 (100%) - ¡Perfecto! Dominio total de los conceptos  
+9/10 (90%) - ¡Excelente! Pequeñas lagunas, revisar un área  
+8/10 (80%) - ¡Bien! Buen entendimiento, revisar 2 áreas  
+7/10 (70%) - ¡Aprobado! Cumplió objetivos de aprendizaje, revisar 3+ áreas  
+Menos de 7 - Revisar material y repetir  
+________________  
+
+Plantilla de Análisis de Desempeño  
+Rastree qué preguntas fallan los estudiantes para identificar brechas de conocimiento:  
+| Objetivo de Aprendizaje | Preguntas         | Fallas Comunes                      | Remediación                      |  
+|-------------------------|-------------------|-----------------------------------|---------------------------------|  
+| 1.1 - Interacción con API| P2, P3, P7, P8    | Entender métodos HTTP y JSON       | Revisar "Material de Lectura: Sección 4" |  
+| 1.2 - Uso de Servicios Públicos | P4, P6, P10  | Elegir API adecuada para caso      | Revisar "Ejemplos: 1-4" y "Actividades" |  
+| 1.3 - API vs. Entrenamiento | P1, P9          | Cuándo usar APIs vs. modelos custom| Revisar "Material de Lectura: Sección 5" |  
+________________  
+
+Preguntas de Respuesta Extendida (Opcional - Para Evaluación Profunda)  
+Pregunta Opcional 11: Respuesta Corta  
+Explique por qué almacenar en caché (caching) resultados de API puede ahorrar dinero. Proporcione un ejemplo específico.  
+Respuesta Modelo (puntos clave a buscar):  
+* Las APIs cobran por solicitud  
+* El caching almacena resultados previos  
+* Consultas repetidas usan resultados cacheados en vez de nuevas llamadas API  
+* Ejemplo: Una reseña de producto aparece 10 veces para diferentes usuarios. Sin caching, 10 llamadas API ($0.10). Con caching, 1 llamada API + 9 accesos cacheados ($0.01).  
+* Ahorro: reducción del 90% en costos de API para solicitudes duplicadas  
+Puntuación:  
+* Respuesta completa (5 puntos): Incluye concepto de caching + números específicos + ejemplo  
+* Parcial (3 puntos): Explica caching pero es vago en ahorros  
+* Básico (1 punto): Menciona caching sin explicación clara  
+________________  
+
+Pregunta Opcional 12: Ejercicio de Aplicación  
+Diseñe una integración API para este escenario:  
+Problema: Una inmobiliaria quiere generar automáticamente descripciones para más de 50,000 fotos de propiedades.  
+Su tarea:  
+1. Identificar qué API(s) de AI usaría  
+2. Describir el flujo de trabajo (entrada → llamada API → salida)  
+3. Identificar un posible problema y cómo manejarlo  
+Estructura de Respuesta Modelo:  
+APIs Usadas:  
+* Vision API (análisis de imágenes)  
+* Natural Language API (opcional - para mejorar descripciones)  
+* Text-to-Speech (opcional - para descripciones en audio)  
+Flujo de Trabajo:  
+Foto de propiedad  
+ ↓  
+Vision API (detectar objetos, estado, características)  
+ ↓  
+Generar Descripción (ej. "Dormitorio espacioso con luz natural")  
+ ↓  
+Guardar en base de datos de listados  
+
+Problemas Potenciales:  
+1. Costo: 50,000 imágenes × tarifa API = gasto significativo  
+ * Solución: Procesamiento por lotes, monitorear costos, cachear propiedades similares  
+2. Calidad: Descripciones genéricas pueden omitir características únicas  
+ * Solución: Usar API como punto de partida, revisión humana  
+3. Tiempo: Procesamiento secuencial toma horas  
+ * Solución: Procesamiento paralelo con llamadas asíncronas  
+Rubrica de Puntuación:  
+* APIs correctas seleccionadas (2 puntos)  
+* Flujo de trabajo claro (2 puntos)  
+* Problema realista identificado (1 punto)  
+* Solución práctica propuesta (1 punto)  
+* Total: 6 puntos  
+________________  
+
+Recomendaciones para la Entrega del Quiz  
+Para Plataformas de Aprendizaje en Línea:  
+* Mostrar una pregunta a la vez  
+* Proporcionar retroalimentación inmediata tras cada respuesta  
+* Mostrar respuesta correcta con explicación si el estudiante falla  
+* Permitir un reintento (tomar mejor puntaje)  
+* Mostrar barra de progreso (ej. "Pregunta 3/10")  
+
+Formato de Visualización de Preguntas:  
+═══════════════════════════════════════════════════════  
+Pregunta 2 de 10 | Dificultad: ⭐⭐ (Fundamental)  
+═══════════════════════════════════════════════════════  
+
+Al hacer una llamada API a un servicio de análisis de sentimiento,  
+¿qué método HTTP usaría típicamente?  
+
+☐ A) GET - para obtener puntuaciones de sentimiento de la API  
+☐ B) POST - para enviar datos de texto a la API para procesamiento  
+☐ C) PUT - para actualizar el modelo de análisis de sentimiento  
+☐ D) DELETE - para eliminar su texto de los servidores de la API  
+
+[ENVIAR RESPUESTA]  
+
+Flujo de Retroalimentación (si la respuesta es incorrecta):  
+❌ Incorrecto
+
+Tu Respuesta: A (GET)  
+Respuesta Correcta: B (POST)  
+
+Explicación:  
+Las solicitudes POST se utilizan cuando se envían datos AL servidor para su procesamiento. En análisis de sentimiento, envías (POST) tu texto a la API, que luego lo procesa y devuelve resultados...  
+
+[PRÓXIMA PREGUNTA] o [REVISAR MATERIAL]  
+
+Flujo de Retroalimentación (si la respuesta es correcta):  
+✓ ¡Correcto!  
+
+Explicación:  
+Las solicitudes POST se utilizan cuando se envían datos AL servidor para su procesamiento...  
+
+[PRÓXIMA PREGUNTA]  
+
+________________  
+
+Variaciones del Quiz  
+Versión A (Estándar - 10 preguntas, 15 minutos)  
+Usada para el primer intento, incluye preguntas 1-10  
+Versión B (Chequeo Rápido - 5 preguntas, 7 minutos)  
+Chequeo rápido de comprensión, muestra: P1, P3, P5, P7, P9  
+Versión C (Dominio Avanzado - 10 preguntas, 20 minutos)  
+Incluye preguntas opcionales P11 y P12, enfocado en aplicación y análisis  
+Versión D (Repaso - 6 preguntas, 10 minutos)  
+Para estudiantes que revisitan el módulo, enfocado en conceptos clave: P1, P2, P4, P6, P9, P10  
+________________  
+
+Características de Accesibilidad  
+✓ Para estudiantes con dislexia: Proveer versión en audio de las preguntas  
+✓ Para estudiantes ciegos: Asegurar compatibilidad con lectores de pantalla, texto alternativo para código  
+✓ Para discapacidades motoras: Permitir navegación por teclado, tiempo amplio para responder  
+✓ Para estudiantes ESL (inglés como segunda lengua): Proveer glosario bilingüe, resaltar términos técnicos  
+________________  
+
+Soporte Bilingüe  
+Ejemplo de traducción al español (P1):  
+¿Cuál es la ventaja principal de usar una API de IA en lugar de entrenar un modelo desde cero?  
+A) Las API son más baratas de desarrollar que entrenar cualquier modelo  
+B) Las API proporcionan acceso inmediato a modelos preentrenados sin requerir experiencia en ML o grandes conjuntos de datos  
+C) Las API solo pueden ser utilizadas por programadores principiantes  
+D) Las API no requieren ningún conocimiento de programación  
+Respuesta Correcta: B  
+________________  
+
+Ruta de Remediación para Estudiantes con Dificultades  
+Si el estudiante obtiene menos del 70%:  
+1. Identificar áreas débiles usando la tabla de análisis de desempeño  
+2. Revisar secciones relevantes:  
+   * Brechas conceptuales → Revisar Material de Lectura  
+   * Brechas en implementación → Revisar Ejemplos y Actividades  
+   * Brechas en integración → Repetir actividad práctica  
+3. Practicar preguntas - Revisar preguntas en área débil  
+4. Repetir quiz - Enfocarse en preguntas previamente falladas  
+5. Apoyo individual - Si persisten dificultades, contactar instructor  
+________________  
+
+Plantilla de Estadísticas del Quiz (Para Instructores)  
+Monitorear desempeño del quiz en cohortes:  
+Reporte de Desempeño del Quiz del Módulo 9  
+═══════════════════════════════════════════════════════  
+
+Total de Estudiantes: 250  
+Puntaje Promedio: 78.4%  
+Tasa de Aprobación (≥70%): 87%  
+
+Desempeño por Pregunta:  
+P1: 92% correcto (comprensión sólida)  
+P2: 88% correcto  
+P3: 84% correcto  
+P4: 76% correcto  
+P5: 71% correcto (requiere refuerzo)  
+P6: 73% correcto (requiere refuerzo)  
+P7: 65% correcto (requiere refuerzo) ⚠️  
+P8: 69% correcto (requiere refuerzo) ⚠️  
+P9: 72% correcto  
+P10: 81% correcto  
+
+Recomendación:  
+Las preguntas de análisis de código (P7-P8) necesitan mejor explicación en las actividades. Considerar agregar más recorridos de código.  
+
+________________  
+
+Envío de Respuestas y Calificación  
+Calificación Automática:  
+* Preguntas de opción múltiple se califican automáticamente al instante  
+* Comparar respuesta del estudiante con la clave de respuestas  
+* Mostrar puntaje y retroalimentación al instante  
+Revisión Manual (Opcional):  
+* Preguntas de respuesta extendida (P11-P12) pueden ser revisadas por instructores  
+* Usar rúbrica de calificación proporcionada  
+* Dar retroalimentación personalizada en 24-48 horas  
+________________  
+
+Recomendaciones de Tiempo para el Quiz  
+Asignación Recomendada de Tiempo:  
+* Opción Múltiple (P1-P6): 1.5 minutos cada una = 9 minutos  
+* Análisis de Código (P7-P8): 2 minutos cada una = 4 minutos  
+* Escenarios (P9-P10): 1.5 minutos cada uno = 3 minutos  
+* Total: 16 minutos (incluye 1 minuto de margen)  
+________________  
+
+Ruta de Aprendizaje Post-Quiz  
+Después de completar el quiz, los estudiantes reciben recomendaciones personalizadas:  
+Si puntaje 90-100%:  
+* ✓ ¡Felicidades! Has dominado el Módulo 9  
+* Considerar: Temas avanzados (ajuste fino de APIs, despliegue en producción)  
+* Desafío: Construir un proyecto de integración multi-API  
+Si puntaje 80-89%:  
+* Buen trabajo! Revisa las áreas donde fallaste preguntas  
+* Considerar: Releer secciones relevantes, ver recorridos de ejemplos  
+* Desafío: Completar ejemplos adicionales P11-P12  
+Si puntaje 70-79%:  
+* Has cumplido con los objetivos de aprendizaje. Algunas áreas necesitan refuerzo.  
+* Requerido: Revisar una actividad práctica que te haya resultado difícil  
+* Desafío: Enseñar a un compañero uno de los ejemplos  
+Si puntaje menor a 70%:  
+* Fortalezcamos tu comprensión  
+* Requerido: Revisar todo el material de lectura, repetir actividades prácticas  
+* Apoyo: Contactar instructor para guía individual  
+* Oportunidad: Repetir quiz después de la revisión  
+________________  
+
+Total de Preguntas del Quiz: 10 (más 2 opcionales)  
+Tiempo Estimado de Finalización: 15 minutos  
+Puntaje para Aprobar: 70% (7/10)  
+Formato: Opción múltiple + Análisis de código + Escenarios

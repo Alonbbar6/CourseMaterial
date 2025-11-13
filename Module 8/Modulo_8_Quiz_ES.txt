@@ -1,0 +1,331 @@
+Módulo 8: IA Responsable y Ética  
+Cuestionario: Preguntas Basadas en Escenarios (12 minutos)  
+Descripción del Módulo: Este cuestionario representa el 10% del módulo de 120 minutos, evaluando la comprensión de los estudiantes sobre los principios de IA Responsable mediante escenarios realistas.  
+Formato del Cuestionario: 10 preguntas basadas en escenarios que requieren juicio ético y aplicación de conceptos  
+Tiempo Asignado: 12 minutos en total (aproximadamente 1 minuto por pregunta)  
+Puntaje de Aprobación: 70% (7 de 10 respuestas correctas)  
+________________  
+
+
+INSTRUCCIONES DEL CUESTIONARIO  
+Cada pregunta presenta un escenario realista de ética en IA. Elija la respuesta MEJOR que demuestre comprensión de los principios de IA Responsable (Equidad, Transparencia, Responsabilidad) y la toma de decisiones éticas. Algunas preguntas pueden tener múltiples respuestas defendibles, pero una opción se alinea mejor con las prácticas de IA Responsable.  
+________________  
+
+
+PREGUNTA 1: Identificación de Sesgo en IA  
+Escenario: El sistema de IA para aprobación de préstamos de un banco aprueba el 78% de las solicitudes de códigos postales suburbanos pero solo el 52% de los códigos postales urbanos, aun cuando los solicitantes tienen puntajes de crédito y niveles de ingresos similares.  
+Pregunta: ¿Qué tipo de sesgo es el MÁS probable en este caso?  
+A) Sesgo algorítmico - las fórmulas matemáticas del modelo están defectuosas  
+B) Sesgo de datos - los datos de entrenamiento reflejan discriminación histórica en préstamos  
+C) Sesgo de despliegue - el sistema está siendo usado incorrectamente  
+D) Sesgo de confirmación - los revisores humanos están influyendo en los resultados  
+Respuesta Correcta: B - Sesgo de datos  
+Explicación: Este escenario demuestra sesgo de datos, donde patrones históricos de discriminación (redlining, prácticas diferenciales de préstamo) en los datos de entrenamiento hacen que la IA perpetúe estos patrones. Aunque las decisiones algorítmicas importan, la causa raíz es el sesgo en los datos históricos que el modelo aprendió.  
+Objetivo de Aprendizaje Evaluado: 1.1 - Definir y reconocer diferentes tipos de sesgo en IA  
+________________  
+
+
+PREGUNTA 2: Compensación entre Equidad y Precisión  
+Escenario: Un hospital puede implementar una herramienta diagnóstica de IA con un 92% de precisión general, o esperar 6 meses para implementar una versión con 88% de precisión general pero con rendimiento igualitario en todos los grupos demográficos (eliminando la brecha actual del 15% de precisión entre grupos).  
+Pregunta: ¿Qué decisión refleja MEJOR los principios de IA Responsable?  
+A) Implementar inmediatamente - mayor precisión general salva más vidas  
+B) Esperar 6 meses - la equidad requiere rendimiento igual entre grupos  
+C) Implementar ahora con advertencias sobre limitaciones para grupos afectados  
+D) Implementar solo para grupos con alta precisión, usar métodos tradicionales para otros  
+Respuesta Correcta: B - Esperar 6 meses  
+Explicación: La IA Responsable prioriza la equidad y la justicia. Implementar un sistema que brinda atención significativamente peor a algunos grupos demográficos viola los principios de equidad, incluso si la precisión general es mayor. La espera de 6 meses asegura atención equitativa, alineándose con el principio de que la IA no debe exacerbar disparidades en salud.  
+Objetivo de Aprendizaje Evaluado: 1.2 - Explicar los principios fundamentales de IA Responsable (Equidad)  
+________________  
+
+
+PREGUNTA 3: Transparencia en Decisiones de Alto Impacto  
+Escenario: Un sistema de IA niega la solicitud hipotecaria de una familia. Al preguntar por qué, la empresa explica: "Nuestro modelo de IA considera 423 factores de manera compleja y no lineal que no pueden simplificarse en una explicación clara."  
+Pregunta: ¿Cuál es el PROBLEMA ético PRINCIPAL con esta respuesta?  
+A) El modelo de IA es demasiado complejo y debería ser reemplazado por uno más simple  
+B) La falta de transparencia impide que la familia entienda o impugne la decisión  
+C) La empresa debería haber usado solo métodos tradicionales de puntuación crediticia  
+D) Demasiados factores hacen que el sistema sea inexacto  
+Respuesta Correcta: B - La falta de transparencia impide entender o impugnar la decisión  
+Explicación: Esto viola el principio de transparencia de la IA Responsable. Para decisiones de alto impacto que afectan la vida de las personas (vivienda, salud, empleo), los individuos tienen derecho a entender por qué se tomaron las decisiones y a impugnar resultados potencialmente injustos. La IA explicable (XAI) es esencial para la rendición de cuentas en estos contextos.  
+Objetivo de Aprendizaje Evaluado: 1.2 - Explicar los principios fundamentales de IA Responsable (Transparencia)  
+________________  
+
+
+PREGUNTA 4: Cadena de Responsabilidad  
+Escenario: Un robot autónomo de entrega atropella a un peatón. La investigación revela: el algoritmo de la empresa de IA funcionó según lo programado, el fabricante del robot siguió todas las especificaciones, la empresa de entregas mantuvo correctamente el robot y el peatón cruzaba fuera de la zona permitida (jaywalking).  
+Pregunta: Desde la perspectiva de IA Responsable, ¿quién tiene la RESPONSABILIDAD PRINCIPAL?  
+A) El peatón, por cruzar fuera de la zona permitida  
+B) La empresa de IA, como creadora del sistema de toma de decisiones  
+C) La empresa de entregas, como operadora del robot  
+D) Todas las partes comparten la responsabilidad; el daño ocurrió a pesar de los procedimientos adecuados  
+Respuesta Correcta: D - Todas las partes comparten la responsabilidad  
+Explicación: La IA Responsable requiere establecer marcos claros de responsabilidad para sistemas complejos de IA. Cuando ocurre un daño, la responsabilidad puede distribuirse a lo largo de toda la cadena: creadores, implementadores y operadores comparten la responsabilidad de garantizar la seguridad. Este escenario ilustra por qué la gobernanza de IA requiere responsabilidad multi-partes y no culpas individuales.  
+Objetivo de Aprendizaje Evaluado: 1.2 - Explicar los principios fundamentales de IA Responsable (Responsabilidad)  
+________________  
+
+
+PREGUNTA 5: Privacidad y Consentimiento  
+Escenario: Una startup de IA en salud quiere entrenar un modelo de predicción de enfermedades usando registros electrónicos de salud de 5 millones de pacientes. Los datos están anonimizados (nombres eliminados), pero la empresa no obtuvo consentimiento específico para esta aplicación de IA. La investigación podría salvar miles de vidas anualmente.  
+Pregunta: ¿Qué debería hacer la empresa para alinearse con los principios de IA Responsable?  
+A) Proceder - los datos anonimizados no requieren consentimiento adicional  
+B) Proceder - el beneficio para la salud pública supera las preocupaciones de privacidad  
+C) Solicitar aprobación de la junta de revisión institucional (IRB) e implementar medidas robustas de desidentificación más allá de la anonimización básica  
+D) Abandonar el proyecto - usar datos sin consentimiento explícito nunca es ético  
+Respuesta Correcta: C - Solicitar aprobación IRB y desidentificación robusta  
+Explicación: La IA Responsable requiere equilibrar la innovación con la protección de la privacidad. Aunque el beneficio para la salud pública es significativo, la gobernanza adecuada mediante juntas de revisión institucional (IRB) asegura supervisión ética. La desidentificación robusta (más allá de la simple anonimización) protege la privacidad mientras permite investigación beneficiosa. Este enfoque respeta los principios de gobernanza de datos y promueve el bien público.  
+Objetivo de Aprendizaje Evaluado: 1.3 - Analizar las implicaciones sociales y éticas de la adopción generalizada de IA  
+________________  
+
+
+PREGUNTA 6: Desinformación y Deepfakes  
+Escenario: La herramienta generativa de IA de su empresa puede crear videos altamente realistas de cualquier persona diciendo cualquier cosa (deepfakes). Una campaña política quiere usarla para crear videos "paródicos" de su oponente diciendo cosas escandalosas, claramente etiquetados como parodia.  
+Pregunta: ¿Cuál es la preocupación ética MÁS significativa al aprobar este uso?  
+A) Incluso las parodias etiquetadas pueden difundirse como desinformación cuando se pierde el contexto  
+B) El discurso político no debería involucrar contenido generado por IA  
+C) La tecnología podría ser ingeniería inversa por actores malintencionados  
+D) Crear videos de personas reales sin consentimiento siempre es incorrecto  
+Respuesta Correcta: A - Las parodias etiquetadas pueden difundirse como desinformación  
+Explicación: La preocupación principal es que el contenido etiquetado como "parodia" en su contexto original a menudo circula sin etiquetas en redes sociales, convirtiéndose en desinformación efectiva. La IA Responsable considera los impactos posteriores y el potencial mal uso. Este escenario demuestra cómo el contenido generado por IA puede contribuir a la desinformación incluso con buenas intenciones, resaltando la necesidad de una gobernanza cuidadosa de herramientas generativas de IA.  
+Objetivo de Aprendizaje Evaluado: 1.3 - Analizar las implicaciones sociales y éticas de la adopción generalizada de IA  
+________________
+
+PREGUNTA 7: Reconociendo el Sesgo Algorítmico  
+Escenario: Un sistema de IA para moderación de contenido elimina publicaciones que contienen la palabra "gay" a tasas mucho más altas que las publicaciones que contienen la palabra "straight", incluso cuando el contenido no infringe ninguna norma. La IA fue entrenada para detectar discurso de odio.  
+Pregunta: ¿Qué problema DEMUESTRA MEJOR este caso?  
+A) Sesgo en los datos - los datos de entrenamiento asociaron términos LGBTQ+ con contenido negativo  
+B) La IA está funcionando correctamente para proteger a grupos vulnerables  
+C) Sesgo de despliegue - el sistema se está aplicando al contenido incorrecto  
+D) Los moderadores humanos están anulando incorrectamente a la IA  
+Respuesta Correcta: A - Sesgo en los datos de entrenamiento  
+Explicación: Esto demuestra un sesgo en los datos donde los datos de entrenamiento contenían desproporcionadamente términos LGBTQ+ en contextos etiquetados como discurso de odio (a menudo porque estas comunidades son blanco de odio). La IA aprendió una asociación inapropiada, lo que provoca que modere en exceso contenido de las mismas comunidades que debería proteger. Esto resalta cómo los datos sesgados pueden hacer que la IA perpetúe la discriminación.  
+Objetivo de Aprendizaje Evaluado: 1.1 - Definir y reconocer diferentes tipos de sesgo en IA  
+________________  
+
+
+PREGUNTA 8: Aplicación de XAI (IA Explicable)  
+Escenario: Un juez utiliza un sistema de IA que predice el riesgo de reincidencia para decisiones de sentencia. El abogado de un acusado solicita una explicación sobre la alta puntuación de riesgo asignada a su cliente. La empresa de IA responde que revelar la explicación permitiría a los criminales "manipular el sistema".  
+Pregunta: ¿Qué requiere la IA Responsable en esta situación?  
+A) La empresa tiene razón - proteger el algoritmo es más importante  
+B) Se requiere algún nivel de explicación para garantizar el debido proceso, incluso si existe el riesgo de manipulación  
+C) El sistema no debería usarse en contextos judiciales en absoluto  
+D) Solo el juez necesita entender, no el acusado  
+Respuesta Correcta: B - Se requiere algún nivel de explicación para el debido proceso  
+Explicación: En contextos judiciales de alta importancia, la IA Responsable requiere equilibrar la transparencia con las preocupaciones de seguridad. El debido proceso exige que los acusados comprendan los factores que afectan su sentencia. Las técnicas de XAI pueden proporcionar explicaciones significativas sin revelar los algoritmos exactos. Usar IA inexplicable en contextos judiciales viola principios fundamentales de equidad y responsabilidad.  
+Objetivo de Aprendizaje Evaluado: 1.2 - Explicar los principios fundamentales de la IA Responsable (Transparencia/XAI)  
+________________  
+
+
+PREGUNTA 9: Evaluación del Impacto del Sesgo  
+Escenario: Un sistema de reconocimiento facial para seguridad en edificios tiene estas tasas de precisión:  
+* Hombres de piel clara: 99.2%  
+* Mujeres de piel clara: 98.7%  
+* Hombres de piel oscura: 97.1%  
+* Mujeres de piel oscura: 94.3%  
+La empresa afirma que es un "rendimiento aceptable" ya que todos los grupos superan el 94%.  
+Pregunta: ¿Cuál es el MEJOR contraargumento desde la perspectiva de IA Responsable?  
+A) Cualquier valor por encima del 90% es aceptable; la crítica es inválida  
+B) La brecha del 5% en precisión significa que las mujeres de piel oscura enfrentan 10 veces más rechazos falsos en la práctica  
+C) Todo reconocimiento facial es inherentemente sesgado y no debería usarse  
+D) El sistema solo necesita más datos de entrenamiento para mejorar  
+Respuesta Correcta: B - La brecha en precisión se traduce en 10 veces más rechazos falsos  
+Explicación: Aunque un 94% parece aceptable, la disparidad importa enormemente en la práctica. Si el sistema procesa 10,000 personas diariamente, las mujeres de piel oscura enfrentan aproximadamente 600 rechazos falsos frente a ~80 para hombres de piel clara — alrededor de 7 a 10 veces más. Esto crea experiencias sistemáticamente peores para grupos específicos, violando principios de equidad. La IA Responsable evalúa no solo el rendimiento general sino el impacto dispar entre demografías.  
+Objetivo de Aprendizaje Evaluado: 1.1 - Reconocer diferentes tipos de sesgo en IA y su impacto  
+________________  
+
+
+PREGUNTA 10: Decisión Ética Integral  
+Escenario: El sistema de IA de su empresa minorista optimiza la colocación y precios de productos en tiempo real basándose en la demografía de los clientes detectada por cámaras. Aumenta precios en ciertos productos cuando detecta clientes de códigos postales más ricos (determinados por datos de tarjetas de crédito) y los disminuye para otros. Las ganancias aumentaron un 23%, pero grupos de derechos civiles lo califican como "discriminación algorítmica".  
+Pregunta: ¿Qué respuesta DEMUESTRA MEJOR comprensión de la IA Responsable?  
+A) Continuar - la fijación diferencial de precios basada en la disposición a pagar es economía estándar  
+B) Continuar pero dejar de usar datos demográficos - usar solo comportamiento de navegación  
+C) Descontinuar - el sistema crea un trato injusto basado en características protegidas  
+D) Hacer el algoritmo transparente para que los clientes sepan cuándo los precios son personalizados  
+Respuesta Correcta: C - Descontinuar el sistema  
+Explicación: Este sistema viola múltiples principios de IA Responsable: usa datos demográficos para discriminar, carece de transparencia y genera injusticias sistemáticas. Aunque la fijación de precios personalizada existe, basarla en características correlacionadas con clases protegidas (raza, ingresos) perpetúa la discriminación. La opción D (transparencia) no resuelve el problema de equidad. Este escenario requiere sopesar las ganancias frente a la responsabilidad ética — la IA Responsable prioriza la equidad sobre los ingresos.  
+Objetivos de Aprendizaje Evaluados: 1.2 y 1.3 - Explicar principios de IA Responsable y analizar implicaciones éticas  
+________________  
+
+
+RESUMEN DE LA CLAVE DE RESPUESTAS  
+Pregunta  
+	Respuesta Correcta  
+	Tema Principal  
+	Dificultad  
+1  
+	B  
+	Sesgo en Datos  
+	Media  
+2  
+	B  
+	Ecuanimidad (Fairness)  
+	Media  
+3  
+	B  
+	Transparencia  
+	Fácil  
+4  
+	D  
+	Responsabilidad (Accountability)  
+	Difícil  
+5  
+	C  
+	Privacidad/Gobernanza de Datos  
+	Media  
+6  
+	A  
+	Desinformación  
+	Media  
+7  
+	A  
+	Sesgo Algorítmico  
+	Media  
+8  
+	B  
+	XAI  
+	Difícil  
+9  
+	B  
+	Impacto del Sesgo  
+	Difícil  
+10  
+	C  
+	Ética Integral  
+	Difícil  
+Distribución de Dificultad:  
+* Fácil: 1 pregunta (10%)  
+* Media: 6 preguntas (60%)  
+* Difícil: 3 preguntas (30%)  
+________________  
+
+
+RÚBRICA DE CALIFICACIÓN  
+90-100% (9-10 correctas): Excelente comprensión de los principios de IA Responsable y capacidad para aplicarlos en escenarios complejos.  
+70-89% (7-8 correctas): Buena comprensión con pequeñas lagunas. Revisar áreas específicas donde ocurrieron errores.  
+50-69% (5-6 correctas): Comprensión en desarrollo. Revisitare los principios clave de Equidad, Transparencia y Responsabilidad.  
+Menos del 50% (<5 correctas): Requiere revisión significativa del contenido del módulo. Enfocarse en entender tipos de sesgo y marcos éticos.  
+________________
+
+GUÍA DETALLADA DE RETROALIMENTACIÓN  
+Para cada respuesta incorrecta, proporcione:  
+
+Respuestas incorrectas de la Pregunta 1:  
+* A: El sesgo algorítmico es posible, pero el escenario apunta a patrones geográficos que sugieren problemas con datos históricos  
+* C: El sesgo de implementación (deployment bias) ocurre cuando los sistemas se usan en contextos no previstos; esto parece ser sistémico  
+* D: No hay evidencia de intervención humana; el patrón es sistemático en todas las aplicaciones  
+
+Respuestas incorrectas de la Pregunta 2:  
+* A: Priorizar la precisión general sobre la equidad viola los principios de justicia  
+* C: Las advertencias no resuelven el problema de equidad; algunos grupos aún reciben atención deficiente  
+* D: Sistemas separados crean escenarios de "separados pero iguales", históricamente problemáticos  
+
+Respuestas incorrectas de la Pregunta 3:  
+* A: Aunque los modelos más simples ayudan, el problema central es la falta de explicación, no solo la complejidad  
+* C: Los métodos tradicionales tienen sus propios sesgos; el problema es la explicabilidad  
+* D: La cantidad de factores no determina la precisión; la transparencia es el problema  
+
+Respuestas incorrectas de la Pregunta 4:  
+* A: El comportamiento peatonal no exime a los diseñadores/operadores del sistema de responsabilidad  
+* B: Los creadores de IA comparten responsabilidad pero no son los únicos responsables  
+* C: Los operadores comparten responsabilidad pero no son los únicos responsables  
+
+Respuestas incorrectas de la Pregunta 5:  
+* A: La anonimización por sí sola no elimina las preocupaciones de privacidad ni los requisitos de consentimiento  
+* B: El beneficio público no anula automáticamente los derechos de privacidad y la revisión ética  
+* D: Demasiado extremo; existen marcos éticos (como la revisión por IRB) que pueden equilibrar las preocupaciones  
+
+Respuestas incorrectas de la Pregunta 6:  
+* B: El discurso político no es inherentemente problemático; el problema es el potencial de desinformación  
+* C: Aunque preocupante, este no es el principal problema ético para la decisión inmediata  
+* D: Aunque el consentimiento importa, el problema central es la difusión de desinformación  
+
+Respuestas incorrectas de la Pregunta 7:  
+* B: Moderar en exceso contenido LGBTQ+ perjudica en lugar de proteger a estas comunidades  
+* C: El sistema se está implementando según lo previsto; el problema está en su entrenamiento  
+* D: No hay evidencia de anulación humana; este es un comportamiento algorítmico sistemático  
+
+Respuestas incorrectas de la Pregunta 8:  
+* A: Las preocupaciones de seguridad no prevalecen sobre el debido proceso y los derechos fundamentales de equidad  
+* C: Demasiado extremo; el uso adecuado con explicabilidad es posible  
+* D: Los acusados tienen derecho a entender los factores que afectan su sentencia  
+
+Respuestas incorrectas de la Pregunta 9:  
+* A: La precisión absoluta no es el único criterio; el impacto dispar es importante  
+* C: Demasiado absoluto; cierto reconocimiento facial puede ser apropiado con salvaguardas adecuadas  
+* D: Aunque cierto, esto no aborda por qué la disparidad actual es problemática  
+
+Respuestas incorrectas de la Pregunta 10:  
+* A: La economía estándar no justifica la discriminación basada en características protegidas  
+* B: Aún crea un trato injusto; cambiar la fuente de datos no resuelve el problema ético  
+* D: La transparencia no hace que la discriminación sea ética  
+
+________________  
+
+OPCIONES ADICIONALES DE EVALUACIÓN  
+Para estudiantes avanzados:  
+Incluya 2-3 preguntas adicionales que requieran justificación escrita (50-100 palabras) para decisiones éticas, evaluadas según:  
+* Reconocimiento de principios relevantes (Equidad, Transparencia, Rendición de Cuentas)  
+* Consideración de múltiples partes interesadas  
+* Comprensión de los trade-offs  
+* Factibilidad práctica de las soluciones propuestas  
+
+Para entornos grupales:  
+* Use preguntas como disparadores para discusión  
+* Haga que los estudiantes defiendan diferentes respuestas  
+* Explore diferencias culturales en el razonamiento ético  
+* Conecte con noticias y controversias actuales sobre ética en IA  
+
+________________  
+
+ALINEACIÓN CON LOS OBJETIVOS DE APRENDIZAJE DEL MÓDULO  
+✓ OA 1.1 (Definir y reconocer tipos de sesgo en IA): Preguntas 1, 7, 9  
+✓ OA 1.2 (Explicar principios de IA Responsable): Preguntas 2, 3, 4, 8, 10  
+✓ OA 1.3 (Analizar implicaciones sociales/éticas): Preguntas 5, 6, 10  
+
+________________  
+
+NOTAS PARA EL INSTRUCTOR  
+Antes del Quiz:  
+* Repase conceptos clave: tipos de sesgo, principios de IA Responsable, IA Explicable (XAI)  
+* Recuerde a los estudiantes que muchos escenarios tienen respuestas alternativas defendibles  
+* Enfatice que el quiz evalúa razonamiento ético, no memorización  
+
+Durante el Quiz:  
+* Controle el tiempo (12 minutos en total)  
+* Considere permitir que los estudiantes marquen preguntas para discusión  
+* Observe patrones de confusión en temas específicos  
+
+Después del Quiz:  
+* Revise preguntas con >40% de respuestas incorrectas  
+* Facilite discusión sobre preguntas controvertidas (2, 4, 10)  
+* Conecte escenarios del quiz con dilemas éticos vistos anteriormente en el módulo  
+* Destaque que la ética en IA en el mundo real rara vez tiene respuestas "correctas" claras  
+
+Modificaciones del Quiz:  
+* Puede administrarse digitalmente o en papel  
+* Considere formato de libro abierto para enfatizar aplicación sobre memorización  
+* Puede permitir que los estudiantes revisen respuestas tras discusión grupal  
+* Para aprendizaje asincrónico, proporcione retroalimentación automática inmediata  
+
+________________  
+
+Fin de la sección del Quiz  
+Esta evaluación representa el 10% del Módulo 8 (12 minutos de un módulo de 120 minutos)  
+Diseñado para integrarse con: 40% Lectura, 30% Dilemas Éticos, 20% Contenido Interactivo  
+
+________________  
+
+TRADUCCIONES AL ESPAÑOL - TÉRMINOS CLAVE EN EL QUIZ  
+Para entrega bilingüe:  
+* Responsible AI = IA Responsable  
+* AI Bias = Sesgo de IA  
+* Data Bias = Sesgo de Datos  
+* Algorithmic Bias = Sesgo Algorítmico  
+* Fairness = Equidad  
+* Transparency = Transparencia  
+* Accountability = Rendición de Cuentas  
+* Explainable AI (XAI) = IA Explicable  
+* Privacy = Privacidad  
+* Data Governance = Gobernanza de Datos  
+* Misinformation = Desinformación  
+* Deepfakes = Videos Falsos Profundos / Deepfakes  
+* Deployment = Implementación / Despliegue
