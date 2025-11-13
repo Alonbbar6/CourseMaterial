@@ -1,4 +1,4 @@
-﻿MODULE 4: HANDS-ON PROMPTING LAB
+MODULE 4: HANDS-ON PROMPTING LAB
 Interactive Prompt Engineering Practice (48 minutes)
 MTW AI Platform | 40% of Module Content
 ________________

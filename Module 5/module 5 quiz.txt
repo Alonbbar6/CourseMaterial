@@ -1,4 +1,4 @@
-﻿SECTION A: MULTIPLE CHOICE QUESTIONS
+SECTION A: MULTIPLE CHOICE QUESTIONS
 Preguntas de Opción Múltiple
 Question 1
 What is tokenization in NLP?

@@ -1,4 +1,4 @@
-﻿MODULE 3: COMPLETE VISUAL & DIAGRAM SPECIFICATIONS
+MODULE 3: COMPLETE VISUAL & DIAGRAM SPECIFICATIONS
 Introduction to Neural Networks and Deep Learning
 10 Visuals | 36 minutes total | 30% of Module Content
 ________________
